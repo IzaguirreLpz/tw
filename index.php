@@ -1,5 +1,6 @@
 <?php
 //initial commit ansluisa
+//commit 2 de Juank
 session_start();
 require 'funcs/conexion.php';
 require 'funcs/funcs.php';
