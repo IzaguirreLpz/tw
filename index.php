@@ -39,31 +39,41 @@ if (isset($_SESSION['id_usuario'])) {
 		<!--<link rel="stylesheet" href="css/toastr.min.css" >-->
 		<!---<link rel="stylesheet" href="css/font-awesome.css" >--->
 	</head>
+	<style>
+		.card {
+			box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+			transition: 0.3s;
+			width: 40%;
+			padding: 15px;
+			margin: 5px;
+		}
+
+		.card_footer {
+			margin-top: 10px;
+		}
+
+		.card:hover {
+			box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+		}
+
+		.container {
+			padding: 2px 16px;
+		}
+
+		/* body {
+			background-image: url('images\bg.jpg');
+			background-repeat: no-repeat, repeat;
+		} */
+	</style>
 
 	<body>
-		<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-		<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-		<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-		<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-		<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-		<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-		<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-		<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-		<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-		<center>
-			<div class="form-group">
-
-			</div>
-		</center>
+		<img style="margin-top:10%" src="images\tecniwahs_logo.png" alt="tecniwash logo" srcset="">
 		<!--TECNIWASH<div class="signin-form">-->
 
 		<div class="w3ls-login">
 
 
 			<form class="" method="post" id="loginform">
-
-				<div>&nbsp;&nbsp;&nbsp;&nbsp;</div>
-
 
 				<div class="agile-field-txt">
 					<label>
@@ -77,10 +87,63 @@ if (isset($_SESSION['id_usuario'])) {
 						<i class="glyphicon glyphicon-lock" aria-hidden="true"></i> password :</label>
 					<input type="password" class="form-control" name="password" placeholder="Password" id="password" maxlength="15" required />
 					<span toggle="password-field" id="eye" class="fa fa-eye field-icon" toggleClass=" toggle-password" onclick="myFunction()"></span>
-
-
-
 				</div>
+				<div class="agile-field-txt">
+					<a data-toggle="modal" data-target="#recuperapass" style="cursor: pointer;">He olvidado mi contraseña</a>
+				</div>
+
+				<!-- Modal -->
+				<div class="modal fade" id="recuperapass" tabindex="-1" aria-labelledby="recuperapassLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="recuperapassLabel">Modal title</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								<div class="row" style="display: flex;justify-content: center;">
+									<div class="col-sm">
+										<div class="card" style="width: 18rem;">
+											<img src="images\Emails-amico.png" width="50%" class="card-img-top" alt="...">
+											<div class="card-body">
+												<h5 class="card-title">Recuperar Mediante Correo</h5>
+												<div class="card_footer">
+													<a href="/tw/recupera.php" class="btn btn-success">Enviar correo</a>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="col-sm">
+										<div class="card" style="width: 18rem;">
+											<img src="images\Taking notes-pana.png" width="50%" class="card-img-top" alt="...">
+											<div class="card-body">
+												<h5 class="card-title">Recuperar Mediante Preguntas</h5>
+												<div class="card_footer">
+													<a href="/tw/recupera_pre.php" class="btn btn-success">Responder Preguntas</a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+
+
+
+				<!-- Fin del modal -->
+
+
+
 				<script>
 					function eye() {
 						var e = document.getElementById("password");
