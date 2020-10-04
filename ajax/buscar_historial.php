@@ -10,7 +10,7 @@ session_start();
 
 	$rol = $_SESSION['id_rol'];
 $idUsuario = $_SESSION['id_usuario'];
-$clinica= $_SESSION['clinica'];
+
 
 ?>
        <link href="css1/bootstrap.min.css" rel="stylesheet">
@@ -22,20 +22,18 @@ $clinica= $_SESSION['clinica'];
   
      
       
-        <div class="dataTables_length" id="tableListar_length">
-      <table class="table" id="tableListar">
-        <thead>
-          <tr class="info">
-  
-             <th>N°</th>
-             <th>clave</th>
-             <th>nombre </th>
+        <div class="table-responsive" id="tableListar_length">
+      <table class="table table-striped b-t b-light" id="tableListar">
+      <thead>
+          <tr class="success">
             
-              <th>obs.Personales</th>
-             <th>obs.Familiares</th>
-              <th>clinica</th>
-              <th>Fecha</th>
-            <th> Opciones</th>
+            <th>Nombre</th>
+            <th>Usuario</th>
+            <th>Rol</th>
+            <th>Estado</th>
+            <th>Correo</th>
+            <th>Fecha Creacion</th>
+            <th>Acciones</th>
           </tr>
         </thead>
         <tbody>
@@ -44,24 +42,15 @@ $clinica= $_SESSION['clinica'];
 			
 			
 
-				
-			if ($rol !=1){
-         $clinica_b="where enc_id_clinica=$clinica ";
-         
-     }else{
-    $clinica_b="";
-                 
-                 
-                 
-     }
+		
   
 			
-			 $sql =  "SELECT * from siec_encabezado_antecedentes inner join siec_empleados on siec_empleados.emp_id_empleado=siec_encabezado_antecedentes.enc_id_empleado inner JOIN siec_usuarios on siec_usuarios.usu_id_usuario=siec_encabezado_antecedentes.enc_id_usuario inner JOIN siec_clinicas on siec_clinicas.cli_id_clinica=siec_encabezado_antecedentes.enc_id_clinica  $clinica_b";
-
+			 
+      $sql = "SELECT * FROM tbl_usuario inner join tbl_roles on tbl_usuario.id_rol = tbl_roles.id_rol order by id_usuario ASC";
 			$query = mysqli_query($mysqli, $sql);
      
 			
-			$count_query   = mysqli_query($mysqli, "SELECT count(*) AS numrows FROM siec_encabezado_antecedentes  ");
+			$count_query   = mysqli_query($mysqli, "SELECT count(*) AS numrows FROM tbl_usuario");
 		$row1= mysqli_fetch_array($count_query);
 			
 			$numrows = $row1['numrows'];
@@ -71,30 +60,30 @@ $clinica= $_SESSION['clinica'];
 			
         while ($row=mysqli_fetch_array($query)){
 			
-                        
-            $id=$row['enc_id_encabezado_ant'];
-            $clave=$row['enc_clave_empleado'];
-            $nom_emp=$row['emp_nombre'];
-            $perso=$row['enc_obse_personales'];
-            $familiares=$row['enc_obse_familiares'];
-            $clinica=$row['cli_nombre'];
-			$fecha_creacion=$row['enc_fecha_creacion'];
-		   $fecha_creacion=date('d/m/Y', strtotime($fecha_creacion));	   
-     
+           $id_usuario=$row['id_usuario'];
+			               $nombre=$row['nombre_usuario'];
+						$usuario=$row['usuario'];
+			            $id_rol=$row['id_rol'];
+						$rol=$row['rol'];
+				        $correo=$row['correo_electronico'];
+			            $estado=$row['estado_usuario'];
+			            $correo=$row['correo_electronico'];
+                        $fecha=$row['fecha_creacion'];
+                        $fecha= date('d/m/Y', strtotime($fecha));
           ?>
    
              
               <tr>
               
-            <td><?php echo $id; ?></td>
-                  <td><?php echo $clave; ?></td>
-                <td><?php echo $nom_emp;?></td>
-                  <td><?php echo $perso;?></td>
-                  <td><?php echo $familiares;?></td>
-                <td><?php echo $clinica;?></td>
-                  <td><?php echo $fecha_creacion;?></td>
+           
+              <td><?php echo $nombre ?></td>
+                <td><?php echo $usuario;?></td>
+                <td><?php echo $rol;?></td>
+                 <td><?php echo $estado;?></td>
+                  <td><?php echo $correo;?></td>
+                  <td><?php echo $fecha;?></td>
                 <td>
-                    
+              
                
                       <a href="reporte/re_prueba.php?id=<?php echo $id;?>"   data-toggle="tooltip" class='btn btn-danger' title='imprimir' ><i class="fa fa-print"></i></a> 
                     

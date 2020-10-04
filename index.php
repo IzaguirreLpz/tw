@@ -67,7 +67,7 @@ if (isset($_SESSION['id_usuario'])) {
 	</style>
 
 	<body>
-		<img style="margin-top:10%" src="images\tecniwahs_logo.png" alt="tecniwash logo" srcset="">
+		<img style="margin-top:5%" src="images\tecniwahs_logo.png" alt="tecniwash logo" srcset="">
 		<!--TECNIWASH<div class="signin-form">-->
 
 		<div class="w3ls-login">
