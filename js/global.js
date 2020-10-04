@@ -84,13 +84,13 @@ $(function(){
         $('#tableListar').DataTable({
             "order": [ 0, 'desc' ],
             "language": {
-                "lengthMenu"            : "Mostrar _MENU_ registros por página",
+                "lengthMenu"            : "&nbsp;&nbsp;&nbsp;&nbsp;Mostrar&nbsp;&nbsp; _MENU_ &nbsp;&nbsp; Registros por página",
                 "zeroRecords"           : "No se encontraron resultados",
                 "info"                  : "Mostrando página _PAGE_ de _PAGES_",
                 "infoEmpty"             : "No hay registros disponibles",
                 "infoFiltered"          : "(filtrado de _MAX_ registros totales)",
-                "sSearch"               : "",
-                "sSearchPlaceholder"    : 'Buscar',
+                "sSearch"               : "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Buscar   &nbsp;&nbsp;&nbsp;&nbsp;  ",
+                "sSearchPlaceholder"    : 'Buscar  ',
                 "oPaginate"             : {
                     "sFirst"                : "Primero",
                     "sPrevious"             : "Anterior", 

@@ -1,6 +1,6 @@
 /* Set the defaults for DataTables initialisation */
 $.extend( true, $.fn.dataTable.defaults, {
-	"sDom": "<'row'<'col-xs-6'l><'col-xs-6'f>r>t<'row'<'col-xs-6'i><'col-xs-6'p>>",
+	"sDom": "<'row'<'col-lg-8'l><'col-sm-4'f>r>t<'row'<'col-xs-6'i><'col-xs-6'p>>",
 	"sPaginationType": "bootstrap",
 	"oLanguage": {
 		"sLengthMenu": "_MENU_ records per page"
@@ -13,8 +13,8 @@ $.extend( true, $.fn.dataTable.defaults, {
 /* Default class modification */
 $.extend( $.fn.dataTableExt.oStdClasses, {
 	"sWrapper": "dataTables_wrapper form-inline",
-	"sFilterInput": "form-control input-sm",
-	"sLengthSelect": "form-control input-sm"
+	"sFilterInput": "input-md-10 form-control",
+	"sLengthSelect": "form-control input-md"
 } );
 
 

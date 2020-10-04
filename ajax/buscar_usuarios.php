@@ -13,11 +13,7 @@ $idUsuario = $_SESSION['id_usuario'];
 
 
 ?>
-       <link href="css1/bootstrap.min.css" rel="stylesheet">
-    <link href="css1/datepicker3.css" rel="stylesheet">
-    <link href="css/dataTables.bootstrap.css" rel="stylesheet">
-    <link href="css1/estilos.css" rel="stylesheet">
-
+     
         
   
      
@@ -84,10 +80,7 @@ $idUsuario = $_SESSION['id_usuario'];
                   <td><?php echo $fecha;?></td>
                 <td>
               
-               
-                      <a href="reporte/re_prueba.php?id=<?php echo $id;?>"   data-toggle="tooltip" class='btn btn-danger' title='imprimir' ><i class="fa fa-print"></i></a> 
-                    
-                                    
+                <a href="" class="active" ui-toggle-class=""><i class="fa fa-pencil text-success text-dark"></i><i class="fa fa-times text-danger text"></i></a>        
 
             
 			
@@ -117,15 +110,10 @@ width=0,height=0,left=-1000,top=-1000`;
       </table>
      
       </div>
-      <script src="js1/jquery-1.11.1.min.js"></script>
-    <script src="js1/bootstrap.min.js"></script>
-	<script src="js1/bootstrap-datepicker.js"></script>
-	<script src="js1/locales/bootstrap-datepicker.es.js"></script>
-	<script src="js1/jquery.dataTables.min.js"></script>
-    
-        <script src="js1/dataTables.bootstrap.js"></script>
-
-        <script src="js1/validator.js"></script>
-
-    <script src="js1/global.js"></script>
+   
+	<script src="js/bootstrap-datepicker.js"></script>
+	<script src="js/locales/bootstrap-datepicker.es.js"></script>
+	<script src="js/jquery.dataTables.min.js"></script>
+  <script src="js/dataTables.bootstrap.js"></script>
+  <script src="js/global.js"></script>
      
