@@ -8,14 +8,10 @@ if (!empty($_POST)) {
 	$email = $mysqli->real_escape_string($_POST['email']);
 
 	if (emailExiste($email)) {
-
-		$co = "correo_electronico";
 		$usuariocam = "usuario";
 		$cor = getValor($co, $usuariocam, $email);
-
-		$user_id = getValor('id_usuario', 'usuario', $email);
 		$nombre = getValor('nombre_usuario', 'correo_electronico', $cor);
-		$token =  generateToken();
+		echo "El usuario es: {$user_id}";
 		$token1 = generaTokenPass($user_id, $token);
 		$url = 'http://localhost:8080/triste/mau2/login/cambia_pass.php?user_id=' . $user_id . '&token=' . $token;
 

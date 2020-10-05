@@ -856,7 +856,7 @@ function enviarEmail($email, $nombre, $asunto, $cuerpo)
 		$mail->IsHTML(true);
 
 		$mail->send();
-		/* echo "mensaje enviado al correo: {$email}"; */ //comentario en caso que los correos no funcionen
+		/* echo "mensaje enviado al correo: {$email}"; */ //comentario en caso que los correos no funcione
 	} catch (Exception $e) {
 		echo "El mensaje no pudo ser enviado el problema es: {$mail->ErrorInfo}";
 	}
