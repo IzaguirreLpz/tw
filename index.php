@@ -88,19 +88,37 @@ if (isset($_SESSION['id_usuario'])) {
 					<input type="password" class="form-control" name="password" placeholder="Password" id="password" maxlength="15" required />
 					<span toggle="password-field" id="eye" class="fa fa-eye field-icon" toggleClass=" toggle-password" onclick="myFunction()"></span>
 				</div>
-				<div class="agile-field-txt">
-					<a data-toggle="modal" data-target="#recuperapass" style="cursor: pointer;">He olvidado mi contraseña</a>
+				
+				<div class="w3ls-login  w3l-sub">
+					<input type="submit" name="btn-login" value="Iniciar sesión" class="btn btn-default">
+
 				</div>
-				<div class="agile-field-txt">
-					<a href="#" style="cursor: pointer;">Crear Usuario</a>
-				</div>
+
+				<div class="form-group">
+                            
+
+				<br>
+					<a data-toggle="modal" data-target="#recuperapass" style="cursor: pointer;">¿Olvidaste tu contraseña?</a>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<a href="#" style="cursor: pointer;"> ¡Regístrate Aquí !←</a>
+				
+                             
+                 </div>
+
+
+				 
+				
+				<!--- <label>Don't have account yet ! <a href="sign-up.php">Sign Up</a></label>-->
+			</form>
+
+		</div>
 
 				<!-- Modal -->
 				<div class="modal fade" id="recuperapass" tabindex="-1" aria-labelledby="recuperapassLabel" aria-hidden="true">
 					<div class="modal-dialog">
 						<div class="modal-content">
 							<div class="modal-header">
-								<h5 class="modal-title" id="recuperapassLabel">Modal title</h5>
+								<h5 class="modal-title" id="recuperapassLabel">Recuperación de Contraseña</h5>
 								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 									<span aria-hidden="true">&times;</span>
 								</button>
@@ -192,58 +210,12 @@ if (isset($_SESSION['id_usuario'])) {
 						}
 					}
 				</script>
-				<hr />
+			
 
-				<div class="w3ls-login  w3l-sub">
-					<input type="submit" name="btn-login" class="btn btn-default">
-
-				</div>
-				<br />
-				<!--- <label>Don't have account yet ! <a href="sign-up.php">Sign Up</a></label>-->
-			</form>
-
-		</div>
+			
 
 
-
-		<div id="modal" class="modal fade" tabindex="-1" role="dialog">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-
-					<div class="modal-body">
-						<div class="panel panel-info">
-							<div class="panel-heading">
-								Elija la Pregunta y Luego Registre su Respuesta
-							</div>
-							<div class="panel-body">
-								<form id="formpreguntas" class="form form-horizontal">
-									<div class="form-group">
-										<label for="password" class="col-md-4 control-label">Preguntas</label>
-
-										<div class="col-md-6">
-											<select id="pregunta" class="form-control" name="pregunta">
-
-											</select>
-										</div>
-									</div>
-									<div class="form-group">
-										<label for="password" class="col-md-4 control-label">Respuesta</label>
-
-										<div class="col-md-6">
-											<input class="form-control" type="text" name="respuesta" id="respuesta" value="" placeholder="Respuesta para la pregunta">
-										</div>
-									</div>
-									<center>
-										<input type="submit" class="btn btn-danger" name="guardar" value="Guardar" />
-
-									</center>
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+	
 
 
 
@@ -255,7 +227,7 @@ if (isset($_SESSION['id_usuario'])) {
 		<script src="js/toastr.min.js"></script>
 		<!--</div>-->
 
-	</body>
+	
 
 	</html>
 	<script>
