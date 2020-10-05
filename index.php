@@ -91,6 +91,9 @@ if (isset($_SESSION['id_usuario'])) {
 				<div class="agile-field-txt">
 					<a data-toggle="modal" data-target="#recuperapass" style="cursor: pointer;">He olvidado mi contraseña</a>
 				</div>
+				<div class="agile-field-txt">
+					<a href="#" style="cursor: pointer;">Crear Usuario</a>
+				</div>
 
 				<!-- Modal -->
 				<div class="modal fade" id="recuperapass" tabindex="-1" aria-labelledby="recuperapassLabel" aria-hidden="true">
