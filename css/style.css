@@ -1650,6 +1650,8 @@ ul.bs-glyphicons-list {
     background-color: #ddede0 ! important;
     border-color: #ddede0 ! important;
     font-size: 20px;
+    border-style: solid;
+    border-top-width: 7.5px;
 }
 p.hd-title {
     color: #b64d99;
