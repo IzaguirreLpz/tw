@@ -816,6 +816,18 @@ function successBlock($message)
 	}
 }
 
+function showMessage($message, $type)
+{
+
+	echo "<div class='alert alert-{$type} alert-dismissible show' role='alert'>
+			 <li>  {$message} </li>
+		<button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+  </button>
+</div>";
+
+	echo "</ul>";
+	echo "</div>";
+}
 
 function registraUsuario($usuario, $pass_hash, $nombre, $email, $activo, $token, $tipo_usuario)
 {
