@@ -5,45 +5,55 @@ session_start();
 require 'funcs/conexion.php';
 require 'funcs/funcs.php';
 
-if(!isset($_SESSION['id_usuario'])){
-    header ("Location: index.php");
+if (!isset($_SESSION['id_usuario'])) {
+    header("Location: index.php");
 }
 
-if($_SESSION['estado_usuario']== strtolower('nuevo')){
-    header ("Location: preguntas.php");
+if ($_SESSION['estado_usuario'] == strtolower('nuevo')) {
+    header("Location: preguntas.php");
 }
 
 //echo $_SESSION['menus'];
 ?>
 
 <!DOCTYPE html>
-<html >
-<head>
-<title>HOME</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<html>
 
-<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-<!-- bootstrap-css -->
-<link rel="stylesheet" href="css/bootstrap.min.css" >
-<!-- //bootstrap-css -->
-<!-- Custom CSS -->
-<link href="css/style.css" rel='stylesheet' type='text/css' />
-<link href="css/style-responsive.css" rel="stylesheet"/>
-<!-- font CSS -->
-<link href='//fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
-<!-- font-awesome icons -->
-<link rel="stylesheet" href="css/font.css" type="text/css"/>
-<link href="css/font-awesome.css" rel="stylesheet"> 
-<link rel="stylesheet" href="css/morris.css" type="text/css"/>
-<!-- calendar -->
-<link rel="stylesheet" href="css/monthly.css">
-<!-- //calendar -->
-<!-- //font-awesome icons -->
-<script src="js/jquery2.0.3.min.js"></script>
-<script src="js/raphael-min.js"></script>
-<script src="js/morris.js"></script>
+<head>
+    <title>HOME</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <script type="application/x-javascript">
+        addEventListener("load", function() {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+    <!-- bootstrap-css -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- //bootstrap-css -->
+    <!-- Custom CSS -->
+    <link href="css/style.css" rel='stylesheet' type='text/css' />
+    <link href="css/style-responsive.css" rel="stylesheet" />
+    <!-- font CSS -->
+    <link href='//fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+    <!-- font-awesome icons -->
+    <link rel="stylesheet" href="css/font.css" type="text/css" />
+    <link href="css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/morris.css" type="text/css" />
+    <!-- calendar -->
+    <link rel="stylesheet" href="css/monthly.css">
+    <!-- //calendar -->
+    <!-- //font-awesome icons -->
+    <script src="js/jquery2.0.3.min.js"></script>
+    <script src="js/raphael-min.js"></script>
+    <script src="js/morris.js"></script>
 </head>
+
 <body>
 <section id="container">
 <!--header start-->
@@ -125,53 +135,40 @@ USUARIOS
     </div>
     </div>
     </section>
-</section>
-<!--main content end-->
-</section>
-<script src="js/bootstrap.js"></script>
-<script src="js/jquery.dcjqaccordion.2.7.js"></script>
-<script src="js/scripts.js"></script>
-<script src="js/jquery.slimscroll.js"></script>
-<script src="js/jquery.nicescroll.js"></script>
-<!--[if lte IE 8]><script language="javascript" type="text/javascript" src="js/flot-chart/excanvas.min.js"></script><![endif]-->
-<script src="js/jquery.scrollTo.js"></script>
-<!-- morris JavaScript -->	
+    <script src="js/bootstrap.js"></script>
+    <script src="js/jquery.dcjqaccordion.2.7.js"></script>
+    <script src="js/scripts.js"></script>
+    <script src="js/jquery.slimscroll.js"></script>
+    <script src="js/jquery.nicescroll.js"></script>
+    <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="js/flot-chart/excanvas.min.js"></script><![endif]-->
+    <script src="js/jquery.scrollTo.js"></script>
+    <!-- morris JavaScript -->
 
-<!-- calendar -->
-	<script type="text/javascript" src="js/monthly.js"></script>
-	
-	<!-- //calendar -->
+    <!-- calendar -->
+    <script type="text/javascript" src="js/monthly.js"></script>
+
+    <!-- //calendar -->
 </body>
+
 </html>
 <script>
+    $(document).ready(function() {
+        load(1);
+    });
 
+    function load(page) {
 
-	 	$(document).ready(function(){
-			load(1);
-		});
+        $("#loader").fadeIn('slow');
+        $.ajax({
+            url: 'ajax/buscar_usuarios.php',
+            beforeSend: function(objeto) {
+                $('#loader').html('<img src="./img/ajax-loader.gif"> Cargando...');
+            },
+            success: function(data) {
+                $(".outer_div").html(data).fadeIn('slow');
+                $('#loader').html('');
 
-		function load(page){
-		
-			$("#loader").fadeIn('slow');
-			$.ajax({
-				url:'ajax/buscar_usuarios.php',
-				 beforeSend: function(objeto){
-				 $('#loader').html('<img src="./img/ajax-loader.gif"> Cargando...');
-			  },
-				success:function(data){
-					$(".outer_div").html(data).fadeIn('slow');
-					$('#loader').html('');
-					
-				}
-			})
-		}
-
-
-
-
-
-
-
-
-
+            }
+        })
+    }
 </script>
