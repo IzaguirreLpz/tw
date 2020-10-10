@@ -55,87 +55,85 @@ if ($_SESSION['estado_usuario'] == strtolower('nuevo')) {
 </head>
 
 <body>
-    <section id="container">
-        <!--header start-->
-        <header class="header fixed-top clearfix">
-            <!--logo start-->
-            <div class="brand">
-                <a href="#" class="logo">
-                    MENU
-                </a>
-                <div class="sidebar-toggle-box">
-                    <div class="fa fa-bars"></div>
-                </div>
-            </div>
-            <!--logo end-->
+<section id="container">
+<!--header start-->
+<header class="header fixed-top clearfix">
+<!--logo start-->
+<div class="brand">
+    <a href="#" class="logo">
+       MENU
+    </a>
+    <div class="sidebar-toggle-box">
+        <div class="fa fa-bars"></div>
+    </div>
+</div>
+<!--logo end-->
 
-            <div class="top-nav clearfix">
-                <!--search & user info start-->
-                <ul class="nav pull-right top-menu">
+<div class="top-nav clearfix">
+    <!--search & user info start-->
+    <ul class="nav pull-right top-menu">
+        
+        <!-- user login dropdown start-->
+        <li class="dropdown">
+            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                <img alt="" src="images/2.png">
+                <span class="username"><?php echo $_SESSION['usuario'] ?></span>
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu extended logout">
+                
+                <li><a href="logout.php"><i class="fa fa-key"></i>Salir</a></li>
+            </ul>
+        </li>
+        <!-- user login dropdown end -->
+       
+    </ul>
+    <!--search & user info end-->
+</div>
+</header>
+<!--header end-->
+<!--sidebar start-->
+<aside>
+    <div id="sidebar" class="nav-collapse">
+        <!-- sidebar menu start-->
+        <div class="leftside-navigation">
+            <ul class="sidebar-menu" id="nav-accordion">
+<?php
+    
+echo $_SESSION['menus'];
+    ?>
+    
+     </ul>
+           </div>
+        <!-- sidebar menu end-->
+    </div>
+</aside>
+<!--sidebar end-->
+<!--main content start-->
+<section id="main-content">
+<section class="wrapper">
+<div class="table-agile-info">
+<div class="panel panel-default">
+<div class="panel-heading">
+USUARIOS
 
-                    <!-- user login dropdown start-->
-                    <li class="dropdown">
-                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <img alt="" src="images/2.png">
-                            <span class="username"><?php echo $_SESSION['usuario'] ?></span>
-                            <b class="caret"></b>
-                        </a>
-                        <ul class="dropdown-menu extended logout">
+<div class="btn-group pull-right">
+				<button type='button' class="btn btn-success" onClick="location.href='http://localhost/tw/add_usu.php'"><span class="glyphicon glyphicon-plus" ></span> Agregar </button>
+			</div>
+</div>
+    <div class="row w3-res-tb">
+      
+      <div class="col-sm-4">
+      </div>
+      <div class="col-sm-3">
+        
+      </div>
+    </div>
+	 <div id="resultados"></div><!-- Carga los datos ajax -->
+    <div class='outer_div'></div>
 
-                            <li><a href="logout.php"><i class="fa fa-key"></i>Salir</a></li>
-                        </ul>
-                    </li>
-                    <!-- user login dropdown end -->
-
-                </ul>
-                <!--search & user info end-->
-            </div>
-        </header>
-        <!--header end-->
-        <!--sidebar start-->
-        <aside>
-            <div id="sidebar" class="nav-collapse">
-                <!-- sidebar menu start-->
-                <div class="leftside-navigation">
-                    <ul class="sidebar-menu" id="nav-accordion">
-                        <?php
-
-                        echo $_SESSION['menus'];
-                        ?>
-
-                    </ul>
-                </div>
-                <!-- sidebar menu end-->
-            </div>
-        </aside>
-        <!--sidebar end-->
-        <!--main content start-->
-        <section id="main-content">
-            <section class="wrapper">
-                <div class="table-agile-info">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            USUARIOS
-                            <div class="btn-group pull-right">
-                                <button type='button' class="btn btn-success" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-plus"></span> Agregar </button>
-                            </div>
-                        </div>
-                        <div class="row w3-res-tb">
-
-                            <div class="col-sm-4">
-                            </div>
-                            <div class="col-sm-3">
-
-                            </div>
-                        </div>
-                        <div id="resultados"></div><!-- Carga los datos ajax -->
-                        <div class='outer_div'></div>
-
-                    </div>
-                </div>
-            </section>
-        </section>
-        <!--main content end-->
+    </div>
+    </div>
     </section>
     <script src="js/bootstrap.js"></script>
     <script src="js/jquery.dcjqaccordion.2.7.js"></script>
