@@ -108,7 +108,7 @@ echo $_SESSION['menus'];
 USUARIOS
 
 <div class="btn-group pull-right">
-				<button type='button' class="btn btn-success" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-plus" ></span> Agregar </button>
+				<button type='button' class="btn btn-success" onClick="location.href='http://localhost/tw/add_usu.php'"><span class="glyphicon glyphicon-plus" ></span> Agregar </button>
 			</div>
 </div>
     <div class="row w3-res-tb">
