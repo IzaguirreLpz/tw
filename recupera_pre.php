@@ -4,14 +4,14 @@ require 'funcs/conexion.php';
 require 'funcs/funcs.php';
 $errors = array();
 if (!empty($_POST)) {
+	echo $_POST['email'];
 	$user = $mysqli->real_escape_string($_POST['email']);
 
 	if (usuarioExiste($user)) {
 
 		$user_id = getValor('id_usuario', 'usuario', $user);
 		echo "esta bien";
-
-		header('Location:cambia_pass_pre.php?user_id=' . $user_id);
+		header('Location:recupera_pre.php?user_id=' . $user_id);
 	} else {
 		$errors[] = "no existe usuario";
 	}
@@ -22,74 +22,94 @@ if (!empty($_POST)) {
 <head>
 	<title>Recuperar Password</title>
 
-	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/bootstrap-theme.min.css">
-	<script src="js/bootstrap.min.js"></script>
-
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+	<link rel="stylesheet" href="css/stepper.css">
+	<link rel="stylesheet" href="css/stylelogin.css" type="text/css" />
 </head>
 
 <body>
 
 	<div class="container">
-		<div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-			<div class="panel panel-info">
-				<div class="panel-heading">
-					<div class="panel-title">Recuperar Password</div>
-					<div style="float:right; font-size: 80%; position: relative; top:-10px"><a href="index.php">Iniciar Sesi&oacute;n</a></div>
-				</div>
+		<img style="margin-top:5%" src="images\tecniwahs_logo.png" alt="tecniwash logo" srcset="">
+		<?php
+		if (empty($_GET['user_id'])) {
+		?>
+			<div class="w3ls-login">
 
-				<div style="padding-top:30px" class="panel-body">
+				<form class="" method="post" id="loginform">
+					<div class="agile-field-txt">
+						<h3 style="font-size: 20px;font-weight:500">Recuperar Password</h3>
+					</div>
+					<div class="agile-field-txt">
+						<label>
+							<i class="glyphicon glyphicon-user" aria-hidden="true"></i>Nombre De Usuario :</label>
+						<input type="text" class="form-control" name="email" placeholder="Usuario/Correo" required />
+						<span id="check-e"></span>
+					</div>
 
-					<div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
+					<div class="w3ls-login  w3l-sub">
+						<input type="submit" name="btn-login" value="Enviar" class="btn btn-default">
+					</div>
+					<div class="form-group">
 
-					<form id="loginform" class="form-horizontal" role="form" action="<?php $_SERVER['PHP_SELF']; ?>" method="POST" autocomplete="off">
 
-						<div style="margin-bottom: 25px" class="input-group">
-							<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-							<input id="email" type="text" class="form-control" name="email" placeholder="USUARIO" style="text-transform: uppercase;" onkeypress="return soloLetras(event)" onPaste="return false;" maxlength="15" required>
-						</div>
+						<br>
+						<a data-toggle="modal" href="/tw" style="cursor: pointer;">Regresar al Login</a>
 
-						<script>
-							function soloLetras(e) {
-								key = e.keyCode || e.which;
-								tecla = String.fromCharCode(key).toLowerCase();
-								letras = " áéíóúabcdefghijklmnñopqrstuvwxyz";
-								especiales = "8-37-39-46";
+					</div>
 
-								tecla_especial = false
-								for (var i in especiales) {
-									if (key == especiales[i]) {
-										tecla_especial = true;
-										break;
-									}
-								}
+					<!--- <label>Don't have account yet ! <a href="sign-up.php">Sign Up</a></label>-->
+				</form>
 
-								if (letras.indexOf(tecla) == -1 && !tecla_especial) {
-									return false;
-								}
-							}
-						</script>
-
-						<center>
-							<div style="margin-top:10px" class="form-group">
-								<div class="col-sm-12 controls">
-									<button id="btn-login" type="submit" class="btn btn-success">Enviar</a>
-								</div>
-							</div>
-						</center>
-						<div class="form-group">
-							<div class="col-md-12 control">
-								<div style="border-top: 1px solid#888; padding-top:15px; font-size:85%">
-									No tiene una cuenta! <a href="registro.php">Registrate aquí</a>
-								</div>
-							</div>
-						</div>
-					</form>
-					<?php echo resultBlock($errors); ?>
-				</div>
 			</div>
-		</div>
+		<?php
+		} else {
+		?>
+			<form id="regForm">
+				<h1>Register:</h1>
+				<!-- One "tab" for each step in the form: -->
+				<div class="tab">Name:
+					<p><input placeholder="First name..." oninput="this.className = ''" name="fname"></p>
+					<p><input placeholder="Last name..." oninput="this.className = ''" name="lname"></p>
+				</div>
+				<div class="tab">Contact Info:
+					<p><input placeholder="E-mail..." oninput="this.className = ''" name="email"></p>
+					<p><input placeholder="Phone..." oninput="this.className = ''" name="phone"></p>
+				</div>
+				<div class="tab">Birthday:
+					<p><input placeholder="dd" oninput="this.className = ''" name="dd"></p>
+					<p><input placeholder="mm" oninput="this.className = ''" name="nn"></p>
+					<p><input placeholder="yyyy" oninput="this.className = ''" name="yyyy"></p>
+				</div>
+				<div class="tab">Login Info:
+					<p><input placeholder="Username..." oninput="this.className = ''" name="uname"></p>
+					<p><input placeholder="Password..." oninput="this.className = ''" name="pword" type="password"></p>
+				</div>
+				<div style="overflow:auto;">
+					<div style="float:right;">
+						<button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
+						<button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
+					</div>
+				</div>
+				<!-- Circles which indicates the steps of the form: -->
+				<div style="text-align:center;margin-top:40px;">
+					<span class="step"></span>
+					<span class="step"></span>
+					<span class="step"></span>
+					<span class="step"></span>
+				</div>
+			</form>
+		<?php
+		}
+		?>
 	</div>
+
+
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+	<script src="js/stepper.js"></script>
 </body>
 
 </html>

@@ -292,6 +292,13 @@ if (!empty($_POST)) {
 				<input type="submit" name="btn-login" class="btn btn-default">
 
 			</div>
+			<div class="form-group">
+
+
+				<br>
+				<a data-toggle="modal" href="/tw" style="cursor: pointer;">Regresar al Login</a>
+
+			</div>
 			<br />
 		</form>
 
