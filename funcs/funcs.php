@@ -9,7 +9,16 @@ require 'conexion.php';
 	$value=$rw[$row];
 	return $value;
 }*/
+function getArray( $tabla, $campoWhere, $valor){
+//20201010 retorna  toda la fila 
+$str = "SELECT $campo FROM $tabla WHERE $campoWhere = $valor ";
+$array = mysqli_query($mysqli, $str);
+$hola = mysqli_fetch_assoc($array);
 
+return $hola;
+
+
+}
 
 function getCualquiera($campo, $tabla, $campoWhere, $valor)
 {
