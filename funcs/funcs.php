@@ -9,6 +9,22 @@ require 'conexion.php';
 	$value=$rw[$row];
 	return $value;
 }*/
+
+
+function formato_correo ($valor){
+
+	if (preg_match('/\w+@\w+\.+[a-z]/', $valor)){
+
+return true;
+
+	}else{
+
+		return false;
+
+	}
+
+
+}
 function getArray( $tabla, $campoWhere, $valor){
 	global $mysqli;
 //20201010 retorna  toda la fila 

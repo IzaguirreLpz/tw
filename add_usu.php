@@ -8,6 +8,20 @@ require 'funcs/funcs.php';
 if(!isset($_SESSION['id_usuario'])){
     header ("Location: index.php");
 }
+$us= 0;
+//para que cuando sea agregar el rol sea nuevo predeterminado
+$rol=5;
+if (isset ($_GET["us"] )){
+$us =$_GET["us"];
+
+$arreglo = getArray("tbl_usuario","id_usuario",$us);
+$nom = $arreglo['nombre_usuario'];
+$usu= $arreglo['usuario'];
+$rol= $arreglo['id_rol'];
+$estado= $arreglo['estado_usuario'];
+$corr = $arreglo['correo_electronico'];
+}
+
 
 //echo $_SESSION['id_usuario'];
 //echo $_SESSION['menus'];
@@ -117,11 +131,12 @@ echo $_SESSION['menus'];
                 <div class="col-lg-12">
                     <section class="panel">
                         <header class="panel-heading">
-                            Agregar Usuario
+                            <?php 
+                             if ($us !=0){echo "Editar  Usuario $usu "; }else {echo "Agregar Usuario ";} ?>
                             <span class="tools pull-right">
                                 <a class="fa fa-chevron-down" href="javascript:;"></a>
-                                               <a class="fa fa-cog" href="javascript:;"></a>
-                                <a class="fa fa-times" href="javascript:;"></a>
+                                              
+                                <a class="fa fa-share" href="usuarios.php" ></a>
                              </span>
                         </header>
                         <div class="panel-body">
@@ -130,13 +145,13 @@ echo $_SESSION['menus'];
                             
                                    
 
-
+    <input type="hidden" id="usu" name="usu"  <?php   echo "value='$us'" ;  ?> >
 <div class="form-group">
      <label class="control-label col-lg-3">Nombre Completo:</label>
   	  <div class="col-lg-6">
   	   <div class="input-group">
 		<span class="input-group-addon"><i class="glyphicon glyphicon-user" ></i></span>
-		<input maxlength="70" type="text" name="txt_nc" placeholder="Nombre" style="text-transform: uppercase;" id="txt_nc" autocomplete="off" autofocus="on" onkeyup="return unspaces()"  onkeypress="return soloLetras(event)" class="form-control" onkeypress="return soloLetras(event)" onPaste="return false;" title="nombre Usuario" required >
+		<input maxlength="70" type="text" <?php   if ($us !=0){ echo "value=$nom" ; } ?> name="txt_nc" placeholder="Nombre" style="text-transform: uppercase;" id="txt_nc" autocomplete="off" autofocus="on" onkeyup="return unspaces()"  onkeypress="return soloLetras(event)" class="form-control" onkeypress="return soloLetras(event)" onPaste="return false;" title="nombre Usuario" required >
       </div>
      </div>
     </div>
@@ -168,7 +183,7 @@ echo $_SESSION['menus'];
       <div class="col-lg-6">
        <div class="input-group">
 		<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-		<input maxlength="15" type="text" name="txt_us" placeholder="Usuario" style="text-transform: uppercase;" id="txt_us" autocomplete="off" autofocus="on" onkeyup="return nospaces()" onkeypress="return soloLetras(event)"  onkeypress="return soloLetras(event)" onPaste="return false;" class="form-control"  title="Usuario solo letras" required>
+		<input maxlength="15" type="text" name="txt_us"  <?php   if ($us !=0){ echo "value=$usu "       ; } ?> placeholder="Usuario" style="text-transform: uppercase;" id="txt_us" autocomplete="off" autofocus="on" onkeyup="return nospaces()" onkeypress="return soloLetras(event)"  onkeypress="return soloLetras(event)" onPaste="return false;" class="form-control"  title="Usuario solo letras" required>
        </div>
       </div> 
     </div>
@@ -217,7 +232,7 @@ echo $_SESSION['menus'];
     <!-- Text input-->
 
 
-
+   <?php if ($us ==0) { ?>
 
     <div class="form-group">
 	 <label class="control-label col-lg-3" >Contraseña:</label>
@@ -253,7 +268,8 @@ echo $_SESSION['menus'];
       	  </div>
          </div>
        </div>
-       
+<?php } ?>
+ 
      <script>
         	function nospaces1(){
 		orig=document.form.pass2.value;
@@ -278,16 +294,29 @@ echo $_SESSION['menus'];
       <div class="col-md-6 selectContainer">
       <div class="input-group">
         <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
-	  	<select title="Rol del Usuario" class='form-control' name='rol' id='rol' onchange="load(1);"  readonly>
-				<?php 
-				$query_cod_veh=mysqli_query($mysqli,"SELECT id_rol,rol from tbl_roles WHERE id_rol=5");
-				while($rw=mysqli_fetch_array($query_cod_veh))	{
-					?>
-				<option value="<?php echo $rw['id_rol'];?>"><?php echo $rw['rol'];?></option>			
-					<?php
-				}
+	  	<select title="Rol del Usuario" class='form-control' name='rol' id='rol'  <?php if ($us==0) { echo "readonly   "; }?> style="text-transform: uppercase;"   >
+                            <?php 
+                            $w=" ";
+                            if ($rol==5 ){
 
-				?>
+                                $w = "where id_rol=5";
+                            }else{
+                             //  $w = " ";
+?>
+          <option value="">Seleccione un Rol</option>
+<?php
+
+                            }
+
+                            
+							$query_cod_veh=mysqli_query($mysqli,"select * from tbl_roles $w order by id_rol");
+							while($rw=mysqli_fetch_array($query_cod_veh))	{
+								?>
+							<option value="<?php echo $rw['id_rol'];?>"  <?php if ($rw['id_rol']== $rol) {  echo "selected='selected'" ;} ?>         ><?php echo $rw['rol'];?></option>			
+								<?php
+							}
+
+							?>
 				</select>
 				</div>
 			  </div>
@@ -301,7 +330,7 @@ echo $_SESSION['menus'];
 	  <div class="col-lg-6">
 	   <div class="input-group">
 		<span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-		<input maxlength="80" type="text" name="correo" placeholder="e-mail" id="correo" autocomplete="off" autofocus="on" o class="form-control" onPaste="return false;" required  onkeyup=" nospaces3();">  
+		<input maxlength="80" type="email"  <?php   if ($us !=0){ echo "value=$corr" ; } ?>    name="correo" placeholder="e-mail" id="correo" autocomplete="off" autofocus="on" o class="form-control" onPaste="return false;" required  onkeyup=" nospaces3();">  
 		</div>
 		</div>
 	   </div>
@@ -346,7 +375,29 @@ alert("La dirección de email es incorrecta.");
     <div class="col-md-6 selectContainer">
       <div class="input-group">
 		<span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
-		<input type="combo_estado" id="combo_estado" name="combo_estado" class="form-control" value="NUEVO" readonly>	
+
+        <?php if ($us==null) { ?>
+
+            <input type="combo_estado" id="combo_estado" name="combo_estado" class="form-control" value="NUEVO" readonly>	
+
+
+       <?php }else { ?>
+
+        <select name="estado_usuarios"  id="estado_usuarios"class="form-control" style="text-transform: uppercase;">
+			<option value="-1">--seleccione estado--</option>
+			<option value="BlOQUEADO"    <?php if ($estado== "BlOQUEADO") {  echo "selected='selected'" ;} ?> >BlOQUEADO</option>
+			<option value="ACTIVO"  <?php if ($estado== "ACTIVO") {  echo "selected='selected'" ;} ?> >ACTIVO</option>
+			<option value="INACTIVO" <?php if ($estado== "INACTIVO") {  echo "selected='selected'" ;} ?> >INACTIVO</option>
+            <option value="NUEVO" <?php if ($estado== "NUEVO") {  echo "selected='selected'" ;} ?> >NUEVO</option>
+		
+		</select>
+
+
+     <?php  } ?>
+
+    
+
+
 	</div>
   </div>
   </div>
@@ -354,7 +405,7 @@ alert("La dirección de email es incorrecta.");
 
                                     <div class="form-group">
                                         <div class="col-lg-offset-3 col-lg-6">
-                                            <button class="btn btn-primary"  onclick = "this.form.action='registrar2.php'"value= "Guardar" type="submit">Save</button>
+                                            <button class="btn btn-success"  onclick = "this.form.action='registrar2.php'"value= "Guardar" type="submit">Guardar</button>
                                             <button class="btn btn-default" type="button">Cancel</button>
                                         </div>
                                     </div>
@@ -402,7 +453,7 @@ alert("La dirección de email es incorrecta.");
 				// toastr.options.positionClass = 'toast-top-center';
 				
 				if(data=="ok"){
-					toastr.success("Registrado con exito.");
+					toastr.success("Guardado con exito.");
 					setTimeout(function(){
 						location.href="usuarios.php";
 					},3000);
@@ -443,7 +494,7 @@ alert("La dirección de email es incorrecta.");
                 $('#show-hide-passwd1').on('click', function(e) {
                     e.preventDefault();
                     var current = $(this).attr('action');
-                    toastr.info("Pregunta Guardada Correctamente .");
+                   
                     if (current == 'hide') {
                         $(this).prev().attr('type','text');
                         $(this).removeClass('glyphicon-eye-open').addClass('glyphicon-eye-close').attr('action','show');

@@ -55,7 +55,7 @@ $idUsuario = $_SESSION['id_usuario'];
 
         while ($row = mysqli_fetch_array($query)) {
 
-          $id_usuario = $row['id_usuario'];
+          $usu_nom = $row['id_usuario'];
           $nombre = $row['nombre_usuario'];
           $usuario = $row['usuario'];
           $id_rol = $row['id_rol'];
@@ -79,7 +79,7 @@ $idUsuario = $_SESSION['id_usuario'];
             <td><?php echo $fecha; ?></td>
             <td>
 
-              <a href="" class="active" ui-toggle-class=""><i class="fa fa-pencil text-success text-dark"></i><i class="fa fa-times text-danger text"></i></a>
+              <a href="add_usu.php?us=<?php echo $usu_nom ?> " class="active" ui-toggle-class=""><i class="fa fa-pencil text-success text-dark"></i><i class="fa fa-times text-danger text"></i></a>
 
 
 
