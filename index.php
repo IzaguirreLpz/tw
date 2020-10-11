@@ -88,134 +88,129 @@ if (isset($_SESSION['id_usuario'])) {
 					<input type="password" class="form-control" name="password" placeholder="Password" id="password" maxlength="15" required />
 					<span toggle="password-field" id="eye" class="fa fa-eye field-icon" toggleClass=" toggle-password" onclick="myFunction()"></span>
 				</div>
-				
+
 				<div class="w3ls-login  w3l-sub">
 					<input type="submit" name="btn-login" value="Iniciar sesión" class="btn btn-default">
 
 				</div>
 
 				<div class="form-group">
-                            
 
-				<br>
+
+					<br>
 					<a data-toggle="modal" data-target="#recuperapass" style="cursor: pointer;">¿Olvidaste tu contraseña?</a>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<a href="#" style="cursor: pointer;"> ¡Regístrate Aquí !←</a>
-				
-                             
-                 </div>
+					<a href="#" style="cursor: pointer;"> ¡Regístrate Aquí !</a>
 
 
-				 
-				
-				<!--- <label>Don't have account yet ! <a href="sign-up.php">Sign Up</a></label>-->
+				</div>
 			</form>
 
 		</div>
 
-				<!-- Modal -->
-				<div class="modal fade" id="recuperapass" tabindex="-1" aria-labelledby="recuperapassLabel" aria-hidden="true">
-					<div class="modal-dialog">
-						<div class="modal-content">
-							<div class="modal-header">
-								<h5 class="modal-title" id="recuperapassLabel">Recuperación de Contraseña</h5>
-								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								</button>
-							</div>
-							<div class="modal-body">
-								<div class="row" style="display: flex;justify-content: center;">
-									<div class="col-sm">
-										<div class="card" style="width: 18rem;">
-											<img src="images\Emails-amico.png" width="50%" class="card-img-top" alt="...">
-											<div class="card-body">
-												<h5 class="card-title">Recuperar Mediante Correo</h5>
-												<div class="card_footer">
-													<a href="/tw/recupera.php" class="btn btn-success">Enviar correo</a>
-												</div>
-											</div>
-										</div>
-									</div>
-
-									<div class="col-sm">
-										<div class="card" style="width: 18rem;">
-											<img src="images\Taking notes-pana.png" width="50%" class="card-img-top" alt="...">
-											<div class="card-body">
-												<h5 class="card-title">Recuperar Mediante Preguntas</h5>
-												<div class="card_footer">
-													<a href="/tw/recupera_pre.php" class="btn btn-success">Responder Preguntas</a>
-												</div>
-											</div>
+		<!-- Modal -->
+		<div class="modal fade" id="recuperapass" tabindex="-1" aria-labelledby="recuperapassLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="recuperapassLabel">Recuperación de Contraseña</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div class="row" style="display: flex;justify-content: center;">
+							<div class="col-sm">
+								<div class="card" style="width: 18rem;">
+									<img src="images\Emails-amico.png" width="50%" class="card-img-top" alt="...">
+									<div class="card-body">
+										<h5 class="card-title">Recuperar Mediante Correo</h5>
+										<div class="card_footer">
+											<a href="/tw/recupera.php" class="btn btn-success">Enviar correo</a>
 										</div>
 									</div>
 								</div>
 							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+
+							<div class="col-sm">
+								<div class="card" style="width: 18rem;">
+									<img src="images\Taking notes-pana.png" width="50%" class="card-img-top" alt="...">
+									<div class="card-body">
+										<h5 class="card-title">Recuperar Mediante Preguntas</h5>
+										<div class="card_footer">
+											<a href="/tw/recupera_pre.php" class="btn btn-success">Responder Preguntas</a>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+					</div>
 				</div>
+			</div>
+		</div>
 
 
 
 
 
-				<!-- Fin del modal -->
+		<!-- Fin del modal -->
 
 
 
-				<script>
-					function eye() {
-						var e = document.getElementById("password");
-						e.toggleClass("fa-eye fa-eye-slash");
-						var input = $($(this).attr("toggle"));
-						if (input.attr("type") == "password") {
-							input.attr("type", "text");
-						} else {
-							input.attr("type", "password");
-						}
-					};
+		<script>
+			function eye() {
+				var e = document.getElementById("password");
+				e.toggleClass("fa-eye fa-eye-slash");
+				var input = $($(this).attr("toggle"));
+				if (input.attr("type") == "password") {
+					input.attr("type", "text");
+				} else {
+					input.attr("type", "password");
+				}
+			};
 
-					function myFunction() {
-						var e = document.getElementById("eye");
+			function myFunction() {
+				var e = document.getElementById("eye");
 
-						var x = document.getElementById("password");
-						if (x.type === "password") {
-							x.type = "text";
-							e.removeClass('fa fa-eye field-icon');
-							e.addClass('fa fa-eye-slash field-icon');
+				var x = document.getElementById("password");
+				if (x.type === "password") {
+					x.type = "text";
+					e.removeClass('fa fa-eye field-icon');
+					e.addClass('fa fa-eye-slash field-icon');
 
-						} else {
-							x.type = "password";
+				} else {
+					x.type = "password";
 
-							e.removeClass('fa fa-eye-slash field-icon');
-							e.addClass('fa fa-eye field-icon');
+					e.removeClass('fa fa-eye-slash field-icon');
+					e.addClass('fa fa-eye field-icon');
 
-						}
-					}
-
-
+				}
+			}
 
 
-					function myFunction2() {
-						var x = document.getElementById("pass");
-						var y = document.getElementById("repass");
-						if (x.type === "password") {
-							x.type = "text";
-							y.type = "text";
-						} else {
-							x.type = "password";
-							y.type = "password";
-						}
-					}
-				</script>
-			
-
-			
 
 
-	
+			function myFunction2() {
+				var x = document.getElementById("pass");
+				var y = document.getElementById("repass");
+				if (x.type === "password") {
+					x.type = "text";
+					y.type = "text";
+				} else {
+					x.type = "password";
+					y.type = "password";
+				}
+			}
+		</script>
+
+
+
+
+
+
 
 
 
@@ -227,7 +222,7 @@ if (isset($_SESSION['id_usuario'])) {
 		<script src="js/toastr.min.js"></script>
 		<!--</div>-->
 
-	
+
 
 	</html>
 	<script>
