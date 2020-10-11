@@ -10,6 +10,7 @@ require 'conexion.php';
 	return $value;
 }*/
 function getArray( $tabla, $campoWhere, $valor){
+	global $mysqli;
 //20201010 retorna  toda la fila 
 $str = "SELECT * FROM $tabla WHERE $campoWhere = $valor ";
 $array = mysqli_query($mysqli, $str);
