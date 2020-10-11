@@ -149,12 +149,52 @@ USUARIOS
 
     <!-- //calendar -->
 </body>
-
+<?php
+				
+				
+            //    include("modal/eliminar_usuario.php");
+             //   include("modal/editar_usuarios.php");
+                 require 'modal/eliminar_usuario.php';
+        
+    
+              
+                ?>
+                            
 </html>
 <script>
     $(document).ready(function() {
         load(1);
     });
+
+    function
+	  obtener_id(item){
+		
+				
+			$("#user_id_mod").val(item);
+	        
+	      
+ }
+	  
+
+    $( "#editar_password" ).submit(function( event ) {
+  $('#actualizar_datos3').attr("disabled", true);
+  
+ var parametros = $(this).serialize();
+	 $.ajax({
+			type: "POST",
+			url: "ajax/eliminar_usuario.php",
+			data: parametros,
+			 beforeSend: function(objeto){
+				$("#resultados_ajax3").html("Mensaje: Cargando...");
+			  },
+			success: function(datos){
+			$("#resultados_ajax3").html(datos);
+			$('#actualizar_datos3').attr("disabled", false);
+			load(1);
+		  }
+	});
+  event.preventDefault();
+})	  
 
     function load(page) {
 

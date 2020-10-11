@@ -79,9 +79,9 @@ $idUsuario = $_SESSION['id_usuario'];
             <td><?php echo $fecha; ?></td>
             <td>
 
-              <a href="add_usu.php?us=<?php echo $usu_nom ?> " class="active" ui-toggle-class=""><i class="fa fa-pencil text-success text-dark"></i><i class="fa fa-times text-danger text"></i></a>
+              <a href="add_usu.php?us=<?php echo $usu_nom ?> " class='btn btn-default' ui-toggle-class=""><i class="fa fa-pencil text-success text-dark"></i></a>
 
-
+              <a href="#" class='btn btn-default' title='Eliminar usuario'  data-toggle="modal" data-target="#myModal4" onclick='obtener_id("<?php echo $usu_nom;?>")' ><i class="glyphicon glyphicon-remove"></i></a>
 
               <script>
                 function reportePDF2() {
