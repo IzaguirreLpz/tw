@@ -4,9 +4,11 @@ require 'funcs/conexion.php';
 require 'funcs/funcs.php';
 $errors = '';
 $type = 'success';
-
-$userid = $mysqli->real_escape_string($_GET['userid']);
-$token = $mysqli->real_escape_string($_GET['token']);
+if ($_GET) {
+    $userid = $mysqli->real_escape_string($_GET['userid']);
+    $token = $mysqli->real_escape_string($_GET['token']);
+    $tokenBd = getCualquiera('token_password', 'tbl_usuario', 'id_usuario', $userid);
+}
 
 $objeto = "cambia_pass";
 $accion = "INGRESO";
@@ -14,8 +16,20 @@ $descripcion = "Esta en la pantalla de cambia password";
 $bita = grabarBitacora($userid, $objeto, $accion, $descripcion);
 
 if (!verificaTokenPass($userid, $token)) {
-    $errors =  'No se pudo verificar los Datos';
+    $errors =  'No se pudo verificar el token disculpa las molestias';
     $type = 'danger';
+}
+if ($token == $tokenBd) {
+
+    $fechaBd = new DateTime(getCualquiera('fecha_cambio_contrasena', 'tbl_usuario', 'id_usuario', $userid)); //fecha inicial obtenida de la BD
+    $hoy = new DateTime(); //fecha de cierre
+    $intervalo = $hoy->diff($fechaBd);
+    $horas = $intervalo->format('%H');
+    $dias = $intervalo->format('%d');
+    if ($dias > 0) {
+        $errors =  'El token ha caducado, disculpa las molestias, solicita nuevo cambio de contraseña';
+        $type = 'danger';
+    }
 }
 
 if ($_POST != null) {

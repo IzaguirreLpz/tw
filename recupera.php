@@ -235,12 +235,18 @@ if (!empty($_POST)) {
 </html>
 ";
 		if (enviarEmail($email, $nombre, $asunto, $cuerpo0)) {
-
 			echo " le hemos enviado la direccion de correo electronico: $email por favor revisar";
 
 			echo "<br><a href='index.php' >Iniciar Sesion</a>";
 			exit;
 		}
+		global $mysqli;
+		$hoy = new DateTime();
+		$stmt = $mysqli->prepare("UPDATE tbl_usuario SET fecha_cambio_contrasena=NOW() WHERE id_usuario = ?");
+		$stmt->bind_param('i', $user_id);
+		$stmt->execute();
+		$stmt->close();
+
 		$status[] = "mensaje enviado con exito al correo: {$email}";
 		$status[] = "Por favor revisa tu correo";
 	} else {
