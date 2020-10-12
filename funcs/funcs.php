@@ -11,30 +11,26 @@ require 'conexion.php';
 }*/
 
 
-function formato_correo ($valor){
+function formato_correo($valor)
+{
 
-	if (preg_match('/\w+@\w+\.+[a-z]/', $valor)){
+	if (preg_match('/\w+@\w+\.+[a-z]/', $valor)) {
 
-return true;
-
-	}else{
+		return true;
+	} else {
 
 		return false;
-
 	}
-
-
 }
-function getArray( $tabla, $campoWhere, $valor){
+function getArray($tabla, $campoWhere, $valor)
+{
 	global $mysqli;
-//20201010 retorna  toda la fila 
-$str = "SELECT * FROM $tabla WHERE $campoWhere = $valor ";
-$array = mysqli_query($mysqli, $str);
-$hola = mysqli_fetch_assoc($array);
+	//20201010 retorna  toda la fila 
+	$str = "SELECT * FROM $tabla WHERE $campoWhere = $valor ";
+	$array = mysqli_query($mysqli, $str);
+	$hola = mysqli_fetch_assoc($array);
 
-return $hola;
-
-
+	return $hola;
 }
 
 function getCualquiera($campo, $tabla, $campoWhere, $valor)
