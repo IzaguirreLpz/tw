@@ -12,23 +12,22 @@ require 'conexion.php';
 
 
 
-function minMaxPass( $valor)
+function minMaxPass($valor)
 {
 
-	$min= getCualquiera('descripcion', 'tbl_parametros','id_parametro',5);
-	
-	$max= getCualquiera('descripcion', 'tbl_parametros','id_parametro',6);
+	$min = getCualquiera('descripcion', 'tbl_parametros', 'id_parametro', 5);
+
+	$max = getCualquiera('descripcion', 'tbl_parametros', 'id_parametro', 6);
 	if (strlen(trim($valor)) < $min) {
 		return false;
-	} 
-	
+	}
+
 	if (strlen(trim($valor)) > $max) {
 
 		return false;
 	}
 
-return true;
-
+	return true;
 }
 
 
@@ -36,9 +35,9 @@ return true;
 function getSinWhere($campo, $tabla)
 {
 	global $mysqli;
-echo $campo;
-echo $tabla;
-echo "SELECT $campo FROM $tabla LIMIT 1";
+	echo $campo;
+	echo $tabla;
+	echo "SELECT $campo FROM $tabla LIMIT 1";
 	$stmt = $mysqli->prepare("SELECT $campo FROM $tabla LIMIT 1");
 	$stmt->execute();
 	$stmt->store_result();
@@ -51,21 +50,21 @@ echo "SELECT $campo FROM $tabla LIMIT 1";
 	} else {
 		return null;
 	}
-
 }
 
-function generateRandomString() {
+function generateRandomString()
+{
 	$length = 7;
-    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    $charactersLength = strlen($characters);
+	$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+	$charactersLength = strlen($characters);
 	$randomString = '';
-	$sim= '1a$';
-    for ($i = 0; $i < $length; $i++) {
-        $randomString .= $characters[rand(0, $charactersLength - 1)];
+	$sim = '1a$';
+	for ($i = 0; $i < $length; $i++) {
+		$randomString .= $characters[rand(0, $charactersLength - 1)];
 	}
-	$newrandomString= $randomString.$sim;
-    return $newrandomString;
-} 
+	$newrandomString = $randomString . $sim;
+	return $newrandomString;
+}
 
 function formato_correo($valor)
 {
@@ -754,13 +753,13 @@ function grabarBitacora($id_usuario, $objeto, $accion, $descripcion)
 }
 
 
-function grabarHisPas($nombre,$valor)
+function grabarHisPas($nombre, $valor)
 {
 
 	global $mysqli;
-	$id_usuario= getCualquieraS('id_usuario','tbl_usuario','usuario',$nombre);
+	$id_usuario = getCualquieraS('id_usuario', 'tbl_usuario', 'usuario', $nombre);
 	$stmt = $mysqli->prepare("INSERT INTO  hist_pass(id_usuario,pass) VALUES(?,?)");
-	$stmt->bind_param('is', $id_usuario,$valor);
+	$stmt->bind_param('is', $id_usuario, $valor);
 
 	if ($stmt->execute()) {
 		return true;
@@ -964,9 +963,11 @@ function enviarEmail($email, $nombre, $asunto, $cuerpo)
 		$mail->IsHTML(true);
 
 		$mail->send();
+		return true;
 		/* echo "mensaje enviado al correo: {$email}"; */ //comentario en caso que los correos no funcione
 	} catch (Exception $e) {
-		echo "El mensaje no pudo ser enviado el problema es: {$mail->ErrorInfo}";
+		return false;
+		//echo "El mensaje no pudo ser enviado el problema es: {$mail->ErrorInfo}";
 	}
 }
 
