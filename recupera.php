@@ -299,7 +299,7 @@ if (!empty($_POST)) {
 	<div class="w3ls-login">
 		<form class="" method="post" id="recuperarPass">
 			<div class="agile-field-txt">
-				<h4 style="font-size: 20px;font-weight:500">Recuperar Contraseña</h4>
+				<h4 style="font-size: 20px;font-weight:300">Recuperar Contraseña</h4>
 			</div>
 			<div class="agile-field-txt">
 				<label>

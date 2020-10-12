@@ -8,7 +8,7 @@ require 'funcs/funcs.php';
 if(!isset($_SESSION['id_usuario'])){
     header ("Location: index.php");
 }
-
+$id_usu= $_SESSION['id_usuario'];
 //echo $_SESSION['id_usuario'];
 //echo $_SESSION['menus'];
 ?>
@@ -85,8 +85,10 @@ if(!isset($_SESSION['id_usuario'])){
         <div class="leftside-navigation">
             <ul class="sidebar-menu" id="nav-accordion">
 <?php
-    
-echo $_SESSION['menus'];
+if ($id_usu==1){
+    include("menu2.php");
+  }   
+  //echo $_SESSION['menus']; 
     ?>
     
      </ul>

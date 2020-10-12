@@ -12,7 +12,8 @@ if(!isset($_SESSION['id_usuario'])){
 if($_SESSION['estado_usuario']== strtolower('nuevo')){
     header ("Location: preguntas.php");
 }
-
+$id_usu= $_SESSION['id_usuario'];
+//echo $id_usu;
 //echo $_SESSION['menus'];
 ?>
 
@@ -88,8 +89,11 @@ if($_SESSION['estado_usuario']== strtolower('nuevo')){
         <div class="leftside-navigation">
             <ul class="sidebar-menu" id="nav-accordion">
 <?php
-    
-echo $_SESSION['menus'];
+
+if ($id_usu==1){
+  include("menu2.php");
+}   
+//echo $_SESSION['menus'];
     ?>
     
      </ul>
