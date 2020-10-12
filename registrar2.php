@@ -182,11 +182,21 @@ if (!$_POST["pass1"] or !$_POST["txt_nc"] or !$_POST["correo"] or !$_POST["txt_u
 				$co=("select * from tbl_usuario where '$us'=usuario");
 				$res=mysqli_query($mysqli,$co) or die (mysqli_error($mysqli));
 				$fss=mysqli_fetch_row($res);
-				if (preg_match('/^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{6,16}$/', $pass1))
+
+				$valid_cor=formato_correo($correo);
+				if ($valid_cor==false){
+				
+					echo json_encode("Formato de correo invalido.");
+					return;
+				
+				}
+
+				if (minMaxPass($pass1)){
+				if (preg_match('/^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{6,16}$/', $pass1)|| $idUsuario==1){
 				if (!$fss) {
 					$consulta=("insert into tbl_usuario (nombre_usuario,usuario,contrasena,correo_electronico,estado_usuario,id_rol,activacion,fecha_cambio_contrasena) values('$nom', '$us','$pass_hash','$correo','$estado',$rol,1,NOW())");
 $asunto="Se creo su user en TECNIWASH";
-$cuerpo = "Se a registrado a sistema de TECNIWASH con el user .$us. su password inicial es .$pass1. . Feliz día";
+$cuerpo = "Se a registrado a sistema de TECNIWASH con el user $us su password inicial es $pass1 . Feliz día";
 				//S	echo $consulta;
 					$resultado=mysqli_query($mysqli,$consulta) or die (mysqli_error($mysqli));
 					enviarEmail($correo, $nom, $asunto, $cuerpo);
@@ -233,11 +243,23 @@ $cuerpo = "Se a registrado a sistema de TECNIWASH con el user .$us. su password 
 				}else{
 					echo json_encode  ("El Usuario ya existe.");
 					
-                    }else{
+					}
+				}else{
 
 						echo json_encode  ("Su Contraseña debe Incluir Una Mayúscula, Minuscula, Números y Caracteres Especiales !.");
           
 				}
+
+			}else{
+
+
+				
+	$min= getCualquiera('descripcion', 'tbl_parametros','id_parametro',5);
+	
+	$max= getCualquiera('descripcion', 'tbl_parametros','id_parametro',6);
+				echo json_encode  ("No cumple el largo estandar que es minimo $min y  maximo $max  !.");
+          
+			}
 				//mysqli_close($mysqli);
 			}
 		}

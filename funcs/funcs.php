@@ -15,16 +15,9 @@ require 'conexion.php';
 function minMaxPass( $valor)
 {
 
-
-
-	global $mysqli;
-	//20201010 retorna  toda la fila 
-	$str = "SELECT MIN_PASS, MAX_PASS FROM tbl_parametros ";
-	$array = mysqli_query($mysqli, $str);
-	$hola = mysqli_fetch_assoc($array);
-	$min = $hola["MIN_PASS"];
-	$max=$hola["MAX_PASS"];
+	$min= getCualquiera('descripcion', 'tbl_parametros','id_parametro',5);
 	
+	$max= getCualquiera('descripcion', 'tbl_parametros','id_parametro',6);
 	if (strlen(trim($valor)) < $min) {
 		return false;
 	} 
@@ -37,12 +30,36 @@ function minMaxPass( $valor)
 return true;
 
 }
+
+
+
+function getSinWhere($campo, $tabla)
+{
+	global $mysqli;
+echo $campo;
+echo $tabla;
+echo "SELECT $campo FROM $tabla LIMIT 1";
+	$stmt = $mysqli->prepare("SELECT $campo FROM $tabla LIMIT 1");
+	$stmt->execute();
+	$stmt->store_result();
+	$num = $stmt->num_rows;
+
+	if ($num > 0) {
+		$stmt->bind_result($_campo);
+		$stmt->fetch();
+		return $_campo;
+	} else {
+		return null;
+	}
+
+}
+
 function generateRandomString() {
-	$length = 10;
+	$length = 7;
     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $charactersLength = strlen($characters);
 	$randomString = '';
-	$sim= '$';
+	$sim= '1a$';
     for ($i = 0; $i < $length; $i++) {
         $randomString .= $characters[rand(0, $charactersLength - 1)];
 	}
@@ -720,12 +737,13 @@ function grabarBitacora($id_usuario, $objeto, $accion, $descripcion)
 }
 
 
-function grabarRece($id_atencion)
+function grabarHisPas($nombre,$valor)
 {
 
 	global $mysqli;
-	$stmt = $mysqli->prepare("INSERT INTO  siec_receta(re_id_atencion) VALUES(?)");
-	$stmt->bind_param('i', $id_atencion);
+	$id_usuario= getCualquiera('id_usuario','tbl_usuarios','usuario',$nombre);
+	$stmt = $mysqli->prepare("INSERT INTO  hist_pass(id_usuario,pass) VALUES(?,?)");
+	$stmt->bind_param('is', $id_usuario,$valor);
 
 	if ($stmt->execute()) {
 		return $mysqli->insert_id;

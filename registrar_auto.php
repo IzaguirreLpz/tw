@@ -31,9 +31,22 @@ if (!$_POST["pass1"] or !$_POST["txt_nc"] or !$_POST["correo"] or !$_POST["txt_u
 				if ($valid_cor==false){
 				
 					echo json_encode("Formato de correo invalido.");
-					
+					return;
 				
 				}
+
+
+
+			if (!minMaxPass($pass1)){
+
+			
+				$min= getCualquiera('descripcion', 'tbl_parametros','id_parametro',5);
+	
+				$max= getCualquiera('descripcion', 'tbl_parametros','id_parametro',6);
+							echo json_encode  ("No cumple el largo estandar que es minimo $min y  maximo $max  !.");
+							return;
+
+			}
 				
 		$la=("select usuario from tbl_usuario where usuario='$us'");
 				$sa=mysqli_query($mysqli,$la) or die (mysqli_error($mysqli));
