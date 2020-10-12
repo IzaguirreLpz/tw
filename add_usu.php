@@ -11,6 +11,14 @@ if(!isset($_SESSION['id_usuario'])){
 $us= 0;
 //para que cuando sea agregar el rol sea nuevo predeterminado
 $rol=5;
+$token = generateRandomString();
+		//for ($i = 0; $i < 16; $i++) {
+		//	$token .= chr(rand(65, 90));
+		//}
+
+
+//echo $token;
+
 if (isset ($_GET["us"] )){
 $us =$_GET["us"];
 
@@ -237,6 +245,28 @@ echo $_SESSION['menus'];
 
 
    <?php if ($us ==0) { ?>
+		
+								
+    <div class="form-group">
+                        <label class="control-label col-lg-3" for="inputSuccess">Autogenerar</label>
+                        <div class="col-lg-6">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" id="auto" name="auto" value="1" onchange="javascript:showVitales()">
+                                  contraseña
+                                </label>
+                            </div>
+
+
+                        </div>
+                        </div>
+                               
+
+
+
+
+
+
 
     <div class="form-group">
 	 <label class="control-label col-lg-3" >Contraseña:</label>
@@ -267,7 +297,7 @@ echo $_SESSION['menus'];
       <div class="col-md-6 inputGroupContainer">
 		 <div class="input-group">
 			<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-			<input maxlength="20" type= "password" name="pass2" placeholder="Confirmar Password" id="t" title="debe ser igual a la Contraseña" class="form-control" autocomplete="off" autofocus="on" onkeyup="return nospaces1()" onPaste="return false;" required>
+			<input maxlength="20" type= "password" name="pass2" placeholder="Confirmar Password" id="pass2" title="debe ser igual a la Contraseña" class="form-control" autocomplete="off" autofocus="on" onkeyup="return nospaces1()" onPaste="return false;" required>
 		 	<span id="show-hide-passwd1" action="hide" class="input-group-addon glyphicon glyphicon glyphicon-eye-open"></span>
       	  </div>
          </div>
@@ -470,11 +500,50 @@ alert("La dirección de email es incorrecta.");
 		})
 	});
 
+     
+              
+              
+              
+    function showVitales() {
+       // element = document.getElementById("auto");
+        check = document.getElementById("auto");
+        if (check.checked) {
+            document.getElementById('pass1').value= '<?php echo $token ?>';
+            document.getElementById('pass2').value= '<?php echo $token ?>';
+        }
+        else {
+            document.getElementById('pass1').value= '';
+            document.getElementById('pass2').value= '';
+        }
+    }
+              
+         
 
 
 
-
-
+    function showContent() {
+        element = document.getElementById("conte");
+        check = document.getElementById("check");
+        if (check.checked) {
+            element.style.display='block';
+             document.getElementById('incapacidad').value=1;
+             // a=document.getElementById('check').value=1;
+            
+            
+            //alert(a)
+            
+            
+        }
+        else {
+            element.style.display='none';
+             document.getElementById('incapacidad').value="0";
+           // a=document.getElementById('check').value=2;
+              
+            //alert(a)
+        }
+    }
+              
+        
 
                 $(document).on('ready', function() {
                 $('#show-hide-passwd').on('click', function(e) {

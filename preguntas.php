@@ -89,6 +89,7 @@ if  (!empty($_POST))
 <script src="js/jquery2.0.3.min.js"></script>
 <script src="js/raphael-min.js"></script>
 <script src="js/morris.js"></script>
+<link rel="stylesheet" href="css/toastr.min.css">
 </head>
 <body>
 <section id="container">
@@ -237,6 +238,7 @@ WHERE p.id_pregunta NOT IN(SELECT id_pregunta from tbl_respuestas where id_usuar
 <script src="js/jquery.nicescroll.js"></script>
 <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="js/flot-chart/excanvas.min.js"></script><![endif]-->
 <script src="js/jquery.scrollTo.js"></script>
+<script src="js/toastr.min.js"></script>
 <!-- morris JavaScript -->	
 
 <!-- calendar -->

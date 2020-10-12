@@ -5,26 +5,6 @@ session_start();
 require 'funcs/conexion.php';
 require 'funcs/funcs.php';
 
-if(!isset($_SESSION['id_usuario'])){
-    header ("Location: index.php");
-}
-$us= 0;
-//para que cuando sea agregar el rol sea nuevo predeterminado
-$rol=5;
-if (isset ($_GET["us"] )){
-$us =$_GET["us"];
-
-$arreglo = getArray("tbl_usuario","id_usuario",$us);
-$nom = $arreglo['nombre_usuario'];
-$usu= $arreglo['usuario'];
-$rol= $arreglo['id_rol'];
-$estado= $arreglo['estado_usuario'];
-$corr = $arreglo['correo_electronico'];
-}
-
-
-//echo $_SESSION['id_usuario'];
-//echo $_SESSION['menus'];
 ?>
 
 <!DOCTYPE html>
@@ -82,28 +62,7 @@ $corr = $arreglo['correo_electronico'];
 </div>
 <!--logo end-->
 
-<div class="top-nav clearfix">
-    <!--search & user info start-->
-    <ul class="nav pull-right top-menu">
-        
-        <!-- user login dropdown start-->
-        <li class="dropdown">
-            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                <img alt="" src="images/2.png">
-                <span class="username"><?php echo $_SESSION['usuario'] ?></span>
-                <b class="caret"></b>
-            </a>
-            <ul class="dropdown-menu extended logout">
-                
-                <li><a href="logout.php"><i class="fa fa-key"></i> Salir</a></li>
-            </ul>
-        </li>
-        <!-- user login dropdown end -->
-       
-    </ul>
-    <!--search & user info end-->
-</div>
-</header>
+>
 <!--header end-->
 <!--sidebar start-->
 <aside>
