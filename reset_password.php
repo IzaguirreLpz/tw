@@ -43,6 +43,8 @@ if ($_POST != null) {
         $errors = 'Muy Bien Contraseña actualizada correctamente, por favor espere unos segundos';
         $type = 'success';
         $confPass = hashPassword($pass);
+        $user_id = $_GET['userid'];
+        grabarBitacora($user_id, 'Cambio de Contrasenia', 'Cambio', 'Se realizo con exito un cambio de contrasenia mediante correo electronico');
         updPass($confPass, $userid);
     }
 }

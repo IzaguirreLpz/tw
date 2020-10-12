@@ -38,7 +38,8 @@ if (!empty($_POST)) {
 		}
 		$token1 = generaTokenPass($user_id, $token);
 		$url = "http://localhost/tw/reset_password.php?userid={$user_id}&token={$token}";
-		$asunto = 'Recuperar Contaseña';
+		$asunto = 'Recuperar Contasenia';
+		grabarBitacora($user_id, 'Recuperacion de Password', 'Solicitud', 'Se solicito recuperacion de password mediante correo electronico');
 		$cuerpo = "
 
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional //EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
@@ -185,7 +186,7 @@ if (!empty($_POST)) {
 <!--[if mso]><table width='100%' cellpadding='0' cellspacing='0' border='0'><tr><td style='padding-right: 25px; padding-left: 25px; padding-top: 25px; padding-bottom: 25px; font-family: Arial, sans-serif'><![endif]-->
 <div style='color:#b8221f;font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif;line-height:1.2;padding-top:25px;padding-right:25px;padding-bottom:25px;padding-left:25px;'>
 <div style='line-height: 1.2; font-size: 12px; color: #b8221f; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; mso-line-height-alt: 14px;'>
-<p style='font-size: 18px; line-height: 1.2; word-break: break-word; text-align: center; mso-line-height-alt: 22px; margin: 0;'><span style='font-size: 18px;'><strong>CAMBIO DE CONTRASEÑA</strong></span></p>
+<p style='font-size: 18px; line-height: 1.2; word-break: break-word; text-align: center; mso-line-height-alt: 22px; margin: 0;'><span style='font-size: 18px;'><strong>CAMBIO DE PASSWORD</strong></span></p>
 </div>
 </div>
 <!--[if mso]></td></tr></table><![endif]-->
@@ -207,7 +208,7 @@ if (!empty($_POST)) {
 <!--[if mso]><table width='100%' cellpadding='0' cellspacing='0' border='0'><tr><td style='padding-right: 10px; padding-left: 10px; padding-top: 10px; padding-bottom: 10px; font-family: Arial, sans-serif'><![endif]-->
 <div style='color:#555555;font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif;line-height:1.2;padding-top:10px;padding-right:10px;padding-bottom:10px;padding-left:10px;'>
 <div style='line-height: 1.2; font-size: 12px; color: #555555; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; mso-line-height-alt: 14px;'>
-<p style='font-size: 14px; line-height: 1.2; word-break: break-word; text-align: center; mso-line-height-alt: 17px; margin: 0;'>Hola estimado {$nombre}, hemos recibido la solicitud de cambio de contraseña; en caso de no haberlo solicitado usted ignore este correo de lo contrario favor haga clic en el botón para recuperar su contraseña</p>
+<p style='font-size: 14px; line-height: 1.2; word-break: break-word; text-align: center; mso-line-height-alt: 17px; margin: 0;'>Hola estimado {$nombre}, hemos recibido la solicitud de cambio de password; en caso de no haberlo solicitado usted ignore este correo de lo contrario favor haga clic en el botón para recuperar su password</p>
 </div>
 </div>
 <!--[if mso]></td></tr></table><![endif]-->
@@ -226,11 +227,11 @@ if (!empty($_POST)) {
 </tr>
 </tbody>
 </table>
-<a href={$url}>
-<div align='center' class='button-container' style='padding-top:10px;padding-right:10px;padding-bottom:10px;padding-left:10px;'>
-</a>
 <!--[if mso]><table width='100%' cellpadding='0' cellspacing='0' border='0' style='border-spacing: 0; border-collapse: collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;'><tr><td style='padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px' align='center'><v:roundrect xmlns:v='urn:schemas-microsoft-com:vml' xmlns:w='urn:schemas-microsoft-com:office:word' href='' style='height:31.5pt; width:180.75pt; v-text-anchor:middle;' arcsize='10%' stroke='false' fillcolor='#276a9c'><w:anchorlock/><v:textbox inset='0,0,0,0'><center style='color:#ffffff; font-family:Arial, sans-serif; font-size:16px'><![endif]-->
-<div style='text-decoration:none;display:inline-block;color:#ffffff;background-color:#276a9c;border-radius:4px;-webkit-border-radius:4px;-moz-border-radius:4px;width:auto; width:auto;;border-top:1px solid #276a9c;border-right:1px solid #276a9c;border-bottom:1px solid #276a9c;border-left:1px solid #276a9c;padding-top:5px;padding-bottom:5px;font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif;text-align:center;mso-border-alt:none;word-break:keep-all;'><span style='padding-left:20px;padding-right:20px;font-size:16px;display:inline-block;'><span style='font-size: 16px; line-height: 2; word-break: break-word; mso-line-height-alt: 32px;'>Recuperar Contraseña</span></span></div>
+<div style='text-decoration:none;display:inline-block;color:#ffffff;background-color:#276a9c;border-radius:4px;-webkit-border-radius:4px;-moz-border-radius:4px;width:auto; width:auto;;border-top:1px solid #276a9c;border-right:1px solid #276a9c;border-bottom:1px solid #276a9c;border-left:1px solid #276a9c;padding-top:5px;padding-bottom:5px;font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif;text-align:center;mso-border-alt:none;word-break:keep-all;'><span style='padding-left:20px;padding-right:20px;font-size:16px;display:inline-block;'><span style='font-size: 16px; line-height: 2; word-break: break-word; mso-line-height-alt: 32px;'>
+<a href={$url}>
+<button style:'background-color: #276a9c;border: none;color: white;padding: 15px 32px;text-align: center;text-decoration: none;  display: inline-block;font-size: 16px;margin: 4px 2px;cursor: pointer;'>Recuperar Password</span></span></div>
+</a>
 <!--[if mso]></center></v:textbox></v:roundrect></td></tr></table><![endif]-->
 </div>
 <!--[if (!mso)&(!IE)]><!-->
@@ -254,7 +255,6 @@ if (!empty($_POST)) {
 ";
 		if (enviarEmail($email, $nombre, $asunto, $cuerpo)) {
 			echo " le hemos enviado la direccion de correo electronico: $email por favor revisar";
-			grabarBitacora($user_id, 'Recuperacion de Contrasenia', 'Solicitud', 'Se solicito recuperacion de contrasenia mediante correo electronico');
 			echo "<br><a href='index.php' >Iniciar Sesion</a>";
 			exit;
 		}

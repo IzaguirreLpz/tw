@@ -32,6 +32,8 @@ if (!empty($_POST['password'])) {
 		$confPass = hashPassword($pass);
 		updPass($confPass, $userid);
 		$errors = 'Muy Bien Contraseña actualizada correctamente, por favor espere unos segundos';
+		$user_id = $_GET["user_id"];
+		grabarBitacora($user_id, 'Recuperacion de Contrasenia', 'Cambio', 'Se realizo un cambio de contrasenia mediante preguntas');
 		print("<script>   setTimeout(function(){location.href='index.php';},3000);                  </script>");
 		$type = 'success';
 	}
@@ -184,6 +186,7 @@ if (!empty($_POST['respuesta'])) {
 					$type = 'success';
 					$confPass = hashPassword($pass);
 					updPass($confPass, $userid);
+					grabarBitacora($user_id, 'Recuperacion de Contrasenia', 'Cambio', 'Se realizo un cambio de contrasenia mediante preguntas');
 				}
 			}
 		?>
