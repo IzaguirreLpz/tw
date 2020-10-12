@@ -440,7 +440,7 @@ alert("La dirección de email es incorrecta.");
                                     <div class="form-group">
                                         <div class="col-lg-offset-3 col-lg-6">
                                             <button class="btn btn-success"  onclick = "this.form.action='registrar2.php'"value= "Guardar" type="submit">Guardar</button>
-                                            <button class="btn btn-default" type="button">Cancel</button>
+                                         
                                         </div>
                                     </div>
                                 </form>
