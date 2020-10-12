@@ -126,7 +126,7 @@ if (isset($_SESSION['id_usuario'])) {
 									<div class="card-body">
 										<h5 class="card-title">Recuperar Mediante Correo</h5>
 										<div class="card_footer">
-											<a href="/tw/recupera.php" class="btn btn-success">Enviar correo</a>
+											<a href="recupera.php" class="btn btn-success">Enviar correo</a>
 										</div>
 									</div>
 								</div>
@@ -138,7 +138,7 @@ if (isset($_SESSION['id_usuario'])) {
 									<div class="card-body">
 										<h5 class="card-title">Recuperar Mediante Preguntas</h5>
 										<div class="card_footer">
-											<a href="/tw/recupera_pre.php" class="btn btn-success">Responder Preguntas</a>
+											<a href="recupera_pre.php" class="btn btn-success">Responder Preguntas</a>
 										</div>
 									</div>
 								</div>

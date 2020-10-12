@@ -37,7 +37,7 @@ if (!empty($_POST)) {
 			$token .= chr(rand(65, 90));
 		}
 		$token1 = generaTokenPass($user_id, $token);
-		$url = "http://localhost/tw/reset_password.php?userid={$user_id}&token={$token}";
+		$url = "https://tecnowash.herokuapp.com/reset_password.php?userid={$user_id}&token={$token}";
 		$asunto = 'Recuperar Contasenia';
 		grabarBitacora($user_id, 'Recuperacion de Password', 'Solicitud', 'Se solicito recuperacion de password mediante correo electronico');
 		$cuerpo = "
@@ -309,7 +309,7 @@ if (!empty($_POST)) {
 			</div>
 
 			<div class="agile-field-txt">
-				<a data-toggle="modal" href="/tw/recupera_pre.php" style="cursor: pointer;">Recuperar Mediante Preguntas</a>
+				<a data-toggle="modal" href="recupera_pre.php" style="cursor: pointer;">Recuperar Mediante Preguntas</a>
 			</div>
 
 			<hr />
@@ -322,7 +322,7 @@ if (!empty($_POST)) {
 
 
 				<br>
-				<a data-toggle="modal" href="/tw" style="cursor: pointer;">Regresar al Login</a>
+				<a data-toggle="modal" href="index.php" style="cursor: pointer;">Regresar al Login</a>
 
 			</div>
 			<br />
