@@ -12,7 +12,7 @@ require 'conexion.php';
 
 
 
-function minMax($min, $max, $valor)
+function minMaxPass( $valor)
 {
 
 
