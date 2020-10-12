@@ -108,7 +108,24 @@ function getCualquiera($campo, $tabla, $campoWhere, $valor)
 	}
 }
 
+function getCualquieraS($campo, $tabla, $campoWhere, $valor)
+{
+	global $mysqli;
 
+	$stmt = $mysqli->prepare("SELECT $campo FROM $tabla WHERE $campoWhere = ? ");
+	$stmt->bind_param('s', $valor);
+	$stmt->execute();
+	$stmt->store_result();
+	$num = $stmt->num_rows;
+
+	if ($num > 0) {
+		$stmt->bind_result($_campo);
+		$stmt->fetch();
+		return $_campo;
+	} else {
+		return null;
+	}
+}
 function updPass($pass, $id)
 {
 	global $mysqli;
@@ -741,14 +758,14 @@ function grabarHisPas($nombre,$valor)
 {
 
 	global $mysqli;
-	$id_usuario= getCualquiera('id_usuario','tbl_usuarios','usuario',$nombre);
+	$id_usuario= getCualquieraS('id_usuario','tbl_usuario','usuario',$nombre);
 	$stmt = $mysqli->prepare("INSERT INTO  hist_pass(id_usuario,pass) VALUES(?,?)");
 	$stmt->bind_param('is', $id_usuario,$valor);
 
 	if ($stmt->execute()) {
-		return $mysqli->insert_id;
+		return true;
 	} else {
-		return 0;
+		return false;
 	}
 }
 

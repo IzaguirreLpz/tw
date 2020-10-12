@@ -200,7 +200,7 @@ $cuerpo = "Se a registrado a sistema de TECNIWASH con el user $us su password in
 				//S	echo $consulta;
 					$resultado=mysqli_query($mysqli,$consulta) or die (mysqli_error($mysqli));
 					enviarEmail($correo, $nom, $asunto, $cuerpo);
-					
+					grabarHisPas($us,$pass_hash );
 					grabarBitacora($idUsuario,"Usuarios","INSERT", $consulta);
                     echo json_encode("ok");
                     
@@ -213,18 +213,7 @@ $cuerpo = "Se a registrado a sistema de TECNIWASH con el user $us su password in
                     $nuevo=$us;
 					$dest= $correo;
 					
-                    $accion="INSERTAR";
-                     $miau=getValor('id_usuario','correo_electronico',$dest);
-                     $bita=grabarBitacora($miau, $objeto, $accion,$consulta);
-					
-					  $admin=getBitacora('descripcion','nombre',$dueño);
-					$mail = "verificar en el sistema el nuevo usuario: '$nuevo'";
-			        $titulo = "NUEVO USUARIO";
-			        $headers = "MIME-Version: 1.0\r\n";
-			        $headers .= "Content-type: text/html; charset=iso-8859-1\r\n";
-			        $headers .= "From: BERNARDOS PET SYSTEM < ansluisa@hotmail.com >\r\n";
-			        $msg=mail($admin,$titulo,$mail,$headers);
-                    
+                  
                     
                   
                     */

@@ -91,7 +91,8 @@ if (!$_POST["pass1"] or !$_POST["txt_nc"] or !$_POST["correo"] or !$_POST["txt_u
 
 				//S	echo $consulta;
 					$resultado=mysqli_query($mysqli,$consulta) or die (mysqli_error($mysqli));
-                    
+					grabarHisPas($us,$pass_hash );
+					grabarBitacora('0',"Autoregistro","INSERT", $consulta);
                     echo json_encode("ok");
                     
                    
