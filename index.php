@@ -100,7 +100,7 @@ if (isset($_SESSION['id_usuario'])) {
 					<br>
 					<a data-toggle="modal" data-target="#recuperapass" style="cursor: pointer;">¿Olvidaste tu contraseña?</a>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<a href="#" style="cursor: pointer;"> ¡Regístrate Aquí !</a>
+					<a href="registro.php" style="cursor: pointer;"> ¡Regístrate Aquí !</a>
 
 
 				</div>
