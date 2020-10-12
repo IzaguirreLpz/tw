@@ -2,14 +2,34 @@
 require 'funcs/conexion.php';
 require 'funcs/funcs.php';
 
-$status = array();
+$errors = '';
+$type = 'success';
+
+function getCorreo($campo, $tabla, $campoWhere, $valor)
+{
+	global $mysqli;
+
+	$stmt = $mysqli->prepare("SELECT $campo FROM $tabla WHERE $campoWhere = ? ");
+	$stmt->bind_param('s', $valor);
+	$stmt->execute();
+	$stmt->store_result();
+	$num = $stmt->num_rows;
+
+	if ($num > 0) {
+		$stmt->bind_result($_campo);
+		$stmt->fetch();
+		return $_campo;
+	} else {
+		return null;
+	}
+}
+
 if (!empty($_POST)) {
-	//if (isset($_POST['submit'])) {
-	$email = $mysqli->real_escape_string($_POST['email']);
+	$userName = $_POST['email'];
+	$email = getCorreo('correo_electronico', 'tbl_usuario', 'usuario', $userName);
 
 	if (emailExiste($email)) {
 		$usuariocam = "usuario";
-		//$cor = getValor($co, $usuariocam, $email);
 		$nombre = getValor('nombre_usuario', 'correo_electronico', $email);
 		$user_id = getValor('id_usuario', "correo_electronico", $email);
 		$token = '';
@@ -17,11 +37,9 @@ if (!empty($_POST)) {
 			$token .= chr(rand(65, 90));
 		}
 		$token1 = generaTokenPass($user_id, $token);
-		//$url = 'http://localhost:8080/triste/mau2/login/cambia_pass.php?user_id=' . $user_id . '&token=' . $token;
 		$url = "http://localhost/tw/reset_password.php?userid={$user_id}&token={$token}";
-		$asunto = 'recuperar pass';
-		//$cuerpo = "Estimado:$nombre <br /><br />Para continuar con el proceso de recuperación, es indispensable de click en la siguiente url <a href='$url'>Recuperar password</a>";
-		$cuerpo0 = "
+		$asunto = 'Recuperar Contaseña';
+		$cuerpo = "
 
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional //EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 
@@ -234,9 +252,9 @@ if (!empty($_POST)) {
 </body>
 </html>
 ";
-		if (enviarEmail($email, $nombre, $asunto, $cuerpo0)) {
+		if (enviarEmail($email, $nombre, $asunto, $cuerpo)) {
 			echo " le hemos enviado la direccion de correo electronico: $email por favor revisar";
-
+			grabarBitacora($user_id, 'Recuperacion de Contrasenia', 'Solicitud', 'Se solicito recuperacion de contrasenia mediante correo electronico');
 			echo "<br><a href='index.php' >Iniciar Sesion</a>";
 			exit;
 		}
@@ -246,11 +264,11 @@ if (!empty($_POST)) {
 		$stmt->bind_param('i', $user_id);
 		$stmt->execute();
 		$stmt->close();
-
-		$status[] = "mensaje enviado con exito al correo: {$email}";
-		$status[] = "Por favor revisa tu correo";
+		$errors = "mensaje enviado con exito al correo: {$email}";
+		$type = 'success';
 	} else {
-		$status[] = "no existe usuario";
+		$errors = "El usuario no existe intentalo de nuevo";
+		$type = 'danger';
 	}
 }
 
@@ -269,13 +287,15 @@ if (!empty($_POST)) {
 </head>
 
 <body>
-	<div class="container">
-		<?php echo successBlock($status);
-		?>
-	</div>
 
 	<img style="margin-top:10%" src="images\tecniwahs_logo.png" alt="tecniwash logo" srcset="">
-
+	<div class="container">
+		<?php
+		if ($errors != '') {
+			echo showMessage($errors, $type);
+		}
+		?>
+	</div>
 	<div class="w3ls-login">
 		<form class="" method="post" id="recuperarPass">
 			<div class="agile-field-txt">
@@ -284,7 +304,7 @@ if (!empty($_POST)) {
 			<div class="agile-field-txt">
 				<label>
 					<i class="glyphicon glyphicon-user" aria-hidden="true"></i> Correo Electronico :</label>
-				<input type="text" class="form-control" name="email" placeholder="Email" autocomplete="Off" required />
+				<input type="text" class="form-control" style="text-transform: uppercase;" name="email" placeholder="Usuario" autocomplete="Off" required />
 				<span id="check-e"></span>
 			</div>
 
