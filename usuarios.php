@@ -12,7 +12,7 @@ if (!isset($_SESSION['id_usuario'])) {
 if ($_SESSION['estado_usuario'] == strtolower('nuevo')) {
     header("Location: preguntas.php");
 }
-$id_usu= $_SESSION['id_usuario'];
+$id_usu = $_SESSION['id_usuario'];
 //echo $_SESSION['menus'];
 ?>
 
@@ -55,113 +55,113 @@ $id_usu= $_SESSION['id_usuario'];
 </head>
 
 <body>
-<section id="container">
-<!--header start-->
-<header class="header fixed-top clearfix">
-<!--logo start-->
-<div class="brand">
-    <a href="#" class="logo">
-       MENU
-    </a>
-    <div class="sidebar-toggle-box">
-        <div class="fa fa-bars"></div>
-    </div>
-</div>
-<!--logo end-->
+    <section id="container">
+        <!--header start-->
+        <header class="header fixed-top clearfix">
+            <!--logo start-->
+            <div class="brand">
+                <a href="#" class="logo">
+                    MENU
+                </a>
+                <div class="sidebar-toggle-box">
+                    <div class="fa fa-bars"></div>
+                </div>
+            </div>
+            <!--logo end-->
 
-<div class="top-nav clearfix">
-    <!--search & user info start-->
-    <ul class="nav pull-right top-menu">
-        
-        <!-- user login dropdown start-->
-        <li class="dropdown">
-            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                <img alt="" src="images/2.png">
-                <span class="username"><?php echo $_SESSION['usuario'] ?></span>
-                <b class="caret"></b>
-            </a>
-            <ul class="dropdown-menu extended logout">
-                
-                <li><a href="logout.php"><i class="fa fa-key"></i>Salir</a></li>
-            </ul>
-        </li>
-        <!-- user login dropdown end -->
-       
-    </ul>
-    <!--search & user info end-->
-</div>
-</header>
-<!--header end-->
-<!--sidebar start-->
-<aside>
-    <div id="sidebar" class="nav-collapse">
-        <!-- sidebar menu start-->
-        <div class="leftside-navigation">
-            <ul class="sidebar-menu" id="nav-accordion">
-<?php
-   if ($id_usu==1){
-    include("menu2.php");
-  }   
-  //echo $_SESSION['menus']; 
-    ?>
-    
-     </ul>
-           </div>
-        <!-- sidebar menu end-->
-    </div>
-</aside>
-<!--sidebar end-->
-<!--main content start-->
-<section id="main-content">
-<section class="wrapper">
-<div class="table-agile-info">
-<div class="panel panel-default">
-<div class="panel-heading">
-USUARIOS
+            <div class="top-nav clearfix">
+                <!--search & user info start-->
+                <ul class="nav pull-right top-menu">
 
-<div class="btn-group pull-right">
-				<button type='button' class="btn btn-success" onClick="location.href='http://localhost/tw/add_usu.php'"><span class="glyphicon glyphicon-plus" ></span> Agregar </button>
-			</div>
-</div>
-    <div class="row w3-res-tb">
-      
-      <div class="col-sm-4">
-      </div>
-      <div class="col-sm-3">
-        
-      </div>
-    </div>
-	 <div id="resultados"></div><!-- Carga los datos ajax -->
-    <div class='outer_div'></div>
+                    <!-- user login dropdown start-->
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <img alt="" src="images/2.png">
+                            <span class="username"><?php echo $_SESSION['usuario'] ?></span>
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu extended logout">
 
-    </div>
-    </div>
-    </section>
-    <script src="js/bootstrap.js"></script>
-    <script src="js/jquery.dcjqaccordion.2.7.js"></script>
-    <script src="js/scripts.js"></script>
-    <script src="js/jquery.slimscroll.js"></script>
-    <script src="js/jquery.nicescroll.js"></script>
-    <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="js/flot-chart/excanvas.min.js"></script><![endif]-->
-    <script src="js/jquery.scrollTo.js"></script>
-    <!-- morris JavaScript -->
+                            <li><a href="logout.php"><i class="fa fa-key"></i>Salir</a></li>
+                        </ul>
+                    </li>
+                    <!-- user login dropdown end -->
 
-    <!-- calendar -->
-    <script type="text/javascript" src="js/monthly.js"></script>
+                </ul>
+                <!--search & user info end-->
+            </div>
+        </header>
+        <!--header end-->
+        <!--sidebar start-->
+        <aside>
+            <div id="sidebar" class="nav-collapse">
+                <!-- sidebar menu start-->
+                <div class="leftside-navigation">
+                    <ul class="sidebar-menu" id="nav-accordion">
+                        <?php
+                        if ($id_usu == 1) {
+                            include("menu2.php");
+                        }
+                        //echo $_SESSION['menus']; 
+                        ?>
 
-    <!-- //calendar -->
+                    </ul>
+                </div>
+                <!-- sidebar menu end-->
+            </div>
+        </aside>
+        <!--sidebar end-->
+        <!--main content start-->
+        <section id="main-content">
+            <section class="wrapper">
+                <div class="table-agile-info">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            USUARIOS
+
+                            <div class="btn-group pull-right">
+                                <button type='button' class="btn btn-success" onClick="location.href='add_usu.php'"><span class="glyphicon glyphicon-plus"></span> Agregar </button>
+                            </div>
+                        </div>
+                        <div class="row w3-res-tb">
+
+                            <div class="col-sm-4">
+                            </div>
+                            <div class="col-sm-3">
+
+                            </div>
+                        </div>
+                        <div id="resultados"></div><!-- Carga los datos ajax -->
+                        <div class='outer_div'></div>
+
+                    </div>
+                </div>
+            </section>
+            <script src="js/bootstrap.js"></script>
+            <script src="js/jquery.dcjqaccordion.2.7.js"></script>
+            <script src="js/scripts.js"></script>
+            <script src="js/jquery.slimscroll.js"></script>
+            <script src="js/jquery.nicescroll.js"></script>
+            <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="js/flot-chart/excanvas.min.js"></script><![endif]-->
+            <script src="js/jquery.scrollTo.js"></script>
+            <!-- morris JavaScript -->
+
+            <!-- calendar -->
+            <script type="text/javascript" src="js/monthly.js"></script>
+
+            <!-- //calendar -->
 </body>
 <?php
-				
-				
-            //    include("modal/eliminar_usuario.php");
-             //   include("modal/editar_usuarios.php");
-                 require 'modal/eliminar_usuario.php';
-        
-    
-              
-                ?>
-                            
+
+
+//    include("modal/eliminar_usuario.php");
+//   include("modal/editar_usuarios.php");
+require 'modal/eliminar_usuario.php';
+
+
+
+?>
+
 </html>
 <script>
     $(document).ready(function() {
@@ -169,34 +169,34 @@ USUARIOS
     });
 
     function
-	  obtener_id(item){
-		
-				
-			$("#user_id_mod").val(item);
-	        
-	      
- }
-	  
+    obtener_id(item) {
 
-    $( "#editar_password" ).submit(function( event ) {
-  $('#actualizar_datos3').attr("disabled", true);
-  
- var parametros = $(this).serialize();
-	 $.ajax({
-			type: "POST",
-			url: "ajax/eliminar_usuario.php",
-			data: parametros,
-			 beforeSend: function(objeto){
-				$("#resultados_ajax3").html("Mensaje: Cargando...");
-			  },
-			success: function(datos){
-			$("#resultados_ajax3").html(datos);
-			$('#actualizar_datos3').attr("disabled", false);
-			load(1);
-		  }
-	});
-  event.preventDefault();
-})	  
+
+        $("#user_id_mod").val(item);
+
+
+    }
+
+
+    $("#editar_password").submit(function(event) {
+        $('#actualizar_datos3').attr("disabled", true);
+
+        var parametros = $(this).serialize();
+        $.ajax({
+            type: "POST",
+            url: "ajax/eliminar_usuario.php",
+            data: parametros,
+            beforeSend: function(objeto) {
+                $("#resultados_ajax3").html("Mensaje: Cargando...");
+            },
+            success: function(datos) {
+                $("#resultados_ajax3").html(datos);
+                $('#actualizar_datos3').attr("disabled", false);
+                load(1);
+            }
+        });
+        event.preventDefault();
+    })
 
     function load(page) {
 
