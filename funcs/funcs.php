@@ -9,6 +9,34 @@ require 'conexion.php';
 	$value=$rw[$row];
 	return $value;
 }*/
+
+
+
+function minMax($min, $max, $valor)
+{
+
+
+
+	global $mysqli;
+	//20201010 retorna  toda la fila 
+	$str = "SELECT MIN_PASS, MAX_PASS FROM tbl_parametros ";
+	$array = mysqli_query($mysqli, $str);
+	$hola = mysqli_fetch_assoc($array);
+	$min = $hola["MIN_PASS"];
+	$max=$hola["MAX_PASS"];
+	
+	if (strlen(trim($valor)) < $min) {
+		return false;
+	} 
+	
+	if (strlen(trim($valor)) > $max) {
+
+		return false;
+	}
+
+return true;
+
+}
 function generateRandomString() {
 	$length = 10;
     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';

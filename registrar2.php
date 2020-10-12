@@ -138,13 +138,13 @@ if (!$_POST["pass1"] or !$_POST["txt_nc"] or !$_POST["correo"] or !$_POST["txt_u
 				$fb=mysqli_fetch_row($ss);
 	
 	
-				$valid_cor=formato_correo($correo);
-				if ($valid_cor==false){
+				//$valid_cor=formato_correo($correo);
+				//if ($valid_cor==false){
 				
-					echo json_encode("Formato de correo invalido.");
+				//	echo json_encode("Formato de correo invalido.");
 					
 				
-				}
+				//}
 				
 		$la=("select usuario from tbl_usuario where usuario='$us'");
 				$sa=mysqli_query($mysqli,$la) or die (mysqli_error($mysqli));
@@ -185,11 +185,13 @@ if (!$_POST["pass1"] or !$_POST["txt_nc"] or !$_POST["correo"] or !$_POST["txt_u
 				if (preg_match('/^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{6,16}$/', $pass1))
 				if (!$fss) {
 					$consulta=("insert into tbl_usuario (nombre_usuario,usuario,contrasena,correo_electronico,estado_usuario,id_rol,activacion,fecha_cambio_contrasena) values('$nom', '$us','$pass_hash','$correo','$estado',$rol,1,NOW())");
-
-
+$asunto="Se creo su user en TECNIWASH";
+$cuerpo = "Se a registrado a sistema de TECNIWASH con el user .$us. su password inicial es .$pass1. . Feliz día";
 				//S	echo $consulta;
 					$resultado=mysqli_query($mysqli,$consulta) or die (mysqli_error($mysqli));
-                    
+					enviarEmail($correo, $nom, $asunto, $cuerpo);
+					
+					grabarBitacora($idUsuario,"Usuarios","INSERT", $consulta);
                     echo json_encode("ok");
                     
                    
