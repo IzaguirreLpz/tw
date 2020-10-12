@@ -130,7 +130,7 @@ if ($row_cnt > 0) {
 
 
 
-	if ($iduser == 35) {
+	if ($iduser == 1) {
 
 		$validaPassw = password_verify($clave, $passwd);
 
@@ -143,7 +143,8 @@ if ($row_cnt > 0) {
 			$_SESSION['usuario'] = $user;
 			$_SESSION['nombre_usuario'] = $name;
 			$_SESSION['estado_usuario'] = strtolower($estado_usuario);
-
+			$_SESSION['menus'] = crear_menu(0, $idrol);
+		
 
 			echo json_encode("ok");
 		} else {
