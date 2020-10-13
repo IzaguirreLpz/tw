@@ -306,9 +306,8 @@ if ($id_usu==1){
       	  </div>
          </div>
        </div>
-<?php } ?>
- 
-     <script>
+
+       <script>
         	function nospaces1(){
 		orig=document.form.pass2.value;
 		nuev=orig.split(' ');
@@ -318,6 +317,9 @@ if ($id_usu==1){
 	}
     </script>
 
+<?php } ?>
+ 
+     
 
         
         

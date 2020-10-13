@@ -196,8 +196,8 @@ WHERE p.id_pregunta NOT IN(SELECT id_pregunta from tbl_respuestas where id_usuar
                                     <div class="form-group ">
                                         <label for="firstname" class="control-label col-lg-3">Respuesta</label>
                                         <div class="col-lg-6">
-                                            <input class=" form-control" id="respuesta" name="respuesta" type="text">
-                                        </div>
+                                            <input class=" form-control" id="respuesta"  title="Respuesta" onPaste="return false;" name="respuesta" autocomplete="off" type="text" required>
+                                        </div> 
                                     </div>
                                     
 

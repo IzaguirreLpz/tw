@@ -127,6 +127,7 @@ function updPass($pass, $id)
 	$stmt = $mysqli->prepare("UPDATE tbl_usuario SET contrasena = ? WHERE id_usuario = ?");
 	$stmt->bind_param('si', $pass, $id);
 	if ($stmt->execute()) {
+		$bita=grabarBitacora($id,'Actualizar ','update','UPDATE tbl_usuario SET contrasena = $pass WHERE id_usuario =$id ');
 		return true;
 	} else {
 		return false;
@@ -770,7 +771,7 @@ function grabarRES($id_usuario, $id_pregunta, $respuesta)
 	global $mysqli;
 	$stmt = $mysqli->prepare("INSERT INTO tbl_respuestas (id_usuario, id_pregunta, respuesta) VALUES(?,?,?)");
 	$stmt->bind_param('iis', $id_usuario, $id_pregunta, $respuesta);
-
+	$bita=grabarBitacora($id_usuario,'Configurando preguntas ','INSERT','INSERT INTO tbl_respuestas (id_usuario, id_pregunta, respuesta) values $id_usuario,$id_pregunta, $respuesta ');
 	if ($stmt->execute()) {
 		return $mysqli->insert_id;
 	} else {

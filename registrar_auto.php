@@ -74,7 +74,7 @@ if (!$_POST["pass1"] or !$_POST["txt_nc"] or !$_POST["correo"] or !$_POST["txt_u
 
 				
 				$estado= $_POST["combo_estado"];
-				$estado="ACTIVO";
+				$estado="NUEVO";
 				$rol= $_POST["rol"];
 				//echo $rol;
 				//$f1= $_POST["fecha1"];
@@ -93,44 +93,16 @@ if (!$_POST["pass1"] or !$_POST["txt_nc"] or !$_POST["correo"] or !$_POST["txt_u
 					$resultado=mysqli_query($mysqli,$consulta) or die (mysqli_error($mysqli));
 					grabarHisPas($us,$pass_hash );
 					grabarBitacora('0',"Autoregistro","INSERT", $consulta);
+
+					$asunto="Se creo usuario $us en TECNIWASH en autoregistro.";
+$cuerpo = "Se a registrado al sistema $nom sistema de TECNIWASH con el user $us  .";
+				
+					$admin_usuarios= getCualquiera('descripcion', 'tbl_parametros','id_parametro',2);
+	
+					enviarEmail($admin_usuarios, $nom, $asunto, $cuerpo);
                     echo json_encode("ok");
                     
-                   
-					/*
-					$dueño="ADMIN_CORREO";
-					
-				
-                       $objeto="tbl_usuario";
-                    $nuevo=$us;
-					$dest= $correo;
-					
-                    $accion="INSERTAR";
-                     $miau=getValor('id_usuario','correo_electronico',$dest);
-                     $bita=grabarBitacora($miau, $objeto, $accion,$consulta);
-					
-					  $admin=getBitacora('descripcion','nombre',$dueño);
-					$mail = "verificar en el sistema el nuevo usuario: '$nuevo'";
-			        $titulo = "NUEVO USUARIO";
-			        $headers = "MIME-Version: 1.0\r\n";
-			        $headers .= "Content-type: text/html; charset=iso-8859-1\r\n";
-			        $headers .= "From: BERNARDOS PET SYSTEM < ansluisa@hotmail.com >\r\n";
-			        $msg=mail($admin,$titulo,$mail,$headers);
-                    
-                    
-                  
-                    */
-                    
-                    
-			      //  if ($msg) {
-
-						//echo json_encode  ("ok");
-			        
-			        //}else{
-						
-					//	echo json_encode  ("ok");
-						//$mensaje= "Usuario Registrado sin ";
-					
-			       //}
+              
 				}else{
 					echo json_encode  ("El Usuario ya existe.");
 					
