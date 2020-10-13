@@ -57,9 +57,9 @@ $idUsuario = $_SESSION['id_usuario'];
         while ($row = mysqli_fetch_array($query)) {
 
         
-          $usuario = $row['usuario'];
-          $objeto = $row['objeto'];
-          $accion = $row['accion'];
+          $usuario = strtoupper($row['usuario']);
+          $objeto = strtoupper($row['objeto']);
+          $accion = strtoupper($row['accion']);
           $descrip = $row['descripcion'];
        
           $fecha = $row['fecha'];
