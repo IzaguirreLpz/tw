@@ -1371,3 +1371,28 @@ function passHistorial($id_usuario, $password)
 	}
 	return $aprobacion;
 }
+
+
+//funcion para verificar la seguridad de una clave 
+function validar_clave($clave, &$error_clave)
+{
+	$caracteres = '/[\'\/~`\!@#\$%\^&\*\(\)_\-\+=\{\}\[\]\|;:"\<\>,\.\?\\\]/';
+	if (!preg_match('`[a-z]`', $clave)) {
+		$error_clave = "Su Contraseña debe Incluir Una Mayúscula, Minuscula, Números y Caracteres Especiales! No encontramos minusculas";
+		return false;
+	}
+	if (!preg_match('`[A-Z]`', $clave)) {
+		$error_clave = "Su Contraseña debe Incluir Una Mayúscula, Minuscula, Números y Caracteres Especiales! No encontramos mayusculas";
+		return false;
+	}
+	if (!preg_match('`[0-9]`', $clave)) {
+		$error_clave = "Su Contraseña debe Incluir Una Mayúscula, Minuscula, Números y Caracteres Especiales! No encontramos numeros";
+		return false;
+	}
+	if (!preg_match($caracteres, $clave)) {
+		$error_clave = "Su Contraseña debe Incluir Una Mayúscula, Minuscula, Números y Caracteres Especiales! No encontramos caracteres especiales";
+		return false;
+	}
+	$error_clave = "";
+	return true;
+}

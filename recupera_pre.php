@@ -33,13 +33,24 @@ if (!empty($_POST['password'])) {
 		$id = $_GET['user_id'];
 		$userName = getCualquiera('usuario', 'tbl_usuario', 'id_usuario', $id);
 		if (passHistorial($id, $pass)) {
-			grabarHisPas($userName, $confPass);
-			updPass($confPass, $userid);
-			$user_id = $_GET["user_id"];
-			grabarBitacora($user_id, 'Recuperacion de Contrasenia', 'Cambio', 'Se realizo un cambio de contrasenia mediante preguntas');
-			$errors = 'Muy Bien Contraseña actualizada correctamente, por favor espere unos segundos';
-			$type = 'success';
-			print("<script>   setTimeout(function(){location.href='index.php';},3000);                  </script>");
+			if (minMaxPass($pass)) {
+				if (validar_clave($pass, $errors)) {
+					grabarHisPas($userName, $confPass);
+					updPass($confPass, $userid);
+					$user_id = $_GET["user_id"];
+					grabarBitacora($user_id, 'Recuperacion de Contrasenia', 'Cambio', 'Se realizo un cambio de contrasenia mediante preguntas');
+					$errors = 'Muy Bien Contraseña actualizada correctamente, por favor espere unos segundos';
+					$type = 'success';
+					print("<script>   setTimeout(function(){location.href='index.php';},3000);                  </script>");
+				} else {
+					$type = 'danger';
+					$access = true;
+				}
+			} else {
+				$errors = 'Recuerda que tu contraseña debe de ser minimo de 8 caracteres y maximo 10 intenta de nuevo';
+				$type = 'danger';
+				$access = true;
+			}
 		} else {
 			$errors = 'Lamentablemente la contraseña que has ingresado ya ha sido utilizada intenta con otra';
 			$type = 'danger';
@@ -104,6 +115,10 @@ if (!empty($_POST['respuesta'])) {
 	<div class="container">
 		<img style="margin-top:5%" src="images\tecniwahs_logo.png" alt="tecniwash logo" srcset="">
 		<?php
+		$min = getCualquiera('descripcion', 'tbl_parametros', 'id_parametro', 5);
+		$max = getCualquiera('descripcion', 'tbl_parametros', 'id_parametro', 6);
+		echo "<input style='display:none' type='text' id='minlength' value='$min'>";
+		echo "<input style='display:none'type='text' id='maxlength' value='$max'>";
 		if (empty($_GET['user_id'])) {
 			if ($errors != '') {
 				echo showMessage($errors, $type);
@@ -208,17 +223,19 @@ if (!empty($_POST['respuesta'])) {
 					</div>
 					<div class="agile-field-txt">
 						<label>
-							<i class="glyphicon glyphicon-lock" aria-hidden="true"></i> Neva Contraseña :</label>
-						<input type="password" maxlength="15" class="form-control" name="password" placeholder="Contraseña" id="password" required />
-						<!-- <span id="check-e"></span> -->
+							<i class="glyphicon glyphicon-lock" aria-hidden="true"></i>Neva Contraseña: <span id="passCount"></span></label>
+						<input type="password" maxlength="10" autocomplete="off" class="form-control" name="password" placeholder="Contraseña" id="password" onkeyup="charCounter(this.value,'passCount')" required />
 						<span toggle="password-field" id="eye" class="fa fa-eye field-icon" toggleClass=" toggle-password" onclick="verPassword('password')"></span>
 					</div>
 
 					<div class="agile-field-txt">
 						<label>
-							<i class="glyphicon glyphicon-lock" aria-hidden="true"></i> password :</label>
-						<input type="password" maxlength="15" class="form-control" name="con_password" placeholder="Password" id="conf_password" required />
+							<i class="glyphicon glyphicon-lock" aria-hidden="true"></i>Confirmar Nueva Contraseña: <span id="charcount"></span></label>
+						<input type="password" maxlength="10" class="form-control" name="con_password" placeholder="Password" id="conf_password" onkeyup="charCounter(this.value,'charcount')" required />
 						<span toggle="password-field" id="eye" class="fa fa-eye field-icon" toggleClass=" toggle-password" onclick="verPassword('conf_password')"></span>
+						<small style="text-align: left;" id="passwordHelpBlock" class="form-text text-muted">
+							Recuerda que tu contraseña debe tener como minimo 8 caracteres y un maximo de 10
+						</small>
 					</div>
 
 					<div class="w3ls-login  w3l-sub">
@@ -244,6 +261,20 @@ if (!empty($_POST['respuesta'])) {
 				x.type = "text";
 			} else {
 				x.type = "password";
+			}
+		}
+
+		function charCounter(str, id) {
+			var lng = str.length;
+			var span = document.getElementById(id);
+			var min = document.getElementById('minlength').value;
+			var max = document.getElementById('maxlength').value;
+			if (str.length < min) {
+				span.innerHTML = lng + ' de 10 Caracteres';
+				span.style.color = '#bd2130';
+			} else {
+				span.innerHTML = lng + ' de 10 Caracteres';
+				span.style.color = '#28a745';
 			}
 		}
 	</script>
