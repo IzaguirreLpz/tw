@@ -10,7 +10,7 @@ if (!isset($_SESSION['id_usuario'])) {
 }
 $id = $_SESSION['id_usuario'];
 $nom= $_SESSION['usuario'];
-$bita=grabarBitacora($id,'Pantalla Actulizar Nuevo pass ','INGRESO',' .');
+$bita=grabarBitacora($id,'Pantalla Actulizar Nuevo pass ','INGRESO','ingreso $nom');
 if (!empty($_POST)) {
     $pass = $_POST['pass1'];
     $repass = $_POST['pass2'];
