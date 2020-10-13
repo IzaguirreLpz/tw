@@ -60,7 +60,7 @@ $id_usu = $_SESSION['id_usuario'];
         <header class="header fixed-top clearfix">
             <!--logo start-->
             <div class="brand">
-                <a href="#" class="logo">
+                <a href="home.php" class="logo">
                     MENU
                 </a>
                 <div class="sidebar-toggle-box">

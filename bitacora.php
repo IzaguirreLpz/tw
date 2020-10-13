@@ -67,7 +67,7 @@ $objeto="pantalla bitacora";
         <header class="header fixed-top clearfix">
             <!--logo start-->
             <div class="brand">
-                <a href="#" class="logo">
+                <a href="home.php" class="logo">
                     MENU
                 </a>
                 <div class="sidebar-toggle-box">

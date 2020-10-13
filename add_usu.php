@@ -83,7 +83,7 @@ $corr = $arreglo['correo_electronico'];
 <header class="header fixed-top clearfix">
 <!--logo start-->
 <div class="brand">
-    <a href="#" class="logo">
+    <a href="" class="logo">
        MENU
     </a>
     <div class="sidebar-toggle-box">

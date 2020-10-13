@@ -9,6 +9,14 @@ if(!isset($_SESSION['id_usuario'])){
     header ("Location: index.php");
 }
 $id_usu= $_SESSION['id_usuario'];
+
+$correo= getCualquiera('descripcion', 'tbl_parametros','id_parametro',2);
+	
+	$int= getCualquiera('descripcion', 'tbl_parametros','id_parametro',8);
+
+$min= getCualquiera('descripcion', 'tbl_parametros','id_parametro',5);
+$pre= getCualquiera('descripcion', 'tbl_parametros','id_parametro',9);
+	$max= getCualquiera('descripcion', 'tbl_parametros','id_parametro',6);
 //echo $_SESSION['id_usuario'];
 //echo $_SESSION['menus'];
 ?>
@@ -34,11 +42,23 @@ $id_usu= $_SESSION['id_usuario'];
 <link rel="stylesheet" href="css/morris.css" type="text/css"/>
 <!-- calendar -->
 <link rel="stylesheet" href="css/monthly.css">
+<link rel="stylesheet" href="css/toastr.min.css">
 <!-- //calendar -->
 <!-- //font-awesome icons -->
 <script src="js/jquery2.0.3.min.js"></script>
 <script src="js/raphael-min.js"></script>
 <script src="js/morris.js"></script>
+
+<!-- <link rel="stylesheet  prefetch" href="css/bootstrap2.min" > -->
+<!--<link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>-->
+	
+<link rel="stylesheet  prefetch" href="css/bootstrap.min.css" >
+<link rel="stylesheet  prefetch" href="css/bootstrap-theme32.min.css" >
+<link rel="stylesheet  prefetch" href="css/bootstrapValidator32.min.css" >
+  <!--   <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css'>
+	<link rel='stylesheet prefetch' href='http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.0/css/bootstrapValidator.min.css'> -->
+
+
 </head>
 <body>
 <section id="container">
@@ -46,7 +66,7 @@ $id_usu= $_SESSION['id_usuario'];
 <header class="header fixed-top clearfix">
 <!--logo start-->
 <div class="brand">
-    <a href="#" class="logo">
+    <a href="home.php" class="logo">
        MENU
     </a>
     <div class="sidebar-toggle-box">
@@ -121,58 +141,40 @@ if ($id_usu==1){
                             <div class="form">
                                 <form class="cmxform form-horizontal " id="signupForm" method="get" action="" novalidate="novalidate">
                                     <div class="form-group ">
-                                        <label for="firstname" class="control-label col-lg-3">Firstname</label>
+                                        <label for="firstname" class="control-label col-lg-3">Correo Administrador</label>
                                         <div class="col-lg-6">
-                                            <input class=" form-control" id="firstname" name="firstname" type="text">
+                                        <input maxlength="80" class=" form-control"  <?php    echo "value=$correo" ;  ?> type="text" name="correo" placeholder="e-mail" id="correo" autocomplete="off" autofocus="on" o class="form-control" onPaste="return false;" required  onkeyup=" nospaces3();">  
                                         </div>
                                     </div>
                                     <div class="form-group ">
-                                        <label for="lastname" class="control-label col-lg-3">Lastname</label>
+                                        <label for="lastname" class="control-label col-lg-3">Longitud min pass</label>
                                         <div class="col-lg-6">
-                                            <input class=" form-control" id="lastname" name="lastname" type="text">
+                                            <input class=" form-control" id="lastname" <?php    echo "value=$min" ;  ?> name="lastname" type="text">
                                         </div>
                                     </div>
                                     <div class="form-group ">
-                                        <label for="username" class="control-label col-lg-3">Username</label>
+                                        <label for="username" class="control-label col-lg-3"> Longitud max pass</label>
                                         <div class="col-lg-6">
-                                            <input class="form-control " id="username" name="username" type="text">
+                                            <input class="form-control " id="username"    <?php    echo "value=$max" ;  ?> name="username" type="text">
                                         </div>
                                     </div>
                                     <div class="form-group ">
-                                        <label for="password" class="control-label col-lg-3">Password</label>
+                                        <label for="password" class="control-label col-lg-3">Intentos</label>
                                         <div class="col-lg-6">
-                                            <input class="form-control " id="password" name="password" type="password">
+                                            <input class="form-control " <?php    echo "value=$int" ;  ?> id="password" name="password" type="">
                                         </div>
                                     </div>
                                     <div class="form-group ">
-                                        <label for="confirm_password" class="control-label col-lg-3">Confirm Password</label>
+                                        <label for="confirm_password" class="control-label col-lg-3">Preguntas</label>
                                         <div class="col-lg-6">
-                                            <input class="form-control " id="confirm_password" name="confirm_password" type="password">
+                                            <input class="form-control " id="confirm_password" <?php    echo "value=$pre" ;  ?> name="confirm_password" type="">
                                         </div>
                                     </div>
-                                    <div class="form-group ">
-                                        <label for="email" class="control-label col-lg-3">Email</label>
-                                        <div class="col-lg-6">
-                                            <input class="form-control " id="email" name="email" type="email">
-                                        </div>
-                                    </div>
-                                    <div class="form-group ">
-                                        <label for="agree" class="control-label col-lg-3 col-sm-3">Agree to Our Policy</label>
-                                        <div class="col-lg-6 col-sm-9">
-                                            <input type="checkbox" style="width: 20px" class="checkbox form-control" id="agree" name="agree">
-                                        </div>
-                                    </div>
-                                    <div class="form-group ">
-                                        <label for="newsletter" class="control-label col-lg-3 col-sm-3">Receive the Newsletter</label>
-                                        <div class="col-lg-6 col-sm-9">
-                                            <input type="checkbox" style="width: 20px" class="checkbox form-control" id="newsletter" name="newsletter">
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
+                                  
+                                    
                                         <div class="col-lg-offset-3 col-lg-6">
-                                            <button class="btn btn-primary" type="submit">Save</button>
-                                            <button class="btn btn-default" type="button">Cancel</button>
+                                            <button class="btn btn-primary" type="submit">Guardar</button>
+                                           
                                         </div>
                                     </div>
                                 </form>
@@ -198,6 +200,7 @@ if ($id_usu==1){
 </section>
 <!--main content end-->
 </section>
+   
 <script src="js/bootstrap.js"></script>
 <script src="js/jquery.dcjqaccordion.2.7.js"></script>
 <script src="js/scripts.js"></script>
@@ -206,9 +209,10 @@ if ($id_usu==1){
 <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="js/flot-chart/excanvas.min.js"></script><![endif]-->
 <script src="js/jquery.scrollTo.js"></script>
 <!-- morris JavaScript -->	
-
+<script src="js/toastr.min.js"></script>
 <!-- calendar -->
 	<script type="text/javascript" src="js/monthly.js"></script>
+	
 	
 	<!-- //calendar -->
 </body>
