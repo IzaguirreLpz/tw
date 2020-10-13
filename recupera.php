@@ -38,8 +38,8 @@ if (!empty($_POST)) {
 				$token .= chr(rand(65, 90));
 			}
 			$token1 = generaTokenPass($user_id, $token);
-			$url = "https://tecnowash.herokuapp.com/reset_password.php?userid={$user_id}&token={$token}";
-			$asunto = 'Recuperar Contasenia';
+			$url = "localhost/tw/reset_password.php?userid={$user_id}&token={$token}";
+			$asunto = 'Recuperar Password';
 			grabarBitacora($user_id, 'Recuperacion de Password', 'Solicitud', 'Se solicito recuperacion de password mediante correo electronico');
 			$cuerpo = "
 	
@@ -288,10 +288,10 @@ if (!empty($_POST)) {
 <head>
 	<title>Recuperar Password</title>
 
-	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 	<link rel="stylesheet" href="css/stylelogin.css" type="text/css" />
-	<script src="js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="css/font-awesome.css">
+	<!-- <script src="js/bootstrap.min.js"></script> -->
 
 </head>
 
