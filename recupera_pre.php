@@ -28,14 +28,23 @@ if (!empty($_POST['password'])) {
 		$type = 'danger';
 		$access = true;
 	} else {
-
+		$usuario = $_POST['password'];
 		$confPass = hashPassword($pass);
-		updPass($confPass, $userid);
-		$errors = 'Muy Bien Contraseña actualizada correctamente, por favor espere unos segundos';
-		$user_id = $_GET["user_id"];
-		grabarBitacora($user_id, 'Recuperacion de Contrasenia', 'Cambio', 'Se realizo un cambio de contrasenia mediante preguntas');
-		print("<script>   setTimeout(function(){location.href='index.php';},3000);                  </script>");
-		$type = 'success';
+		$id = $_GET['user_id'];
+		$userName = getCualquiera('usuario', 'tbl_usuario', 'id_usuario', $id);
+		if (passHistorial($id, $pass)) {
+			grabarHisPas($userName, $confPass);
+			updPass($confPass, $userid);
+			$user_id = $_GET["user_id"];
+			grabarBitacora($user_id, 'Recuperacion de Contrasenia', 'Cambio', 'Se realizo un cambio de contrasenia mediante preguntas');
+			$errors = 'Muy Bien Contraseña actualizada correctamente, por favor espere unos segundos';
+			$type = 'success';
+			print("<script>   setTimeout(function(){location.href='index.php';},3000);                  </script>");
+		} else {
+			$errors = 'Lamentablemente la contraseña que has ingresado ya ha sido utilizada intenta con otra';
+			$type = 'danger';
+			$access = true;
+		}
 	}
 }
 
@@ -81,9 +90,16 @@ if (!empty($_POST['respuesta'])) {
 
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 	<link rel="stylesheet" href="css/stylelogin.css" type="text/css" />
+	<link rel="stylesheet" href="css/font-awesome.css">
+
 </head>
 
 <body>
+	<style>
+		.fa-eye:before {
+			content: "\f06e";
+		}
+	</style>
 
 	<div class="container">
 		<img style="margin-top:5%" src="images\tecniwahs_logo.png" alt="tecniwash logo" srcset="">
@@ -175,20 +191,6 @@ if (!empty($_POST['respuesta'])) {
 			</div>
 		<?php
 		} else if ($access == true) {
-			if (!empty($_POST['password'])) {
-				$pass = $_POST['password'];
-				$confPass = $_POST['con_password'];
-				if ($pass != $confPass) {
-					$errors = 'Lamentablemente las contraseñas ingresadas no coinciden, Intentalo de Nuevo';
-					$type = 'danger';
-				} else {
-					$errors = 'Muy Bien Contraseña actualizada correctamente, por favor espere unos segundos';
-					$type = 'success';
-					$confPass = hashPassword($pass);
-					updPass($confPass, $userid);
-					grabarBitacora($user_id, 'Recuperacion de Contrasenia', 'Cambio', 'Se realizo un cambio de contrasenia mediante preguntas');
-				}
-			}
 		?>
 			<div class="container">
 				<?php
@@ -207,15 +209,16 @@ if (!empty($_POST['respuesta'])) {
 					<div class="agile-field-txt">
 						<label>
 							<i class="glyphicon glyphicon-lock" aria-hidden="true"></i> Neva Contraseña :</label>
-						<input type="password" maxlength="15" class="form-control" name="password" placeholder="Contraseña" required />
-						<span id="check-e"></span>
+						<input type="password" maxlength="15" class="form-control" name="password" placeholder="Contraseña" id="password" required />
+						<!-- <span id="check-e"></span> -->
+						<span toggle="password-field" id="eye" class="fa fa-eye field-icon" toggleClass=" toggle-password" onclick="verPassword('password')"></span>
 					</div>
 
 					<div class="agile-field-txt">
 						<label>
 							<i class="glyphicon glyphicon-lock" aria-hidden="true"></i> password :</label>
-						<input type="password" maxlength="15" class="form-control" name="con_password" placeholder="Password" id="password" required />
-						<span toggle="password-field" id="eye" class="fa fa-eye field-icon" toggleClass=" toggle-password" onclick="myFunction()"></span>
+						<input type="password" maxlength="15" class="form-control" name="con_password" placeholder="Password" id="conf_password" required />
+						<span toggle="password-field" id="eye" class="fa fa-eye field-icon" toggleClass=" toggle-password" onclick="verPassword('conf_password')"></span>
 					</div>
 
 					<div class="w3ls-login  w3l-sub">
@@ -234,6 +237,17 @@ if (!empty($_POST['respuesta'])) {
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+	<script>
+		function verPassword(id) {
+			var x = document.getElementById(id);
+			if (x.type === "password") {
+				x.type = "text";
+			} else {
+				x.type = "password";
+			}
+		}
+	</script>
+
 </body>
 
 </html>

@@ -24,17 +24,12 @@ function getCorreo($campo, $tabla, $campoWhere, $valor)
 	}
 }
 
-function valid_email($str)
-{
-	return (false !== filter_var($str, FILTER_VALIDATE_EMAIL));
-}
-
 if (!empty($_POST)) {
 	$userName = $_POST['email'];
 	$email = getCorreo('correo_electronico', 'tbl_usuario', 'usuario', $userName);
 
 	if (emailExiste($email)) {
-		if (valid_email($email) == 1) {
+		if (validarEmail($email) == 1) {
 			$usuariocam = "usuario";
 			$nombre = getValor('nombre_usuario', 'correo_electronico', $email);
 			$user_id = getValor('id_usuario', "correo_electronico", $email);

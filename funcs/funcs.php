@@ -10,8 +10,6 @@ require 'conexion.php';
 	return $value;
 }*/
 
-
-
 function minMaxPass($valor)
 {
 
@@ -30,8 +28,6 @@ function minMaxPass($valor)
 	return true;
 }
 
-
-
 function getSinWhere($campo, $tabla)
 {
 	global $mysqli;
@@ -42,7 +38,6 @@ function getSinWhere($campo, $tabla)
 	$stmt->execute();
 	$stmt->store_result();
 	$num = $stmt->num_rows;
-
 	if ($num > 0) {
 		$stmt->bind_result($_campo);
 		$stmt->fetch();
@@ -1339,4 +1334,40 @@ function cambia($password, $user_id, $token)
 	} else {
 		return false;
 	}
+}
+//esta funcion es para validar si el formato de correo electronico es correcto, en caso de ser asi devolvera 1 en caso contrario
+//no devolvera nada
+function validarEmail($str)
+{
+	return (false !== filter_var($str, FILTER_VALIDATE_EMAIL));
+}
+
+//funcion creada para verificar si el password ingresado ya ha sido usado antes
+//$validaPassw = password_verify($password, $passwd);
+function passHistorial($id_usuario, $password)
+{
+	global $mysqli;
+	//con este query buscamos las contraseñas asociadas al usuario en su historial
+	$sql = "SELECT h.pass FROM hist_pass h where h.id_usuario=$id_usuario";
+	$result = $mysqli->query($sql); //guardamos el resultado en una variable
+	//verificamos que nuestro resultado no sea vacio
+	if ($result->num_rows > 0) {
+		// si tiene elementos los analizaremos para que su pass no sea repetida
+		while ($row = $result->fetch_assoc()) {
+			//utilizamos password verify para comparar la contraseña entrante con todas las del historial
+			$validaPassw = password_verify($password, $row["pass"]);
+			if ($validaPassw) {
+				//en caso que $validaPassw nos devuelva true una sola vez vamos a salir del ciclo while y devolver falso
+				$aprobacion = false;
+				break;
+			} else {
+				//si nuestro verificador mantiene su valor en 0 significa que la contraseña no se repite ni una sola vez
+				$aprobacion = true;
+			}
+		}
+	} else {
+		//en caso que nuestro query no traiga ningun valor no sera necesario comprobar el password y unicamente se deja continuar
+		return true;
+	}
+	return $aprobacion;
 }
