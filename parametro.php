@@ -139,7 +139,8 @@ if ($id_usu==1){
                         </header>
                         <div class="panel-body">
                             <div class="form">
-                                <form class="cmxform form-horizontal " id="signupForm" method="get" action="" novalidate="novalidate">
+                            <form class="cmxform form-horizontal " method="post" id="loginform"  action="" novalidate="novalidate">
+                            
                                     <div class="form-group ">
                                         <label for="firstname" class="control-label col-lg-3">Correo Administrador</label>
                                         <div class="col-lg-6">
@@ -149,25 +150,25 @@ if ($id_usu==1){
                                     <div class="form-group ">
                                         <label for="lastname" class="control-label col-lg-3">Longitud min pass</label>
                                         <div class="col-lg-6">
-                                            <input class=" form-control" id="lastname" <?php    echo "value=$min" ;  ?> name="lastname" type="text">
+                                            <input class=" form-control" maxlength="2" id="minpass" <?php    echo "value=$min" ;  ?> name="minpass" type="text">
                                         </div>
                                     </div>
                                     <div class="form-group ">
                                         <label for="username" class="control-label col-lg-3"> Longitud max pass</label>
                                         <div class="col-lg-6">
-                                            <input class="form-control " id="username"    <?php    echo "value=$max" ;  ?> name="username" type="text">
+                                            <input class="form-control " maxlength="2"  id="maxpass"    <?php    echo "value=$max" ;  ?> name="maxpass" type="text">
                                         </div>
                                     </div>
                                     <div class="form-group ">
                                         <label for="password" class="control-label col-lg-3">Intentos</label>
                                         <div class="col-lg-6">
-                                            <input class="form-control " <?php    echo "value=$int" ;  ?> id="password" name="password" type="">
+                                            <input class="form-control "  maxlength="2" <?php    echo "value=$int" ;  ?> id="int" name="int" type="">
                                         </div>
                                     </div>
                                     <div class="form-group ">
                                         <label for="confirm_password" class="control-label col-lg-3">Preguntas</label>
                                         <div class="col-lg-6">
-                                            <input class="form-control " id="confirm_password" <?php    echo "value=$pre" ;  ?> name="confirm_password" type="">
+                                            <input class="form-control " maxlength="2" id="pre" <?php    echo "value=$pre" ;  ?> name="pre" type="">
                                         </div>
                                     </div>
                                   
@@ -212,8 +213,37 @@ if ($id_usu==1){
 <script src="js/toastr.min.js"></script>
 <!-- calendar -->
 	<script type="text/javascript" src="js/monthly.js"></script>
+	<script>
+
+$(document).on('submit', '#loginform', function(event) {
+		event.preventDefault();
+		$.ajax({
+			url: 'save_par.php',
+			type: 'POST',
+			dataType: 'JSON',
+			data: $(this).serialize(),
+			success:function(data){
 	
-	
+				toastr.options.timeOut = 2000;
+				// toastr.options.showMethod = 'fadeIn';
+				// toastr.options.hideMethod = 'fadeOut';
+				// toastr.options.positionClass = 'toast-top-center';
+				
+				if(data=="ok"){
+					toastr.success("Guardado con exito.");
+					setTimeout(function(){
+						location.href="home.php";
+					},2000);
+				}
+			
+				else{
+					toastr.error(data);
+				}
+			}
+		})
+	});
+
+	</script>
 	<!-- //calendar -->
 </body>
 </html>

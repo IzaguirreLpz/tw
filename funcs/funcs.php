@@ -134,6 +134,24 @@ function updPass($pass, $id)
 	}
 }
 
+function updParametro($pass, $id)
+{
+	global $mysqli;
+
+	$stmt = $mysqli->prepare("UPDATE tbl_parametros SET descripcion = ? WHERE id_parametro = ?");
+	$stmt->bind_param('si', $pass, $id);
+	if ($stmt->execute()) {
+		
+		return true;
+	} else {
+		return false;
+	}
+}
+
+
+
+
+
 function cambiaEstado($user_id)
 {
 

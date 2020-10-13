@@ -496,7 +496,7 @@ alert("La dirección de email es incorrecta.");
 					toastr.success("Guardado con exito.");
 					setTimeout(function(){
 						location.href="usuarios.php";
-					},2000);
+					},1500);
 				}
 			
 				else{
