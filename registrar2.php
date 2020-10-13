@@ -38,6 +38,12 @@ if (  !$_POST["correo"]  or !$_POST["txt_us"] or !$_POST["estado_usuarios"] or !
 				 $nombre= strtoupper($nombre);
 				 $user= strtoupper($user);
 
+
+
+
+
+
+				 
              $valid_cor=formato_correo($email);
 if ($valid_cor==false){
 

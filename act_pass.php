@@ -9,23 +9,40 @@ if (!isset($_SESSION['id_usuario'])) {
     header("Location: index.php");
 }
 $id = $_SESSION['id_usuario'];
-
-
+$nom= $_SESSION['usuario'];
+$bita=grabarBitacora($id,'Pantalla Actulizar Nuevo pass ','INGRESO',' .');
 if (!empty($_POST)) {
-    $pass = $_POST['pass'];
-    $repass = $_POST['repass'];
+    $pass = $_POST['pass1'];
+    $repass = $_POST['pass2'];
+
+
+
+       
+
 
     if ($pass == $repass) {
         if (preg_match('/^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{6,16}$/', $pass)) {
+            
+            $historial =passHistorial($id,$pass);
+            if ($historial == false){
+                print "<script>alert('Contraseña ya fue utilizada anteriormente.')</script>";
+                print("<script>window.location.replace('act_pass.php');</script>");
+
+            }
+
+
+
+
 
             $pass_hash = hashPassword($pass);
             $bol = updPass($pass_hash, $id);
             if ($bol == true) {
+                grabarHisPas($us,$pass_hash );
                 print "<script>alert('Usuario nuevo configurado con exito.')</script>";
                 print("<script>window.location.replace('logout.php');</script>");
             }
         } else {
-            print "<script>alert('Contraseña debe llevar caracteres especiales.')</script>";
+            print "<script>alert('Su Contraseña debe Incluir Una Mayúscula, Minuscula, Números y Caracteres Especiales.')</script>";
             print("<script>window.location.replace('act_pass.php');</script>");
         }
     } else {
@@ -73,6 +90,11 @@ if (!empty($_POST)) {
     <script src="js/jquery2.0.3.min.js"></script>
     <script src="js/raphael-min.js"></script>
     <script src="js/morris.js"></script>
+
+
+    <link rel="stylesheet  prefetch" href="css/bootstrap.min.css" >
+<link rel="stylesheet  prefetch" href="css/bootstrap-theme32.min.css" >
+<link rel="stylesheet  prefetch" href="css/bootstrapValidator32.min.css" >
 </head>
 
 <body>
@@ -153,26 +175,52 @@ if (!empty($_POST)) {
                             <div class="panel-body">
                                 <div class="form">
                                     <form class="cmxform form-horizontal " id="preguntas" action="<?php $_SERVER['PHP_SELF']; ?>" method="POST">
-                                        <div class="form-group">
-                                            <label for="password" class="control-label col-lg-3">Password</label>
+                                        
 
-                                            <div class="col-lg-6">
-                                                <input class="form-control" type="password" name="pass" id="pass" value="" maxlength="15" placeholder="" required>
-                                            </div>
-                                        </div>
-                                        <div class="form-group ">
-                                            <label for="firstname" class="control-label col-lg-3">Repita password</label>
-                                            <div class="col-lg-6">
-                                                <input class="form-control" type="password" name="repass" id="repass" maxlength="15" value="" placeholder="" required>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-lg-offset-3 col-lg-6">
+    <div class="form-group">
+	 <label class="control-label col-lg-3" >Contraseña:</label>
+      <div class="col-lg-6">
+       <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+		  <input maxlength="20" type= "password" name="pass1" placeholder="Password"  id="pass1" title="debe contener una mayuscula , numero , signo especial no menor a 8" class="form-control" autocomplete="off" autofocus="on" onkeyup="return nospaces2()" onPaste="return false;" required>
+          <span id="show-hide-passwd" action="hide" class="input-group-addon glyphicon glyphicon glyphicon-eye-open"></span>
+         </div>
+        </div>
+       </div>
+       
+     <script>
+        	function nospaces2(){
+		orig=document.form.pass1.value;
+		nuev=orig.split(' ');
+		nuev=nuev.join('');
+		document.form.pass1.value=nuev;
+		if(nuev=orig.split(' ').length>=2);
+	}
+    </script>
 
-                                                <input id="check2" name="check2" type="checkbox" value="show password" onclick="myFunction2()">
-                                                <label class="check" for="check2">Show password</label>
-                                            </div>
-                                        </div>
+
+        
+        
+     <div class="form-group">
+	  <label class="control-label col-lg-3" >Confirmar Contraseña:</label>
+      <div class="col-md-6 inputGroupContainer">
+		 <div class="input-group">
+			<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+			<input maxlength="20" type= "password" name="pass2" placeholder="Confirmar Password" id="pass2" title="debe ser igual a la Contraseña" class="form-control" autocomplete="off" autofocus="on" onkeyup="return nospaces1()" onPaste="return false;" required>
+		 	<span id="show-hide-passwd1" action="hide" class="input-group-addon glyphicon glyphicon glyphicon-eye-open"></span>
+      	  </div>
+         </div>
+       </div>
+
+       <script>
+        	function nospaces1(){
+		orig=document.form.pass2.value;
+		nuev=orig.split(' ');
+		nuev=nuev.join('');
+		document.form.pass2.value=nuev;
+		if(nuev=orig.split(' ').length>=2);
+	}
+    </script>
 
                                         <div class="form-group">
                                             <div class="col-lg-offset-3 col-lg-6">
@@ -189,6 +237,43 @@ if (!empty($_POST)) {
                 <!-- page end-->
             </div>
             <script>
+
+
+$(document).on('ready', function() {
+                $('#show-hide-passwd').on('click', function(e) {
+                    e.preventDefault();
+                    var current = $(this).attr('action');
+                    if (current == 'hide') {
+                        $(this).prev().attr('type','text');
+                        $(this).removeClass('glyphicon-eye-open').addClass('glyphicon-eye-close').attr('action','show');
+                    }
+                    if (current == 'show') {
+                        $(this).prev().attr('type','password');
+                        $(this).removeClass('glyphicon-eye-close').addClass('glyphicon-eye-open').attr('action','hide');
+                        
+                       
+                    }
+                })
+            })
+                
+                
+                            $(document).on('ready', function() {
+                $('#show-hide-passwd1').on('click', function(e) {
+                    e.preventDefault();
+                    var current = $(this).attr('action');
+                   
+                    if (current == 'hide') {
+                        $(this).prev().attr('type','text');
+                        $(this).removeClass('glyphicon-eye-open').addClass('glyphicon-eye-close').attr('action','show');
+                    }
+                    if (current == 'show') {
+                        $(this).prev().attr('type','password');
+                        $(this).removeClass('glyphicon-eye-close').addClass('glyphicon-eye-open').attr('action','hide');
+                        
+                       
+                    }
+                })
+            })
                 function myFunction() {
                     var x = document.getElementById("password");
                     if (x.type === "password") {

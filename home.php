@@ -12,6 +12,8 @@ if(!isset($_SESSION['id_usuario'])){
 if($_SESSION['estado_usuario']== strtolower('nuevo')){
     header ("Location: preguntas.php");
 }
+$estado=$_SESSION['estado_usuario'];
+
 $id_usu= $_SESSION['id_usuario'];
 //echo $id_usu;
 //echo $_SESSION['menus'];
