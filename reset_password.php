@@ -18,6 +18,7 @@ $bita = grabarBitacora($userid, $objeto, $accion, $descripcion);
 if (!verificaTokenPass($userid, $token)) {
     $errors =  'No se pudo verificar el token disculpa las molestias';
     $type = 'danger';
+    print("<script>setTimeout(function(){location.href='index.php';},3000);</script>");
 }
 if ($token == $tokenBd) {
 

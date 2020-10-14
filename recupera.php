@@ -27,7 +27,6 @@ function getCorreo($campo, $tabla, $campoWhere, $valor)
 if (!empty($_POST)) {
 	$userName = $_POST['email'];
 	$email = getCorreo('correo_electronico', 'tbl_usuario', 'usuario', $userName);
-
 	if (emailExiste($email)) {
 		if (validarEmail($email) == 1) {
 			$usuariocam = "usuario";
@@ -41,6 +40,7 @@ if (!empty($_POST)) {
 			$url = "localhost/tw/reset_password.php?userid={$user_id}&token={$token}";
 			$asunto = 'Recuperar Password';
 			grabarBitacora($user_id, 'Recuperacion de Password', 'Solicitud', 'Se solicito recuperacion de password mediante correo electronico');
+
 			$cuerpo = "
 	
 	<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional //EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
@@ -254,12 +254,21 @@ if (!empty($_POST)) {
 	</body>
 	</html>
 	";
-			$enviado = enviarEmail($email, $nombre, $asunto, $cuerpo);
-			if ($enviado == true) {
-				$errors = 'Se ha enviado un enlace para cambiar tu password a ' . $email . ' favor verifica tu correo';
-				$type = 'success';
+
+			$state = getCualquiera('activacion', 'tbl_usuario', 'id_usuario', $user_id);
+			$lowerState = getCualquiera('estado_usuario', 'tbl_usuario', 'id_usuario', $user_id);
+			$lowerState = strtolower($lowerState);
+			if ($state == 1) {
+				$enviado = enviarEmail($email, $nombre, $asunto, $cuerpo);
+				if ($enviado == true) {
+					$errors = 'Se ha enviado un enlace para cambiar tu password a ' . $email . ' favor verifica tu correo';
+					$type = 'success';
+				} else {
+					$errors = 'Hemos tenido problemas de servidor para enviar tu recuperacion de contraseña ';
+					$type = 'danger';
+				}
 			} else {
-				$errors = 'Hemos tenido problemas de servidor para enviar tu recuperacion de contraseña ';
+				$errors = 'Tu usuario se encuentra bloqueado contactate con tu administrador ';
 				$type = 'danger';
 			}
 		} else {
@@ -297,7 +306,7 @@ if (!empty($_POST)) {
 
 <body>
 
-	<img style="margin-top:10%" src="images\tecniwahs_logo.png" alt="tecniwash logo" srcset="">
+	<img style="margin-top:1%" src="images\tecniwahs_logo.png" alt="tecniwash logo" srcset="">
 	<div class="container">
 		<?php
 		if ($errors != '') {
