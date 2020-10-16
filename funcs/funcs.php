@@ -134,24 +134,6 @@ function updPass($pass, $id)
 	}
 }
 
-function updParametro($pass, $id)
-{
-	global $mysqli;
-
-	$stmt = $mysqli->prepare("UPDATE tbl_parametros SET descripcion = ? WHERE id_parametro = ?");
-	$stmt->bind_param('si', $pass, $id);
-	if ($stmt->execute()) {
-		
-		return true;
-	} else {
-		return false;
-	}
-}
-
-
-
-
-
 function cambiaEstado($user_id)
 {
 
@@ -1411,7 +1393,7 @@ function validar_clave($clave, &$error_clave)
 	}
 	if (preg_match($spaces, $clave)) {
 		$error_clave = "Su Contraseña debe Incluir Una Mayúscula, Minuscula, Números y Caracteres Especiales! Tampoco debe tener espacios en blanco";
-		return false; //AbcD 123@
+		return false;
 	}
 	if (!preg_match($caracteres, $clave)) {
 		$error_clave = "Su Contraseña debe Incluir Una Mayúscula, Minuscula, Números y Caracteres Especiales! No encontramos caracteres especiales";
