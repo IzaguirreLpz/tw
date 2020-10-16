@@ -41,7 +41,7 @@ if (!empty($_POST['password'])) {
 					grabarBitacora($user_id, 'Recuperacion de Contrasenia', 'Cambio', 'Se realizo un cambio de contrasenia mediante preguntas');
 					$errors = 'Muy Bien Contraseña actualizada correctamente, por favor espere unos segundos';
 					$type = 'success';
-					print("<script>   setTimeout(function(){location.href='index.php';},3000);                  </script>");
+					print("<script>setTimeout(function(){location.href='index.php';},3000);</script>");
 				} else {
 					$type = 'danger';
 					$access = true;
@@ -64,7 +64,7 @@ function getPregunta($idUser, $idPregunta)
 {
 	global $mysqli;
 
-	$stmt = $mysqli->prepare("SELECT respuesta FROM bd_ber.tbl_respuestas where id_usuario = ? and id_pregunta=?;");
+	$stmt = $mysqli->prepare("SELECT respuesta FROM tbl_respuestas where id_usuario = ? and id_pregunta=?;");
 	$stmt->bind_param('ii', $idUser, $idPregunta);
 	$stmt->execute();
 	$stmt->store_result();
@@ -113,7 +113,7 @@ if (!empty($_POST['respuesta'])) {
 	</style>
 
 	<div class="container">
-		<img style="margin-top:5%" src="images\tecniwahs_logo.png" alt="tecniwash logo" srcset="">
+		<img style="margin-top:1%" src="images\tecniwahs_logo.png" alt="tecniwash logo" srcset="">
 		<?php
 		$min = getCualquiera('descripcion', 'tbl_parametros', 'id_parametro', 5);
 		$max = getCualquiera('descripcion', 'tbl_parametros', 'id_parametro', 6);
@@ -270,10 +270,10 @@ if (!empty($_POST['respuesta'])) {
 			var min = document.getElementById('minlength').value;
 			var max = document.getElementById('maxlength').value;
 			if (str.length < min) {
-				span.innerHTML = lng + ' de 10 Caracteres';
+				span.innerHTML = lng + ' de ' + max + ' Caracteres';
 				span.style.color = '#bd2130';
 			} else {
-				span.innerHTML = lng + ' de 10 Caracteres';
+				span.innerHTML = lng + ' de ' + max + ' Caracteres';
 				span.style.color = '#28a745';
 			}
 		}

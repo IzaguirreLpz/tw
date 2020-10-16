@@ -1,4 +1,8 @@
-
+<style>
+	#user_id_mod{
+		display: none;
+	}
+</style>
 	<!-- Modal -->
 	<div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	  <div class="modal-dialog" role="document">
@@ -15,8 +19,8 @@
 			 
 			  <div class="form-group">
 				
-				<div class="col-sm-8">
-					<input type="hidden" id="user_id_mod" name="user_id_mod">
+				<div class="col-sm-3">
+					<input   type='hidden' type='text'    id="user_id_mod" name="user_id_mod">
 				</div>
 			  </div>
 			 

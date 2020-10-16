@@ -14,6 +14,14 @@ if ($_SESSION['estado_usuario'] == strtolower('nuevo')) {
 }
 $id_usu = $_SESSION['id_usuario'];
 //echo $_SESSION['menus'];
+
+$objeto="pantalla usuario";
+		$accion="INGRESO";
+		$descripcion="ingreso a pantalla usuario";
+		
+		$bita=grabarBitacora($id_usu,$objeto,$accion,$descripcion);
+
+
 ?>
 
 <!DOCTYPE html>

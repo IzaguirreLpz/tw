@@ -24,17 +24,30 @@ if (  !$_POST["correo"]  or !$_POST["txt_us"] or !$_POST["estado_usuarios"] or !
 		 $email=  $_POST["correo"]   ;
 		 $est=  $_POST["estado_usuarios"]  ;
 
-			  $est="NUEVO";
+			 // $est="NUEVO";
 			  $comparar="ACTIVO";
+                  $intentos = " ";
 			  
-			 if  ($est==$comparar){
+			 if  ( $est=="NUEVO"){
 				 $act="1";
 					 
-			 }else{
-				 $act="0";
-				 
 			 }
-			  
+  
+			   if  ( $est=="ACTIVO"){
+				 $act="1";
+                   $intentos = ",intentos = '0'";
+					 
+			 }
+    
+     if  ( $est=="INACTIVO"){
+				 $act="0";
+					 
+			 }
+    
+      if  ( $est=="BLOQUEADO"){
+				 $act="0";
+					 
+			 }
 				 $nombre= strtoupper($nombre);
 				 $user= strtoupper($user);
 
@@ -69,7 +82,7 @@ $lo=("select correo_electronico from tbl_usuario where correo_electronico='$emai
 			   $accion="UPDATE";
 	
 	   
-   $sql="UPDATE tbl_usuario SET nombre_usuario='".$nombre."', usuario='".$user."', id_rol='".$rol."', correo_electronico='".$email."', estado_usuario='".$est."', activacion= '".$act."' WHERE id_usuario='".$id_usuario."'";
+   $sql="UPDATE tbl_usuario SET nombre_usuario='".$nombre."', usuario='".$user."', id_rol='".$rol."', correo_electronico='".$email."', estado_usuario='".$est."', activacion= '".$act."'  $intentos WHERE id_usuario='".$id_usuario."'";
    $query_update = mysqli_query($mysqli,$sql);
 	$id= 1;
 				 
@@ -202,7 +215,7 @@ if (!$_POST["pass1"] or !$_POST["txt_nc"] or !$_POST["correo"] or !$_POST["txt_u
 				if (!$fss) {
 					$consulta=("insert into tbl_usuario (nombre_usuario,usuario,contrasena,correo_electronico,estado_usuario,id_rol,activacion,fecha_cambio_contrasena) values('$nom', '$us','$pass_hash','$correo','$estado',$rol,1,NOW())");
 $asunto="Se creo su user en TECNIWASH";
-$cuerpo = "Se a registrado a sistema de TECNIWASH con el user $us su password inicial es $pass1 . Feliz día";
+$cuerpo = "Se a registrado a sistema de TECNIWASH con el user $us su password inicial es $pass1 ";
 				//S	echo $consulta;
 					$resultado=mysqli_query($mysqli,$consulta) or die (mysqli_error($mysqli));
 					enviarEmail($correo, $nom, $asunto, $cuerpo);
