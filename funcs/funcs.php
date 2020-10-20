@@ -1287,6 +1287,10 @@ function verificaTokenPass($user_id, $token)
 
 	global $mysqli;
 
+	$conexion = $mysqli;
+	$consulta = "UPDATE tbl_usuario SET estado_usuario='ACTIVO', activacion=1,intentos=0 WHERE id_usuario={$user_id}";
+	mysqli_query($conexion, $consulta);
+
 	$stmt = $mysqli->prepare("SELECT activacion FROM tbl_usuario WHERE id_usuario = ? AND token_password = ? AND password_request = 1 LIMIT 1");
 	$stmt->bind_param('is', $user_id, $token);
 	$stmt->execute();

@@ -78,14 +78,14 @@ if (isset($_SESSION['id_usuario'])) {
 				<div class="agile-field-txt">
 					<label>
 						<i class="glyphicon glyphicon-user" aria-hidden="true"></i> Usuario :</label>
-					<input type="text" class="form-control" name="usuario" style=" text-transform: uppercase" onPaste="return false" placeholder="usuario" maxlength="15" required />
+					<input type="text" class="form-control" name="usuario" style=" text-transform: uppercase" onPaste="return false" placeholder="usuario" autocomplete="off" maxlength="15" required />
 					<span id="check-e"></span>
 				</div>
 
 				<div class="agile-field-txt">
 					<label>
 						<i class="glyphicon glyphicon-lock" aria-hidden="true"></i> password :</label>
-					<input type="password" class="form-control" name="password" placeholder="Password" id="password" maxlength="15" required />
+					<input type="password" class="form-control" name="password" placeholder="Password" id="password" maxlength="15" autocomplete="off" required />
 					<span toggle="password-field" id="eye" class="fa fa-eye field-icon" toggleClass=" toggle-password" onclick="myFunction()"></span>
 				</div>
 

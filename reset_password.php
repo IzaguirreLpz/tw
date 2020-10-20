@@ -16,6 +16,7 @@ $descripcion = "Esta en la pantalla de cambia password";
 $bita = grabarBitacora($userid, $objeto, $accion, $descripcion);
 
 if (!verificaTokenPass($userid, $token)) {
+    echo 'aqui se quedo';
     $errors =  'No se pudo verificar el token disculpa las molestias';
     $type = 'danger';
     print("<script>setTimeout(function(){location.href='index.php';},3000);</script>");

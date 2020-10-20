@@ -171,7 +171,7 @@ if (!empty($_POST['respuesta'])) {
 						$user_id = $_GET['user_id'];
 						global $mysqli;
 						$conexion = $mysqli;
-						$consulta = "SELECT p.id_pregunta, p.pregunta FROM tbl_preguntas p WHERE p.id_pregunta IN (SELECT id_pregunta from tbl_respuestas where id_usuario= $user_id)";
+						$consulta = "SELECT p.id_pregunta, p.pregunta FROM tbl_preguntas p WHERE p.id_pregunta";
 						$result = mysqli_query($conexion, $consulta); {
 						?>
 							<select name="pregunta" class="form-control" id="sectorbox">
