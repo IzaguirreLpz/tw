@@ -84,6 +84,7 @@ if (isset($_GET["us"])) {
 	<link rel='stylesheet prefetch' href='http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.0/css/bootstrapValidator.min.css'> -->
 
 
+
 </head>
 
 <body>
@@ -352,7 +353,7 @@ if (isset($_GET["us"])) {
                                                 <div class="input-group">
                                                     <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
                                                     <select title="Rol del Usuario" class='form-control' name='rol' id='rol' <?php if ($us == 0) {
-                                                                                                                                    echo "readonly   ";
+                                                                                                                                    echo " ";
                                                                                                                                 } ?> style="text-transform: uppercase;">
                                                         <?php
                                                         $w = " ";

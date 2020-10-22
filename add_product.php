@@ -1,6 +1,4 @@
 <?php
-
-
 session_start();
 require 'funcs/conexion.php';
 require 'funcs/funcs.php';
@@ -14,15 +12,8 @@ if (!isset($_SESSION['id_usuario'])) {
 $id_usu = $_SESSION['id_usuario'];
 
 $us = 0;
-//para que cuando sea agregar el rol sea nuevo predeterminado
 $rol = 5;
 $token = generateRandomString();
-//for ($i = 0; $i < 16; $i++) {
-//	$token .= chr(rand(65, 90));
-//}
-
-
-//echo $token;
 
 if (isset($_GET["us"])) {
     $us = $_GET["us"];
@@ -36,27 +27,28 @@ if (isset($_GET["us"])) {
 };
 
 if (!empty($_POST)) {
-    //$post = file_get_contents('php://input');
-    //echo $post;
+    /* $post = file_get_contents('php://input');
+    echo $post; */
     $nombre = $_POST['product_nombre'];
-    $precio = $_POST['product_price'];
     $descripcion = $_POST['product_description'];
+    $proveedores = $_POST['product_supliers'];
+    $precio = $_POST['product_price'];
     $unidades = $_POST['product_units'];
+    $precioProducto = $_POST['product_compra'];
     global $mysqli;
     $conexion = $mysqli;
-    $consulta = "INSERT INTO tbl_productos(nombre,precio,descripcion,cantidad) VALUES ('$nombre',$precio,'$descripcion',$unidades);";
+    $consulta = "INSERT INTO  bd_tw . tbl_productos ( nombre , descripcion , proveedor , precio_venta , cantidad , precio_costo )VALUES('$nombre','$descripcion','$proveedores',$precio,$unidades,$precioProducto)";
     if (mysqli_query($conexion, $consulta)) {
         $errors = 'Se ha ingresado el producto correctamente';
         $type = 'success';
     } else {
-        $errors = 'Lamentablemente hemos tenido problemas ingresando el producto, si puedes reportalo con tu Administrador';
+        $mensaje = mysqli_error($conexion);
+        $errors = 'Hemos tenido el siguiente problema: ' . $mensaje . '</br> Contacta tu Administrador';
         $type = 'warning';
     }
     mysqli_close($conexion);
 }
 
-//echo $_SESSION['id_usuario'];
-//echo $_SESSION['menus'];
 ?>
 
 <!DOCTYPE html>
@@ -87,20 +79,18 @@ if (!empty($_POST)) {
     <script src="js/jquery2.0.3.min.js"></script>
     <script src="js/raphael-min.js"></script>
     <script src="js/morris.js"></script>
-
-    <!-- <link rel="stylesheet  prefetch" href="css/bootstrap2.min" > -->
-    <!--<link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>-->
-
     <link rel="stylesheet  prefetch" href="css/bootstrap.min.css">
     <link rel="stylesheet  prefetch" href="css/bootstrap-theme32.min.css">
     <link rel="stylesheet  prefetch" href="css/bootstrapValidator32.min.css">
-    <!--   <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css'>
-	<link rel='stylesheet prefetch' href='http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.0/css/bootstrapValidator.min.css'> -->
-
 
 </head>
 
 <body>
+    <style>
+        .form-w3layouts {
+            background-color: #fff;
+        }
+    </style>
     <section id="container">
         <!--header start-->
         <header class="header fixed-top clearfix">
@@ -183,7 +173,7 @@ if (!empty($_POST)) {
                                 <span class="tools pull-right">
                                     <a class="fa fa-chevron-down" href="javascript:;"></a>
 
-                                    <a class="fa fa-share" href="usuarios.php"></a>
+                                    <a class="fa fa-share" href="productos.php"></a>
                                 </span>
                             </header>
                             <div class="panel-body">
@@ -197,7 +187,7 @@ if (!empty($_POST)) {
                                                     <span class="input-group-addon"><i class="fas fa-file-signature"></i></span>
                                                     <input maxlength="70" type="text" <?php if ($us != 0) {
                                                                                             echo "value=$nom";
-                                                                                        } ?> name="product_nombre" placeholder="Nombre" style="text-transform: uppercase;" id="txt_nc" autocomplete="off" autofocus="on" onkeyup="return unspaces()" onkeypress="return soloLetras(event)" class="form-control" onkeypress="return soloLetras(event)" onPaste="return false;" title="Nombre Del Producto" required>
+                                                                                        } ?> name="product_nombre" placeholder="Nombre" style="text-transform: uppercase;" id="txt_nc" autocomplete="off" autofocus="on" class="form-control" onkeypress="return soloLetras(event)" onPaste="return false;" title="Nombre Del Producto" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -210,7 +200,7 @@ if (!empty($_POST)) {
                                                     <span class="input-group-addon"><i class="fas fa-money-bill-wave"></i></span>
                                                     <input maxlength="15" type="number" name="product_price" <?php if ($us != 0) {
                                                                                                                     echo "value=$usu ";
-                                                                                                                } ?> style="text-transform: uppercase;" id="txt_us" autocomplete="off" autofocus="on" onkeyup="return nospaces()" onPaste="return false;" class="form-control" title="Recuerda ingresar un precio" required>
+                                                                                                                } ?> style="text-transform: uppercase;" id="txt_us" autocomplete="off" autofocus="on" onPaste="return false;" class="form-control" title="Recuerda ingresar un precio" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -222,47 +212,11 @@ if (!empty($_POST)) {
                                                     <span class="input-group-addon"><i class="fas fa-money-bill-wave"></i></span>
                                                     <input maxlength="15" type="number" name="product_compra" <?php if ($us != 0) {
                                                                                                                     echo "value=$usu ";
-                                                                                                                } ?> style="text-transform: uppercase;" id="txt_us" autocomplete="off" autofocus="on" onkeyup="return nospaces()" onPaste="return false;" class="form-control" title="Recuerda ingresar un precio" required>
+                                                                                                                } ?> style="text-transform: uppercase;" id="txt_us" autocomplete="off" autofocus="on" onPaste="return false;" class="form-control" title="Recuerda ingresar un precio" required>
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <script>
-                                            function soloLetras(e) {
-                                                key = e.keyCode || e.which;
-                                                tecla = String.fromCharCode(key).toLowerCase();
-                                                letras = " áéíóúabcdefghijklmnñopqrstuvwxyz";
-                                                especiales = "8-37-39-46";
-                                                tecla_especial = false
-                                                for (var i in especiales) {
-                                                    if (key == especiales[i]) {
-                                                        tecla_especial = true;
-                                                        break;
-                                                    }
-                                                }
-                                                if (letras.indexOf(tecla) == -1 && !tecla_especial) {
-                                                    return false;
-                                                }
-                                            }
-                                        </script>
-                                        <script>
-                                            function soloLetras(e) {
-                                                key = e.keyCode || e.which;
-                                                tecla = String.fromCharCode(key).toLowerCase();
-                                                letras = " áéíóúabcdefghijklmnñopqrstuvwxyz";
-                                                especiales = "8-37-39-46";
-                                                tecla_especial = false
-                                                for (var i in especiales) {
-                                                    if (key == especiales[i]) {
-                                                        tecla_especial = true;
-                                                        break;
-                                                    }
-                                                }
-                                                if (letras.indexOf(tecla) == -1 && !tecla_especial) {
-                                                    return false;
-                                                }
-                                            }
-                                        </script>
                                         <!-- Text input-->
                                         <?php if ($us == 0) { ?>
                                             <div class="form-group">
@@ -274,15 +228,6 @@ if (!empty($_POST)) {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <script>
-                                                function nospaces2() {
-                                                    orig = document.form.pass1.value;
-                                                    nuev = orig.split(' ');
-                                                    nuev = nuev.join('');
-                                                    document.form.pass1.value = nuev;
-                                                    if (nuev = orig.split(' ').length >= 2);
-                                                }
-                                            </script>
 
                                             <div class="form-group">
                                                 <label class="control-label col-lg-3">Proveedor:</label>
@@ -290,11 +235,11 @@ if (!empty($_POST)) {
                                                     <div class="input-group">
                                                         <span class="input-group-addon"><i class="fas fa-parachute-box"></i></span>
                                                         <select class="form-control" id="exampleFormControlSelect1" name="product_supliers" title="Por favor seleccione un proveedor">
-                                                            <option value="1">Inversiones Multiples</option>
-                                                            <option value="2">2</option>
-                                                            <option value="3">3</option>
-                                                            <option value="4">4</option>
-                                                            <option value="5">5</option>
+                                                            <option value="Inversiones Multiples">Inversiones Multiples</option>
+                                                            <option value="Chevron">Chevron</option>
+                                                            <option value="Shell">Shell</option>
+                                                            <option value="Texaco">Texaco</option>
+                                                            <option value="Puma">Puma</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -305,42 +250,11 @@ if (!empty($_POST)) {
                                                 <div class="col-md-6 inputGroupContainer">
                                                     <div class="input-group">
                                                         <span class="input-group-addon"><i class="fas fa-boxes"></i></span>
-                                                        <input maxlength="20" type="number" name="product_units" placeholder="Confirmar Password" id="pass2" title="Numero total de productos con el que cuentas en inventario" class="form-control" autocomplete="off" autofocus="on" onkeyup="return nospaces1()" onPaste="return false;" required>
+                                                        <input maxlength="20" type="number" name="product_units" placeholder="Confirmar Password" id="pass2" title="Numero total de productos con el que cuentas en inventario" class="form-control" autocomplete="off" autofocus="on" onPaste="return false;" required>
                                                     </div>
                                                 </div>
                                             </div>
-
-                                            <script>
-                                                function nospaces1() {
-                                                    orig = document.form.pass2.value;
-                                                    nuev = orig.split(' ');
-                                                    nuev = nuev.join('');
-                                                    document.form.pass2.value = nuev;
-                                                    if (nuev = orig.split(' ').length >= 2);
-                                                }
-                                            </script>
                                         <?php } ?>
-                                        <script>
-                                            function nospaces3() {
-                                                orig = document.form.correo.value;
-                                                nuev = orig.split(' ');
-                                                nuev = nuev.join('');
-                                                document.form.correo.value = nuev;
-                                                if (nuev = orig.split(' ').length >= 2);
-                                            }
-
-                                            function validar() {
-                                                var correo, expresion;
-                                                correo = document.getElementById("correo").value;
-                                                expresion = /\w+@\w+\.+[a-z]/;
-                                                if (correo.length > 80) {
-                                                    alert("El campo correo excede su capacidad de caracteres");
-                                                } else if (!expresion.test(correo)) {
-                                                    alert('El correo no es valido');
-                                                    return false;
-                                                }
-                                            }
-                                        </script>
                                         <div class="form-group">
                                             <div class="col-lg-offset-3 col-lg-6">
                                                 <button class="btn btn-success" value="Guardar" type="submit">Guardar</button>
@@ -367,102 +281,19 @@ if (!empty($_POST)) {
             window.scrollTo(0, 1);
         }
     </script>
-    <script>
-        $(document).on('submit', '#loginform', function(event) {
-            event.preventDefault();
-            $.ajax({
-                url: 'registrar2.php',
-                type: 'POST',
-                dataType: 'JSON',
-                data: $(this).serialize(),
-                success: function(data) {
-                    toastr.options.timeOut = 2000;
-                    // toastr.options.showMethod = 'fadeIn';
-                    // toastr.options.hideMethod = 'fadeOut';
-                    // toastr.options.positionClass = 'toast-top-center';
-                    if (data == "ok") {
-                        toastr.success("Guardado con exito.");
-                        setTimeout(function() {
-                            location.href = "usuarios.php";
-                        }, 1500);
-                    } else {
-                        toastr.error(data);
-                    }
-                }
-            })
-        });
-
-        function showVitales() {
-            // element = document.getElementById("auto");
-            check = document.getElementById("auto");
-            if (check.checked) {
-                document.getElementById('pass1').value = '<?php echo $token ?>';
-                document.getElementById('pass2').value = '<?php echo $token ?>';
-            } else {
-                document.getElementById('pass1').value = '';
-                document.getElementById('pass2').value = '';
-            }
-        }
-
-        function showContent() {
-            element = document.getElementById("conte");
-            check = document.getElementById("check");
-            if (check.checked) {
-                element.style.display = 'block';
-                document.getElementById('incapacidad').value = 1;
-                // a=document.getElementById('check').value=1;
-                //alert(a)
-            } else {
-                element.style.display = 'none';
-                document.getElementById('incapacidad').value = "0";
-                // a=document.getElementById('check').value=2;
-                //alert(a)
-            }
-        }
-
-        $(document).on('ready', function() {
-            $('#show-hide-passwd').on('click', function(e) {
-                e.preventDefault();
-                var current = $(this).attr('action');
-                if (current == 'hide') {
-                    $(this).prev().attr('type', 'text');
-                    $(this).removeClass('glyphicon-eye-open').addClass('glyphicon-eye-close').attr('action', 'show');
-                }
-                if (current == 'show') {
-                    $(this).prev().attr('type', 'password');
-                    $(this).removeClass('glyphicon-eye-close').addClass('glyphicon-eye-open').attr('action', 'hide');
-                }
-            })
-        })
-
-        $(document).on('ready', function() {
-            $('#show-hide-passwd1').on('click', function(e) {
-                e.preventDefault();
-                var current = $(this).attr('action');
-                if (current == 'hide') {
-                    $(this).prev().attr('type', 'text');
-                    $(this).removeClass('glyphicon-eye-open').addClass('glyphicon-eye-close').attr('action', 'show');
-                }
-                if (current == 'show') {
-                    $(this).prev().attr('type', 'password');
-                    $(this).removeClass('glyphicon-eye-close').addClass('glyphicon-eye-open').attr('action', 'hide');
-                }
-            })
-        });
-    </script>
 
     <script src="js/bootstrap.js"></script>
     <script src="js/jquery.dcjqaccordion.2.7.js"></script>
     <script src="js/scripts.js"></script>
     <script src="js/jquery.slimscroll.js"></script>
     <script src="js/jquery.nicescroll.js"></script>
-    <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="js/flot-chart/excanvas.min.js"></script><![endif]-->
     <script src="js/jquery.scrollTo.js"></script>
     <!-- morris JavaScript -->
     <script src="js/toastr.min.js"></script>
     <!-- calendar -->
     <script type="text/javascript" src="js/monthly.js"></script>
     <!-- //calendar -->
+    <script src="js\validaciones.js"></script>
 </body>
 
 </html>
