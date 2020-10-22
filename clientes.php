@@ -55,11 +55,16 @@ $objeto="pantalla usuario";
     <link rel="stylesheet" href="css/morris.css" type="text/css" />
     <!-- calendar -->
     <link rel="stylesheet" href="css/monthly.css">
-    <!-- //calendar -->
-    <!-- //font-awesome icons -->
-    <script src="js/jquery2.0.3.min.js"></script>
-    <script src="js/raphael-min.js"></script>
-    <script src="js/morris.js"></script>
+ 
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="tableexport.min.css">
+ 
+  <script src="js/jquery.min.js"></script>
+  <script src="js/FileSaver.min.js"></script>
+  <script src="js/tableexport.min.js"></script>
+  <!--- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>-->
+	     <link href="css/select2.min.css" rel="stylesheet" /> 
+      <script src="js/select2.min.js"></script>
 </head>
 
 <body>
@@ -125,19 +130,30 @@ $objeto="pantalla usuario";
                 <div class="table-agile-info">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            USUARIOS
-
+                         CLIENTES
                             <div class="btn-group pull-right">
                                 <button type='button' class="btn btn-success" onClick="location.href='add_usu.php'"><span class="glyphicon glyphicon-plus"></span> Agregar </button>
                             </div>
                         </div>
                         <div class="row w3-res-tb">
 
-                            <div class="col-sm-4">
-                            </div>
-                            <div class="col-sm-3">
+                        <div class="col-lg-3">
+		<div class="input-group">
+		  <span class="input-group-addon">INICIO</span>
+		   <input  type="date" id="fecha_ini"  name="fecha_ini" placeholder="FECHA INICIO"></div>
+		</div>
+    
+   
+		<div class="input-group">
+		  <span class="input-group-addon">FIN</span>
+		<input  type="date"   id="fecha_fin" name="fecha_fin"  >
 
-                            </div>
+	
+
+
+                        
+<button id="procesar" class="btn btn-primary">Procesar</button>
+             <button class="btn btn-default" title="salir de la consulta"  >   <span class="fa fa-outdent" title="salir de la consulta"  onclick="load(1)"></span></button>
                         </div>
                         <div id="resultados"></div><!-- Carga los datos ajax -->
                         <div class='outer_div'></div>
@@ -221,4 +237,65 @@ require 'modal/eliminar_usuario.php';
             }
         })
     }
+
+
+
+
+
+
+
+
+         
+    $('#procesar').on('click', function(){
+      
+		var desde = $('#fecha_ini').val();
+		var hasta = $('#fecha_fin').val();
+		var url = 'ajax/busca_clientes_fecha.php';
+            
+		$.ajax({
+		type:'POST',
+		url:url,
+		data:'desde='+desde+'&hasta='+hasta,
+		success: function(data){
+   
+			$(".outer_div").html(data).fadeIn('slow');
+            ExportTable();
+            $('#loader').html('');
+            
+           
+		}
+	});
+	return false;
+	});
+	
+        
+       
+            function ExportTable(){
+			$("table").tableExport({
+                
+                
+                 
+                
+				headings: true,                    // (Boolean), display table headings (th/td elements) in the <thead>
+				footers: true,                     // (Boolean), display table footers (th/td elements) in the <tfoot>
+				formats: ["xls", "csv", "txt"],    // (String[]), filetypes for the export
+				fileName: "id",                    // (id, String), filename for the downloaded file
+				bootstrap: true,                   // (Boolean), style buttons using bootstrap
+				position: "well" ,                // (top, bottom), position of the caption element relative to table
+				ignoreRows: null,                  // (Number, Number[]), row indices to exclude from the exported file
+				ignoreCols: null,                 // (Number, Number[]), column indices to exclude from the exported file
+				ignoreCSS: ".tableexport-ignore"   // (selector, selector[]), selector(s) to exclude from the exported file
+			});
+		}
+        
+        
+        
+
+
+
+
+
+
+
+
 </script>
