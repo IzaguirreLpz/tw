@@ -334,7 +334,7 @@ if ($id_usu==1){
       <div class="col-md-6 selectContainer">
       <div class="input-group">
         <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
-	  	<select title="Rol del Usuario" class='form-control' name='rol' id='rol'  <?php if ($us==0) { echo "readonly   "; }?> style="text-transform: uppercase;"   >
+	  	<select title="Rol del Usuario" class='form-control' name='rol' id='rol'  <?php if ($us==0) { echo " "; }?> style="text-transform: uppercase;"   >
                             <?php 
                             $w=" ";
                             if ($rol==5 ){
