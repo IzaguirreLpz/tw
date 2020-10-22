@@ -5,6 +5,9 @@ session_start();
 require 'funcs/conexion.php';
 require 'funcs/funcs.php';
 
+$errors = '';
+$type = 'success';
+
 if (!isset($_SESSION['id_usuario'])) {
     header("Location: index.php");
 }
@@ -30,8 +33,27 @@ if (isset($_GET["us"])) {
     $rol = $arreglo['id_rol'];
     $estado = $arreglo['estado_usuario'];
     $corr = $arreglo['correo_electronico'];
-}
+};
 
+if (!empty($_POST)) {
+    //$post = file_get_contents('php://input');
+    //echo $post;
+    $nombre = $_POST['product_nombre'];
+    $precio = $_POST['product_price'];
+    $descripcion = $_POST['product_description'];
+    $unidades = $_POST['product_units'];
+    global $mysqli;
+    $conexion = $mysqli;
+    $consulta = "INSERT INTO tbl_productos(nombre,precio,descripcion,cantidad) VALUES ('$nombre',$precio,'$descripcion',$unidades);";
+    if (mysqli_query($conexion, $consulta)) {
+        $errors = 'Se ha ingresado el producto correctamente';
+        $type = 'success';
+    } else {
+        $errors = 'Lamentablemente hemos tenido problemas ingresando el producto, si puedes reportalo con tu Administrador';
+        $type = 'warning';
+    }
+    mysqli_close($conexion);
+}
 
 //echo $_SESSION['id_usuario'];
 //echo $_SESSION['menus'];
@@ -40,19 +62,10 @@ if (isset($_GET["us"])) {
 <!DOCTYPE html>
 
 <head>
-    <title>HOME</title>
+    <title>Agregar Producto Nuevo</title>
+    <link rel="icon" href="images\favicon\favicon.ico" type="image/ico" sizes="16x16">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
-    <script type="application/x-javascript">
-        addEventListener("load", function() {
-            setTimeout(hideURLbar, 0);
-        }, false);
-
-        function hideURLbar() {
-            window.scrollTo(0, 1);
-        }
-    </script>
     <!-- bootstrap-css -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <!-- //bootstrap-css -->
@@ -68,6 +81,7 @@ if (isset($_GET["us"])) {
     <!-- calendar -->
     <link rel="stylesheet" href="css/monthly.css">
     <link rel="stylesheet" href="css/toastr.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
     <!-- //calendar -->
     <!-- //font-awesome icons -->
     <script src="js/jquery2.0.3.min.js"></script>
@@ -151,16 +165,20 @@ if (isset($_GET["us"])) {
             <div class="form-w3layouts">
                 <!-- page start-->
 
-
+                <?php
+                if ($errors != '') {
+                    echo showMessage($errors, $type);
+                }
+                ?>
                 <div class="row">
                     <div class="col-lg-12">
                         <section class="panel">
                             <header class="panel-heading">
                                 <?php
                                 if ($us != 0) {
-                                    echo "Editar  Usuario $usu ";
+                                    echo "Editar  Producto $usu ";
                                 } else {
-                                    echo "Agregar Usuario ";
+                                    echo "Agregar Nuevo Producto ";
                                 } ?>
                                 <span class="tools pull-right">
                                     <a class="fa fa-chevron-down" href="javascript:;"></a>
@@ -170,53 +188,41 @@ if (isset($_GET["us"])) {
                             </header>
                             <div class="panel-body">
                                 <div class="form">
-                                    <form class="cmxform form-horizontal " method="post" id="loginform" action="" novalidate="novalidate">
-
-
-
+                                    <form class="cmxform form-horizontal" method="post" action="" novalidate="novalidate">
                                         <input type="hidden" id="usu" name="usu" <?php echo "value='$us'";  ?>>
                                         <div class="form-group">
-                                            <label class="control-label col-lg-3">Nombre Completo:</label>
+                                            <label class="control-label col-lg-3">Nombre Producto:</label>
                                             <div class="col-lg-6">
                                                 <div class="input-group">
-                                                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                                    <span class="input-group-addon"><i class="fas fa-file-signature"></i></span>
                                                     <input maxlength="70" type="text" <?php if ($us != 0) {
                                                                                             echo "value=$nom";
-                                                                                        } ?> name="txt_nc" placeholder="Nombre" style="text-transform: uppercase;" id="txt_nc" autocomplete="off" autofocus="on" onkeyup="return unspaces()" onkeypress="return soloLetras(event)" class="form-control" onkeypress="return soloLetras(event)" onPaste="return false;" title="nombre Usuario" required>
+                                                                                        } ?> name="product_nombre" placeholder="Nombre" style="text-transform: uppercase;" id="txt_nc" autocomplete="off" autofocus="on" onkeyup="return unspaces()" onkeypress="return soloLetras(event)" class="form-control" onkeypress="return soloLetras(event)" onPaste="return false;" title="Nombre Del Producto" required>
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <script>
-                                            function soloLetras(e) {
-                                                key = e.keyCode || e.which;
-                                                tecla = String.fromCharCode(key).toLowerCase();
-                                                letras = " áéíóúabcdefghijklmnñopqrstuvwxyz";
-                                                especiales = "8-37-39-46";
-
-                                                tecla_especial = false
-                                                for (var i in especiales) {
-                                                    if (key == especiales[i]) {
-                                                        tecla_especial = true;
-                                                        break;
-                                                    }
-                                                }
-
-                                                if (letras.indexOf(tecla) == -1 && !tecla_especial) {
-                                                    return false;
-                                                }
-                                            }
-                                        </script>
                                         <!-- Text input-->
-
                                         <div class="form-group">
-                                            <label class="control-label col-lg-3">Usuario:</label>
+                                            <label class="control-label col-lg-3">Precio de Venta:</label>
                                             <div class="col-lg-6">
                                                 <div class="input-group">
-                                                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                                    <input maxlength="15" type="text" name="txt_us" <?php if ($us != 0) {
-                                                                                                        echo "value=$usu ";
-                                                                                                    } ?> placeholder="Usuario" style="text-transform: uppercase;" id="txt_us" autocomplete="off" autofocus="on" onkeyup="return nospaces()" onkeypress="return soloLetras(event)" onkeypress="return soloLetras(event)" onPaste="return false;" class="form-control" title="Usuario solo letras" required>
+                                                    <span class="input-group-addon"><i class="fas fa-money-bill-wave"></i></span>
+                                                    <input maxlength="15" type="number" name="product_price" <?php if ($us != 0) {
+                                                                                                                    echo "value=$usu ";
+                                                                                                                } ?> style="text-transform: uppercase;" id="txt_us" autocomplete="off" autofocus="on" onkeyup="return nospaces()" onPaste="return false;" class="form-control" title="Recuerda ingresar un precio" required>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="control-label col-lg-3">Precio de Compra:</label>
+                                            <div class="col-lg-6">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="fas fa-money-bill-wave"></i></span>
+                                                    <input maxlength="15" type="number" name="product_compra" <?php if ($us != 0) {
+                                                                                                                    echo "value=$usu ";
+                                                                                                                } ?> style="text-transform: uppercase;" id="txt_us" autocomplete="off" autofocus="on" onkeyup="return nospaces()" onPaste="return false;" class="form-control" title="Recuerda ingresar un precio" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -227,7 +233,6 @@ if (isset($_GET["us"])) {
                                                 tecla = String.fromCharCode(key).toLowerCase();
                                                 letras = " áéíóúabcdefghijklmnñopqrstuvwxyz";
                                                 especiales = "8-37-39-46";
-
                                                 tecla_especial = false
                                                 for (var i in especiales) {
                                                     if (key == especiales[i]) {
@@ -235,20 +240,17 @@ if (isset($_GET["us"])) {
                                                         break;
                                                     }
                                                 }
-
                                                 if (letras.indexOf(tecla) == -1 && !tecla_especial) {
                                                     return false;
                                                 }
                                             }
                                         </script>
-
                                         <script>
                                             function soloLetras(e) {
                                                 key = e.keyCode || e.which;
                                                 tecla = String.fromCharCode(key).toLowerCase();
                                                 letras = " áéíóúabcdefghijklmnñopqrstuvwxyz";
                                                 especiales = "8-37-39-46";
-
                                                 tecla_especial = false
                                                 for (var i in especiales) {
                                                     if (key == especiales[i]) {
@@ -256,50 +258,22 @@ if (isset($_GET["us"])) {
                                                         break;
                                                     }
                                                 }
-
                                                 if (letras.indexOf(tecla) == -1 && !tecla_especial) {
                                                     return false;
                                                 }
                                             }
                                         </script>
                                         <!-- Text input-->
-
-
                                         <?php if ($us == 0) { ?>
-
-
                                             <div class="form-group">
-                                                <label class="control-label col-lg-3" for="inputSuccess">Autogenerar</label>
-                                                <div class="col-lg-6">
-                                                    <div class="checkbox">
-                                                        <label>
-                                                            <input type="checkbox" id="auto" name="auto" value="1" onchange="javascript:showVitales()">
-                                                            contraseña
-                                                        </label>
-                                                    </div>
-
-
-                                                </div>
-                                            </div>
-
-
-
-
-
-
-
-
-                                            <div class="form-group">
-                                                <label class="control-label col-lg-3">Contraseña:</label>
+                                                <label class="control-label col-lg-3">Descripcion:</label>
                                                 <div class="col-lg-6">
                                                     <div class="input-group">
-                                                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                                        <input maxlength="20" type="password" name="pass1" placeholder="Password" id="pass1" title="debe contener una mayuscula , numero , signo especial no menor a 8" class="form-control" autocomplete="off" autofocus="on" onkeyup="return nospaces2()" onPaste="return false;" required>
-                                                        <span id="show-hide-passwd" action="hide" class="input-group-addon glyphicon glyphicon glyphicon-eye-open"></span>
+                                                        <span class="input-group-addon"><i class="fas fa-file-alt"></i></span>
+                                                        <textarea class="form-control" name="product_description" autocomplete="off" title="recuerda describir el producto que venderas" autofocus="on" id="exampleFormControlTextarea1" rows="1" required></textarea>
                                                     </div>
                                                 </div>
                                             </div>
-
                                             <script>
                                                 function nospaces2() {
                                                     orig = document.form.pass1.value;
@@ -310,16 +284,28 @@ if (isset($_GET["us"])) {
                                                 }
                                             </script>
 
-
-
-
                                             <div class="form-group">
-                                                <label class="control-label col-lg-3">Confirmar Contraseña:</label>
+                                                <label class="control-label col-lg-3">Proveedor:</label>
                                                 <div class="col-md-6 inputGroupContainer">
                                                     <div class="input-group">
-                                                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                                        <input maxlength="20" type="password" name="pass2" placeholder="Confirmar Password" id="pass2" title="debe ser igual a la Contraseña" class="form-control" autocomplete="off" autofocus="on" onkeyup="return nospaces1()" onPaste="return false;" required>
-                                                        <span id="show-hide-passwd1" action="hide" class="input-group-addon glyphicon glyphicon glyphicon-eye-open"></span>
+                                                        <span class="input-group-addon"><i class="fas fa-parachute-box"></i></span>
+                                                        <select class="form-control" id="exampleFormControlSelect1" name="product_supliers" title="Por favor seleccione un proveedor">
+                                                            <option value="1">Inversiones Multiples</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="5">5</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="control-label col-lg-3">Unidades en Inventario:</label>
+                                                <div class="col-md-6 inputGroupContainer">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"><i class="fas fa-boxes"></i></span>
+                                                        <input maxlength="20" type="number" name="product_units" placeholder="Confirmar Password" id="pass2" title="Numero total de productos con el que cuentas en inventario" class="form-control" autocomplete="off" autofocus="on" onkeyup="return nospaces1()" onPaste="return false;" required>
                                                     </div>
                                                 </div>
                                             </div>
@@ -333,72 +319,7 @@ if (isset($_GET["us"])) {
                                                     if (nuev = orig.split(' ').length >= 2);
                                                 }
                                             </script>
-
                                         <?php } ?>
-
-
-
-
-
-
-
-
-
-
-                                        <!-- Text input-->
-                                        <div class="form-group">
-                                            <label class="control-label col-lg-3">Rol:</label>
-                                            <div class="col-md-6 selectContainer">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
-                                                    <select title="Rol del Usuario" class='form-control' name='rol' id='rol' <?php if ($us == 0) {
-                                                                                                                                    echo "readonly   ";
-                                                                                                                                } ?> style="text-transform: uppercase;">
-                                                        <?php
-                                                        $w = " ";
-                                                        if ($rol == 5) {
-
-                                                            $w = "where id_rol=5";
-                                                        } else {
-                                                            //  $w = " ";
-                                                        ?>
-                                                            <option value="">Seleccione un Rol</option>
-                                                        <?php
-
-                                                        }
-
-
-                                                        $query_cod_veh = mysqli_query($mysqli, "select * from tbl_roles $w order by id_rol");
-                                                        while ($rw = mysqli_fetch_array($query_cod_veh)) {
-                                                        ?>
-                                                            <option value="<?php echo $rw['id_rol']; ?>" <?php if ($rw['id_rol'] == $rol) {
-                                                                                                            echo "selected='selected'";
-                                                                                                        } ?>><?php echo $rw['rol']; ?></option>
-                                                        <?php
-                                                        }
-
-                                                        ?>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-                                        <!-- Text input-->
-                                        <!-- Text input-->
-
-                                        <div class="form-group">
-                                            <label class="control-label col-lg-3">E-Mail</label>
-                                            <div class="col-lg-6">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                                                    <input maxlength="80" type="email" <?php if ($us != 0) {
-                                                                                            echo "value=$corr";
-                                                                                        } ?> name="correo" placeholder="e-mail" id="correo" autocomplete="off" autofocus="on" o class="form-control" onPaste="return false;" required onkeyup=" nospaces3();">
-                                                </div>
-                                            </div>
-                                        </div>
-
                                         <script>
                                             function nospaces3() {
                                                 orig = document.form.correo.value;
@@ -412,7 +333,6 @@ if (isset($_GET["us"])) {
                                                 var correo, expresion;
                                                 correo = document.getElementById("correo").value;
                                                 expresion = /\w+@\w+\.+[a-z]/;
-
                                                 if (correo.length > 80) {
                                                     alert("El campo correo excede su capacidad de caracteres");
                                                 } else if (!expresion.test(correo)) {
@@ -420,64 +340,10 @@ if (isset($_GET["us"])) {
                                                     return false;
                                                 }
                                             }
-
-                                            /*         
-function validar() {
-if (/^w+([.-]?w+)*@w+([.-]?w+)*(.w{2,3,4})+$/.test('correo')){
-alert("La dirección de email " + 'correo' + " es correcta.");
-}else {
-alert("La dirección de email es incorrecta.");
-}
-}*/
                                         </script>
-
-
-
-                                        <div class="form-group">
-                                            <label class="control-label col-lg-3">Estado:</label>
-                                            <div class="col-md-6 selectContainer">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
-
-                                                    <?php if ($us == null) { ?>
-
-                                                        <input type="combo_estado" id="combo_estado" name="combo_estado" class="form-control" value="NUEVO" readonly>
-
-
-                                                    <?php } else { ?>
-
-                                                        <select name="estado_usuarios" id="estado_usuarios" class="form-control" style="text-transform: uppercase;">
-                                                            <option value="-1">--seleccione estado--</option>
-                                                            <option value="BlOQUEADO" <?php if ($estado == "BlOQUEADO") {
-                                                                                            echo "selected='selected'";
-                                                                                        } ?>>BlOQUEADO</option>
-                                                            <option value="ACTIVO" <?php if ($estado == "ACTIVO") {
-                                                                                        echo "selected='selected'";
-                                                                                    } ?>>ACTIVO</option>
-                                                            <option value="INACTIVO" <?php if ($estado == "INACTIVO") {
-                                                                                            echo "selected='selected'";
-                                                                                        } ?>>INACTIVO</option>
-                                                            <option value="NUEVO" <?php if ($estado == "NUEVO") {
-                                                                                        echo "selected='selected'";
-                                                                                    } ?>>NUEVO</option>
-
-                                                        </select>
-
-
-                                                    <?php  } ?>
-
-
-
-
-                                                </div>
-                                            </div>
-                                        </div>
-
-
                                         <div class="form-group">
                                             <div class="col-lg-offset-3 col-lg-6">
-                                                <button class="btn btn-success" onclick="this.form.action='registrar2.php'" value="Guardar" type="submit">Guardar</button>
-
+                                                <button class="btn btn-success" value="Guardar" type="submit">Guardar</button>
                                             </div>
                                         </div>
                                     </form>
@@ -488,25 +354,19 @@ alert("La dirección de email es incorrecta.");
                 </div>
                 <!-- page end-->
             </div>
-
-
-
-
-
-
-
-
-
-
-
-
         </section>
         <!--main content end-->
     </section>
 
+    <script type="application/x-javascript">
+        addEventListener("load", function() {
+            setTimeout(hideURLbar, 0);
+        }, false);
 
-
-
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
     <script>
         $(document).on('submit', '#loginform', function(event) {
             event.preventDefault();
@@ -516,12 +376,10 @@ alert("La dirección de email es incorrecta.");
                 dataType: 'JSON',
                 data: $(this).serialize(),
                 success: function(data) {
-
                     toastr.options.timeOut = 2000;
                     // toastr.options.showMethod = 'fadeIn';
                     // toastr.options.hideMethod = 'fadeOut';
                     // toastr.options.positionClass = 'toast-top-center';
-
                     if (data == "ok") {
                         toastr.success("Guardado con exito.");
                         setTimeout(function() {
@@ -533,10 +391,6 @@ alert("La dirección de email es incorrecta.");
                 }
             })
         });
-
-
-
-
 
         function showVitales() {
             // element = document.getElementById("auto");
@@ -550,10 +404,6 @@ alert("La dirección de email es incorrecta.");
             }
         }
 
-
-
-
-
         function showContent() {
             element = document.getElementById("conte");
             check = document.getElementById("check");
@@ -561,21 +411,14 @@ alert("La dirección de email es incorrecta.");
                 element.style.display = 'block';
                 document.getElementById('incapacidad').value = 1;
                 // a=document.getElementById('check').value=1;
-
-
                 //alert(a)
-
-
             } else {
                 element.style.display = 'none';
                 document.getElementById('incapacidad').value = "0";
                 // a=document.getElementById('check').value=2;
-
                 //alert(a)
             }
         }
-
-
 
         $(document).on('ready', function() {
             $('#show-hide-passwd').on('click', function(e) {
@@ -588,18 +431,14 @@ alert("La dirección de email es incorrecta.");
                 if (current == 'show') {
                     $(this).prev().attr('type', 'password');
                     $(this).removeClass('glyphicon-eye-close').addClass('glyphicon-eye-open').attr('action', 'hide');
-
-
                 }
             })
         })
-
 
         $(document).on('ready', function() {
             $('#show-hide-passwd1').on('click', function(e) {
                 e.preventDefault();
                 var current = $(this).attr('action');
-
                 if (current == 'hide') {
                     $(this).prev().attr('type', 'text');
                     $(this).removeClass('glyphicon-eye-open').addClass('glyphicon-eye-close').attr('action', 'show');
@@ -607,14 +446,10 @@ alert("La dirección de email es incorrecta.");
                 if (current == 'show') {
                     $(this).prev().attr('type', 'password');
                     $(this).removeClass('glyphicon-eye-close').addClass('glyphicon-eye-open').attr('action', 'hide');
-
-
                 }
             })
-        })
+        });
     </script>
-
-
 
     <script src="js/bootstrap.js"></script>
     <script src="js/jquery.dcjqaccordion.2.7.js"></script>
@@ -627,7 +462,6 @@ alert("La dirección de email es incorrecta.");
     <script src="js/toastr.min.js"></script>
     <!-- calendar -->
     <script type="text/javascript" src="js/monthly.js"></script>
-
     <!-- //calendar -->
 </body>
 
