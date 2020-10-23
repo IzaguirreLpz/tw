@@ -5,18 +5,14 @@ include('../funcs/funcs.php');
 
 $desde = $_POST['desde'];
 $hasta = $_POST['hasta'];
-$paciente =$_POST['paciente'];
-$doctor =$_POST['doctor'];
-$enfermedad =$_POST['enfermedad'];
+
 //if para añadirle condiciones al select
 
-$cli=$_POST['cli'];
+//$cli=$_POST['cli'];
 session_start();
  
 $rol = $_SESSION['id_rol'];
 $idUsuario = $_SESSION['id_usuario'];
-$clinica= $_SESSION['clinica'];
-
 if (
 			!empty($hasta) &&
 			!empty($desde) 
@@ -36,88 +32,23 @@ if (
 
 
 
-if((!empty($doctor))){
-	$con_doctor="and  ate_id_usuario= $doctor";
-    $nom_doctor=getUSUARIO('usu_nombre_com','usu_id_usuario',$doctor);
-    $tit_doc="Doctor: $nom_doctor";
-    
-    
-}else{
-    
-    $con_doctor="";
-    $tit_doc="";
-}
-
-
-
-
-
-if((!empty($enfermedad))){
-	$con_enf="and ate_padece = '$enfermedad'";
-    
-    $tit_enf=" Enfermedad : $enfermedad";
-    
-    
-}else{
-    
-    $con_enf="";
-    $tit_enf="";
-}
-
-
-
-
-
-if((!empty($cli))){
-	$con_cli="and 	ate_id_clinica = $cli";
-    $nom_cli=getCualquiera('cli_nombre','siec_clinicas','cli_id_clinica',$cli);
-    $tit_cli="Clinica: $nom_cli";
-    
-    
-}else{
-    
-    $con_cli="";
-    $tit_cli="";
-}
-
-
- if ($rol !=1 and $idUsuario!=1){
-         $clinica_b="and 	ate_id_clinica=$clinica ";
-         
-     }else{
-    $clinica_b="";
-          
-                 
-     }
 
 
 
 
 
 
-if((!empty($paciente))){
-$con_empleado = "and ate_id_empleado=$paciente";
-$nombre_emp = getEMP('emp_nombre','emp_id_empleado',$paciente);
-$tit_emp=" paciente : $nombre_emp";
-    
-    
-    
-    
-}else{
-    
-    $con_empleado="";
-    $tit_emp="";
-}
+
 
 
 ?>
 
    
-    <link rel="stylesheet" href="tableexport.min.css">
+    <link rel="stylesheet" href="../css/tableexport.min.css">
  
-  <script src="js/jquery.min.js"></script>
-  <script src="js/FileSaver.min.js"></script>
-  <script src="js/tableexport.min.js"></script>
+  <script src="../js/jquery.min.js"></script>
+  <script src="../js/FileSaver.min.js"></script>
+  <script src="../js/tableexport.min.js"></script>
 
 
 
@@ -158,7 +89,7 @@ $tit_emp=" paciente : $nombre_emp";
         <thead>
             
             <tr>
-            <th><b> Reporte de Atenciones <?php echo $tit_emp; ?> <?php echo $tit_fecha; ?> <?php echo $tit_doc; ?><?php echo $tit_enf; ?></b>
+            <th><b> Reporte de Clientes <?php echo $tit_fecha; ?> </b>
           </th>
             
             </tr>
@@ -167,45 +98,49 @@ $tit_emp=" paciente : $nombre_emp";
       <tr class="success">
             
 
-             <th>Id</th>
-             <th>Clave</th>
-             <th>Nombre </th>
-            <th>Diagnostico</th>
-              <th>Doctor</th>
-             <th>Fecha atencion</th>
+           
+             <th>Identidad</th>
+             <th>Nombre</th>
+             <th>Telefonos </th>
+             <th>Correo</th>
+             <th>fecha</th>
+      
            
           </tr>
         </thead>
         <tbody>
             <?php
- $sql = "SELECT * FROM siec_atenciones inner join siec_empleados on siec_atenciones.ate_id_empleado= siec_empleados.emp_id_empleado inner join siec_usuarios on siec_atenciones.ate_id_usuario= siec_usuarios.usu_id_usuario  where status=2  $con_doctor $con_empleado $con_fecha $con_enf $clinica_b $con_cli order by ate_id_atencion ASC";          
+ $sql = "SELECT * FROM tbl_clientes ";          
 	//echo $cli;
 //echo $sql;
 	$query = mysqli_query($mysqli, $sql);
-             $item=0;
+             $item=0; 
 if(mysqli_num_rows($query)>0){
 	while($row = mysqli_fetch_array($query)){
 		$item = $item+1;
 		
-		             		
-$id=$row['ate_id_atencion'];
-			               $clave=$row['emp_clave_empleado'];
-						$nombre=$row['emp_nombre'];
-						$diagnostico=$row['ate_diagnostico'];
-            $doctor=$row['usu_nombre_com'];
-				        $fecha=$row['ate_fecha_visita'];
-			            $diagnostico=$row['ate_padece'];
+			
+			               $item=$row['id_cliente'];
+			               $id=$row['identidad'];
+						$apellido=$row['ape_cliente'];
+						$nom=$row['nom_cliente'];
+				        $cel=$row['celular'];
+			            $tel=$row['telefono'];
+			           $correo=$row['cor_cliente'];
+                  $fecha=$row['fecha_registro'];
                  $fecha= date('d/m/Y', strtotime($fecha));
+			           $membresia= $row['membresia'];
+			           $direccion=$row['direccion'];
+
 		
 ?>
 		    <tr>
-              
-            <td><?php echo $item ?></td>
-                <td><?php echo $clave;?></td>
-                <td><?php echo $nombre;?></td>
-                 <td><?php echo $diagnostico; ?></td>
-                  <td><?php echo $doctor;?></td>
+               <td><?php echo $id ?></td>
+                <td><?php echo $nom." ". $apellido;?></td>
+                <td><?php echo $cel."||".$tel;?></td>
+                 <td><?php echo $correo;?></td>
                   <td><?php echo $fecha;?></td>
+    
                 
               </tr>
           <?php

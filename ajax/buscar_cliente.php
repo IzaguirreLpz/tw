@@ -44,7 +44,7 @@ if(($_SESSION['id_usuario'])){
   
 			
 			 $sql = "SELECT * FROM tbl_clientes order by id_cliente ASC";
-       echo $sql;
+     
 			$query = mysqli_query($mysqli, $sql);
      
 			
