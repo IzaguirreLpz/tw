@@ -129,7 +129,7 @@ if(mysqli_num_rows($query)>0){
 			           $correo=$row['cor_cliente'];
                   $fecha=$row['fecha_registro'];
                  $fecha= date('d/m/Y', strtotime($fecha));
-			           $membresia= $row['membresia'];
+			           $gender= $row['genero'];
 			           $direccion=$row['direccion'];
 
 		

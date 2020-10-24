@@ -132,7 +132,7 @@ $objeto="pantalla usuario";
                         <div class="panel-heading">
                          CLIENTES
                             <div class="btn-group pull-right">
-                                <button type='button' class="btn btn-success" onClick="location.href='add_usu.php'"><span class="glyphicon glyphicon-plus"></span> Agregar </button>
+                                <button type='button' class="btn btn-success" onClick="location.href='add_clie.php'"><span class="glyphicon glyphicon-plus"></span> Agregar </button>
                             </div>
                         </div>
                         <div class="row w3-res-tb">

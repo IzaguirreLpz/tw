@@ -69,7 +69,7 @@ if(($_SESSION['id_usuario'])){
 			           $correo=$row['cor_cliente'];
                   $fecha=$row['fecha_registro'];
                  $fecha= date('d/m/Y', strtotime($fecha));
-			           $membresia= $row['membresia'];
+			          
 			           $direccion=$row['direccion'];
           ?>
    
@@ -83,22 +83,11 @@ if(($_SESSION['id_usuario'])){
                   <td><?php echo $fecha;?></td>
                 <td>
                     
-                     <?php
-			//if ($eliminar==1 || $idUsuario==1){?>
-                   <a href="#" class='btn btn-danger' title='eliminar cliente'  data-toggle="modal" data-target="#myModal4" onclick='obtener_id("<?php echo $item;?>")' ><i class="glyphicon glyphicon-remove"></i></a>     
-                    
-                    <?php // } ?>
-                    
-                     <?php
-			//if ($actualizar==1 || $idUsuario==1){?>                
-                  <a href="#" class='btn btn-primary' title='Editar cliente'  data-toggle="modal" data-target="#myModal2" onclick='obtener_datos("<?php echo $id;?>" , "<?php echo $nom ?>", "<?php echo $apellido ?>", "<?php echo $cel ?>","<?php echo $tel ?>","<?php echo $correo ?>","<?php echo $direccion ?>","<?php echo $membresia ?>")' ><i class="glyphicon glyphicon-edit"></i></a> 
-                  <?php //} ?>	
-                  	
-             
-             <a href="lista_mas.php?user_id=<?php echo $item;?>" data-toggle="tooltip" title="buscar mascotas"  class='btn btn-warning'><span class="glyphicon glyphicon-list"></span></a>      	
-            
-						
-               
+                 
+              <a href="edi_clie.php?us=<?php echo $item?> " class='btn btn-default' ui-toggle-class=""><i class="fa fa-pencil text-success text-dark"></i></a>
+
+<a href="#" class='btn btn-default' title='Eliminar usuario'  data-toggle="modal" data-target="#myModal4" onclick='obtener_id("<?php echo $usu_nom;?>")' ><i class="glyphicon glyphicon-remove"></i></a>
+
                
              
                
