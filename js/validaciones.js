@@ -50,3 +50,5 @@ function validarCorreo(id) {
         return false;
     }
 }
+
+getElementByClassName();

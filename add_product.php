@@ -30,6 +30,35 @@ if (isset($_GET["idProduct"])) {
 if (!empty($_POST)) {
     /* $post = file_get_contents('php://input');
     echo $post; */
+    if (!empty($_POST['editMode'])){
+        $idProduct = $_POST['editMode'];
+        $nombre = $_POST['product_nombre'];
+        $descripcion = $_POST['product_description'];
+        $proveedores = $_POST['product_supliers'];
+        $precio = $_POST['product_price'];
+        $unidades = $_POST['product_units'];
+        $precioProducto = $_POST['product_compra'];
+        $sql = "UPDATE tbl_productos SET nombre = '$nombre',
+        descripcion = '$descripcion',
+        proveedor = '$proveedores',
+        precio_venta = $precio,
+        cantidad = $unidades,
+        precio_costo = $precioProducto
+        WHERE id_productos = $idProduct;";
+        global $mysqli;
+        $conexion = $mysqli;
+        if (mysqli_query($conexion, $sql)) {
+            $errors = 'Se han actualizado los datos de el producto correctamente';
+            $type = 'success';
+        } else {
+            $mensaje = mysqli_error($conexion);
+            $errors = 'Hemos tenido el siguiente problema: a la hora de actualizar ' . $mensaje . '</br> Contacta tu Administrador';
+            $type = 'warning';
+        }
+        mysqli_close($conexion);
+    }else{
+    echo 'excelente estamos ingresando';
+
     $nombre = $_POST['product_nombre'];
     $descripcion = $_POST['product_description'];
     $proveedores = $_POST['product_supliers'];
@@ -48,8 +77,8 @@ if (!empty($_POST)) {
         $type = 'warning';
     }
     mysqli_close($conexion);
+    }
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -180,7 +209,12 @@ if (!empty($_POST)) {
                             <div class="panel-body">
                                 <div class="form">
                                     <form class="cmxform form-horizontal" method="post" action="" novalidate="novalidate">
-                                        <input type="hidden" id="usu" name="usu" <?php echo "value='$idProduct'";  ?>>
+                                    <?php if($edicion != 0){
+                                        ?>
+                                    <input type="hidden" id="usu" name="editMode" <?php echo "value='$idProduct'";  ?>>
+                                    <?php
+                                    }
+                                    ?>
                                         <div class="form-group">
                                             <label class="control-label col-lg-3">Nombre Producto:</label>
                                             <div class="col-lg-6">
