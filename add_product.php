@@ -168,7 +168,7 @@ if (!empty($_POST)) {
                         if ($id_usu == 1) {
                             include("menu2.php");
                         }
-                        //echo $_SESSION['menus']; 
+                        //echo $_SESSION['menus'];
                         ?>
 
                     </ul>
