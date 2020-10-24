@@ -1,6 +1,4 @@
 <?php
-
-
 session_start();
 require 'funcs/conexion.php';
 require 'funcs/funcs.php';
@@ -111,7 +109,7 @@ $bita = grabarBitacora($id_usu, $objeto, $accion, $descripcion);
                         if ($id_usu == 1) {
                             include("menu2.php");
                         }
-                        //echo $_SESSION['menus']; 
+                        //echo $_SESSION['menus'];
                         ?>
 
                     </ul>
@@ -153,7 +151,6 @@ $bita = grabarBitacora($id_usu, $objeto, $accion, $descripcion);
             <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="js/flot-chart/excanvas.min.js"></script><![endif]-->
             <script src="js/jquery.scrollTo.js"></script>
             <!-- morris JavaScript -->
-
             <!-- calendar -->
             <script type="text/javascript" src="js/monthly.js"></script>
 
@@ -161,12 +158,7 @@ $bita = grabarBitacora($id_usu, $objeto, $accion, $descripcion);
 </body>
 <?php
 
-
-//    include("modal/eliminar_usuario.php");
-//   include("modal/editar_usuarios.php");
-require 'modal/eliminar_usuario.php';
-
-
+require 'modal/eliminar_producto.php';
 
 ?>
 
@@ -176,13 +168,8 @@ require 'modal/eliminar_usuario.php';
         load(1);
     });
 
-    function
-    obtener_id(item) {
-
-
-        $("#user_id_mod").val(item);
-
-
+    function obtener_id(id, titulo, descripcion) {
+        $("#product_id").val(id);
     }
 
 
@@ -192,25 +179,34 @@ require 'modal/eliminar_usuario.php';
         var parametros = $(this).serialize();
         $.ajax({
             type: "POST",
-            url: "ajax/eliminar_usuario.php",
+            url: "ajax/eliminar_producto.php",
             data: parametros,
             beforeSend: function(objeto) {
-                $("#resultados_ajax3").html("Mensaje: Cargando...");
+                $("#mensajeAjax").html("Mensaje: Cargando...");
             },
             success: function(datos) {
-                $("#resultados_ajax3").html(datos);
+                $("#mensajeAjax").html(datos);
                 $('#actualizar_datos3').attr("disabled", false);
                 load(1);
+                setTimeout(function() {
+                    limpiarMensaje('mensajeAjax');
+                    $('#myModal4').modal('hide');
+                }, 3000);
             }
         });
         event.preventDefault();
     })
 
+    function limpiarMensaje(id) {
+        let content = document.getElementById(id);
+        content.removeChild(content.lastElementChild);
+    }
+
     function load(page) {
 
         $("#loader").fadeIn('slow');
         $.ajax({
-            url: 'ajax/buscar_usuarios.php',
+            url: 'ajax/buscar_productos.php',
             beforeSend: function(objeto) {
                 $('#loader').html('<img src="./img/ajax-loader.gif"> Cargando...');
             },

@@ -11,19 +11,20 @@ if (!isset($_SESSION['id_usuario'])) {
 }
 $id_usu = $_SESSION['id_usuario'];
 
-$us = 0;
+$edicion = 0;
 $rol = 5;
 $token = generateRandomString();
 
-if (isset($_GET["us"])) {
-    $us = $_GET["us"];
-
-    $arreglo = getArray("tbl_usuario", "id_usuario", $us);
-    $nom = $arreglo['nombre_usuario'];
-    $usu = $arreglo['usuario'];
-    $rol = $arreglo['id_rol'];
-    $estado = $arreglo['estado_usuario'];
-    $corr = $arreglo['correo_electronico'];
+if (isset($_GET["idProduct"])) {
+    $edicion = 1;
+    $idProduct = $_GET["idProduct"];
+    $arreglo = getArray("tbl_productos", "id_productos", $idProduct);
+    $nom = $arreglo['nombre'];
+    $descr = $arreglo['descripcion'];
+    $ventaPrecio = $arreglo['precio_venta'];
+    $proveedor = $arreglo['proveedor'];
+    $costo = $arreglo['precio_costo'];
+    $unidades = $arreglo['cantidad'];
 };
 
 if (!empty($_POST)) {
@@ -165,8 +166,8 @@ if (!empty($_POST)) {
                         <section class="panel">
                             <header class="panel-heading">
                                 <?php
-                                if ($us != 0) {
-                                    echo "Editar  Producto $usu ";
+                                if ($edicion != 0) {
+                                    echo "Editar  Producto";
                                 } else {
                                     echo "Agregar Nuevo Producto ";
                                 } ?>
@@ -179,13 +180,13 @@ if (!empty($_POST)) {
                             <div class="panel-body">
                                 <div class="form">
                                     <form class="cmxform form-horizontal" method="post" action="" novalidate="novalidate">
-                                        <input type="hidden" id="usu" name="usu" <?php echo "value='$us'";  ?>>
+                                        <input type="hidden" id="usu" name="usu" <?php echo "value='$idProduct'";  ?>>
                                         <div class="form-group">
                                             <label class="control-label col-lg-3">Nombre Producto:</label>
                                             <div class="col-lg-6">
                                                 <div class="input-group">
                                                     <span class="input-group-addon"><i class="fas fa-file-signature"></i></span>
-                                                    <input maxlength="70" type="text" <?php if ($us != 0) {
+                                                    <input maxlength="70" type="text" <?php if ($edicion != 0) {
                                                                                             echo "value=$nom";
                                                                                         } ?> name="product_nombre" placeholder="Nombre" style="text-transform: uppercase;" id="txt_nc" autocomplete="off" autofocus="on" class="form-control" onkeypress="return soloLetras(event)" onPaste="return false;" title="Nombre Del Producto" required>
                                                 </div>
@@ -198,8 +199,8 @@ if (!empty($_POST)) {
                                             <div class="col-lg-6">
                                                 <div class="input-group">
                                                     <span class="input-group-addon"><i class="fas fa-money-bill-wave"></i></span>
-                                                    <input maxlength="15" type="number" name="product_price" <?php if ($us != 0) {
-                                                                                                                    echo "value=$usu ";
+                                                    <input maxlength="15" type="number" name="product_price" <?php if ($edicion != 0) {
+                                                                                                                    echo "value=$ventaPrecio ";
                                                                                                                 } ?> style="text-transform: uppercase;" id="txt_us" autocomplete="off" autofocus="on" onPaste="return false;" class="form-control" title="Recuerda ingresar un precio" required>
                                                 </div>
                                             </div>
@@ -210,21 +211,20 @@ if (!empty($_POST)) {
                                             <div class="col-lg-6">
                                                 <div class="input-group">
                                                     <span class="input-group-addon"><i class="fas fa-money-bill-wave"></i></span>
-                                                    <input maxlength="15" type="number" name="product_compra" <?php if ($us != 0) {
-                                                                                                                    echo "value=$usu ";
+                                                    <input maxlength="15" type="number" name="product_compra" <?php if ($edicion != 0) {
+                                                                                                                    echo "value=$costo";
                                                                                                                 } ?> style="text-transform: uppercase;" id="txt_us" autocomplete="off" autofocus="on" onPaste="return false;" class="form-control" title="Recuerda ingresar un precio" required>
                                                 </div>
                                             </div>
                                         </div>
 
                                         <!-- Text input-->
-                                        <?php if ($us == 0) { ?>
                                             <div class="form-group">
                                                 <label class="control-label col-lg-3">Descripcion:</label>
                                                 <div class="col-lg-6">
                                                     <div class="input-group">
                                                         <span class="input-group-addon"><i class="fas fa-file-alt"></i></span>
-                                                        <textarea class="form-control" name="product_description" autocomplete="off" title="recuerda describir el producto que venderas" autofocus="on" id="exampleFormControlTextarea1" rows="1" required></textarea>
+                                                            <textarea class="form-control" name="product_description" autocomplete="off" title="recuerda describir el producto que venderas" autofocus="on" id="exampleFormControlTextarea1" rows="2" required><?php if($edicion != 0) {echo $descr; }?></textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -250,11 +250,10 @@ if (!empty($_POST)) {
                                                 <div class="col-md-6 inputGroupContainer">
                                                     <div class="input-group">
                                                         <span class="input-group-addon"><i class="fas fa-boxes"></i></span>
-                                                        <input maxlength="20" type="number" name="product_units" placeholder="Confirmar Password" id="pass2" title="Numero total de productos con el que cuentas en inventario" class="form-control" autocomplete="off" autofocus="on" onPaste="return false;" required>
+                                                        <input maxlength="20" type="number" name="product_units" placeholder="Confirmar Password" id="pass2" title="Numero total de productos con el que cuentas en inventario" class="form-control" autocomplete="off" autofocus="on" onPaste="return false;" <?php if($edicion !=0) {echo "value=$unidades";} ?> required>
                                                     </div>
                                                 </div>
                                             </div>
-                                        <?php } ?>
                                         <div class="form-group">
                                             <div class="col-lg-offset-3 col-lg-6">
                                                 <button class="btn btn-success" value="Guardar" type="submit">Guardar</button>
@@ -280,6 +279,14 @@ if (!empty($_POST)) {
         function hideURLbar() {
             window.scrollTo(0, 1);
         }
+
+        //eliminar alerta despues de 5 segundos
+        let alerta = document.getElementsByClassName('alert');
+        setTimeout(function() {
+            while (alerta.length > 0) {
+                alerta[0].parentNode.removeChild(alerta[0]);
+            }
+        }, 5000);
     </script>
 
     <script src="js/bootstrap.js"></script>
