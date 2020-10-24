@@ -10,6 +10,24 @@ if(!isset($_SESSION['id_usuario'])){
 }
 $id_usu= $_SESSION['id_usuario'];
 
+
+if (isset ($_GET["us"] )){
+	$us =$_GET["us"];
+	
+	$arreglo = getArray("tbl_clientes","id_cliente",$us);
+	$identidad = $arreglo['identidad'];
+	$nom= $arreglo['nom_cliente'];
+	$ape= $arreglo['ape_cliente'];
+	$gender= $arreglo['genero'];
+	$cel = $arreglo['celular'];
+    $tel= $arreglo['telefono'];
+	$dir= $arreglo['direccion'];
+	$cor = $arreglo['cor_cliente'];
+
+
+	}
+	
+
 //echo $_SESSION['id_usuario'];
 //echo $_SESSION['menus'];
 ?>
@@ -123,11 +141,11 @@ if ($id_usu==1){
                 <div class="col-lg-12">
                     <section class="panel">
                         <header class="panel-heading">
-                            Agregar cliente
+                            Editar cliente
                             <span class="tools pull-right">
-                                <a class="fa fa-chevron-down" href="javascript:;"></a>
-                                <a class="fa fa-cog" href="javascript:;"></a>
-                                <a class="fa fa-times" href="javascript:;"></a>
+							<a class="fa fa-chevron-down" href="javascript:;"></a>
+                                              
+											  <a class="fa fa-share" href="clientes.php" ></a>
                              </span>
                         </header>
                         <div class="panel-body">
@@ -140,7 +158,7 @@ if ($id_usu==1){
 				<div class="col-sm-8">
 			  	 <div class="input-group">
 			  	  <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
-				  <input  type="tel" class="form-control" id="identidad" name="identidad" placeholder="22345678" pattern="^[9
+				  <input  type="tel" class="form-control" <?php   echo "value='$identidad'" ;  ?>  id="identidad" name="identidad" placeholder="22345678" pattern="^[9
 				  |0|1|2]\d{12}$"  title="min 13 numeros solo"onPaste="return false;"  maxlength="15" autocomplete="off" >
 				</div> 
 			  </div>
@@ -152,7 +170,7 @@ if ($id_usu==1){
 				<div class="col-sm-8">
 			  	 <div class="input-group">
 			  	  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-				  <input title="nombre" type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombres" style="text-transform: uppercase;" onkeypress="return soloLetras(event)" maxlength="70" onPaste="return false;" autocomplete="off" required>
+				  <input title="nombre"    <?php   echo "value='$nom'" ;  ?> type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombres" style="text-transform: uppercase;" onkeypress="return soloLetras(event)" maxlength="70" onPaste="return false;" autocomplete="off" required>
 				</div>
 			  </div>
 			  </div>
@@ -187,7 +205,7 @@ if ($id_usu==1){
 				<div class="col-sm-8">
 			  	 <div class="input-group">
 			  	  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-				  <input  type="text" class="form-control" id="apellido" name="apellido" placeholder="Apellidos" pattern="[a-zA-Z0-9]{2,64}" title="Usuario" style="text-transform: uppercase;" onkeypress="return soloLetras(event)"  onPaste="return false;"  maxlength="15" autocomplete="off">
+				  <input  type="text"   <?php   echo "value='$ape'" ;  ?> class="form-control" id="apellido" name="apellido" placeholder="Apellidos" pattern="[a-zA-Z0-9]{2,64}" title="Usuario" style="text-transform: uppercase;" onkeypress="return soloLetras(event)"  onPaste="return false;"  maxlength="15" autocomplete="off">
 				</div> 
 			  </div>
 			  </div>
@@ -218,8 +236,8 @@ if ($id_usu==1){
 		  		  <div class="input-group">
 		  		  
 		  		  
-		  		   <input type="radio" name="gender" id="gender" value="M" checked> Male
-  <input type="radio" name="gender" id="gender" value="F"> Female<br>
+		  		   <input type="radio" name="gender" id="gender" value="M"  <?php  if ($gender=='M'){ echo 'checked';}   ?> > Male
+  <input type="radio" name="gender" id="gender" value="F" <?php  if ($gender=='F'){ echo 'checked';}   ?> > Female<br>
  
 				</div>
 			  </div>
@@ -230,7 +248,7 @@ if ($id_usu==1){
 				<div class="col-sm-8">
 			  	 <div class="input-group">
 			  	  <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
-				  <input  type="tel" class="form-control" id="celular" name="celular" placeholder="99003423" pattern="^[9|8|3]\d{7}$"  title="min 8 numeros solo" style="text-transform: uppercase;"  onPaste="return false;"  maxlength="15" autocomplete="off" required>
+				  <input  type="tel" <?php   echo "value='$cel'" ;  ?> class="form-control" id="celular" name="celular" placeholder="99003423" pattern="^[9|8|3]\d{7}$"  title="min 8 numeros solo" style="text-transform: uppercase;"  onPaste="return false;"  maxlength="15" autocomplete="off" required>
 
 				</div> 
 			  </div>
@@ -253,7 +271,7 @@ if ($id_usu==1){
 			  	 <div class="input-group">
 			  	  <span class="input-group-addon"><i class="glyphicon glyphicon-phone-alt"></i></span>
 				  <input  type="tel" class="form-control" id="telefono" name="telefono" placeholder="22345678" pattern="^[9
-				  |8|3|2]\d{7}$"  title="min 8 numeros solo" style="text-transform: uppercase;"  onPaste="return false;"  maxlength="15" autocomplete="off" required>
+				  |8|3|2]\d{7}$"  <?php   echo "value='$tel'" ;  ?> title="min 8 numeros solo" style="text-transform: uppercase;"  onPaste="return false;"  maxlength="15" autocomplete="off" required>
 				</div> 
 			  </div>
 			  </div>
@@ -263,7 +281,7 @@ if ($id_usu==1){
 				 <div class="col-sm-8">
 			  	  <div class="input-group">
 			  	   <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-				    <input title="E-mail" type="email" class="form-control" id="correo_electronico" name="correo_electronico" placeholder="Correo Electronico" maxlength="80" onPaste="return false;" required autocomplete="off">
+				    <input title="E-mail" <?php   echo "value='$cor'" ;  ?> type="email" class="form-control" id="correo_electronico" name="correo_electronico" placeholder="Correo Electronico" maxlength="80" onPaste="return false;" required autocomplete="off">
 					</div>
 				  </div>
 				</div>
@@ -273,7 +291,7 @@ if ($id_usu==1){
 				<div class="col-sm-8">
 			  	 <div class="input-group">
 			  	  <span class="input-group-addon"><i class="glyphicon glyphicon-list-alt"></i></span>
-				  <textarea input  class="form-control" id="direccion" name="direccion" placeholder="Direccion" pattern="[a-zA-Z0-9]{2,64}" title="Usuario"   onPaste="return false;"  maxlength="15" autocomplete="off"></textarea>
+				  <textarea input  <?php   echo "value='$dir'" ;  ?> class="form-control" id="direccion" name="direccion" placeholder="Direccion" pattern="[a-zA-Z0-9]{2,64}" title="Usuario"   onPaste="return false;"  maxlength="15" autocomplete="off"> <?php   echo $dir;  ?></textarea>
 				</div> 
 			  </div>
 			  </div>
@@ -287,7 +305,7 @@ if ($id_usu==1){
 			 </div>
 		 
 		 
-
+			 <input type="hidden" id="id" name="id" <?php   echo "value='$us'" ;  ?>>
                                     
                                         <div class="col-lg-offset-3 col-lg-6">
                                             <button class="btn btn-primary" type="submit">Guardar</button>
@@ -334,7 +352,7 @@ if ($id_usu==1){
 $(document).on('submit', '#loginform', function(event) {
 		event.preventDefault();
 		$.ajax({
-			url: 'save_clie.php',
+			url: 'editar_clie.php',
 			type: 'POST',
 			dataType: 'JSON',
 			data: $(this).serialize(),
@@ -348,7 +366,7 @@ $(document).on('submit', '#loginform', function(event) {
 				if(data=="ok"){
 					toastr.success("Guardado con exito.");
 					setTimeout(function(){
-						location.href="home.php";
+						location.href="clientes.php";
 					},2000);
 				}
 			
