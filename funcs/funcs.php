@@ -1406,3 +1406,23 @@ function validar_clave($clave, &$error_clave)
 	$error_clave = "";
 	return true;
 }
+
+
+function BorrarGen ($tabla, $campo, $valor){
+
+	global $mysqli;
+
+//	DELETE FROM table_name WHERE condition;
+	$stmt = $mysqli->prepare("Delete  from $tabla  WHERE $campo = $valor");
+	
+	if ($stmt->execute()) {
+		$bita = grabarBitacora($id, 'Eliminar ', 'DELETE', 'Delete  from $tabla  WHERE $campo = $valor');
+		return true;
+	} else {
+		return false;
+	}
+
+
+
+
+}
