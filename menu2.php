@@ -3,14 +3,13 @@
    <a href='javascript:;'><i class='fa fa-cogs icon-list icon-large'></i><span>Seguridad</span></a>
    <ul class='sub'>
       <li><a href='bitacora.php'><i class=''></i>Bitacora</a> </li>
-      <li><a href='productos.php'><i class=''></i>Productos</a> </li>
       <li><a href='parametro.php'><i class=''></i>Configuracion</a> </li>
    </ul>
 </li>
 <li class='sub-menu'>
    <a href='javascript:;'><i class="fas fa-car"></i><span>Servicios</span></a>
    <ul class='sub'>
-      <li><a href='#'><i class=''></i>Mantenimiento</a> </li>
+      <li><a href='mantenimiento.php'><i class=''></i>Mantenimiento</a> </li>
       <li><a href='#'><i class=''></i>Vehiculos</a> </li>
       <li><a href='atenciones.php'><i class=''></i>Atenciones</a> </li>
    </ul>
@@ -20,6 +19,8 @@
    <ul class='sub'>
       <li><a href='clientes.php'><i class=''></i>Clientes</a> </li>
       <li><a href='usuarios.php'><i class=''></i>Usuarios</a> </li>
+      <li><a href='productos.php'><i class=''></i>Productos</a> </li>
+      <li><a href='#'><i class=''></i>Proveedores</a> </li>
       <li><a href='#'><i class=''></i>Inventario</a> </li>
    </ul>
 </li>
