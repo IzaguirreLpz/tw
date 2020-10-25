@@ -73,9 +73,9 @@ if (!$_POST["pass1"] or !$_POST["txt_nc"] or !$_POST["correo"] or !$_POST["txt_u
 
 
 				
-				$estado= $_POST["combo_estado"];
+				//$estado= $_POST["combo_estado"];
 				$estado="NUEVO";
-				$rol= $_POST["rol"];
+				//$rol= $_POST["rol"];
 				//echo $rol;
 				//$f1= $_POST["fecha1"];
 		
@@ -86,7 +86,7 @@ if (!$_POST["pass1"] or !$_POST["txt_nc"] or !$_POST["correo"] or !$_POST["txt_u
 				$fss=mysqli_fetch_row($res);
 				if (preg_match('/^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{6,16}$/', $pass1))
 				if (!$fss) {
-					$consulta=("insert into tbl_usuario (nombre_usuario,usuario,contrasena,correo_electronico,estado_usuario,id_rol,activacion,fecha_cambio_contrasena) values('$nom', '$us','$pass_hash','$correo','$estado',$rol,1,NOW())");
+					$consulta=("insert into tbl_usuario (nombre_usuario,usuario,contrasena,correo_electronico,estado_usuario,activacion,fecha_cambio_contrasena) values('$nom', '$us','$pass_hash','$correo','$estado',1,NOW())");
 
 
 				//S	echo $consulta;

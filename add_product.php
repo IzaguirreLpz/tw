@@ -57,8 +57,6 @@ if (!empty($_POST)) {
         }
         mysqli_close($conexion);
     }else{
-    echo 'excelente estamos ingresando';
-
     $nombre = $_POST['product_nombre'];
     $descripcion = $_POST['product_description'];
     $proveedores = $_POST['product_supliers'];

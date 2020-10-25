@@ -16,8 +16,8 @@ $idUsuario = $_SESSION['id_usuario'];
                 <th>Descripcion</th>
                 <th>Proveedor</th>
                 <th>Precio De Venta</th>
-                <th>Precio Costo</th>
                 <th>Unidades Disponibles</th>
+                <th>Precio Costo</th>
                 <th>Acciones</th>
             </tr>
         </thead>
