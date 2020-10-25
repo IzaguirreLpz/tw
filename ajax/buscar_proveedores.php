@@ -26,13 +26,14 @@ if(($_SESSION['id_usuario'])){
       <tr class="success">
 
 
-             
-             <th>Identidad</th>
-             <th>Nombre</th>
-             <th>Telefonos </th>
-             <th>Correo</th>
-             <th>fecha</th>
-            <th> Acciones</th>
+               <th>RTN</th>
+            <th>Empresa</th>
+             <th>Representante</th>
+              <th>Telefonos </th>
+              <th>Tipo</th>
+                 <th>correo</th>
+                 <th>Fecha</th>
+            <th>Acciones</th>
           </tr>
         </thead>
         <tbody>
@@ -43,12 +44,12 @@ if(($_SESSION['id_usuario'])){
 
   
 			
-			 $sql = "SELECT * FROM tbl_clientes order by id_cliente ASC";
+			 $sql = "SELECT * FROM tbl_proveedores order by id_proveedor DESC";
      
 			$query = mysqli_query($mysqli, $sql);
      
 			
-			$count_query   = mysqli_query($mysqli, "SELECT count(*) AS numrows FROM tbl_clientes  ");
+			$count_query   = mysqli_query($mysqli, "SELECT count(*) AS numrows FROM tbl_proveedores  ");
 		$row1= mysqli_fetch_array($count_query);
 			
 			$numrows = $row1['numrows'];
@@ -58,33 +59,43 @@ if(($_SESSION['id_usuario'])){
 			
         while ($row=mysqli_fetch_array($query)){
 			
+			   $hola=$row['id_proveedor'];
+			            $nom_empresa=$row['nom_empresa'];
+			            $representante=$row['representante'];
+						$num_tel1=$row['num_tel1'];
+						$num_tel2=$row['num_tel2'];
+						$RTN=$row['RTN'];
+			            $tipo= $row['tipo'];
+                        $cor_empresa=$row['cor_empresa'];
 			
-			
-			               $item=$row['id_cliente'];
-			               $id=$row['identidad'];
-						$apellido=$row['ape_cliente'];
-						$nom=$row['nom_cliente'];
-				        $cel=$row['celular'];
-			            $tel=$row['telefono'];
-			           $correo=$row['cor_cliente'];
+			             
+            
+            
+            
+            
+            
                   $fecha=$row['fecha_registro'];
                  $fecha= date('d/m/Y', strtotime($fecha));
 			          
-			           $direccion=$row['direccion'];
+			          
           ?>
    
              
               <tr>
               
-                <td><?php echo $id ?></td>
-                <td><?php echo $nom." ". $apellido;?></td>
-                <td><?php echo $cel."||".$tel;?></td>
-                 <td><?php echo $correo;?></td>
+                <td><?php echo $RTN?></td>
+             
+                <td><?php echo $nom_empresa?></td>
+                <td><?php echo $representante;?></td>
+                <td><?php echo $num_tel1." | | ".$num_tel2;?></td>
+                 
+                  <td><?php echo $tipo?></td>
+                  <td><?php echo $cor_empresa;?></td>
                   <td><?php echo $fecha;?></td>
                 <td>
                     
                  
-              <a href="edi_clie.php?us=<?php echo $item?> " class='btn btn-default' ui-toggle-class=""><i class="fa fa-pencil text-success text-dark"></i></a>
+              <a href="edi_prove.php?us=<?php echo $hola?> " class='btn btn-default' ui-toggle-class=""><i class="fa fa-pencil text-success text-dark"></i></a>
 
 <a href="#" class='btn btn-default' title='Eliminar usuario'  data-toggle="modal" data-target="#myModal4" onclick='obtener_id("<?php echo $item;?>")' ><i class="glyphicon glyphicon-remove"></i></a>
 

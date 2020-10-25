@@ -17,7 +17,7 @@ $id_usu = $_SESSION['id_usuario'];
 
 $objeto="pantalla usuario";
 		$accion="INGRESO";
-		$descripcion="ingreso a pantalla usuario";
+		$descripcion="ingreso a pantalla proveedores";
 		
 		$bita=grabarBitacora($id_usu,$objeto,$accion,$descripcion);
 
@@ -130,7 +130,7 @@ $objeto="pantalla usuario";
                 <div class="table-agile-info">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                         CLIENTES
+                         PROVEEDORES
                             <div class="btn-group pull-right">
                                 <button type='button' class="btn btn-success" onClick="location.href='add_clie.php'"><span class="glyphicon glyphicon-plus"></span> Agregar </button>
                             </div>
@@ -227,7 +227,7 @@ require 'modal/eliminar_gen.php';
 
         $("#loader").fadeIn('slow');
         $.ajax({
-            url: 'ajax/buscar_cliente.php',
+            url: 'ajax/buscar_proveedores.php',
             beforeSend: function(objeto) {
                 $('#loader').html('<img src="./img/ajax-loader.gif"> Cargando...');
             },
