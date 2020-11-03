@@ -141,7 +141,7 @@ $bita = grabarBitacora($id_usu, $objeto, $accion, $descripcion);
                         <div class="input-group">
                             <span class="input-group-addon">FIN</span>
                             <input  type="date"   id="fecha_fin" name="fecha_fin"  >
-                            <button id="procesar" class="btn btn-primary">Procesar</button>
+                            <button id="procesar" style="margin:0 15px" class="btn btn-primary">Procesar</button>
                             <button class="btn btn-default" title="salir de la consulta"><span class="fa fa-outdent" title="salir de la consulta"  onclick="load(1)"></span></button>
                         </div>
                         <div id="resultados"></div><!-- Carga los datos ajax -->

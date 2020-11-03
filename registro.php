@@ -193,9 +193,6 @@ $nuevafecha = date('Y-m-j', $nuevafecha);
 								</script>
 								<!-- Text input-->
 
-
-
-
 								<div class="form-group">
 									<label class="col-md-4 control-label">Contraseña:</label>
 									<div class="col-md-6 inputGroupContainer">
@@ -216,9 +213,6 @@ $nuevafecha = date('Y-m-j', $nuevafecha);
 										if (nuev = orig.split(' ').length >= 2);
 									}
 								</script>
-
-
-
 
 								<div class="form-group">
 									<label class="col-md-4 control-label">Confirmar Contraseña:</label>
@@ -241,16 +235,8 @@ $nuevafecha = date('Y-m-j', $nuevafecha);
 									}
 								</script>
 
-
-
-
-
-
-
-
-
 								<!-- Text input-->
-								<div class="form-group">
+								<!-- <div class="form-group">
 									<label class="col-md-4 control-label">Rol:</label>
 									<div class="col-md-6 selectContainer">
 										<div class="input-group">
@@ -268,7 +254,7 @@ $nuevafecha = date('Y-m-j', $nuevafecha);
 											</select>
 										</div>
 									</div>
-								</div>
+								</div> -->
 
 
 								<!-- Text input-->
@@ -306,7 +292,7 @@ $nuevafecha = date('Y-m-j', $nuevafecha);
 										}
 									}
 
-									/*         
+									/*
 function validar() {
 if (/^w+([.-]?w+)*@w+([.-]?w+)*(.w{2,3,4})+$/.test('correo')){
 alert("La dirección de email " + 'correo' + " es correcta.");
@@ -318,7 +304,7 @@ alert("La dirección de email es incorrecta.");
 
 
 
-								<div class="form-group">
+								<!-- <div class="form-group">
 									<label class="col-md-4 control-label">Estado:</label>
 									<div class="col-md-6 selectContainer">
 										<div class="input-group">
@@ -326,7 +312,7 @@ alert("La dirección de email es incorrecta.");
 											<input type="combo_estado" id="combo_estado" name="combo_estado" class="form-control" value="NUEVO" readonly>
 										</div>
 									</div>
-								</div>
+								</div> -->
 
 								<div class="form-group">
 
@@ -337,11 +323,6 @@ alert("La dirección de email es incorrecta.");
 										</div>
 									</div>
 								</div>
-
-
-
-
-
 
 								<input type="submit" class="btn btn-success" value="Aceptar" onclick="this.form.action='registrar2.php'" class="btn btn-success">
 

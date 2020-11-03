@@ -55,19 +55,16 @@ if (!empty($_POST)) {
             $errors = 'Hemos tenido el siguiente problema: a la hora de actualizar ' . $mensaje . '</br> Contacta tu Administrador';
             $type = 'warning';
         }
-        mysqli_close($conexion);
+       // mysqli_close($conexion);
     }else{
-    echo 'excelente estamos ingresando';
-
     $nombre = $_POST['product_nombre'];
     $descripcion = $_POST['product_description'];
     $proveedores = $_POST['product_supliers'];
     $precio = $_POST['product_price'];
-    $unidades = $_POST['product_units'];
     $precioProducto = $_POST['product_compra'];
     global $mysqli;
     $conexion = $mysqli;
-    $consulta = "INSERT INTO  bd_tw . tbl_productos ( nombre , descripcion , proveedor , precio_venta , cantidad , precio_costo )VALUES('$nombre','$descripcion','$proveedores',$precio,$unidades,$precioProducto)";
+    $consulta = "INSERT INTO  bd_tw . tbl_productos ( nombre , descripcion , proveedor , precio_venta , precio_costo )VALUES('$nombre','$descripcion','$proveedores',$precio,$precioProducto)";
     if (mysqli_query($conexion, $consulta)) {
         $errors = 'Se ha ingresado el producto correctamente';
         $type = 'success';
@@ -76,7 +73,7 @@ if (!empty($_POST)) {
         $errors = 'Hemos tenido el siguiente problema: ' . $mensaje . '</br> Contacta tu Administrador';
         $type = 'warning';
     }
-    mysqli_close($conexion);
+    //mysqli_close($conexion);
     }
 }
 ?>
@@ -135,27 +132,24 @@ if (!empty($_POST)) {
             </div>
             <!--logo end-->
 
-            <div class="top-nav clearfix">
-                <!--search & user info start-->
-                <ul class="nav pull-right top-menu">
-
-                    <!-- user login dropdown start-->
-                    <li class="dropdown">
-                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <img alt="" src="images/2.png">
-                            <span class="username"><?php echo $_SESSION['usuario'] ?></span>
-                            <b class="caret"></b>
-                        </a>
-                        <ul class="dropdown-menu extended logout">
-
-                            <li><a href="logout.php"><i class="fa fa-key"></i> Salir</a></li>
-                        </ul>
-                    </li>
-                    <!-- user login dropdown end -->
-
+        <div class="top-nav clearfix">
+            <!--search & user info start-->
+            <ul class="nav pull-right top-menu">
+                <!-- user login dropdown start-->
+                <li class="dropdown">
+                <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                    <img alt="" src="images/2.png">
+                    <span class="username"><?php echo $_SESSION['usuario'] ?></span>
+                    <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu extended logout">
+                    <li><a href="logout.php"><i class="fa fa-key"></i> Salir</a></li>
                 </ul>
-                <!--search & user info end-->
-            </div>
+                </li>
+                <!-- user login dropdown end -->
+            </ul>
+            <!--search & user info end-->
+        </div>
         </header>
         <!--header end-->
         <!--sidebar start-->
@@ -170,7 +164,6 @@ if (!empty($_POST)) {
                         }
                         //echo $_SESSION['menus'];
                         ?>
-
                     </ul>
                 </div>
                 <!-- sidebar menu end-->
@@ -190,115 +183,136 @@ if (!empty($_POST)) {
                     echo showMessage($errors, $type);
                 }
                 ?>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <section class="panel">
-                            <header class="panel-heading">
-                                <?php
-                                if ($edicion != 0) {
-                                    echo "Editar  Producto";
-                                } else {
-                                    echo "Agregar Nuevo Producto ";
-                                } ?>
-                                <span class="tools pull-right">
-                                    <a class="fa fa-chevron-down" href="javascript:;"></a>
+        <div class="row">
+            <div class="col-lg-12">
+                <section class="panel">
+                    <header class="panel-heading">
+                        <?php
+                        if ($edicion != 0) {
+                            echo "Editar  Producto";
+                        } else {
+                            echo "Agregar Nuevo Producto ";
+                        } ?>
+                        <span class="tools pull-right">
+                            <a class="fa fa-chevron-down" href="javascript:;"></a>
 
-                                    <a class="fa fa-share" href="productos.php"></a>
-                                </span>
-                            </header>
-                            <div class="panel-body">
-                                <div class="form">
-                                    <form class="cmxform form-horizontal" method="post" action="" novalidate="novalidate">
-                                    <?php if($edicion != 0){
-                                        ?>
-                                    <input type="hidden" id="usu" name="editMode" <?php echo "value='$idProduct'";  ?>>
-                                    <?php
-                                    }
-                                    ?>
-                                        <div class="form-group">
-                                            <label class="control-label col-lg-3">Nombre Producto:</label>
-                                            <div class="col-lg-6">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon"><i class="fas fa-file-signature"></i></span>
-                                                    <input maxlength="70" type="text" <?php if ($edicion != 0) {
-                                                                                            echo "value=$nom";
-                                                                                        } ?> name="product_nombre" placeholder="Nombre" style="text-transform: uppercase;" id="txt_nc" autocomplete="off" autofocus="on" class="form-control" onkeypress="return soloLetras(event)" onPaste="return false;" title="Nombre Del Producto" required>
-                                                </div>
-                                            </div>
+                            <a class="fa fa-share" href="productos.php"></a>
+                        </span>
+                    </header>
+                    <div class="panel-body">
+                        <div class="form">
+                            <form class="cmxform form-horizontal" method="post" action="" novalidate="novalidate">
+                            <?php if($edicion != 0){
+                                ?>
+                            <input type="hidden" id="usu" name="editMode" <?php echo "value='$idProduct'";  ?>>
+                            <?php
+                            }
+                            ?>
+                                <div class="form-group">
+                                    <label class="control-label col-lg-3">Nombre Producto:</label>
+                                    <div class="col-lg-6">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fas fa-file-signature"></i></span>
+                                            <input maxlength="70" type="text" <?php if ($edicion != 0) {
+                                    echo "value=$nom";
+                                } ?> name="product_nombre" placeholder="Nombre" style="text-transform: uppercase;" id="txt_nc" autocomplete="off" autofocus="on" class="form-control" onkeypress="return soloLetras(event)" onPaste="return false;" title="Nombre Del Producto" required>
                                         </div>
-
-                                        <!-- Text input-->
-                                        <div class="form-group">
-                                            <label class="control-label col-lg-3">Precio de Venta:</label>
-                                            <div class="col-lg-6">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon"><i class="fas fa-money-bill-wave"></i></span>
-                                                    <input maxlength="15" type="number" name="product_price" <?php if ($edicion != 0) {
-                                                                                                                    echo "value=$ventaPrecio ";
-                                                                                                                } ?> style="text-transform: uppercase;" id="txt_us" autocomplete="off" autofocus="on" onPaste="return false;" class="form-control" title="Recuerda ingresar un precio" required>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label class="control-label col-lg-3">Precio de Compra:</label>
-                                            <div class="col-lg-6">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon"><i class="fas fa-money-bill-wave"></i></span>
-                                                    <input maxlength="15" type="number" name="product_compra" <?php if ($edicion != 0) {
-                                                                                                                    echo "value=$costo";
-                                                                                                                } ?> style="text-transform: uppercase;" id="txt_us" autocomplete="off" autofocus="on" onPaste="return false;" class="form-control" title="Recuerda ingresar un precio" required>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!-- Text input-->
-                                            <div class="form-group">
-                                                <label class="control-label col-lg-3">Descripcion:</label>
-                                                <div class="col-lg-6">
-                                                    <div class="input-group">
-                                                        <span class="input-group-addon"><i class="fas fa-file-alt"></i></span>
-                                                            <textarea class="form-control" name="product_description" autocomplete="off" title="recuerda describir el producto que venderas" autofocus="on" id="exampleFormControlTextarea1" rows="2" required><?php if($edicion != 0) {echo $descr; }?></textarea>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label class="control-label col-lg-3">Proveedor:</label>
-                                                <div class="col-md-6 inputGroupContainer">
-                                                    <div class="input-group">
-                                                        <span class="input-group-addon"><i class="fas fa-parachute-box"></i></span>
-                                                        <select class="form-control" id="exampleFormControlSelect1" name="product_supliers" title="Por favor seleccione un proveedor">
-                                                            <option value="Inversiones Multiples">Inversiones Multiples</option>
-                                                            <option value="Chevron">Chevron</option>
-                                                            <option value="Shell">Shell</option>
-                                                            <option value="Texaco">Texaco</option>
-                                                            <option value="Puma">Puma</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label class="control-label col-lg-3">Unidades en Inventario:</label>
-                                                <div class="col-md-6 inputGroupContainer">
-                                                    <div class="input-group">
-                                                        <span class="input-group-addon"><i class="fas fa-boxes"></i></span>
-                                                        <input maxlength="20" type="number" name="product_units" placeholder="Confirmar Password" id="pass2" title="Numero total de productos con el que cuentas en inventario" class="form-control" autocomplete="off" autofocus="on" onPaste="return false;" <?php if($edicion !=0) {echo "value=$unidades";} ?> required>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        <div class="form-group">
-                                            <div class="col-lg-offset-3 col-lg-6">
-                                                <button class="btn btn-success" value="Guardar" type="submit">Guardar</button>
-                                            </div>
-                                        </div>
-                                    </form>
+                                    </div>
                                 </div>
-                            </div>
-                        </section>
+
+                                <!-- Text input-->
+                                    <div class="form-group">
+                                        <label class="control-label col-lg-3">Descripcion:</label>
+                                        <div class="col-lg-6">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fas fa-file-alt"></i></span>
+                                                    <textarea class="form-control" name="product_description" autocomplete="off" title="recuerda describir el producto que venderas" autofocus="on" id="exampleFormControlTextarea1" rows="2" required><?php if($edicion != 0) {echo $descr; }?></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                <!-- Text input-->
+                                <div class="form-group">
+                                        <label class="control-label col-lg-3">Proveedor:</label>
+                                        <div class="col-md-6 inputGroupContainer">
+                                            <div class="input-group">
+                                                <?php
+                                                    global $mysqli;
+                                                    $query = "select * from tbl_proveedores";
+                                                    $result = mysqli_query($mysqli,$query) or die(mysql_error()."[".$query."]");
+                                                ?>
+                                                <span class="input-group-addon"><i class="fas fa-parachute-box"></i></span>
+                                                <select class="form-control" id="exampleFormControlSelect1" name="product_supliers" title="Por favor seleccione un proveedor">
+                                                    <?php
+                                                    foreach ($result as $key => $value) {
+                                                        echo "<option value={$value['nom_empresa']}>{$value['nom_empresa']}</option>";
+                                                   }
+                                                    ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Text input-->
+                                <div class="form-group">
+                                        <label class="control-label col-lg-3">Categoria:</label>
+                                        <div class="col-md-6 inputGroupContainer">
+                                            <div class="input-group">
+                                                <?php
+                                                    global $mysqli;
+                                                    $conexion = $mysqli;
+                                                    $query = "select * from tbl_categorias";
+                                                    $result = mysqli_query($conexion, $query) or die(mysql_error()."[".$query."]");
+                                                ?>
+                                                <span class="input-group-addon"><i class="fas fa-tags"></i></span>
+                                                <select class="form-control" id="exampleFormControlSelect1" name="product_supliers" title="Por favor seleccione un proveedor">
+                                                    <?php
+                                                    foreach ($result as $key => $value) {
+                                                        echo "<option value={$value['nombre']}>{$value['nombre']}</option>";
+                                                   }
+                                                    ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Text input-->
+                                <div class="form-group">
+                                    <label class="control-label col-lg-3">Precio de Venta:</label>
+                                    <div class="col-lg-6">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fas fa-money-bill-wave"></i></span>
+                                            <input maxlength="15" type="number" name="product_price" <?php if ($edicion != 0) {
+                                                     echo "value=$ventaPrecio ";
+                                                } ?> style="text-transform: uppercase;" id="txt_us" autocomplete="off" autofocus="on" onPaste="return false;" class="form-control" title="Recuerda ingresar un precio" required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Text input-->
+                                <div class="form-group">
+                                    <label class="control-label col-lg-3">Precio de Compra:</label>
+                                    <div class="col-lg-6">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fas fa-money-bill-wave"></i></span>
+                                            <input maxlength="15" type="number" name="product_compra" <?php if ($edicion != 0) {
+                                                        echo "value=$costo";
+                                                    } ?> style="text-transform: uppercase;" id="txt_us" autocomplete="off" autofocus="on" onPaste="return false;" class="form-control" title="Recuerda ingresar un precio" required> 
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-lg-offset-3 col-lg-6">
+                                        <button class="btn btn-success" value="Guardar" type="submit">Guardar</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                </div>
+                </section>
+            </div>
+        </div>
                 <!-- page end-->
             </div>
         </section>

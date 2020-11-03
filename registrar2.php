@@ -54,8 +54,6 @@ if (  !$_POST["correo"]  or !$_POST["txt_us"] or !$_POST["estado_usuarios"] or !
 
 
 
-
-
 				 
              $valid_cor=formato_correo($email);
 if ($valid_cor==false){

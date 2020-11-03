@@ -12,12 +12,13 @@ $idUsuario = $_SESSION['id_usuario'];
     <table class="table table-striped b-t b-light" id="tableListar" style="margin: 10px 0 0 0;">
         <thead>
             <tr class="success">
-                <th>Nombre Del Producto</th>
+                <th>Nombre</th>
                 <th>Descripcion</th>
                 <th>Proveedor</th>
                 <th>Precio De Venta</th>
                 <th>Precio Costo</th>
-                <th>Unidades Disponibles</th>
+                <th>Categoria</th>
+                <th>Fecha Registro</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -35,17 +36,19 @@ $idUsuario = $_SESSION['id_usuario'];
                     $nombre = $row['nombre'];
                     $descripcion = $row['descripcion'];
                     $proveedor = $row['proveedor'];
-                    $cantidad = $row['cantidad'];
-                    $precioCosto = $row['precio_costo'];
                     $precioVenta = $row['precio_venta'];
+                    $precioCosto = $row['precio_costo'];
+                    $categoria = $row['categoria'];
+                    $fechaRegistro = $row['fecha_registro'];
             ?>
                     <tr>
                         <td><?php echo $nombre ?></td>
                         <td><?php echo $descripcion; ?></td>
                         <td><?php echo $proveedor; ?></td>
                         <td><?php echo $precioVenta; ?></td>
-                        <td><?php echo $cantidad; ?></td>
                         <td><?php echo $precioCosto; ?></td>
+                        <td><?php echo $categoria; ?></td>
+                        <td><?php echo $fechaRegistro; ?></td>                    
                         <td>
                             <a href="add_product.php?idProduct=<?php echo $product_id ?> " class='btn btn-default' ui-toggle-class=""><i class="fa fa-pencil text-success text-dark"></i></a>
                             <a href="#" class='btn btn-default' title='Eliminar Producto' data-toggle="modal" data-target="#myModal4" onclick='obtener_id("<?php echo $product_id; ?>")'><i class="glyphicon glyphicon-remove"></i></a>
