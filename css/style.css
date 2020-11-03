@@ -220,7 +220,7 @@ ul.sidebar-menu li a.active i {
 }
 /*main content*/
 #main-content {
-  margin-left: 240px;
+  margin-left: 300px;
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
   -o-transition: all 0.3s ease-in-out;

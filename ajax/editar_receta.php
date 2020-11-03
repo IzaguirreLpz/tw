@@ -1,160 +1,93 @@
 <?php
-require '../funcs/conexion.php';
-require '../funcs/funcs.php';
-
-
-
-
 
 session_start();
-$session_id= session_id();
 
 
-   $atencion=$_SESSION['id_atencion'];
-
-
-
-
-
-
-       
-     //echo '<script>alert (" Ha respondido '.$atencion.' respuestas afirmativas");</script>';
-
-if (isset($_POST['id'])){$id=$_POST['id'];}
-//if (isset($_POST['atencion'])){$atencion=$_POST['atencion'];}
-if (isset($_POST['cantidad'])){$cantidad=$_POST['cantidad'];}
-
-	
-	
-
-
-
-
-
-
-
-if (!empty($id) and !empty($cantidad) )
-{
-    
-    
-        
-   // $atencion = $_SESSION['id_atencion'];
-	
-  //  $atencion=$_POST['atencion'];
-    //$_SESSION['atencion'] = $atencion;
-//$insert_tmp=mysqli_query($mysqli, "INSERT INTO tmp (id_producto,cantidad_tmp,sesion) VALUES ('$id','$cantidad','$session_id')");
-$id_receta= getCualquiera('re_id_receta','siec_receta','re_id_atencion',$atencion);
-        
-    $insert_tmp=mysqli_query($mysqli, "INSERT INTO siec_medicamentos_entregados (ent_id_inventario,ent_id_atencion,ent_cantidad,ent_id_receta) VALUES('$id','$atencion','$cantidad','$id_receta')");
-    
-    
-    
-    
-    $cantpro=getCANTI($id);
-    $stock=$cantpro-$cantidad;
-   
-    $update=mysqli_query($mysqli, "UPDATE siec_existencias_detalle SET exi_cantidad='".$stock."' WHERE	exi_id_inventario ='".$id."'");
-    
-
-    
-    
-    
-    
-    
-    
-    
-}
-
-
-
-
-
-
-
-
-//<!-------------------------de aqui arriba esta bueno-------------------------->
-
-
-
-if (isset($_GET['id']))//codigo elimina un elemento del array
-{
-    
-    
-    
-$id_tmp=intval($_GET['id']);
-    $id_pro=getIDEXI('ent_id_inventario','ent_id_med_entregado',$id_tmp);
-     $canti=getIDEXI('ent_cantidad','ent_id_med_entregado',$id_tmp);
-    $cantprod=getCANTI($id_pro);
-    $stock=$cantprod+$canti;
-   
-   $update=mysqli_query($mysqli, "UPDATE siec_existencias_detalle SET exi_cantidad='".$stock."' WHERE	exi_id_inventario ='".$id_pro."'");
-    
-    
-$delete=mysqli_query($mysqli, "DELETE FROM siec_medicamentos_entregados WHERE 	ent_id_med_entregado='".$id_tmp."'");
-    
-    
-    
-    
-    
-    
-    
-    
-    
+if(($_SESSION['id_usuario'])){
+	require '../funcs/conexion.php';
+require '../funcs/funcs.php';
+	$idUsuario = $_SESSION['id_usuario'];
+$sql = "Select id_usuario, nombre_usuario from tbl_usuario WHERE id_usuario = '$idUsuario'";
+$result = $mysqli->query($sql);
+$row = $result->fetch_assoc();
+	 
+}else{
+	  header ("Location: index.php");
 }
 
 ?>
-
-
-<table class="table">
-<tr class="warning">
-	<th class='text-center'>CODIGO</th>
-	<th class='text-center'>CANT.</th>
-	<th>DESCRIPCION</th>
-
-	<th></th>
-</tr>
 <?php
-    
-    
-    
-    $atencion = $_SESSION['id_atencion'];
-	        
-     // echo '<script>alert (" Ha respondido '.$atencion.' respuestas afirmativas");</script>';
-        
-   // $atencion=$_POST['atencion'];
-    
-    
-	$sumador_total=0;
-	$sql=mysqli_query($mysqli, "select * from siec_inventario, siec_medicamentos_entregados where siec_inventario.inv_id_inventario= siec_medicamentos_entregados.ent_id_inventario and ent_id_atencion ='".$atencion."'");
-	while ($row=mysqli_fetch_array($sql))
-	{
-	$id_tmp=$row['ent_id_med_entregado'];
-	$codigo_producto=$row['inv_codigo'];
-	$cantidad=$row['ent_cantidad'];
-	$nombre_producto=$row['inv_nombre_producto'];
-	
-	
-	//$precio_venta=$row['precio_tmp'];
-	
-	
-	
-
-	
-		?>
-		<tr>
-			<td class='text-center'><?php echo $codigo_producto;?></td>
-			<td class='text-center'><?php echo $cantidad;?></td>
-			<td><?php echo $nombre_producto;?></td>
-			
+	//Archivo verifica que el usario que intenta acceder a la URL esta logueado
+	/*Inicia validacion del lado del servidor*/
+	if (empty($_POST['parametros'])) {
+           $errors[] = "Parametro vacio";
+        }else if (empty($_POST['valors'])) {
+           $errors[] = "Valor Vacio";
+        } 
+         else if (
+			!empty($_POST['valors']) &&
+			!empty($_POST['valors'])
+		){
+		/* Connect To Database*/
+		//Contiene funcion que conecta a la base de datos
+		// escaping, additionally removing everything that could be (html/javascript-) code
+		$id_parametro=intval($_POST['mod_id']);
+		$parametro=mysqli_real_escape_string($mysqli,(strip_tags($_POST["parametros"],ENT_QUOTES)));
+		$valor=mysqli_real_escape_string($mysqli,(strip_tags($_POST["valors"],ENT_QUOTES)));
 		
-			<td class='text-center'><a href="#" onclick="eliminar('<?php echo $id_tmp ?>')"><i class="glyphicon glyphicon-trash"></i></a></td>
-		</tr>		
-		<?php
-	}
+		
+			 
+			    $parametro= strtoupper($parametro);
+				$valor= strtoupper($valor);
+
+		 
+			  $objeto="tbl_parametros";
+                     $us="probando";
+                    $accion="UPDATE";
+         
+            
+		$sql="UPDATE tbl_receta SET nombre_paciente='".$parametro."', prescripcion='".$valor."' WHERE id_receta='".$id_parametro."'";
+		$query_update = mysqli_query($mysqli,$sql);
+		 $id= 1;
+                      
+			if ($query_update){
+				  $bita=grabarBitacora($idUsuario,$objeto,$accion,$sql);
+			 
+				$messages[] = "El parametro ha sido actualizado satisfactoriamente.";
+			} else{
+				$errors []= "Lo siento algo ha salido mal intenta nuevamente.".mysqli_error($mysqli);
+			}
+		} else {
+			$errors []= "Error desconocido.";
+		}
+		
+		if (isset($errors)){
+			
+			?>
+			<div class="alert alert-danger" role="alert">
+				<button type="button" class="close" data-dismiss="alert">&times;</button>
+					<strong>Error!</strong> 
+					<?php
+						foreach ($errors as $error) {
+								echo $error;
+							}
+						?>
+			</div>
+			<?php
+			}
+			if (isset($messages)){
+				
+				?>
+				<div class="alert alert-success" role="alert">
+						<button type="button" class="close" data-dismiss="alert">&times;</button>
+						<strong>¡Bien hecho!</strong>
+						<?php
+							foreach ($messages as $message) {
+									echo $message;
+								}
+							?>
+				</div>
+				<?php
+			}
 
 ?>
-
-
-
-
-</table>
