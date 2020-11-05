@@ -44,7 +44,7 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
                     P&aacute;gina [[page_cu]]/[[page_nb]]
                 </td>
                 <td style="width: 50%; text-align: right">
-                    &copy; <?php echo "bernardos.pw "; echo  $anio=date('Y'); ?>
+                    &copy; <?php echo "obedalvarado.pw "; echo  $anio=date('Y'); ?>
                 </td>
             </tr>
         </table>
@@ -61,15 +61,15 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
 		<tr>
            <td style="width:50%;" >
 			<?php 
-				$sql_cliente=mysqli_query($con,"select * from tbl_clientes where id_cliente='$id_cliente'");
+				$sql_cliente=mysqli_query($con,"select * from clientes where id_cliente='$id_cliente'");
 				$rw_cliente=mysqli_fetch_array($sql_cliente);
-				echo $rw_cliente['nom_cliente'];
+				echo $rw_cliente['nombre_cliente'];
 				echo "<br>";
-				echo $rw_cliente['direccion'];
+				echo $rw_cliente['direccion_cliente'];
 				echo "<br> Teléfono: ";
-				echo $rw_cliente['telefono'];
+				echo $rw_cliente['telefono_cliente'];
 				echo "<br> Email: ";
-				echo $rw_cliente['cor_cliente'];
+				echo $rw_cliente['email_cliente'];
 			?>
 			
 		   </td>
@@ -88,9 +88,9 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
 		<tr>
            <td style="width:35%;">
 			<?php 
-				$sql_user=mysqli_query($con,"select * from tbl_usuario where id_usuario='$id_vendedor'");
+				$sql_user=mysqli_query($con,"select * from users where user_id='$id_vendedor'");
 				$rw_user=mysqli_fetch_array($sql_user);
-				echo $rw_user['nombre_usuario'];
+				echo $rw_user['firstname']." ".$rw_user['lastname'];
 			?>
 		   </td>
 		  <td style="width:25%;"><?php echo date("d/m/Y");?></td>
@@ -137,11 +137,6 @@ while ($row=mysqli_fetch_array($sql))
 	$precio_total_f=number_format($precio_total,2);//Precio total formateado
 	$precio_total_r=str_replace(",","",$precio_total_f);//Reemplazo las comas
 	$sumador_total+=$precio_total_r;//Sumador
-    
-    
-    
-    $insert_detail=mysqli_query($con, "INSERT INTO detalle_factura(numero_factura, id_producto, cantidad, precio_venta) VALUES ('$numero_factura','$id_producto','$cantidad','$precio_venta_r')");
-    
 	if ($nums%2==0){
 		$clase="clouds";
 	} else {
@@ -159,7 +154,7 @@ while ($row=mysqli_fetch_array($sql))
 
 	<?php 
 	//Insert en la tabla detalle_cotizacion
-	
+	$insert_detail=mysqli_query($con, "INSERT INTO detalle_factura VALUES ('','$numero_factura','$id_producto','$cantidad','$precio_venta_r')");
 	
 	$nums++;
 	}
@@ -175,12 +170,11 @@ while ($row=mysqli_fetch_array($sql))
             <td style="widtd: 15%; text-align: right;"> <?php echo number_format($subtotal,2);?></td>
         </tr>
 		<tr>
-            <td colspan="3" style="widtd: 85%; text-align: right;">IVA 15% <?php echo $simbolo_moneda;?> </td>
+            <td colspan="3" style="widtd: 85%; text-align: right;">IVA (<?php echo $impuesto; ?>)% <?php echo $simbolo_moneda;?> </td>
             <td style="widtd: 15%; text-align: right;"> <?php echo number_format($total_iva,2);?></td>
         </tr><tr>
             <td colspan="3" style="widtd: 85%; text-align: right;">TOTAL <?php echo $simbolo_moneda;?> </td>
             <td style="widtd: 15%; text-align: right;"> <?php echo number_format($total_factura,2);?></td>
-        
         </tr>
     </table>
 	
@@ -196,8 +190,6 @@ while ($row=mysqli_fetch_array($sql))
 
 <?php
 $date=date("Y-m-d H:i:s");
-
-//$insert_detail=mysqli_query($con, "INSERT INTO detalle_factura(numero_factura, id_producto, cantidad, precio_venta, fecha) VALUES( 2, 1, 1, 20, '2017-10-07 10:40:47')");
-$insert=mysqli_query($con,"INSERT INTO facturas (numero_factura,id_cliente, id_vendedor, condiciones, total_venta, estado_factura) VALUES ('$numero_factura','$id_cliente','$id_vendedor','$condiciones','$total_factura','1')");
+$insert=mysqli_query($con,"INSERT INTO facturas VALUES (NULL,'$numero_factura','$date','$id_cliente','$id_vendedor','$condiciones','$total_factura','1')");
 $delete=mysqli_query($con,"DELETE FROM tmp WHERE session_id='".$session_id."'");
 ?>

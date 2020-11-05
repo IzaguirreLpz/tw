@@ -78,7 +78,7 @@ $row = $result->fetch_assoc();
             <div class="table-agile-info">
               <div class="panel panel-default">
 		<div class="panel-heading">
-        FACTURAS
+        FACTURAS PENDIENTES
         
 		    <div class="btn-group pull-right">
                 
@@ -160,7 +160,7 @@ $row = $result->fetch_assoc();
 			var q= $("#q").val();
 			$("#loader").fadeIn('slow');
 			$.ajax({
-				url:'./ajax/buscar_facturas.php?action=ajax&page='+page+'&q='+q,
+				url:'./ajax/buscar_facturas_pendientes.php?action=ajax&page='+page+'&q='+q,
 				 beforeSend: function(objeto){
 				 $('#loader').html('<img src="./images/ajax-loader.gif"> Cargando...');
 			  },

@@ -3,8 +3,12 @@
 	/* Connect To Database*/
 	//require_once ("config/db.php");//Contiene las variables de configuracion para conectar a la base de datos
 
+	session_start();
 
 require_once ("funcs/conexion.php");//Contiene funcion que conecta a la base de datos
+if(!isset($_SESSION['id_usuario'])){
+    header ("Location: index.php");
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -63,7 +67,7 @@ require_once ("funcs/conexion.php");//Contiene funcion que conecta a la base de 
 							<div class="col-md-3">
 								<select class="form-control input-sm" id="id_vendedor">
 									<?php
-										$sql_vendedor=mysqli_query($con,"select * from tbl_usuario order by nombre_usuario");
+										$sql_vendedor=mysqli_query($mysqli,"select * from tbl_usuario order by nombre_usuario");
 										while ($rw=mysqli_fetch_array($sql_vendedor)){
 											$id_vendedor=$rw["id_usuario"];
 											$nombre_vendedor=$rw["nombre_usuario"];

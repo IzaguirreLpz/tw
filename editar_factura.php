@@ -5,7 +5,7 @@
 	$active_productos="";
 	$active_clientes="";
 	$active_usuarios="";	
-	$title="Editar Factura | Simple Invoice";
+	$title="Editar Factura";
 	
 	/* Connect To Database*/
 	//Contiene las variables de configuracion para conectar a la base de datos
@@ -145,7 +145,7 @@
 				</div>
 			</form>	
 			<div class="clearfix"></div>
-				<div class="editar_factura" class='col-md-12' style="margin-top:10px"></div><!-- Carga los datos ajax -->	
+				<div class="factura" class='col-md-12' style="margin-top:10px"></div><!-- Carga los datos ajax -->	
 			
 		<div id="resultados" class='col-md-12' style="margin-top:10px"></div><!-- Carga los datos ajax -->			
 			

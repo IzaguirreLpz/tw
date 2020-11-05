@@ -1,45 +1,35 @@
-
-
-
-
 <?php
-
 session_start();
-$session_id= session_id();
+require '../funcs/conexion.php';
 
+$id_factura= $_SESSION['id_factura'];
+$numero_factura= $_SESSION['numero_factura'];
+if (isset($_POST['id'])){$id=intval($_POST['id']);}
+if (isset($_POST['cantidad'])){$cantidad=intval($_POST['cantidad']);}
+if (isset($_POST['precio_venta'])){$precio_venta=floatval($_POST['precio_venta']);}
 
-
-if (isset($_POST['id'])){$id=$_POST['id'];}
-if (isset($_POST['cantidad'])){$cantidad=$_POST['cantidad'];}
-if (isset($_POST['precio_venta'])){$precio_venta=$_POST['precio_venta'];}
-
-	/* Connect To Database*/
-	//Contiene las variables de configuracion para conectar a la base de datos
-	require_once ("../funcs/conexion.php");//Contiene funcion que conecta a la base de datos
+	
 	//Archivo de funciones PHP
 	include("funciones.php");
 if (!empty($id) and !empty($cantidad) and !empty($precio_venta))
 {
-$insert_tmp=mysqli_query($mysqli, "INSERT INTO tmp (id_producto,cantidad_tmp,precio_tmp,session_id) VALUES ('$id','$cantidad','$precio_venta','$session_id')");
-    
-    
-    $cantpro=getValor($id);
-    $stock=$cantpro-$cantidad;
-   
-    $update=mysqli_query($mysqli, "UPDATE products SET cant='".$stock."' WHERE id_producto='".$id."'");
+$update=mysqli_query($mysqli, "UPDATE products SET cant='".$cantidad."' WHERE id_producto='".$id."'");
+    //$simbolo_moneda=get_row('cant',' products', 'id_producto', id);
+$insert=mysqli_query($mysqli, "INSERT INTO detalle_factura (numero_factura, id_producto,cantidad,precio_venta) VALUES ('$numero_factura','$id','$cantidad','$precio_venta')");
+
+$cantpro=mysqli_query($mysqli, "SELECT cantidad FROM products WHERE id_producto='".$id."'");
 }
+   
+   // $stock=$cantpro-$cantidad;
+   
+
+
 if (isset($_GET['id']))//codigo elimina un elemento del array
 {
-$id_tmp=intval($_GET['id']);	
-     $can=getTemp($id_tmp);
-    $geTpro= getpro($id_tmp);
-    $update=mysqli_query($mysqli, "UPDATE products SET cant=cant+'".$can."' WHERE id_producto='".$geTpro."'");
-$delete=mysqli_query($mysqli, "DELETE FROM tmp WHERE id_tmp='".$id_tmp."'");
-    
-    
-         
+$id_detalle=intval($_GET['id']);	
+$delete=mysqli_query($mysqli, "DELETE FROM detalle_factura WHERE id_detalle='".$id_detalle."'");
 }
-$simbolo_moneda="L";
+$simbolo_moneda=get_row('tbl_parametros','descripcion', 'id_parametro', 10);
 ?>
 <table class="table">
 <tr>
@@ -52,17 +42,16 @@ $simbolo_moneda="L";
 </tr>
 <?php
 	$sumador_total=0;
-	//"select * from products, tmp where products.id_producto=tmp.id_producto and tmp.session_id='".$session_id."'");
-	$sql=mysqli_query($mysqli, "select * from products, tmp where products.id_producto=tmp.id_producto and tmp.session_id='".$session_id."'");
+	$sql=mysqli_query($mysqli, "select * from products, facturas, detalle_factura where facturas.numero_factura=detalle_factura.numero_factura and  facturas.id_factura='$id_factura' and products.id_producto=detalle_factura.id_producto");
 	while ($row=mysqli_fetch_array($sql))
 	{
-	$id_tmp=$row["id_tmp"];
+	$id_detalle=$row["id_detalle"];
 	$codigo_producto=$row['codigo_producto'];
-	$cantidad=$row['cantidad_tmp'];
+	$cantidad=$row['cantidad'];
 	$nombre_producto=$row['nombre_producto'];
 	
 	
-	$precio_venta=$row['precio_tmp'];
+	$precio_venta=$row['precio_venta'];
 	$precio_venta_f=number_format($precio_venta,2);//Formateo variables
 	$precio_venta_r=str_replace(",","",$precio_venta_f);//Reemplazo las comas
 	$precio_total=$precio_venta_r*$cantidad;
@@ -77,16 +66,16 @@ $simbolo_moneda="L";
 			<td><?php echo $nombre_producto;?></td>
 			<td class='text-right'><?php echo $precio_venta_f;?></td>
 			<td class='text-right'><?php echo $precio_total_f;?></td>
-			<td class='text-center'><a href="#" onclick="eliminar('<?php echo $id_tmp ?>')"><i class="glyphicon glyphicon-trash"></i></a></td>
+			<td class='text-center'><a href="#" onclick="eliminar('<?php echo $id_detalle ?>')"><i class="glyphicon glyphicon-trash"></i></a></td>
 		</tr>		
 		<?php
 	}
-	$impuesto=15;
+	$impuesto=get_row('tbl_parametros','descripcion', 'id_parametro', 3);
 	$subtotal=number_format($sumador_total,2,'.','');
 	$total_iva=($subtotal * $impuesto )/100;
 	$total_iva=number_format($total_iva,2,'.','');
 	$total_factura=$subtotal+$total_iva;
-
+	$update=mysqli_query($mysqli,"update facturas set total_venta='$total_factura' where id_factura='$id_factura'");
 ?>
 <tr>
 	<td class='text-right' colspan=4>SUBTOTAL <?php echo $simbolo_moneda;?></td>

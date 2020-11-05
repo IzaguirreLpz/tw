@@ -65,7 +65,7 @@ if (!defined('__CLASS_HTML2PDF__')) {
         protected $_isInThead        = false;       // flag : in a thead
         protected $_isInTfoot        = false;       // flag : in a tfoot
         protected $_isInOverflow     = false;       // flag : in a overflow
-        protected $_isInFooter       = false;       // flag : in a footer
+        //protected $_isInFooter       = false;       // flag : in a footer
         protected $_isInDraw         = null;        // flag : in a draw (svg)
         protected $_isAfterFloat     = false;       // flag : is just after a float
         protected $_isInForm         = false;       // flag : is in a float. false / action of the form

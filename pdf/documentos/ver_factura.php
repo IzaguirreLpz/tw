@@ -5,12 +5,15 @@
 	Mail: info@obedalvarado.pw
 	---------------------------*/
 	session_start();
-
+	if (!isset($_SESSION['user_login_status']) AND $_SESSION['user_login_status'] != 1) {
+        header("location: ../../login.php");
+		exit;
+    }
 	/* Connect To Database*/
 	include("../../config/db.php");
 	include("../../config/conexion.php");
 	//Archivo de funciones PHP
-	include("funciones.php");
+	include("../../funciones.php");
 	$id_factura= intval($_GET['id_factura']);
 	$sql_count=mysqli_query($con,"select * from facturas where id_factura='".$id_factura."'");
 	$count=mysqli_num_rows($sql_count);

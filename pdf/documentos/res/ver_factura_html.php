@@ -61,15 +61,15 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
 		<tr>
            <td style="width:50%;" >
 			<?php 
-				$sql_cliente=mysqli_query($con,"select * from tbl_clientes where id_cliente='$id_cliente'");
+				$sql_cliente=mysqli_query($con,"select * from clientes where id_cliente='$id_cliente'");
 				$rw_cliente=mysqli_fetch_array($sql_cliente);
-				echo $rw_cliente['nom_cliente'];
+				echo $rw_cliente['nombre_cliente'];
 				echo "<br>";
-				echo $rw_cliente['direccion'];
+				echo $rw_cliente['direccion_cliente'];
 				echo "<br> Teléfono: ";
-				echo $rw_cliente['telefono'];
+				echo $rw_cliente['telefono_cliente'];
 				echo "<br> Email: ";
-				echo $rw_cliente['cor_cliente'];
+				echo $rw_cliente['email_cliente'];
 			?>
 			
 		   </td>
@@ -88,9 +88,9 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
 		<tr>
            <td style="width:35%;">
 			<?php 
-				$sql_user=mysqli_query($con,"select * from tbl_usuario where id_usuario='$id_vendedor'");
+				$sql_user=mysqli_query($con,"select * from users where user_id='$id_vendedor'");
 				$rw_user=mysqli_fetch_array($sql_user);
-				echo $rw_user['nombre_usuario'];
+				echo $rw_user['firstname']." ".$rw_user['lastname'];
 			?>
 		   </td>
 		  <td style="width:25%;"><?php echo date("d/m/Y", strtotime($fecha_factura));?></td>
@@ -121,7 +121,7 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
 <?php
 $nums=1;
 $sumador_total=0;
-$sql=mysqli_query($con, "select * from products, detalle_factura, facturas where products.id_producto=detalle_factura.id_producto and detalle_factura.numero_factura=facturas.numero_factura and facturas.numero_factura='".$numero_factura."'");
+$sql=mysqli_query($con, "select * from products, detalle_factura, facturas where products.id_producto=detalle_factura.id_producto and detalle_factura.numero_factura=facturas.numero_factura and facturas.id_factura='".$id_factura."'");
 
 while ($row=mysqli_fetch_array($sql))
 	{
@@ -169,7 +169,7 @@ while ($row=mysqli_fetch_array($sql))
             <td style="widtd: 15%; text-align: right;"> <?php echo number_format($subtotal,2);?></td>
         </tr>
 		<tr>
-            <td colspan="3" style="widtd: 85%; text-align: right;">IVA 15% <?php echo $simbolo_moneda;?> </td>
+            <td colspan="3" style="widtd: 85%; text-align: right;">IVA (<?php echo $impuesto;?>)% <?php echo $simbolo_moneda;?> </td>
             <td style="widtd: 15%; text-align: right;"> <?php echo number_format($total_iva,2);?></td>
         </tr><tr>
             <td colspan="3" style="widtd: 85%; text-align: right;">TOTAL <?php echo $simbolo_moneda;?> </td>

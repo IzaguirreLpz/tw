@@ -59,13 +59,66 @@ $objeto="pantalla usuario";
 </head>
 
 <body>
-     <?php  include("barras.php"); ?>
+          
+<header class="header fixed-top clearfix">	
+            <!--logo start-->	
+            <div class="brand">	
+                <a href="home.php" class="logo">	
+                    MENU	
+                </a>	
+                <div class="sidebar-toggle-box">	
+                    <div class="fa fa-bars"></div>	
+                </div>	
+            </div>	
+            <!--logo end-->	
+
+            <div class="top-nav clearfix">	
+                <!--search & user info start-->	
+                <ul class="nav pull-right top-menu">	
+
+                    <!-- user login dropdown start-->	
+                    <li class="dropdown">	
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">	
+                            <img alt="" src="images/2.png">	
+                            <span class="username"><?php echo $_SESSION['usuario'] ?></span>	
+                            <b class="caret"></b>	
+                        </a>	
+                        <ul class="dropdown-menu extended logout">	
+
+                            <li><a href="logout.php"><i class="fa fa-key"></i>Salir</a></li>	
+                        </ul>	
+                    </li>	
+                    <!-- user login dropdown end -->	
+
+                </ul>	
+                <!--search & user info end-->	
+            </div>	
+        </header>	
+        <!--header end-->	
+        <!--sidebar start-->	
+        <aside>	
+            <div id="sidebar" class="nav-collapse">	
+                <!-- sidebar menu start-->	
+                <div class="leftside-navigation">	
+                    <ul class="sidebar-menu" id="nav-accordion">	
+                        <?php	
+                        if ($id_usu == 1) {	
+                            include("menu2.php");	
+                        }	
+                        //echo $_SESSION['menus']; 	
+                        ?>	
+
+                    </ul>	
+                </div>	
+                <!-- sidebar menu end-->	
+            </div>	
+        </aside>
     <section id="container">
         <!--header start-->
 
         <!--sidebar end-->
         <!--main content start-->
-      
+       <section id="main-content">
             <section class="wrapper">
                 <div class="table-agile-info">
                     <div class="panel panel-default">
@@ -93,20 +146,29 @@ $objeto="pantalla usuario";
                     
                       <?php // style="text-transform: uppercase;width:300px; height:90px" if ($insertar==1 || $idUsuario==1){?>
                     
-	<label for="q" class="col-md-2 control-label">Cliente o # de factura</label>		
-<div class="col-md-5">
-					
-								<div class="col-md-5">
-    </div>
-                         <div class="col-md-3">
-                                 
-								<button type="button" class="btn btn-default" onclick="agregar('<?php echo $rw['emp_id_empleado'];?>')">
+	<label for="q" class="col-md-2 control-label">Cliente </label>		
+
+								<div class="col-lg-8">
+                                    
+                                    <select  class="myselect" style="text-transform: uppercase;width:300px; height:90px" id="q"  name="empleado"  >	    
+                <?php 	                   
+				$query_cod_veh=mysqli_query($mysqli,"SELECT id_cliente, identidad, nom_cliente from tbl_clientes ");	
+				while($rw=mysqli_fetch_array($query_cod_veh))	{	
+					?>	
+
+				<option value="<?php echo $rw['id_cliente'];?>"><?php echo $rw['identidad'];?> | <?php echo $rw['nom_cliente'];?></option>				
+					<?php	
+				}	
+
+				?>	
+
+                </select>
+                    
+								<button type="button" class="btn btn-default" onclick="agregar()">
 									<span class="glyphicon glyphicon-plus" ></span> Agregar  </button>
-								<span id="loader"></span>
-                                
-                                
-							</div>
-					</div>
+								<span id="loader"></span>                   
+    </div>
+                        
 				
 				
 				
@@ -191,7 +253,7 @@ $objeto="pantalla usuario";
 
     }
 
-function agregar (id)
+function agregar ()
 		{
 			var q= $("#q").val();
             var id= $("#q").val();
@@ -240,7 +302,7 @@ function agregar (id)
                     url:'ajax/buscar_clie_pend.php',
 
 				 beforeSend: function(objeto){
-				 $('#loader').html('<img src="./img/ajax-loader.gif"> Cargando...');
+				 $('#loader').html('<img src="./images/ajax-loader.gif"> Cargando...');
 			  },
 				success:function(data){
 					$(".outer_div").html(data).fadeIn('slow');

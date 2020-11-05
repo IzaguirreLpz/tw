@@ -1,7 +1,8 @@
 
 		$(document).ready(function(){
-			load(1);
+		
 			$( "#resultados" ).load( "ajax/editar_facturacion.php" );
+			load(1);
 		});
 
 		function load(page){
