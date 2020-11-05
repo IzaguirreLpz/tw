@@ -29,7 +29,7 @@ $objeto="pantalla usuario";
 if (!empty($_POST['clientId'])) {
     $idCliente = $_POST['clientId'];
     global $mysqli;
-    $query = "DELETE FROM tbl_clientes WHERE id_cliente = $idCliente;";
+    $query = "DELETE FROM tbl_vehiculos WHERE id_vehiculo = $idCliente;";
     $objeto = "tbl_clientes";
     $accion = "DELETE";
     $descripcion = "ingreso a pantalla productos";
@@ -49,7 +49,7 @@ if (!empty($_POST['clientId'])) {
 <html>
 
 <head>
-    <title>HOME</title>
+    <title>Vehiculos</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
@@ -151,9 +151,9 @@ if (!empty($_POST['clientId'])) {
                 <div class="table-agile-info">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                         CLIENTES
+                         Vehiculos
                             <div class="btn-group pull-right">
-                                <button type='button' class="btn btn-success" onClick="location.href='add_clie.php'"><span class="glyphicon glyphicon-plus"></span> Agregar </button>
+                                <button type='button' class="btn btn-success" onClick="location.href='add_vehiculo.php'"><span class="glyphicon glyphicon-plus"></span> Agregar </button>
                             </div>
                         </div>
                         <div class="row w3-res-tb">
@@ -209,7 +209,7 @@ if (!empty($_POST['clientId'])) {
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel" style="text-align: center;">¿Seguro que deséa eliminar este Cliente?</h4>
+                <h4 class="modal-title" id="myModalLabel" style="text-align: center;">¿Seguro que deséa eliminar este Vehiculo?</h4>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" method="post" id="editar_password" name="editar_password">
@@ -224,7 +224,7 @@ if (!empty($_POST['clientId'])) {
                     </div>
                     <div class="modal-footer center">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btn-danger" id="eliminarProducto">Eliminar Cliente</button>
+                        <button type="submit" class="btn btn-danger" id="eliminarProducto">Eliminar Vehiculo</button>
                     </div>
                 </form>
             </div>
@@ -249,33 +249,11 @@ if (!empty($_POST['clientId'])) {
         $("#user_id_mod").val(item);
     }
 
-
-    /*$("#editar_password").submit(function(event) {
-        $('#actualizar_datos3').attr("disabled", true);
-        var tabla = "tbl_clientes";
-		var campo = "id_cliente";
-        var  user_id_mod =  $("#user_id_mod").val(item);
-        $.ajax({
-            type: "POST",
-            url: "ajax/eliminar_cliente.php",
-            data: 'tabla='+tabla+'&campo='+campo+'&user_id_mod='+user_id_mod,
-            beforeSend: function(objeto) {
-                $("#resultados_ajax3").html("Mensaje: Cargando...");
-            },
-            success: function(datos) {
-                $("#resultados_ajax3").html(datos);
-                $('#actualizar_datos3').attr("disabled", false);
-               // load(1);
-            }
-        });
-        event.preventDefault();
-    })*/
-
     function load(page) {
 
         $("#loader").fadeIn('slow');
         $.ajax({
-            url: 'ajax/buscar_cliente.php',
+            url: 'ajax/buscar_vehiculo.php',
             beforeSend: function(objeto) {
                 $('#loader').html('<img src="./img/ajax-loader.gif"> Cargando...');
             },
@@ -286,15 +264,7 @@ if (!empty($_POST['clientId'])) {
             }
         })
     }
-
-
-
-
-
-
-
-
-         
+   
     $('#procesar').on('click', function(){
       
 		var desde = $('#fecha_ini').val();
@@ -337,14 +307,4 @@ if (!empty($_POST['clientId'])) {
 			});
 		}
         
-        
-        
-
-
-
-
-
-
-
-
 </script>

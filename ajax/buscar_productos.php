@@ -14,9 +14,9 @@ $idUsuario = $_SESSION['id_usuario'];
             <tr class="success">
                 <th>Nombre</th>
                 <th>Descripcion</th>
-                <th>Proveedor</th>
                 <th>Precio De Venta</th>
                 <th>Precio Costo</th>
+                <th>Proveedor</th>
                 <th>Categoria</th>
                 <th>Fecha Registro</th>
                 <th>Acciones</th>
@@ -35,9 +35,9 @@ $idUsuario = $_SESSION['id_usuario'];
                     $product_id = $row['id_productos'];
                     $nombre = $row['nombre'];
                     $descripcion = $row['descripcion'];
-                    $proveedor = $row['proveedor'];
                     $precioVenta = $row['precio_venta'];
                     $precioCosto = $row['precio_costo'];
+                    $proveedor = $row['proveedor'];
                     $categoria = $row['categoria'];
                     $fechaRegistro = $row['fecha_registro'];
             ?>
