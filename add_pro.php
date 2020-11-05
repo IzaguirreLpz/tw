@@ -1,6 +1,5 @@
 <?php
 
-
 session_start();
 require 'funcs/conexion.php';
 require 'funcs/funcs.php';

@@ -8,14 +8,14 @@
 	$title="Editar Factura | Simple Invoice";
 	
 	/* Connect To Database*/
-	require_once ("config/db.php");//Contiene las variables de configuracion para conectar a la base de datos
-	require_once ("config/conexion.php");//Contiene funcion que conecta a la base de datos
+	//Contiene las variables de configuracion para conectar a la base de datos
+	require_once ("funcs/conexion.php");//Contiene funcion que conecta a la base de datos
 	
 	if (isset($_GET['id_factura']))
 	{
 				$id_factura=intval($_GET['id_factura']);
 		$campos="tbl_clientes.id_cliente, tbl_clientes.nom_cliente, tbl_clientes.telefono, tbl_clientes.cor_cliente, facturas.id_vendedor, facturas.fecha_factura, facturas.condiciones, facturas.estado_factura, facturas.numero_factura";
-		$sql_factura=mysqli_query($con,"select $campos from facturas, tbl_clientes where facturas.id_cliente=tbl_clientes.id_cliente and id_factura='".$id_factura."'");
+		$sql_factura=mysqli_query($mysqli,"select $campos from facturas, tbl_clientes where facturas.id_cliente=tbl_clientes.id_cliente and id_factura='".$id_factura."'");
 		$count=mysqli_num_rows($sql_factura);
 		if ($count==1)
 		{
@@ -91,7 +91,7 @@
 							<div class="col-md-3">
 							<select class="form-control input-sm" id="id_usuario" name="id_usuario">
 									<?php
-										$sql_vendedor=mysqli_query($con,"select * from tbl_usuario order by usuario");
+										$sql_vendedor=mysqli_query($mysqli,"select * from tbl_usuario order by usuario");
 										while ($rw=mysqli_fetch_array($sql_vendedor)){
 											$id_vendedor=$rw["id_usuario"];
 											$nombre_vendedor=$rw["nombre_usuario"];

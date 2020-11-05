@@ -37,7 +37,7 @@
 			$.ajax({
         type: "POST",
         url: "./ajax/editar_receta.php",
-        data: "id="+id+"&cantidad="+cantidad+"&atencion="+atencion,
+        data: "id="+id+"&cantidad="+cantidad, // data: "id="+id+"&cantidad="+cantidad+"&atencion="+atencion,
 		 beforeSend: function(objeto){
 			$("#resultados").html("Mensaje: Cargando...");
 		  },
