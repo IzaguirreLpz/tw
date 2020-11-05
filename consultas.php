@@ -172,11 +172,14 @@ $nombre=getNum();
 
 
 
-
+<?php   include("modal/eliminar_usados-modal.php"); ?>
+    
 </section>
 <!--main content end-->
 </section>
    
+
+
 <script src="js/bootstrap.js"></script>
 <script src="js/jquery.dcjqaccordion.2.7.js"></script>
 <script src="js/scripts.js"></script>
@@ -191,28 +194,6 @@ $nombre=getNum();
 	<script>
         
   	
-	  $( "#guardar_usuario" ).submit(function( event ) {
-  //$('#guardar_datos').attr("disabled", true);
-  console.log ("test");
-  alert("llego a la fun");
- var parametros = $(this).serialize();
-	 $.ajax({
-			type: "POST",
-			url: "ajax/nuevo_usado.php",
-			data: parametros,
-			 beforeSend: function(objeto){
-				$("#resultados_ajax").html("Mensaje: Cargando...");
-			  },
-			success: function(datos){
-			$("#resultados_ajax").html(datos);
-			$('#guardar_datos').attr("disabled", false);
-				load(1);
-			
-		  }
-		 
-	});
-  event.preventDefault();
-})
 	
         
 $(".myselect").select2();
@@ -271,19 +252,7 @@ var desde=$('#masco').val();
  }
        
    
-    
-    
-    
-    
-    
 
-
-	  
-    
-   
-    
-    
-  
 	 	$(document).ready(function(){
 			load(1);
 		});
@@ -307,25 +276,7 @@ var desde=$('#masco').val();
 			})
 		}  
     
-$( "#editar_password" ).submit(function( event ) {
-  $('#actualizar_datos3').attr("disabled", true);
-  
- var parametros = $(this).serialize();
-	 $.ajax({
-			type: "POST",
-			url: "ajax/eliminar_usados.php",
-			data: parametros,
-			 beforeSend: function(objeto){
-				$("#resultados_ajax3").html("Mensaje: Cargando...");
-			  },
-			success: function(datos){
-			$("#resultados_ajax3").html(datos);
-			$('#actualizar_datos3').attr("disabled", false);
-			load(1);
-		  }
-	});
-  event.preventDefault();
-})
+
     
 	</script>
 
@@ -335,7 +286,7 @@ $( "#editar_password" ).submit(function( event ) {
 				
 				
 			include("modal/registro_usado.php");
-		  include("modal/eliminar_usados-modal.php");
+		
 
 	
 
