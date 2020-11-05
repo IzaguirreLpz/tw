@@ -5,6 +5,9 @@ session_start();
 require 'funcs/conexion.php';
 require 'funcs/funcs.php';
 
+$errors = '';
+$type = 'success';
+
 if (!isset($_SESSION['id_usuario'])) {
     header("Location: index.php");
 }
@@ -17,10 +20,27 @@ $id_usu = $_SESSION['id_usuario'];
 
 $objeto="pantalla usuario";
 		$accion="INGRESO";
-		$descripcion="ingreso a pantalla proveedores";
+		$descripcion="ingreso a pantalla usuario";
 		
 		$bita=grabarBitacora($id_usu,$objeto,$accion,$descripcion);
 
+
+//en esta etapa se obtiene el submit del modal para eliminar el Cliente
+if (!empty($_POST['clientId'])) {
+    $idProveedor = $_POST['clientId'];
+    global $mysqli;
+    $query = "DELETE FROM tbl_proveedores WHERE id_proveedor = $idProveedor;";
+    $objeto = "tbl_proveedores";
+    $accion = "DELETE";
+    $descripcion = "Se elimino un proveedor";
+    if (mysqli_query($mysqli, $query)) {
+        $errors = "Proveedor eliminado con éxito.";
+        grabarBitacora($idProveedor, $objeto, $accion, $query);
+    }else{
+        $errors = "Lo sentimos , el intento de eliminado falló. Por favor, regrese y vuelva a intentarlo.";
+        $type="warning";
+    }
+}
 
 ?>
 
@@ -28,7 +48,7 @@ $objeto="pantalla usuario";
 <html>
 
 <head>
-    <title>HOME</title>
+    <title>Provedores</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
@@ -130,9 +150,9 @@ $objeto="pantalla usuario";
                 <div class="table-agile-info">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                         PROVEEDORES
+                         Provedores
                             <div class="btn-group pull-right">
-                                <button type='button' class="btn btn-success" onClick="location.href='add_clie.php'"><span class="glyphicon glyphicon-plus"></span> Agregar </button>
+                                <button type='button' class="btn btn-success" onClick="location.href='add_proveedor.php'"><span class="glyphicon glyphicon-plus"></span> Agregar Proveedor</button>
                             </div>
                         </div>
                         <div class="row w3-res-tb">
@@ -161,6 +181,12 @@ $objeto="pantalla usuario";
                     </div>
                 </div>
             </section>
+
+            <?php
+                if ($errors != '') {
+                    echo showMessage($errors, $type);
+                }
+                ?>
             <script src="js/bootstrap.js"></script>
             <script src="js/jquery.dcjqaccordion.2.7.js"></script>
             <script src="js/scripts.js"></script>
@@ -174,17 +200,39 @@ $objeto="pantalla usuario";
             <script type="text/javascript" src="js/monthly.js"></script>
 
             <!-- //calendar -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel" style="text-align: center;">¿Seguro que deséa eliminar este Proveedor?</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" method="post" id="editar_password" name="editar_password">
+                    <div id="mensajeAjax"></div>
+                    <div class="form-group">
+                        <div class="col-sm-8">
+                            <input type="hidden" id="clientId" name="clientId">
+                            <div class="container">
+                                <img width="50%" src="./images/delete.svg">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer center">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-danger" id="eliminarProducto">Eliminar Proveedor</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
 </body>
-<?php
-
-
-//    include("modal/eliminar_usuario.php");
-//   include("modal/editar_usuarios.php");
-require 'modal/eliminar_gen.php';
-
-
-
-?>
 
 </html>
 <script>
@@ -194,34 +242,12 @@ require 'modal/eliminar_gen.php';
 
     function
     obtener_id(item) {
-
-
+        let val = item;
+        let id = document.getElementById('clientId');
+        console.log(item)
+        id.value = val;
         $("#user_id_mod").val(item);
-
-
     }
-
-
-    $("#editar_password").submit(function(event) {
-        $('#actualizar_datos3').attr("disabled", true);
-        var tabla = "tbl_clientes";
-		var campo = "id_cliente";
-        var  user_id_mod =  $("#user_id_mod").val(item);
-        $.ajax({
-            type: "POST",
-            url: "ajax/eliminar_gen.php",
-            data: 'tabla='+tabla+'&campo='+campo+'&user_id_mod='+user_id_mod,
-            beforeSend: function(objeto) {
-                $("#resultados_ajax3").html("Mensaje: Cargando...");
-            },
-            success: function(datos) {
-                $("#resultados_ajax3").html(datos);
-                $('#actualizar_datos3').attr("disabled", false);
-               // load(1);
-            }
-        });
-        event.preventDefault();
-    })
 
     function load(page) {
 
@@ -238,15 +264,7 @@ require 'modal/eliminar_gen.php';
             }
         })
     }
-
-
-
-
-
-
-
-
-         
+   
     $('#procesar').on('click', function(){
       
 		var desde = $('#fecha_ini').val();
@@ -274,9 +292,6 @@ require 'modal/eliminar_gen.php';
             function ExportTable(){
 			$("table").tableExport({
                 
-                
-                 
-                
 				headings: true,                    // (Boolean), display table headings (th/td elements) in the <thead>
 				footers: true,                     // (Boolean), display table footers (th/td elements) in the <tfoot>
 				formats: ["xls", "csv", "txt"],    // (String[]), filetypes for the export
@@ -289,14 +304,4 @@ require 'modal/eliminar_gen.php';
 			});
 		}
         
-        
-        
-
-
-
-
-
-
-
-
 </script>

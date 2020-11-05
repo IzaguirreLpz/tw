@@ -22,7 +22,7 @@
       <li><a href='vehiculos.php'><i class=''></i>Vehiculos</a> </li>
       <li><a href='usuarios.php'><i class=''></i>Usuarios</a> </li>
       <li><a href='productos.php'><i class=''></i>Productos</a> </li>
-      <li><a href='proveedores.php'><i class=''></i>Proveedores</a> </li>
+      <li><a href='provedores.php'><i class=''></i>Provedores</a> </li>
       <li><a href='#'><i class=''></i>Inventario</a> </li>
    </ul>
 </li>
