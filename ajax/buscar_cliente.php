@@ -38,11 +38,6 @@ if(($_SESSION['id_usuario'])){
         <tbody>
           <?php
 			
-			
-			
-
-  
-			
 			 $sql = "SELECT * FROM tbl_clientes order by id_cliente ASC";
      
 			$query = mysqli_query($mysqli, $sql);

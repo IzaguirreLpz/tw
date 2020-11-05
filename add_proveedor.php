@@ -15,65 +15,70 @@ $edicion = 0;
 $rol = 5;
 $token = generateRandomString();
 
-if (isset($_GET["idProduct"])) {
+if (isset($_GET["id"])) {
     $edicion = 1;
-    $idProduct = $_GET["idProduct"];
-    $arreglo = getArray("tbl_productos", "id_productos", $idProduct);
-    $nom = $arreglo['nombre'];
-    $descr = $arreglo['descripcion'];
-    $ventaPrecio = $arreglo['precio_venta'];
-    $proveedor = $arreglo['proveedor'];
-    $costo = $arreglo['precio_costo'];
-    $unidades = $arreglo['cantidad'];
+    $idElement = $_GET["id"];
+    $arreglo = getArray("tbl_proveedores", "id_proveedor", $idElement);
+    $nombro = $arreglo['nom_empresa'];
+    $tel1 = $arreglo['num_tel1'];
+    $tel2 = $arreglo['num_tel2'];
+    $direccion = $arreglo['direccion'];
+    $rtn = $arreglo['RTN'];
+    $representante = $arreglo['representante'];
+    $email = $arreglo['cor_empresa'];
 };
 
 if (!empty($_POST)) {
-    /* $post = file_get_contents('php://input');
+     /*$post = file_get_contents('php://input');
     echo $post; */
     if (!empty($_POST['editMode'])){
-        $idProduct = $_POST['editMode'];
-        $nombre = $_POST['product_nombre'];
-        $descripcion = $_POST['product_description'];
-        $proveedores = $_POST['product_supliers'];
-        $categoria = $_POST['product_category'];
-        $precio = $_POST['product_price'];
-        $unidades = $_POST['product_units'];
-        $precioProducto = $_POST['product_compra'];
-        $sql = "UPDATE tbl_productos SET nombre = '$nombre',
-        descripcion = '$descripcion',
-        proveedor = '$proveedores',
-        categoria = '$categoria',
-        precio_venta = $precio,
-        cantidad = $unidades,
-        precio_costo = $precioProducto
-        WHERE id_productos = $idProduct;";
+        $editId = $_POST['editMode'];
+        $nombre = $_POST['nombre'];
+        $tel1 = $_POST['tel1'];
+        $tel2 = $_POST['tel2'];
+        $direccion = $_POST['direccion'];
+        $rtn = $_POST['rtn'];
+        $representate = $_POST['representante'];
+        $correo = $_POST['correo'];
+        $sql = "UPDATE  bd_tw . tbl_proveedores  SET
+         nom_empresa  = '$nombre',
+         num_tel1  = $tel1,
+         num_tel2  = $tel2,
+         direccion  = '$direccion',
+         RTN  = '$rtn',
+         representante  = '$representante',
+         cor_empresa  = '$correo'
+        WHERE  id_proveedor  = $editId;";
         global $mysqli;
         $conexion = $mysqli;
         if (mysqli_query($conexion, $sql)) {
-            $errors = 'Se han actualizado los datos de el producto correctamente';
+            $errors = 'Se han actualizado los datos de el proveedor correctamente';
             $type = 'success';
         } else {
             $mensaje = mysqli_error($conexion);
-            $errors = 'Hemos tenido el siguiente problema: a la hora de actualizar ' . $mensaje . '</br> Contacta tu Administrador';
+            $errors = 'Hemos tenido el siguiente problema: a la hora de actualizar ' . $mensaje . 'Contacta tu Administrador</br>'.$sql.'';
             $type = 'warning';
         }
        // mysqli_close($conexion);
     }else{
-    $nombre = $_POST['product_nombre'];
-    $descripcion = $_POST['product_description'];
-    $proveedores = $_POST['product_supliers'];
-    $precio = $_POST['product_price'];
-    $categoria = $_POST['product_category'];
-    $precioProducto = $_POST['product_compra'];
+    $nombre = $_POST['nombre'];
+    $tel1 = $_POST['tel1'];
+    $tel2 = $_POST['tel2'];
+    $direccion = $_POST['direccion'];
+    $rtn = $_POST['rtn'];
+    $representate = $_POST['representante'];
+    $correo = $_POST['correo'];
     global $mysqli;
     $conexion = $mysqli;
-    $consulta = "INSERT INTO  bd_tw . tbl_productos ( nombre , descripcion , proveedor ,categoria ,precio_venta , precio_costo )VALUES('$nombre','$descripcion','$proveedores','$categoria',$precio,$precioProducto)";
+    $consulta = "INSERT INTO  bd_tw . tbl_proveedores 
+    (nom_empresa , num_tel1 , num_tel2 , direccion , RTN , representante , cor_empresa)
+    VALUES('$nombre',$tel1,$tel2,'$direccion','$rtn','$representate','$correo');";
     if (mysqli_query($conexion, $consulta)) {
-        $errors = 'Se ha ingresado el producto correctamente';
+        $errors = 'Se ha ingresado el vehiculo correctamente';
         $type = 'success';
     } else {
         $mensaje = mysqli_error($conexion);
-        $errors = 'Hemos tenido el siguiente problema: ' . $mensaje . '</br> Contacta tu Administrador';
+        $errors = 'Hemos tenido el siguiente problema: ' . $mensaje . '</br> Contacta tu Administrador</br>'.$consulta.'';
         $type = 'warning';
     }
     //mysqli_close($conexion);
@@ -84,7 +89,7 @@ if (!empty($_POST)) {
 <!DOCTYPE html>
 
 <head>
-    <title>Agregar Producto Nuevo</title>
+    <title>Agregar Provedor Nuevo</title>
     <link rel="icon" href="images\favicon\favicon.ico" type="image/ico" sizes="16x16">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -192,14 +197,14 @@ if (!empty($_POST)) {
                     <header class="panel-heading">
                         <?php
                         if ($edicion != 0) {
-                            echo "Editar  Producto";
+                            echo "Editar Provedor";
                         } else {
-                            echo "Agregar Nuevo Producto ";
+                            echo "Agregar Nuevo Provedor ";
                         } ?>
                         <span class="tools pull-right">
                             <a class="fa fa-chevron-down" href="javascript:;"></a>
 
-                            <a class="fa fa-share" href="productos.php"></a>
+                            <a class="fa fa-share" href="provedores.php"></a>
                         </span>
                     </header>
                     <div class="panel-body">
@@ -207,100 +212,96 @@ if (!empty($_POST)) {
                             <form class="cmxform form-horizontal" method="post" action="" novalidate="novalidate">
                             <?php if($edicion != 0){
                                 ?>
-                            <input type="hidden" id="usu" name="editMode" <?php echo "value='$idProduct'";  ?>>
+                            <input type="hidden" id="usu" name="editMode" <?php echo "value='$idElement'";?> >
                             <?php
                             }
                             ?>
                                 <div class="form-group">
-                                    <label class="control-label col-lg-3">Nombre Producto:</label>
+                                    <label class="control-label col-lg-3">Nombre De La Empresa:</label>
                                     <div class="col-lg-6">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fas fa-file-signature"></i></span>
                                             <input maxlength="70" type="text" <?php if ($edicion != 0) {
-                                    echo "value=$nom";
-                                } ?> name="product_nombre" placeholder="Nombre" style="text-transform: uppercase;" id="txt_nc" autocomplete="off" autofocus="on" class="form-control" onkeypress="return soloLetras(event)" onPaste="return false;" title="Nombre Del Producto" required>
+                                    echo "value=$nombro";
+                                } ?> name="nombre" placeholder="Marca" style="text-transform: uppercase;" id="txt_nc" autocomplete="off" autofocus="on" class="form-control" onkeypress="return soloLetras(event)" onPaste="return false;" title="Marca del Vehiculo" required>
                                         </div>
                                     </div>
                                 </div>
 
                                 <!-- Text input-->
-                                    <div class="form-group">
-                                        <label class="control-label col-lg-3">Descripcion:</label>
-                                        <div class="col-lg-6">
-                                            <div class="input-group">
-                                                <span class="input-group-addon"><i class="fas fa-file-alt"></i></span>
-                                                    <textarea class="form-control" name="product_description" autocomplete="off" title="recuerda describir el producto que venderas" autofocus="on" id="exampleFormControlTextarea1" rows="2" required><?php if($edicion != 0) {echo $descr; }?></textarea>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                <!-- Text input-->
                                 <div class="form-group">
-                                        <label class="control-label col-lg-3">Proveedor:</label>
-                                        <div class="col-md-6 inputGroupContainer">
-                                            <div class="input-group">
-                                                <?php
-                                                    global $mysqli;
-                                                    $query = "select * from tbl_proveedores";
-                                                    $result = mysqli_query($mysqli,$query) or die(mysql_error()."[".$query."]");
-                                                ?>
-                                                <span class="input-group-addon"><i class="fas fa-parachute-box"></i></span>
-                                                <select class="form-control" id="exampleFormControlSelect1" name="product_supliers" title="Por favor seleccione un proveedor">
-                                                    <?php
-                                                    foreach ($result as $key => $value) {
-                                                        echo "<option value={$value['nom_empresa']}>{$value['nom_empresa']}</option>";
-                                                   }
-                                                    ?>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Text input-->
-                                <div class="form-group">
-                                        <label class="control-label col-lg-3">Categoria:</label>
-                                        <div class="col-md-6 inputGroupContainer">
-                                            <div class="input-group">
-                                                <?php
-                                                    global $mysqli;
-                                                    $conexion = $mysqli;
-                                                    $query = "select * from tbl_categorias";
-                                                    $result = mysqli_query($conexion, $query) or die(mysql_error()."[".$query."]");
-                                                ?>
-                                                <span class="input-group-addon"><i class="fas fa-tags"></i></span>
-                                                <select class="form-control" id="exampleFormControlSelect1" name="product_category" title="Por favor seleccione un proveedor">
-                                                    <?php
-                                                    foreach ($result as $key => $value) {
-                                                        echo "<option value={$value['nombre']}>{$value['nombre']}</option>";
-                                                   }
-                                                    ?>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Text input-->
-                                <div class="form-group">
-                                    <label class="control-label col-lg-3">Precio de Venta:</label>
+                                    <label class="control-label col-lg-3">Telefono 1:</label>
                                     <div class="col-lg-6">
                                         <div class="input-group">
-                                            <span class="input-group-addon"><i class="fas fa-money-bill-wave"></i></span>
-                                            <input maxlength="15" type="number" name="product_price" <?php if ($edicion != 0) {
-                                                     echo "value=$ventaPrecio ";
+                                            <span class="input-group-addon"><i class="fas fa-phone"></i></span>
+                                            <input maxlength="8" type="number" name="tel1" <?php if ($edicion != 0) {
+                                                     echo "value=$tel1";
                                                 } ?> style="text-transform: uppercase;" id="txt_us" autocomplete="off" autofocus="on" onPaste="return false;" class="form-control" title="Recuerda ingresar un precio" required>
                                         </div>
                                     </div>
                                 </div>
 
-                                <!-- Text input-->
+                                 <!-- Text input-->
                                 <div class="form-group">
-                                    <label class="control-label col-lg-3">Precio de Compra:</label>
+                                    <label class="control-label col-lg-3">Telefono 2:</label>
                                     <div class="col-lg-6">
                                         <div class="input-group">
-                                            <span class="input-group-addon"><i class="fas fa-money-bill-wave"></i></span>
-                                            <input maxlength="15" type="number" name="product_compra" <?php if ($edicion != 0) {
-                                                        echo "value=$costo";
-                                                    } ?> style="text-transform: uppercase;" id="txt_us" autocomplete="off" autofocus="on" onPaste="return false;" class="form-control" title="Recuerda ingresar un precio" required> 
+                                            <span class="input-group-addon"><i class="fas fa-phone"></i></span>
+                                            <input maxlength="8" type="number" name="tel2" <?php if ($edicion != 0) {
+                                                     echo "value=$tel2";
+                                                } ?> style="text-transform: uppercase;" id="txt_us" autocomplete="off" autofocus="on" onPaste="return false;" class="form-control" title="Recuerda ingresar un precio" required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                    <!-- Text input-->
+                                <div class="form-group">
+                                    <label class="control-label col-lg-3">Direccion:</label>
+                                    <div class="col-lg-6">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fas fa-compass"></i></span>
+                                            <input type="text" name="direccion" <?php if ($edicion != 0) {
+                                                     echo "value=$direccion";
+                                                } ?> style="text-transform: uppercase;" id="txt_us" autocomplete="off" autofocus="on" onPaste="return false;" class="form-control" required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                    <!-- Text input-->
+                                <div class="form-group">
+                                    <label class="control-label col-lg-3">RTN:</label>
+                                    <div class="col-lg-6">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="far fa-file-alt"></i></span>
+                                            <input maxlength="9" pattern="\d*" type="number" name="rtn" <?php if ($edicion != 0) {
+                                                     echo "value=$rtn";
+                                                } ?> style="text-transform: uppercase;" id="txt_us" autocomplete="off" autofocus="on" onPaste="return false;" class="form-control" title="Recuerda ingresar un precio" required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                  <!-- Text input-->
+                                <div class="form-group">
+                                    <label class="control-label col-lg-3">Representante:</label>
+                                    <div class="col-lg-6">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fas fa-user"></i></span>
+                                            <input maxlength="20" type="text" name="representante" <?php if ($edicion != 0) {
+                                                     echo "value=$representante";
+                                                } ?> style="text-transform: uppercase;" id="txt_us" autocomplete="off" autofocus="on" onPaste="return false;" class="form-control" title="Recuerda ingresar un precio" required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                 <!-- Text input-->
+                                <div class="form-group">
+                                    <label class="control-label col-lg-3">Correo Empresa:</label>
+                                    <div class="col-lg-6">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fas fa-envelope"></i></span>
+                                            <input type="email" name="correo" <?php if ($edicion != 0) {
+                                                     echo "value=$email";
+                                                } ?> id="txt_us" autocomplete="off" autofocus="on" onPaste="return false;" class="form-control" title="Recuerda ingresar un precio" required>
                                         </div>
                                     </div>
                                 </div>

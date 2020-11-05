@@ -30,7 +30,7 @@ if(($_SESSION['id_usuario'])){
             <th>Empresa</th>
              <th>Representante</th>
               <th>Telefonos </th>
-              <th>Tipo</th>
+              
                  <th>correo</th>
                  <th>Fecha</th>
             <th>Acciones</th>
@@ -65,7 +65,7 @@ if(($_SESSION['id_usuario'])){
 						$num_tel1=$row['num_tel1'];
 						$num_tel2=$row['num_tel2'];
 						$RTN=$row['RTN'];
-			            $tipo= $row['tipo'];
+			           
                         $cor_empresa=$row['cor_empresa'];
 			
 			             
@@ -87,17 +87,15 @@ if(($_SESSION['id_usuario'])){
              
                 <td><?php echo $nom_empresa?></td>
                 <td><?php echo $representante;?></td>
-                <td><?php echo $num_tel1." | | ".$num_tel2;?></td>
-                 
-                  <td><?php echo $tipo?></td>
-                  <td><?php echo $cor_empresa;?></td>
-                  <td><?php echo $fecha;?></td>
+                <td><?php echo $num_tel1." | | ".$num_tel2;?></td> 
+                <td><?php echo $cor_empresa;?></td>
+                <td><?php echo $fecha;?></td>
                 <td>
                     
                  
-              <a href="edi_prove.php?us=<?php echo $hola?> " class='btn btn-default' ui-toggle-class=""><i class="fa fa-pencil text-success text-dark"></i></a>
+              <a href="add_proveedor.php?id=<?php echo $hola?> " class='btn btn-default' ui-toggle-class=""><i class="fa fa-pencil text-success text-dark"></i></a>
 
-<a href="#" class='btn btn-default' title='Eliminar usuario'  data-toggle="modal" data-target="#myModal4" onclick='obtener_id("<?php echo $item;?>")' ><i class="glyphicon glyphicon-remove"></i></a>
+<a href="#" class='btn btn-default' title='Eliminar usuario'  data-toggle="modal" data-target="#myModal4" onclick='obtener_id("<?php echo $hola;?>")' ><i class="glyphicon glyphicon-remove"></i></a>
 
                
              
