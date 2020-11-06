@@ -75,13 +75,13 @@ $id=$row['id_atencion'];
 
                 <?php
 
-
+//label label-success
 switch ($status) {
     case 1:
                   ?> <td><span class="label label-warning"><?php echo $pendiente; ?></span> </td> <?php
         break;
     case 2:
-                  ?> <td> <span class="label label-success"><?php echo  $atendido; ?></span></td> <?php
+                  ?> <td> <span class="label label-info"><?php echo  $atendido; ?></span></td> <?php
         break;
         
         
@@ -129,20 +129,6 @@ switch ($status) {
 
                     <a href="consulta.php?ate=<?php echo $id;?>&id=<?php echo $clie;?>" data-toggle="tooltip" title="ATENDER CONSULTA"
                         class='btn btn-default'><span class="fa fa-cog"></span></a>
-
-
-
-
-                    <a href="editar_factura.php?id_factura=<?php echo $id;?>" data-toggle="tooltip"
-                        class='btn btn-default' title='EDITAR RECETA'><i class="fa fa-cart-plus"></i></a>
-
-
-
-                    <a href="editar_consulta.php?user_id=<?php echo $id;?>" data-toggle="tooltip"
-                        title="EDITAR  CONSULTA" class='btn btn-default'><span class="fa fa-list-alt"></span></a>
-
-
-
 
 
 

@@ -60,7 +60,7 @@
 			?>
 			<div class="table-responsive">
 			  <table class="table">
-				<tr  class="info">
+				<tr  class="success">
 					<th>#</th>
 					<th>Fecha</th>
 					<th>Cliente</th>
