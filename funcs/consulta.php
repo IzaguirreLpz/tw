@@ -50,7 +50,7 @@ $ate=$_POST['mod_id'];
 
     
     
-    
+    echo "INSERT INTO detalle_factura(numero_factura, id_producto, cantidad, precio_venta) select $num_fact , id_producto, cantidad_tmp,precio_tmp from tmp where num=$ate";
     $detalle=mysqli_query($mysqli,"INSERT INTO detalle_factura(numero_factura, id_producto, cantidad, precio_venta) select $num_fact , id_producto, cantidad_tmp,precio_tmp from tmp where num=$ate");
     
     
@@ -62,7 +62,6 @@ $ate=$_POST['mod_id'];
 
 
   
-    
        $insertar_fact=mysqli_query($mysqli,"INSERT INTO facturas ( numero_factura, id_cliente, id_vendedor, condiciones, total_venta, estado_factura, id_atencion) VALUES ('$num_fact','$id_cliente','$idUsuario','$condiciones',(SELECT sum(precio_tmp) as Total FROM tmp WHERE num=$ate),'2',$ate)");
     
     

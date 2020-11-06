@@ -9,8 +9,6 @@
         header("location: ../../login.php");
 		exit;
     }
-	
-	
 	/* Connect To Database*/
 	include("../../config/db.php");
 	include("../../config/conexion.php");
