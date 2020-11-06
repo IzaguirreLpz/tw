@@ -158,7 +158,7 @@ while ($row=mysqli_fetch_array($sql))
 	
 	$nums++;
 	}
-	$impuesto=get_row('perfil','impuesto', 'id_perfil', 1);
+	$impuesto=get_row('tbl_parametros','descripcion', 'id_parametro',3);
 	$subtotal=number_format($sumador_total,2,'.','');
 	$total_iva=($subtotal * $impuesto )/100;
 	$total_iva=number_format($total_iva,2,'.','');
