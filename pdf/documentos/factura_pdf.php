@@ -1,14 +1,8 @@
 <?php
-	/*-------------------------
-	Autor: Obed Alvarado
-	Web: obedalvarado.pw
-	Mail: info@obedalvarado.pw
-	---------------------------*/
+	
 	session_start();
-	if (!isset($_SESSION['user_login_status']) AND $_SESSION['user_login_status'] != 1) {
-        header("location: ../../login.php");
-		exit;
-    }
+
+	
 	/* Connect To Database*/
 	include("../../config/db.php");
 	include("../../config/conexion.php");
@@ -35,7 +29,7 @@
 	$sql=mysqli_query($con, "select LAST_INSERT_ID(numero_factura) as last from facturas order by id_factura desc limit 0,1 ");
 	$rw=mysqli_fetch_array($sql);
 	$numero_factura=$rw['last']+1;	
-	$simbolo_moneda=get_row('tbl_parametros','descripcion', 'id_parametro', 13);
+	$simbolo_moneda=get_row('tbl_parametros','descripcion', 'id_parametro', 10);
     // get the HTML
      ob_start();
      include(dirname('__FILE__').'/res/factura_html.php');
