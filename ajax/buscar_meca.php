@@ -1,4 +1,3 @@
-
 <?php
 
 	$paciente="";
@@ -12,35 +11,27 @@ $idUsuario = $_SESSION['id_usuario'];
 
 
 ?>
-       <link href="css1/bootstrap.min.css" rel="stylesheet">
-   
-    <link href="css/dataTables.bootstrap.css" rel="stylesheet">
 
-
-        
-  
-     
-      
-        <div class="dataTables_length" id="tableListar_length">
-      <table class="table" id="tableListar">
+<div class="dataTables_length" id="tableListar_length">
+<table class="table table-striped b-t b-light" id="tableListar" style="margin: 10px 0 0 0;">
+ 
         <thead>
-          <tr class="info">
-  
-             <th>N°</th>
-             <th>Id</th>
-             <th>Nombre </th>
-              <th>Estado</th>
-             <th>Fecha atencion</th>
-            <th>Opciones</th>
-          </tr>
+            <tr class="success">
+
+                <th>N°</th>
+                <th>Id</th>
+                <th>Nombre </th>
+                <th>Estado</th>
+                <th>Fecha atencion</th>
+                <th>Opciones</th>
+            </tr>
         </thead>
         <tbody>
-          <?php
+            <?php
 			
 			
 		
-			 $sql = "SELECT a.status,a.id_atencion,c.identidad ,a.fecha_visita ,c.id_cliente,c.nom_cliente, c.ape_cliente from tbl_clientes c , tbl_atenciones a where a.id_cliente= c.id_cliente AND LEFT(a.fecha_visita,10)=CURDATE() ORDER BY a.id_atencion ASC";
-
+			 $sql = "SELECT a.status,a.id_atencion,c.identidad ,a.fecha_visita ,a.id_cliente id_cliente,c.nom_cliente, c.ape_cliente from tbl_clientes c , tbl_atenciones a where a.id_cliente= c.id_cliente AND LEFT(a.fecha_visita,10)=CURDATE() ORDER BY a.id_atencion ASC";
 			$query = mysqli_query($mysqli, $sql);
      $item=0;
 			
@@ -67,22 +58,22 @@ $id=$row['id_atencion'];
             $atendido="ATENDIDO";$label_class='label-success';
                   $ausente="AUSENTE";$label_class='label-danger';
                 $status=$row['status'];
-			    $emple=['id_cliente'];      
+			    $clie=$row['id_cliente'];      
            
          
          
           ?>
-   
-             
-              <tr>
-              
-            <td><?php echo $item; ?></td>
+
+
+            <tr>
+
+                <td><?php echo $item; ?></td>
                 <td><?php echo $clave;?></td>
                 <td><?php echo $nombre;?></td>
-                  
-            
-                  
-                  <?php
+
+
+
+                <?php
 
 
 switch ($status) {
@@ -100,94 +91,81 @@ switch ($status) {
         break;
 }
 ?>
-                  
-                  
-                  
-                  
-                  
-                  
- 
-                  		
-                  
-                  <td><?php echo $fecha;?></td>
-                  
-                  
+
+
+
+
+
+
+
+
+
+                <td><?php echo $fecha;?></td>
+
+
                 <td>
-                    
-                    
-   <?php 
+
+
+                    <?php 
             
             
            //   $historial=TieneHistorial($id_emp);  
            $historial=1;
             if ($historial!=1) {     ?>
-                    
-                
-                    <a href="histo_con.php?id=<?php echo $id_emp;?>"   data-toggle="tooltip" class='btn btn-danger' title='AGREGAR HISTORIAL' ><i class="fa fa-stethoscope"></i></a> 
 
-                     <?php
+
+                    <a href="histo_con.php?id=<?php echo $clie;?>" data-toggle="tooltip" class='btn btn-danger'
+                        title='AGREGAR HISTORIAL'><i class="fa fa-cog"></i></a>
+
+                    <?php
 }
 ?>
-     
-                    
-                   
-                    
-               
-           
-             
-             <a href="consulta.php?user_id=<?php echo $id;?>" data-toggle="tooltip" title="ATENDER CONSULTA"  class='btn btn-default'><span class="fa fa-user-md"></span></a>  
-                    
-  
-            
-			
-                    
-                    
-                    
-                    
-                    
-                    
-                 
-  
-          
-
-                    <a href="editar_factura.php?id_factura=<?php echo $id;?>"   data-toggle="tooltip" class='btn btn-default' title='EDITAR RECETA' ><i class="fa fa-cart-plus"></i></a> 
-
- 
-                
-                     <a href="editar_consulta.php?user_id=<?php echo $id;?>" data-toggle="tooltip" title="EDITAR  CONSULTA"  class='btn btn-default'><span class="fa fa-list-alt"></span></a>
-          
 
 
-            
-               
-               
+
+
+
+
+
+                    <a href="consulta.php?ate=<?php echo $id;?>&id=<?php echo $clie;?>" data-toggle="tooltip" title="ATENDER CONSULTA"
+                        class='btn btn-default'><span class="fa fa-cog"></span></a>
+
+
+
+
+                    <a href="editar_factura.php?id_factura=<?php echo $id;?>" data-toggle="tooltip"
+                        class='btn btn-default' title='EDITAR RECETA'><i class="fa fa-cart-plus"></i></a>
+
+
+
+                    <a href="editar_consulta.php?user_id=<?php echo $id;?>" data-toggle="tooltip"
+                        title="EDITAR  CONSULTA" class='btn btn-default'><span class="fa fa-list-alt"></span></a>
+
+
+
+
+
+
                 </td>
-              </tr>
-          <?php
+            </tr>
+            <?php
             
            }
           }else{ 
           
           ?>
-          <tr>
-            <td colspan="4">No se encontraron resultados</td>
-          </tr>
-          <?php
+            <tr>
+                <td colspan="4">No se encontraron resultados</td>
+            </tr>
+            <?php
           }
           ?>
         </tbody>
-      </table>
-     
-      </div>
-      <script src="js1/jquery-1.11.1.min.js"></script>
-    <script src="js1/bootstrap.min.js"></script>
-	<script src="js1/bootstrap-datepicker.js"></script>
-	<script src="js1/locales/bootstrap-datepicker.es.js"></script>
-	<script src="js1/jquery.dataTables.min.js"></script>
-    
-        <script src="js1/dataTables.bootstrap.js"></script>
+    </table>
 
-        <script src="js1/validator.js"></script>
-
-    <script src="js1/global.js"></script>
-     
+</div>
+<script src="js/bootstrap-datepicker.js"></script>
+      <script src="js/locales/bootstrap-datepicker.es.js"></script>
+      <script src="js/jquery.dataTables.min.js"></script>
+      <script src="js/dataTables.bootstrap.js"></script>
+      <script src="js/global.js"></script>
