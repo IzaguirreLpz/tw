@@ -1,7 +1,3 @@
-
-
-
-
 <?php
 
 session_start();
@@ -16,6 +12,19 @@ if (isset($_POST['precio_venta'])){$precio_venta=$_POST['precio_venta'];}
 	/* Connect To Database*/
 	//Contiene las variables de configuracion para conectar a la base de datos
 	require_once ("../funcs/conexion.php");//Contiene funcion que conecta a la base de datos
+	require_once ("../dompdf/src/Autoloader.php");
+	use Dompdf\Dompdf;
+	$dompdf = new Dompdf();
+$dompdf->loadHtml('<h1>DOMPDF Demo</h1><br><p>Hello World !</p>');
+
+// (Optional) Setup the paper size and orientation
+$dompdf->setPaper('A4', 'portrait');
+
+// Render the HTML as PDF
+$dompdf->render();
+
+// Output the generated PDF to Browser
+$dompdf->stream();
 	//Archivo de funciones PHP
 	include("funciones.php");
 if (!empty($id) and !empty($cantidad) and !empty($precio_venta))

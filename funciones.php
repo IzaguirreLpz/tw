@@ -1,6 +1,7 @@
 <?php 
 function get_row($table,$row, $id, $equal){
 	global $con;
+	$variable = "select $row from $table where $id='$equal'";
 	$query=mysqli_query($con,"select $row from $table where $id='$equal'");
 	$rw=mysqli_fetch_array($query);
 	$value=$rw[$row];
@@ -61,9 +62,8 @@ function get_row($table,$row, $id, $equal){
 	}
 
 function getpro($valor)
-	{
+	{	
 		global $con;
-		
 		$stmt = $con->prepare("SELECT id_producto FROM tmp WHERE id_tmp = ? ");
 		$stmt->bind_param('s', $valor);
 		$stmt->execute();
