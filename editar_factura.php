@@ -10,11 +10,11 @@
 	/* Connect To Database*/
 	//Contiene las variables de configuracion para conectar a la base de datos
 	require_once ("funcs/conexion.php");//Contiene funcion que conecta a la base de datos
-	
+	require_once ("funcs/funcs.php");
 	if (isset($_GET['id_factura']))
 	{
 				$id_factura=intval($_GET['id_factura']);
-		$campos="tbl_clientes.id_cliente, tbl_clientes.nom_cliente, tbl_clientes.telefono, tbl_clientes.cor_cliente, facturas.id_vendedor, facturas.fecha_factura, facturas.condiciones, facturas.estado_factura, facturas.numero_factura";
+		$campos="tbl_clientes.id_cliente, tbl_clientes.nom_cliente, tbl_clientes.telefono, tbl_clientes.cor_cliente, facturas.id_vendedor, facturas.fecha_factura, facturas.condiciones, facturas.estado_factura, facturas.numero_factura, facturas.id_atencion";
 		$sql_factura=mysqli_query($mysqli,"select $campos from facturas, tbl_clientes where facturas.id_cliente=tbl_clientes.id_cliente and id_factura='".$id_factura."'");
 		$count=mysqli_num_rows($sql_factura);
 		if ($count==1)
@@ -31,6 +31,26 @@
 				$numero_factura=$rw_factura['numero_factura'];
 				$_SESSION['id_factura']=$id_factura;
 				$_SESSION['numero_factura']=$numero_factura;
+                $id_atencion= $rw_factura['id_atencion'];
+            
+            
+            if ($id_atencion != null){
+                
+                $obs= getCualquiera('observacion','tbl_atenciones','id_atencion',$id_atencion);
+                
+                if ($obs == null){
+                    
+                    $obs=' ';
+                    
+                }
+                
+            }
+            
+            
+            
+            
+            
+            
 		}	
 		else
 		{
@@ -127,8 +147,25 @@
 								</select>
 							</div>
 						</div>
+                
+                
+                <?php if  ($id_atencion != null){ ?>
 				
-				
+				<div class="form-group row">
+				  <label for="nombre_cliente" class="col-md-7 control-label">Detalle atención</label>
+				  
+				 
+							<div >
+								<textarea    readonly="readonly"     input class="form-control" id="detalle" name="detalle"
+                                                        placeholder="detalle" pattern="[a-zA-Z0-9]{2,64}"
+                                                        title="Detalle de atención" onPaste="return false;" rows=5
+                                                        cols="100" autocomplete="off"><?php   echo $obs;  ?></textarea> 
+							</div>
+					
+				 </div>
+                
+                
+                <?php } ?>
 				<div class="col-md-12">
 					<div class="pull-right">
 						<button type="submit" class="btn btn-default">

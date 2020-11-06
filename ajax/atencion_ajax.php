@@ -11,8 +11,8 @@ $hasta = $_POST['hasta'];
 
 ?>
    
-        <div class="dataTables_length" id="tableListar_length">
-      <table class="table" id="tableListar">
+<div class="table-responsive" id="tableListar_length">
+     <table class="table table-striped b-t b-light" id="tableListar">
         <thead>
           <tr class="success">
         
@@ -28,7 +28,7 @@ $hasta = $_POST['hasta'];
 				
 			 $sql = "select * from products, tmp where products.id_producto=tmp.id_producto  and num='$hasta'";
             //num='$hasta'";
-            echo $sql;
+            
 
 			$query = mysqli_query($mysqli, $sql);
 			$count_query   = mysqli_query($mysqli, "SELECT count(*) AS numrows FROM products ");
@@ -71,3 +71,8 @@ $hasta = $_POST['hasta'];
       </table>
      
       </div>
+<script src="js/bootstrap-datepicker.js"></script>
+<script src="js/locales/bootstrap-datepicker.es.js"></script>
+<script src="js/jquery.dataTables.min.js"></script>
+<script src="js/dataTables.bootstrap.js"></script>
+<script src="js/global.js"></script>

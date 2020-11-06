@@ -1,12 +1,5 @@
 
 
-<script>
-
-alert("llego")
-</script>
-
-
-
 <?php
 
 		if (empty($_POST['consul_id'])){

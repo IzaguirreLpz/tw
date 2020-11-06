@@ -352,7 +352,7 @@ if ($id_usu==1){
 $(document).on('submit', '#loginform', function(event) {
 		event.preventDefault();
 		$.ajax({
-			url: 'editar_clie.php',
+			url: 'e.php',
 			type: 'POST',
 			dataType: 'JSON',
 			data: $(this).serialize(),

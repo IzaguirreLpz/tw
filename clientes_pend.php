@@ -128,9 +128,7 @@ $objeto="pantalla usuario";
                             <div class="btn-group pull-right">
                 
               
-				<a  href="nueva_factura.php" class="btn btn-info"><span class="glyphicon glyphicon-plus" ></span> Nueva Factura</a>
-                
-                
+			
 			
 			</div>
                             </div>
@@ -203,16 +201,12 @@ $objeto="pantalla usuario";
 
             <!-- //calendar -->
 </body>
-<?php
+          
+                	<?php 
 
-
-//    include("modal/eliminar_usuario.php");
-//   include("modal/editar_usuarios.php");
-//require 'modal/eliminar_usuario.php';
-
-
-
-?>
+			include("modal/cambiar_estado.php");
+		?>
+			
 
 </html>
 <script>
@@ -295,6 +289,47 @@ function agregar ()
     })
 
 
+        
+    
+$( "#editar_producto" ).submit(function( event ) {
+  $('#actualizar_datos').attr("disabled", true);
+  
+ var parametros = $(this).serialize();
+	 $.ajax({
+			type: "POST",
+			url: "ajax/editar_listaestatus.php",
+			data: parametros,
+			 beforeSend: function(objeto){
+				$("#resultados_ajax2").html("Mensaje: Cargando...");
+			  },
+			success: function(datos){
+			$("#resultados_ajax2").html(datos);
+			$('#actualizar_datos').attr("disabled", false);
+			load(1);
+		  }
+	});
+  event.preventDefault();
+})
+
+	function obtener_datos(id,status){
+		
+		
+
+			$("#mod_id").val(id);
+	
+			$("#mod_estado").val(status);
+		}
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     	function load(page){
 			var q= $("#q").val();
 			$("#loader").fadeIn('slow');
@@ -313,3 +348,5 @@ function agregar ()
 			})
 		}
 </script>
+        
+        

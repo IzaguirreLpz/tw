@@ -30,7 +30,7 @@ require '../funcs/funcs.php';
      
      
      
-		$sql="UPDATE siec_atenciones SET status='".$estado."' WHERE ate_id_atencion='".$id_atencion."'";
+		$sql="UPDATE tbl_atenciones SET status='".$estado."' WHERE id_atencion='".$id_atencion."'";
 		$query_update = mysqli_query($mysqli,$sql);
 			if ($query_update){
 				$messages[] = "El estado ha sido actualizado satisfactoriamente.";
