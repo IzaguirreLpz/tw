@@ -16,6 +16,26 @@ $ate= $_GET['ate'];
 $nom_com=  $arreglo['nom_cliente']." ".$arreglo['ape_cliente'];
 //echo $_SESSION['id_usuario'];
 //echo $_SESSION['menus'];
+
+
+if (isset ($_GET["ate"] )){
+	
+	
+	$arreglo = getArray("tbl_atenciones","id_atencion",$ate);
+	$auto = $arreglo['id_auto'];
+	$obs = $arreglo['observacion'];
+    if ($obs==null){$obs=' ';}
+
+	}
+
+
+
+
+
+
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -96,8 +116,8 @@ $nom_com=  $arreglo['nom_cliente']." ".$arreglo['ape_cliente'];
                                 <form class="cmxform form-horizontal " name="consultas" method="post" id="loginform"
                                     action="" novalidate="novalidate">
                                     <div class="agileinfo-row">
-                                        <input type="" id="mod_id" name="mod_id" value="<?php echo $ate;?>">
-                                        <input type="" id="id_clie" name="id_clie" value="<?php echo $id_cliente;?>">
+                                        <input type="hidden" id="mod_id" name="mod_id" value="<?php echo $ate;?>">
+                                        <input type="hidden" id="id_clie" name="id_clie" value="<?php echo $id_cliente;?>">
                                    
                                         <div class='form-group'>
                                             <label class='col-sm-3 control-label'
@@ -115,7 +135,7 @@ $nom_com=  $arreglo['nom_cliente']." ".$arreglo['ape_cliente'];
 			                                             	while($rw=mysqli_fetch_array($query_cod_veh))	{
 				                                         	?>
 
-                                                        <option value="<?php echo $rw['id_vehiculo'];?>">
+                                                        <option value="<?php echo $rw['id_vehiculo'];?>"   <?php if ($rw['id_vehiculo'] == $auto) { echo "selected='selected'"; } ?>>
                                                             <?php echo $rw['placa']." | ". $rw['marca']." ". $rw['modelo']. " ".  $rw['color'];?>
                                                         </option>
                                                         <?php
@@ -159,7 +179,7 @@ $nom_com=  $arreglo['nom_cliente']." ".$arreglo['ape_cliente'];
                                                     <textarea input class="form-control" id="detalle" name="detalle"
                                                         placeholder="detalle" pattern="[a-zA-Z0-9]{2,64}"
                                                         title="Detalle de atención" onPaste="return false;" rows=5
-                                                        cols="200" autocomplete="off"></textarea>
+                                                        cols="200" autocomplete="off"> <?php   echo $obs;  ?></textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -178,7 +198,9 @@ $nom_com=  $arreglo['nom_cliente']." ".$arreglo['ape_cliente'];
                                                 class="glyphicon glyphicon-plus"></span> Usados en atención</button>
                                     </div>
                                     <div id="resultados">
-                                        <b>Servicios o Productos</b>
+                                        <b></b>                                            <button type="submit" class="btn btn-success">
+                                                Registrar Atención
+                                            </button>
                                     </div><!-- Carga los datos ajax -->
                                     <br>
 
@@ -188,7 +210,7 @@ $nom_com=  $arreglo['nom_cliente']." ".$arreglo['ape_cliente'];
                                     <div class="form-group">
                                         <div class="col-md-9 col-md-offset-5">
                                             <button type="submit" class="btn btn-danger">
-                                                registrar consulta
+                                                REGISTRAR ATENCIÓN
                                             </button>
 
 

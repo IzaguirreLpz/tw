@@ -108,16 +108,11 @@ $status=$row['status'];
                 
             <td>
 
+          <?php  if ($status ==1 || $status == 3){ ?>
+
          <a href="#" class='btn btn-default' title='Editar producto' onclick="obtener_datos('<?php echo $id;?>','<?php echo $status; ?>');" data-toggle="modal" data-target="#myModal2"><i class="glyphicon glyphicon-edit"></i></a> 
              
-              <script>
-                function reportePDF2() {
-                  var desde = $id;
-                  let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,
-width=0,height=0,left=-1000,top=-1000`;
-                  open('reporte/re_prueba.php?id=' + id, 'test', params);
-                }
-              </script>
+         <?php    } ?>
 
             </td>
           </tr>

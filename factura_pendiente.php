@@ -83,7 +83,7 @@ $row = $result->fetch_assoc();
 		    <div class="btn-group pull-right">
                 
               
-				<a  href="nueva_factura.php" class="btn btn-info"><span class="glyphicon glyphicon-plus" ></span> Nueva Factura</a>
+				
                 
                 
 			

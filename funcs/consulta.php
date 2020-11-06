@@ -42,7 +42,7 @@ $ate=$_POST['mod_id'];
     
 
 
-    		$sql="UPDATE tbl_atenciones SET id_auto='".$auto."', observacion='".$obs."' WHERE id_atencion=".$ate."";
+    		$sql="UPDATE tbl_atenciones SET id_auto='".$auto."', observacion='".$obs."', status= 2  WHERE id_atencion=".$ate."";
     
     
     
