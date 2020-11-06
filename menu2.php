@@ -3,9 +3,10 @@
 <li class='sub-menu'>
    <a href='javascript:;'><i class="fas fa-car"></i><span>Atención</span></a>
    <ul class='sub'>
-      <li><a href='mantenimiento.php'><i class=''></i>Lista servicios</a> </li>
+      
       <li><a href='clientes_pend.php'><i class=''></i>Lista  de Espera</a> </li>
       <li><a href='atencion_meca.php'><i class=''></i>Atenciones</a> </li>
+       <li><a href='mantenimiento.php'><i class=''></i>Lista servicios</a> </li>
    </ul>
 </li>
 <li class='sub-menu'>
