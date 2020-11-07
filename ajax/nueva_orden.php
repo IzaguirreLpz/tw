@@ -21,8 +21,7 @@ require '../funcs/funcs.php';
            $errors[] = "codigo vacío";
         } else if (empty($_POST['precio'])) {
            $errors[] = "precio vacío";
-        }else if (empty($_POST['stock'])) {
-           $errors[] = "codigos vacío";
+        
         
         }  
    
@@ -42,7 +41,7 @@ require '../funcs/funcs.php';
 		$precio = $_POST["precio"];
 	   $stock=$_POST['total_stock'];
 		$tipo_transaccion=$_POST["transaccion"];
-            $sql=( "INSERT INTO transaccion_medicamentos(codigo_transaccion,id_proveedor,fecha,codigo,numero,tipo_transaccion,stock) 
+            $sql=( "INSERT INTO transaccion_productos(codigo_transaccion,id_proveedor,fecha,codigo,numero,tipo_transaccion,stock) 
                                             VALUES('$id','$id_prove','$fecha','$codigo','$cantidad','$tipo_transaccion','$stock')");
 		$query_update = mysqli_query($mysqli,$sql);
 		

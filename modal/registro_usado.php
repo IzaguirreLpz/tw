@@ -47,8 +47,7 @@ function hitung_total_stok() {
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel"><i class='glyphicon glyphicon-edit'></i> Agregar Nuevo
-                    Servicio</h4>
+                <h4 class="modal-title" id="myModalLabel"><i class='glyphicon glyphicon-edit'></i> Agregar producto o servicio </h4>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" method="post" id="guardar_usuario" name="guardar_usuario">
@@ -74,9 +73,9 @@ function hitung_total_stok() {
                     </div>
 
 
-                    <input type="" class="" id="nom" name="nom" placeholder="" maxlength="80" onPaste="return false;"
+                    <input type="hidden" class="" id="nom" name="nom" placeholder="" maxlength="80" onPaste="return false;"
                         required autocomplete="off">
-                    <input type="" class="" id="mas" name="mas" placeholder="" maxlength="80" onPaste="return false;"
+                    <input type="hidden" class="" id="mas" name="mas" placeholder="" maxlength="80" onPaste="return false;"
                         required autocomplete="off">
 
                     <div class="form-group">
@@ -121,7 +120,7 @@ function hitung_total_stok() {
     $("#guardar_usuario").submit(function(event) {
         $('#guardar_datos').attr("disabled", true);
         console.log("test");
-        alert("llego a la fun");
+
         var parametros = $(this).serialize();
         $.ajax({
             type: "POST",

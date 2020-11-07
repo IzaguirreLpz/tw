@@ -48,7 +48,7 @@
             
                
 					// write new user's data into database
-                    $sql = "DELETE  FROM transaccion_medicamentos WHERE no ='".$id_compra."'";
+                    $sql = "DELETE  FROM transaccion_productos WHERE no ='".$id_compra."'";
                     $query = mysqli_query($mysqli,$sql);
 
                     // if user has been added successfully

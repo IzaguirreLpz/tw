@@ -47,12 +47,12 @@ if(($_SESSION['id_usuario'])){
 
 
 
-			 $sql = "SELECT a.tipo_transaccion,a.no,a.id_proveedor, a.codigo_transaccion,a.fecha,a.codigo,a.stock,a.numero,b.codigo_producto,b.nombre_producto,b.unidad FROM transaccion_medicamentos as a INNER JOIN products as b ON a.codigo=b.codigo_producto ORDER BY codigo_transaccion DESC";
+			 $sql = "SELECT a.tipo_transaccion,a.no,a.id_proveedor, a.codigo_transaccion,a.fecha,a.codigo,a.stock,a.numero,b.codigo_producto,b.nombre_producto,b.unidad FROM transaccion_productos as a INNER JOIN products as b ON a.codigo=b.codigo_producto ORDER BY codigo_transaccion DESC";
 
 			$query = mysqli_query($mysqli, $sql);
 
 
-			$count_query   = mysqli_query($mysqli, "SELECT count(*) AS numrows FROM transaccion_medicamentos");
+			$count_query   = mysqli_query($mysqli, "SELECT count(*) AS numrows FROM transaccion_productos");
 		$row1= mysqli_fetch_array($count_query);
 
 			$numrows = $row1['numrows'];

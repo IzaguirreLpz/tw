@@ -182,7 +182,7 @@ $row = $result->fetch_assoc();
 		if (confirm("Realmente deseas eliminar la factura")){	
 		$.ajax({
         type: "GET",
-        url: "./ajax/buscar_facturas.php",
+        url: "./ajax/buscar_facturas_pendientes.php",
         data: "id="+id,"q":q,
 		 beforeSend: function(objeto){
 			$("#resultados").html("Mensaje: Cargando...");

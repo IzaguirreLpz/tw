@@ -645,31 +645,11 @@ function getReceta($valor)
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 function getNum()
 {
 	global $mysqli;
 
-	$stmt = $mysqli->prepare("(SELECT MAX(numero_factura)+1 FROM facturas)");
+	$stmt = $mysqli->prepare("(SELECT MAX(id_factura)+1 FROM facturas)");
 
 	$stmt->execute();
 	$stmt->store_result();
@@ -837,6 +817,10 @@ function usuarioExiste($usuario)
 		return false;
 	}
 }
+
+
+
+
 
 function emailExiste($email)
 {
@@ -1159,7 +1143,7 @@ function getCANTI($campo, $campoWhere, $valor)
 	{
 		global $mysqli;
 		
-		$stmt = $mysqli->prepare("SELECT $campo FROM transaccion_medicamentos WHERE $campoWhere = ? LIMIT 1");
+		$stmt = $mysqli->prepare("SELECT $campo FROM transaccion_productos WHERE $campoWhere = ? LIMIT 1");
 		$stmt->bind_param('s', $valor);
 		$stmt->execute();
 		$stmt->store_result();
@@ -1252,7 +1236,7 @@ function entraSal($id)
 {
 	global $mysqli;
 
-	$stmt = $mysqli->prepare("SELECT tipo_transaccion FROM transaccion_medicamentos WHERE no= ?");
+	$stmt = $mysqli->prepare("SELECT tipo_transaccion FROM transaccion_productos WHERE no= ?");
 	$stmt->bind_param('i', $id);
 	$stmt->execute();
 	$stmt->bind_result($_id);

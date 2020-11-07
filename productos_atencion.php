@@ -32,7 +32,7 @@ if(isset($_POST['dataidobat'])) {
                 <label class='col-sm-3 control-label'>Precio</label>
                 <div class='col-sm-6'>
                   <div class='input-group'>
-                    <input type='text' class='form-control' id='stok' name='stock' value='' readonly>
+                    <input type='text' class='form-control' id='stok' name='stock' value='0' readonly>
                     <span class='input-group-addon'></span>
                   </div>
                 </div>
