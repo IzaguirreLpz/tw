@@ -95,7 +95,7 @@
             $atendido="ATENDIDO";$label_class='label-success';
       $ausente="AUSENTE";$label_class='label-danger';
             $finalizado = "LISTA PARA FACTURAR";$label_class='label-danger';
-                    echo $ate_est;
+                  
 					?>
 					<tr>
 						<td><?php echo $numero_factura; ?></td>
