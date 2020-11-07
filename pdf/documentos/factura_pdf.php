@@ -18,9 +18,9 @@
 	exit;
 	}
 
-	//require_once(dirname(__FILE__).'/../html2pdf.class.php');
-	require_once '../../vendor/autoload.php';
-	use Spipu\Html2Pdf\Html2Pdf;
+	require_once(dirname(__FILE__).'/../html2pdf.class.php');
+	/* require_once('../../vendor/autoload.php');
+     use Spipu\Html2Pdf\Html2Pdf; */
 		
 	//Variables por GET
 	$id_cliente=intval($_GET['id_cliente']);
@@ -35,21 +35,24 @@
     // get the HTML
      ob_start();
      include(dirname('__FILE__').'/res/factura_html.php');
-    $content = ob_get_clean();
 
+    $content = ob_get_clean();
     try
     {
-  
+		error_reporting(E_ALL & ~E_NOTICE);
+		ini_set('display_errors', 0);
+		ini_set('log_errors', 1);
         // init HTML2PDF
-        $html2pdf = new HTML2PDF('P', 'LETTER', 'es', true, 'UTF-8', array(0, 0, 0, 0));
+        $html2pdf = new HTML2PDF('P', 'A4', 'es', true, 'UTF-8');
         // display the full page
         $html2pdf->pdf->SetDisplayMode('fullpage');
         // convert
-        $html2pdf->writeHTML('<h1>Juank Cool</h1>');
+		$html2pdf->writeHTML($content, isset($_GET['vuehtml']));
+		ob_end_clean();
         // send the PDF
-        $html2pdf->Output();
+        $html2pdf->Output('Factura.pdf');
     }
     catch(HTML2PDF_exception $e) {
-        echo $e;
+		echo $e;
         exit;
     }

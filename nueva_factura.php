@@ -112,8 +112,8 @@ if(!isset($_SESSION['id_usuario'])){
 						<button   type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">
 						 <span class="glyphicon glyphicon-search"></span> Agregar productos
 						</button>
-						<button type="submit" class="btn btn-default">
-						  <span class="glyphicon glyphicon-print"></span> Imprimir
+						<button id="Guardado" type="submit" class="btn btn-success">
+						  <span class="glyphicon glyphicon-print"></span> Guardar e Imprimir
 						</button>
 					</div>	
 				</div>
@@ -173,6 +173,10 @@ if(!isset($_SESSION['id_usuario'])){
 							$("#mail" ).val("");
 						}
 			});	
+
+			$('#Guardado').click(function() {
+				setTimeout(function(){ location.reload(); }, 3000);
+			});
 	</script>
 	
   </body>
