@@ -69,7 +69,8 @@ $status=$row['status'];
 			
                $pendiente="PENDIENTE";$label_class='label-warning';
             $atendido="ATENDIDO";$label_class='label-success';
-      $ausente="AUSENTE";$label_class='label-danger';;
+      $ausente="AUSENTE";$label_class='label-danger';
+            $finalizado = " ATENCION FINALIZADA";$label_class='label-danger';
       ?>
 
 
@@ -89,11 +90,16 @@ $status=$row['status'];
                   ?> <td><span class="label label-warning"><?php echo $pendiente; ?></span> </td> <?php
         break;
     case 2:
-                  ?> <td> <span class="label label-success"><?php echo  $atendido; ?></span></td> <?php
+                  ?> <td> <span class="label label-info"><?php echo  $atendido; ?></span></td> <?php
         break;
     case 3:
                   ?> <td> <span class="label label-danger"><?php echo  $ausente; ?></span></td> <?php
         break;
+                    
+      case 4:
+                  ?> <td> <span class="label label-success"><?php echo  $finalizado; ?></span></td> <?php
+        break;               
+                    
 }
           ?>
                   

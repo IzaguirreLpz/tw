@@ -57,9 +57,10 @@ $id=$row['id_atencion'];
              $pendiente="PENDIENTE";$label_class='label-warning';
             $atendido="ATENDIDO";$label_class='label-success';
                   $ausente="AUSENTE";$label_class='label-danger';
+            $finalizado = " ATENCION FINALIZADA";$label_class='label-danger';
                 $status=$row['status'];
 			    $clie=$row['id_cliente'];      
-           
+              
          
          
           ?>
@@ -89,7 +90,13 @@ switch ($status) {
             case 3:
                   ?> <td> <span class="label label-danger"><?php echo  $ausente; ?></span></td> <?php
         break;
+        
+        case 4:
+                  ?> <td> <span class="label label-success"><?php echo  $finalizado; ?></span></td> <?php
+        break;
 }
+      
+            
 ?>
 
 
@@ -126,10 +133,15 @@ switch ($status) {
 
 
 
-
+ <?php 
+            if ($status==2 ||$status==1) {     ?>
                     <a href="consulta.php?ate=<?php echo $id;?>&id=<?php echo $clie;?>" data-toggle="tooltip" title="ATENDER CONSULTA"
                         class='btn btn-default'><span class="fa fa-cog"></span></a>
 
+
+                    <?php
+}
+?>
 
 
                 </td>

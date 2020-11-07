@@ -109,7 +109,7 @@
 						<div class="form-group row">
 							<label for="empresa" class="col-md-1 control-label">Vendedor</label>
 							<div class="col-md-3">
-							<select class="form-control input-sm" id="id_usuario" name="id_usuario">
+							<select class="form-control input-sm" id="id_vendedor" name="id_vendedor">
 									<?php
 										$sql_vendedor=mysqli_query($mysqli,"select * from tbl_usuario order by usuario");
 										while ($rw=mysqli_fetch_array($sql_vendedor)){
@@ -168,8 +168,8 @@
                 <?php } ?>
 				<div class="col-md-12">
 					<div class="pull-right">
-						<button type="submit" class="btn btn-default">
-						  <span class="glyphicon glyphicon-refresh"></span> Actualizar datos
+						<button type="submit" class="btn btn-info">
+						  <span class="glyphicon glyphicon-refresh"></span> Guardar datos
 						</button>
 					
 						<button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">
@@ -183,7 +183,7 @@
 			</form>	
 			<div class="clearfix"></div>
 				<div class="factura" class='col-md-12' style="margin-top:10px"></div><!-- Carga los datos ajax -->	
-			
+			<div class="editar_factura" class='col-md-12' style="margin-top:10px"></div>
 		<div id="resultados" class='col-md-12' style="margin-top:10px"></div><!-- Carga los datos ajax -->			
 			
 		</div>

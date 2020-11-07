@@ -348,7 +348,7 @@ $(document).on('submit', '#loginform', function(event) {
 				if(data=="ok"){
 					toastr.success("Guardado con exito.");
 					setTimeout(function(){
-						location.href="home.php";
+						location.href="clientes.php";
 					},2000);
 				}
 			

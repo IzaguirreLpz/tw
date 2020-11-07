@@ -14,7 +14,7 @@
 			  <div class="form-group">
 				
 				<div class="col-sm-8">
-					<input type="" id="consul_id" name="consul_id">
+					<input type="hidden" id="consul_id" name="consul_id">
 				</div>
 			  </div>
 	

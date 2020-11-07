@@ -645,31 +645,11 @@ function getReceta($valor)
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 function getNum()
 {
 	global $mysqli;
 
-	$stmt = $mysqli->prepare("(SELECT MAX(numero_factura)+1 FROM facturas)");
+	$stmt = $mysqli->prepare("(SELECT MAX(id_factura)+1 FROM facturas)");
 
 	$stmt->execute();
 	$stmt->store_result();
@@ -837,6 +817,10 @@ function usuarioExiste($usuario)
 		return false;
 	}
 }
+
+
+
+
 
 function emailExiste($email)
 {

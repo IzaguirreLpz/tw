@@ -184,7 +184,18 @@ if (isset ($_GET["ate"] )){
                                             </div>
                                         </div>
 
-
+  <div class="form-group">
+				<label for="contrasena" class="col-sm-3 control-label">Finalizada</label>
+				 <div class="col-sm-8">
+		  		  <div class="input-group">
+		  		  
+		  		  
+		  		   <input type="radio" name="fin" id="fin" value="4" checked>SI &nbsp
+  <input type="radio" name="fin" id="fin" value="2">NO<br>
+ 
+				</div>
+			  </div>
+			</div> 
 
 
 
@@ -198,25 +209,20 @@ if (isset ($_GET["ate"] )){
                                                 class="glyphicon glyphicon-plus"></span> Usados en atención</button>
                                     </div>
                                     <div id="resultados">
-                                        <b></b>                                            <button type="submit" class="btn btn-success">
+                                        <b></b>                               
+                                        <button type="submit" class="btn btn-success">
                                                 Registrar Atención
                                             </button>
+                                        
+                                       
                                     </div><!-- Carga los datos ajax -->
                                     <br>
 
                                     <div class='outer_div'></div>
 
-
-                                    <div class="form-group">
-                                        <div class="col-md-9 col-md-offset-5">
-                                            <button type="submit" class="btn btn-danger">
-                                                REGISTRAR ATENCIÓN
-                                            </button>
-
-
-                                        </div>
-                                    </div>
-
+<center>
+                                <label>PD.Los servicios varián segun carro y servicio detallarlos en el detalle de atención para ajustarlos en la factura.</label>
+    </center>
                                 </form>
                             </div>
                         </div>
