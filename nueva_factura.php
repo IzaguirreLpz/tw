@@ -176,7 +176,7 @@ if(!isset($_SESSION['id_usuario'])){
 
 			$('#Guardado').click(function() {
 				alert('Se ha guardado con exito la factura');
-				setTimeout(function(){ location.reload(); }, 3000);
+				//setTimeout(function(){ location.reload(); }, 3000);
 			});
 	</script>
 	
