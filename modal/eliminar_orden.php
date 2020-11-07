@@ -5,7 +5,7 @@
 		<div class="modal-content">
 		  <div class="modal-header">
 			<button type="button" onClick="location.reload();" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			<h4 class="modal-title" id="myModalLabel"><i class='glyphicon glyphicon-remove'></i> ¿Seguro que deséa eliminar esta compra?</h4>
+			<h4 class="modal-title" id="myModalLabel"><i class='glyphicon glyphicon-remove'></i> ¿Seguro que deséa eliminar?</h4>
 		  </div>
 		  <div class="modal-body">
 			<form class="form-horizontal" method="post" id="editar_password" name="editar_password">
@@ -20,7 +20,7 @@
 	
 		  <div class="modal-footer">
 			<button type="button" class="btn btn-default"onClick="location.reload();" data-dismiss="modal">Cerrar</button>
-			<button type="submit" class="btn btn-danger" id="actualizar_datos3">Eliminar Compra</button>
+			<button type="submit" class="btn btn-danger" id="actualizar_datos3">Eliminar </button>
 		  </div>
 		  </form>
 		</div>
