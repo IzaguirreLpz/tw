@@ -2,7 +2,7 @@
 $servername = '127.0.0.1';
 $username = "root";
 $password = "";
-$dbname = "bd_ber";
+$dbname = "bd_tw";
 
 $paginacion = "mysql:host=$servername;dbname=$dbname;";
 

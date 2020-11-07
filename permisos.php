@@ -5,16 +5,13 @@ session_start();
 require 'funcs/conexion.php';
 require 'funcs/funcs.php';
 
-$errors = '';
-$type = 'success';
+
 
 if (!isset($_SESSION['id_usuario'])) {
     header("Location: index.php");
 }
 
-if ($_SESSION['estado_usuario'] == strtolower('nuevo')) {
-    header("Location: preguntas.php");
-}
+
 $id_usu = $_SESSION['id_usuario'];
 //echo $_SESSION['menus'];
 
@@ -25,23 +22,6 @@ $objeto="pantalla usuario";
 		$bita=grabarBitacora($id_usu,$objeto,$accion,$descripcion);
 
 
-//en esta etapa se obtiene el submit del modal para eliminar el Cliente
-if (!empty($_POST['clientId'])) {
-    $idCliente = $_POST['clientId'];
-    global $mysqli;
-    $query = "DELETE FROM tbl_clientes WHERE id_cliente = $idCliente;";
-    $objeto = "tbl_clientes";
-    $accion = "DELETE";
-    $descripcion = "ingreso a pantalla productos";
-
-    if (mysqli_query($mysqli, $query)) {
-        $errors = "Cliente eliminado con éxito.";
-        grabarBitacora($idCliente, $objeto, $accion, $query);
-    }else{
-        $errors = "Lo sentimos , el intento de eliminado falló. Por favor, regrese y vuelva a intentarlo.";
-        $type="warning";
-    }
-}
 
 ?>
 
@@ -86,9 +66,47 @@ if (!empty($_POST['clientId'])) {
   <!--- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>-->
 	     <link href="css/select2.min.css" rel="stylesheet" /> 
       <script src="js/select2.min.js"></script>
+    <script src="./dist/sweetalert.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="./dist/sweetalert.css">
+    
+    
+          
+      
+<script>
+      
+      
+      
+      
+       
+    function seleccionar_todo(){ 
+   for (i=0;i<document.f1.elements.length;i++) 
+      if(document.f1.elements[i].type == "checkbox")	
+         document.f1.elements[i].checked=1 
+} 
+
+function deseleccionar_todo(){ 
+   for (i=0;i<document.f1.elements.length;i++) 
+      if(document.f1.elements[i].type == "checkbox")	
+         document.f1.elements[i].checked=0 
+}
+      
+      
+      
+      
+      
+      
+      
+      
+      </script>
 </head>
 
 <body>
+         <?php 
+require("./roles_objeto_bd.php"); 
+         include("modal/editar_permisos.php");
+        include("modal/eliminar_permiso.php");
+
+ ?>
     <section id="container">
         <!--header start-->
         <header class="header fixed-top clearfix">
@@ -150,32 +168,84 @@ if (!empty($_POST['clientId'])) {
             <section class="wrapper">
                 <div class="table-agile-info">
                     <div class="panel panel-default">
+                        
+                        <form  method="POST" action="<?php echo $_SERVER["PHP_SELF"] ?>" accept-charset="UTF-8" class="form-conteiner" name = "f1">
                         <div class="panel-heading">
-                       PANTALLAS
+                       PERMISOS ROLES
                             <div class="btn-group pull-right">
-                                <button type='button' class="btn btn-success" onClick="location.href='add_clie.php'"><span class="glyphicon glyphicon-plus"></span> Agregar </button>
+                                <button type='submit' class="btn btn-success"  id="id_btn_guardar"  name="btn_guardar"><span class="glyphicon glyphicon-plus"></span> Agregar </button>
                             </div>
                         </div>
                         <div class="row w3-res-tb">
 
                         <div class="col-lg-3">
 		<div class="input-group">
-		  <span class="input-group-addon">INICIO</span>
-		   <input  type="date" id="fecha_ini"  name="fecha_ini" placeholder="FECHA INICIO"></div>
+		  <span class="input-group-addon">ROL</span>
+		   
+             <select class="myselect"   style='width:200px' id="combo_roles" name="combo_roles">
+
+    <!--//seleccionamos id rol y nombre del rol de la tabla roles y las metemos en variable $sql .
+    luego verificamos la conexion,luego entramos a una codicion si numero de columnas es mayor q 0 -->
+
+    	<?php 
+
+    $sql = "SELECT rol_id_rol, rol_nombre FROM roles";
+    $result = $mysqli->query($sql);
+    echo "<option selected = 'selected' disabled = 'disabled'> Elija un Rol</option>";
+    if ($result->num_rows > 0) {
+        // output data of each row
+        while($row = $result->fetch_assoc()) {
+        //codigo generado por php
+            echo "<option value='".$row['rol_id_rol']."'>".$row['rol_nombre']."</option>"; 
+        }
+    } 
+    	?>
+
+    </select>                 
+                            
+                            
+                            </div>
 		</div>
-    
+                <div class="col-lg-4">
+		<div class="input-group">
+		  <span class="input-group-addon">PANTALLA</span>
+		   <select  class="myselect" style='width:200px' id="combo_objeto" name="combo_objeto">
+
+<!--//seleccionamos id rol y nombre del rol de la tabla roles y las metemos en variable $sql .
+luego verificamos la conexion,luego entramos a una codicion si numero de columnas es mayor q 0 -->
+
+	<?php 
+
+$sql = "SELECT menu_id, pant_nombre FROM menu where id_padre !=0 order by pant_nombre";
+$result = $mysqli->query($sql);
+
+if ($result->num_rows > 0) {
+    echo "<option selected = 'selected' disabled = 'disabled'> Elija una Pantalla</option>";
+    // output data of each row
+    while($row = $result->fetch_assoc()) {
+    //codigo generado por php
+        echo "<option value='".$row['menu_id']."'>".$row['pant_nombre']."</option>";
+    }
+} 
+	?>
+
+</select> </div>
+		</div>
    
 		<div class="input-group">
-		  <span class="input-group-addon">FIN</span>
-		<input  type="date"   id="fecha_fin" name="fecha_fin"  >
-
+		   <input type="checkbox" id="ck_insertar" name = 'ck_insertar'style="margin-left:20px">Insertar
+            <br>
+            <input type="checkbox" id="ck_actualizar" name = 'ck_actualizar' style="margin-left:20px">Actualizar
+            <br>
+            <input type="checkbox" id="ck_eliminar" name = 'ck_eliminar' style="margin-left:20px">Eliminar
 	
 
 
-                        
-<button id="procesar" class="btn btn-primary">Procesar</button>
-             <button class="btn btn-default" title="salir de la consulta"  >   <span class="fa fa-outdent" title="salir de la consulta"  onclick="load(1)"></span></button>
+
                         </div>
+                            
+                            
+                            
                         <div id="resultados"></div><!-- Carga los datos ajax -->
                         <div class='outer_div'></div>
 
@@ -183,11 +253,7 @@ if (!empty($_POST['clientId'])) {
                 </div>
             </section>
 
-            <?php
-                if ($errors != '') {
-                    echo showMessage($errors, $type);
-                }
-                ?>
+       
             <script src="js/bootstrap.js"></script>
             <script src="js/jquery.dcjqaccordion.2.7.js"></script>
             <script src="js/scripts.js"></script>
@@ -275,9 +341,9 @@ if (!empty($_POST['clientId'])) {
 
         $("#loader").fadeIn('slow');
         $.ajax({
-            url: 'ajax/buscar_cliente.php',
+            url: 'ajax/buscar_permisos.php',
             beforeSend: function(objeto) {
-                $('#loader').html('<img src="./img/ajax-loader.gif"> Cargando...');
+                $('#loader').html('<img src="./images/ajax-loader.gif"> Cargando...');
             },
             success: function(data) {
                 $(".outer_div").html(data).fadeIn('slow');
@@ -292,7 +358,7 @@ if (!empty($_POST['clientId'])) {
 
 
 
-
+$(".myselect").select2();
 
          
     $('#procesar').on('click', function(){
