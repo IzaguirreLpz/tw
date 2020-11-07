@@ -64,10 +64,6 @@ $fin=$_POST['fin'];
     
     
     
-<<<<<<< HEAD
-    echo "INSERT INTO detalle_factura(numero_factura, id_producto, cantidad, precio_venta) select $num_fact , id_producto, cantidad_tmp,precio_tmp from tmp where num=$ate";
-    $detalle=mysqli_query($mysqli,"INSERT INTO detalle_factura(numero_factura, id_producto, cantidad, precio_venta) select $num_fact , id_producto, cantidad_tmp,precio_tmp from tmp where num=$ate");
-=======
     }else {
         
         
@@ -76,7 +72,6 @@ $fin=$_POST['fin'];
        $delinsertar_fact=mysqli_query($mysqli,"delete from detalle_factura where numero_factura='".$bol."'");
         $detalle=mysqli_query($mysqli,"INSERT INTO detalle_factura(numero_factura, id_producto, cantidad, precio_venta) select $bol , id_producto, cantidad_tmp,precio_tmp from tmp where num=$ate");
     
->>>>>>> b6d551410d1b7d32bcae7553fa52edadf9ca4d69
     
     
     
@@ -87,13 +82,8 @@ $fin=$_POST['fin'];
     
     
 
-<<<<<<< HEAD
-  
-       $insertar_fact=mysqli_query($mysqli,"INSERT INTO facturas ( numero_factura, id_cliente, id_vendedor, condiciones, total_venta, estado_factura, id_atencion) VALUES ('$num_fact','$id_cliente','$idUsuario','$condiciones',(SELECT sum(precio_tmp) as Total FROM tmp WHERE num=$ate),'2',$ate)");
-=======
     		$sql="UPDATE tbl_atenciones SET id_auto='".$auto."',observacion='".$obs."', status= '".$fin."'  WHERE id_atencion=".$ate."";
     
->>>>>>> b6d551410d1b7d32bcae7553fa52edadf9ca4d69
     
     
 		$query_update = mysqli_query($mysqli,$sql);

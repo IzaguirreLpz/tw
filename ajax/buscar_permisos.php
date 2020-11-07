@@ -1,33 +1,33 @@
 
 <?php
-session_start();
 
+session_start();
 require '../funcs/conexion.php';
 require '../funcs/funcs.php';
-$rol = $_SESSION['id_rol'];
+
+if(($_SESSION['id_usuario'])){
  $idUsuario = $_SESSION['id_usuario'];
-$eliminar=getPer('per_eliminacion',$rol,'7');
-$actualizar=getPer('per_actualizacion',$rol,'7'); 
+    $rol = $_SESSION['id_rol'];
+  
+//	$eliminar=getPer('permiso_eliminacion',$rol,'3');
+	//$actualizar=getPer('permiso_actualizacion',$rol,'3');
+
+	
+	
+}else{
+	header ("Location: index.php");
+}
+
 
 ?>
-       <link href="css1/bootstrap.min.css" rel="stylesheet">
-    <link href="css1/datepicker3.css" rel="stylesheet">
-    <link href="css/dataTables.bootstrap.css" rel="stylesheet">
-    <link href="css1/estilos.css" rel="stylesheet">
+  <div class="table-responsive" id="tableListar_length">
+  <table class="table table-striped b-t b-light" id="tableListar" style="margin: 10px 0 0 0;">
+    <thead>
+      <tr class="success">
 
-        
-  
-     
-      
-        <div class="dataTables_length" id="tableListar_length">
-      <table class="table" id="tableListar">
-        <thead>
-          <tr class="info">
-  
-           
+
              
-           
-         
+          
               <th>ID</th>
               <th>Rol</th>
              <th>Pantalla</th>
@@ -41,19 +41,14 @@ $actualizar=getPer('per_actualizacion',$rol,'7');
         <tbody>
           <?php
 			
-			
-			
-
-  
-			
-			 $sql = "SELECT * FROM siec_permisos 
+			  $sql = "SELECT * FROM permisos 
 inner join menu on menu_id= per_id_pantalla
-inner join siec_roles on rol_id_rol= per_id_rol";
-
+inner join roles on rol_id_rol= per_id_rol";
+     
 			$query = mysqli_query($mysqli, $sql);
      
 			
-			$count_query   = mysqli_query($mysqli, "SELECT count(*) AS numrows FROM siec_permisos  ");
+			$count_query   = mysqli_query($mysqli, "SELECT count(*) AS numrows from permisos");
 		$row1= mysqli_fetch_array($count_query);
 			
 			$numrows = $row1['numrows'];
@@ -63,7 +58,9 @@ inner join siec_roles on rol_id_rol= per_id_rol";
 			
         while ($row=mysqli_fetch_array($query)){
 			
-                           $id=$row['per_id_permiso'];
+			
+			
+			             $id=$row['per_id_permiso'];
 			               $id_pantalla=$row['pant_nombre'];
              $rol=$row['rol_nombre'];
 						$consulta=$row['per_consulta'];
@@ -78,10 +75,10 @@ inner join siec_roles on rol_id_rol= per_id_rol";
                  $fecha= date('d/m/Y', strtotime($fecha));
              $text_estado="Pendiente";$label_class='label-warning';
             
-						
           ?>
    
              
+              
               <tr>
               
             <td><?php echo $id; ?></td>
@@ -178,24 +175,16 @@ inner join siec_roles on rol_id_rol= per_id_rol";
                   <!-- <a href="#" class='btn btn-danger' title='eliminar cliente'  data-toggle="modal" data-target="#myModal4" onclick='obtener_id("<?php echo $item;?>")' ><i class="glyphicon glyphicon-remove"></i></a>     -->
                     
                                       
-                   
-     <?php 
-    if ($idUsuario==1 || $actualizar==1){
-                    ?>   
+  
                     
               <a href="#" class='btn btn-default' title='Editar Permiso'  data-toggle="modal" data-target="#myModal2" onclick='capturar("<?php echo $row['per_id_permiso'];?>","<?php echo $row['per_consulta'];?>","<?php echo $row['per_insercion'];?>","<?php echo $row['per_actualizacion'];?>","<?php echo $row['per_eliminacion'];?>","<?php echo $rol; $id_pantalla; ?>" )' ><i class="fa fa-pencil"></i></a>
-                                 <?php }?> 	
-                  
-                    
-                  <?php 
-    if ($idUsuario==1 || $eliminar==1){
-                    ?>   
+                                 
               
               <a href="#" class='btn btn-danger' title='Editar producto' onclick="obtener_datos('<?php echo $id;?>');" data-toggle="modal" data-target="#myModal3"><i class="fa fa-times"></i></a> 
     
 						
                
-                <?php }?>
+                
              
                
                
@@ -217,15 +206,8 @@ inner join siec_roles on rol_id_rol= per_id_rol";
       </table>
      
       </div>
-      <script src="js1/jquery-1.11.1.min.js"></script>
-    <script src="js1/bootstrap.min.js"></script>
-	<script src="js1/bootstrap-datepicker.js"></script>
-	<script src="js1/locales/bootstrap-datepicker.es.js"></script>
-	<script src="js1/jquery.dataTables.min.js"></script>
-    
-        <script src="js1/dataTables.bootstrap.js"></script>
-
-        <script src="js1/validator.js"></script>
-
-    <script src="js1/global.js"></script>
-     
+      <script src="js/bootstrap-datepicker.js"></script>
+<script src="js/locales/bootstrap-datepicker.es.js"></script>
+<script src="js/jquery.dataTables.min.js"></script>
+<script src="js/dataTables.bootstrap.js"></script>
+<script src="js/global.js"></script>
