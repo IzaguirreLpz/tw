@@ -128,12 +128,12 @@
               </div>
     
       <div class="form-group">  
-                <label class="col-sm-3 control-label">Medicamento</label>
+                <label class="col-sm-3 control-label">Producto</label>
                 <div class="col-sm-6">
-                  <select  class="form-control"  name="codigo" id="codigo" data-placeholder="-- Seleccionar Medicamento --" onchange="tampil_obat(this)" autocomplete="off" required>
+                  <select  class="form-control"  name="codigo" id="codigo" data-placeholder="-- Seleccionar Producto --" onchange="tampil_obat(this)" autocomplete="off" required>
                     <option value="">SELECCIONE UN PRODUCTO</option>
                     <?php
-                      $query_obat = mysqli_query($mysqli, "SELECT codigo_producto, nombre_producto FROM products where tipo=1 ORDER BY nombre_producto ASC") or die('error '.mysqli_error($mysqli));
+                      $query_obat = mysqli_query($mysqli, "SELECT codigo_producto, nombre_producto FROM products where tipo=0 ORDER BY nombre_producto ASC") or die('error '.mysqli_error($mysqli));
                       while ($data_obat = mysqli_fetch_assoc($query_obat)) {
                         echo"<option value=\"$data_obat[codigo_producto]\"> $data_obat[codigo_producto] | $data_obat[nombre_producto] </option>";
                       }

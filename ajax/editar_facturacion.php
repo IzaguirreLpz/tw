@@ -13,21 +13,45 @@ if (isset($_POST['precio_venta'])){$precio_venta=floatval($_POST['precio_venta']
 	include("funciones.php");
 if (!empty($id) and !empty($cantidad) and !empty($precio_venta))
 {
-$update=mysqli_query($mysqli, "UPDATE products SET cant='".$cantidad."' WHERE id_producto='".$id."'");
-    //$simbolo_moneda=get_row('cant',' products', 'id_producto', id);
+
+    $simbolo_moneda="L";
 $insert=mysqli_query($mysqli, "INSERT INTO detalle_factura (numero_factura, id_producto,cantidad,precio_venta) VALUES ('$numero_factura','$id','$cantidad','$precio_venta')");
 
-$cantpro=mysqli_query($mysqli, "SELECT cantidad FROM products WHERE id_producto='".$id."'");
+
+$cantpro=getValor($id);
+$cantpro=intval($cantpro);
+echo "cant prod:".$cantpro;
+echo "cantitidad bd".$cantidad;
+$stock=$cantpro-$cantidad;
+echo  "total de la resta $stock";
+echo  "UPDATE products SET cant='".$stock."' WHERE id_producto='".$id."'";
+
+	$update=mysqli_query($mysqli, "UPDATE products SET cant='".$stock."' WHERE id_producto='".$id."'");
+	
+	?>
+   <script>load(1);</script>
+	<?php
 }
    
-   // $stock=$cantpro-$cantidad;
+
    
 
 
 if (isset($_GET['id']))//codigo elimina un elemento del array
 {
 $id_detalle=intval($_GET['id']);	
+$canti_det= getCualquiera('cantidad','detalle_factura','id_detalle',$id_detalle);
+$canti_det=intval($canti_det);
+$id_pro= getCualquiera('id_producto','detalle_factura','id_detalle',$id_detalle);
+$cantprod=getValor($id_pro);
+$cantprod=intval($cantprod);
+$stock=$cantprod+$canti_det;
+$update=mysqli_query($mysqli, "UPDATE products SET cant='".$stock."' WHERE id_producto='".$id_pro."'");
+
 $delete=mysqli_query($mysqli, "DELETE FROM detalle_factura WHERE id_detalle='".$id_detalle."'");
+?>
+   <script>load(1);</script>
+	<?php
 }
 $simbolo_moneda=get_row('tbl_parametros','descripcion', 'id_parametro', 10);
 ?>

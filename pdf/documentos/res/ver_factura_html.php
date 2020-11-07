@@ -121,7 +121,7 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
 $nums=1;
 $sumador_total=0;
 $sql=mysqli_query($con, "select * from products, detalle_factura, facturas
-where products.id_producto=detalle_factura.id_producto and detalle_factura.numero_factura=facturas.numero_factura
+where products.id_producto=detalle_factura.id_producto and detalle_factura.numero_factura=facturas.id_factura
 and facturas.id_factura=$id_factura");
 
 while ($row=mysqli_fetch_array($sql))

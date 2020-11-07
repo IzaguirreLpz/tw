@@ -40,6 +40,8 @@ $idUsuario = $_SESSION['id_usuario'];
                     $proveedor = $row['proveedor'];
                     $categoria = $row['categorias'];
                     $fechaRegistro = $row['date_added'];
+                    $fechaRegistro = date('d/m/Y', strtotime($fechaRegistro));
+
             ?>
                     <tr>
                         <td><?php echo $codigo ?></td>

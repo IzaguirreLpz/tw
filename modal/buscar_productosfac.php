@@ -19,10 +19,12 @@
 					</form>
 					<div id="loader" style="position: absolute;	text-align: center;	top: 55px;	width: 100%;display:none;"></div><!-- Carga gif animado -->
 					<div class="outer_div" ></div><!-- Datos ajax Final -->
-				  </div>
+					<div class="alert alert-info" role="alert">
+					 <P style="font-weight: bold;">IMPORTANTE: </P> Los productos que su cantidad en inventario sea igual a 0 no se mostraran en esta lista.
+					</div>
+				</div>
 				  <div class="modal-footer">
 					<button  type="submit"  class="btn btn-default" data-dismiss="modal">Cerrar</button>
-					
 				  </div>
 				</div>
 			  </div>

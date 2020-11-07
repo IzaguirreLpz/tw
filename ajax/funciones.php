@@ -10,7 +10,24 @@ function get_row($table,$row, $id, $equal){
 }
 
 
+function getCualquiera($campo, $tabla, $campoWhere, $valor)
+{
+	global $mysqli;
 
+	$stmt = $mysqli->prepare("SELECT $campo FROM $tabla WHERE $campoWhere = ? ");
+	$stmt->bind_param('i', $valor);
+	$stmt->execute();
+	$stmt->store_result();
+	$num = $stmt->num_rows;
+
+	if ($num > 0) {
+		$stmt->bind_result($_campo);
+		$stmt->fetch();
+		return $_campo;
+	} else {
+		return null;
+	}
+}
 
 
 	function getValor($valor)

@@ -203,7 +203,7 @@ if (!empty($_POST)) {
                             <form class="cmxform form-horizontal" method="post" action="" novalidate="novalidate">
                             <?php if($edicion != 0){
                                 ?>
-                            <input type="hidden" id="usu" name="editMode" <?php echo "value='$idElement'";?> >
+                            <input type="hidden" id="usu" name="editMode" <?php echo "value=$idElement";?> >
                             <?php
                             }
                             ?>
@@ -247,10 +247,10 @@ if (!empty($_POST)) {
                                                     <?php
                                                     if ($edicion != 0) {
                                                         $client = getArray("tbl_clientes", "id_cliente", $cliente);
-                                                        echo "<option value=`{$client['id_cliente']}`>{$client['nom_cliente']}</option>";
+                                                        echo "<option value={$client['id_cliente']}>{$client['nom_cliente']}</option>";
                                                     }
                                                     foreach ($result as $key => $value) {
-                                                        echo "<option value=`{$value['id_cliente']}`>{$value['nom_cliente']}</option>";
+                                                        echo "<option value={$value['id_cliente']}>{$value['nom_cliente']}</option>";
                                                    }
                                                     ?>
                                                 </select>

@@ -50,6 +50,7 @@
 				<tr  class="warning">
 					<th>Código</th>
 					<th>Producto</th>
+					<th><span>Stock</span></th>
 					<th><span class="pull-right">Cant.</span></th>
 					<th><span class="pull-right">Precio</span></th>
 					<th class='text-center' style="width: 36px;">Agregar</th>
@@ -59,13 +60,14 @@
 					$id_producto=$row['id_producto'];
 					$codigo_producto=$row['codigo_producto'];
 					$nombre_producto=$row['nombre_producto'];
-                    $cantidad=$row['cant'];
+					$cantidad=$row['cant'];
 					$precio_venta=$row["precio_producto"];
 					$precio_venta=number_format($precio_venta,2,'.','');
 					?>
 					<tr>
 						<td><?php echo $codigo_producto; ?></td>
 						<td><?php echo $nombre_producto; ?></td>
+						<td><?php echo $cantidad; ?></td>
 						<td class='col-xs-1'>
 						<div class="pull-right">
 						<input type="number" class="form-control" style="text-align:right" min="1" max="<?php echo $cantidad; ?>" id="cantidad_<?php echo $id_producto; ?>"  value="1" >
