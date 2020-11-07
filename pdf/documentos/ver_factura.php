@@ -38,13 +38,17 @@
     $content = ob_get_clean();
 
     try
-    {
+    {	
+		error_reporting(E_ALL & ~E_NOTICE);
+		ini_set('display_errors', 0);
+		ini_set('log_errors', 1);
         // init HTML2PDF
         $html2pdf = new HTML2PDF('P', 'LETTER', 'es', true, 'UTF-8', array(0, 0, 0, 0));
         // display the full page
         $html2pdf->pdf->SetDisplayMode('fullpage');
         // convert
-        $html2pdf->writeHTML($content, isset($_GET['vuehtml']));
+		$html2pdf->writeHTML($content, isset($_GET['vuehtml']));
+		ob_end_clean();
         // send the PDF
         $html2pdf->Output('Factura.pdf');
     }

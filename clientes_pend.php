@@ -53,7 +53,7 @@ $objeto="pantalla usuario";
  
     <!-- //font-awesome icons -->
     
-     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
 	     <link href="css/select2.min.css" rel="stylesheet" /> 
       <script src="js/select2.min.js"></script>
 </head>
