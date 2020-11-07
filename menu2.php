@@ -27,6 +27,7 @@
       <li><a href='facturas.php'><i class=''></i>Facturas</a> </li>
      
       <li><a href='productos.php'><i class=''></i>Productos</a> </li>
+      <li><a href='servicios.php'><i class=''></i>Servicios</a> </li>
    
       <li><a href='mov_inventario.php'><i class=''></i>Mov Inventario</a> </li>
    </ul>

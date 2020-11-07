@@ -28,7 +28,7 @@ if (empty($_POST['prodictId'])) {
     $productId = $_POST['prodictId'];
     $a = 3;
 
-    $sql = "DELETE  FROM tbl_productos WHERE id_productos='" . $productId . "'";
+    $sql = "DELETE  FROM products WHERE id_producto='" . $productId . "'";
     $query = mysqli_query($mysqli, $sql);
     $objeto = "tbl_productos";
     $accion = "DELETE";

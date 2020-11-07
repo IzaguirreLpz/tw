@@ -213,7 +213,7 @@ if (!empty($_POST)) {
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fas fa-file-signature"></i></span>
                                             <input maxlength="70" type="text" <?php if ($edicion != 0) {
-                                    echo "value=$marca";
+                                    echo "value='$marca'";
                                 } ?> name="marca" placeholder="Marca" style="text-transform: uppercase;" id="txt_nc" autocomplete="off" autofocus="on" class="form-control" onkeypress="return soloLetras(event)" onPaste="return false;" title="Marca del Vehiculo" required>
                                         </div>
                                     </div>
@@ -226,7 +226,7 @@ if (!empty($_POST)) {
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i class="fas fa-file-alt"></i></span>
                                                     <input maxlength="70" type="text" <?php if ($edicion != 0) {
-                                    echo "value=$modelo";
+                                    echo "value='$modelo'";
                                 } ?> name="modelo" placeholder="Modelo" style="text-transform: uppercase;" id="txt_nc" autocomplete="off" autofocus="on" class="form-control" onkeypress="return soloLetras(event)" onPaste="return false;" title="Marca del Vehiculo" required>
                                             </div>
                                         </div>
@@ -247,10 +247,10 @@ if (!empty($_POST)) {
                                                     <?php
                                                     if ($edicion != 0) {
                                                         $client = getArray("tbl_clientes", "id_cliente", $cliente);
-                                                        echo "<option value={$client['id_cliente']}>{$client['nom_cliente']}</option>";
+                                                        echo "<option value=`{$client['id_cliente']}`>{$client['nom_cliente']}</option>";
                                                     }
                                                     foreach ($result as $key => $value) {
-                                                        echo "<option value={$value['id_cliente']}>{$value['nom_cliente']}</option>";
+                                                        echo "<option value=`{$value['id_cliente']}`>{$value['nom_cliente']}</option>";
                                                    }
                                                     ?>
                                                 </select>
@@ -265,7 +265,7 @@ if (!empty($_POST)) {
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fas fa-palette"></i></span>
                                             <input maxlength="15" type="text" name="color" <?php if ($edicion != 0) {
-                                                     echo "value=$color";
+                                                     echo "value='$color'";
                                                 } ?> style="text-transform: uppercase;" id="txt_us" autocomplete="off" autofocus="on" onPaste="return false;" class="form-control" title="Recuerda ingresar un precio" required>
                                         </div>
                                     </div>
@@ -278,7 +278,7 @@ if (!empty($_POST)) {
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fas fa-car-side"></i></span>
                                             <input maxlength="15" type="text" name="placa" <?php if ($edicion != 0) {
-                                                     echo "value=$placa";
+                                                     echo "value='$placa'";
                                                 } ?> style="text-transform: uppercase;" id="txt_us" autocomplete="off" autofocus="on" onPaste="return false;" class="form-control" title="Recuerda ingresar un precio" required>
                                         </div>
                                     </div>

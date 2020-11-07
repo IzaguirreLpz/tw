@@ -88,12 +88,18 @@ if(!isset($_SESSION['id_usuario'])){
 								<input type="text" class="form-control input-sm" id="fecha" value="<?php echo date("d/m/Y");?>" readonly>
 							</div>
 							<label for="email" class="col-md-1 control-label">Pago</label>
-							<div class="col-md-3">
+							<div class="col-md-2">
 								<select class='form-control input-sm' id="condiciones">
 									<option value="1">Efectivo</option>
 									<option value="2">Cheque</option>
 									<option value="3">Transferencia bancaria</option>
 									<option value="4">Crédito</option>
+								</select>
+							</div>
+							<div class="col-md-2">
+								<select class='form-control input-sm ' id="estado_factura" name="estado_factura">
+									<option value="1">Pagado</option>
+									<option value="2">Pendiente</option>
 								</select>
 							</div>
 						</div>

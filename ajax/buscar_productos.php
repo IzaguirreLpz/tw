@@ -12,8 +12,8 @@ $idUsuario = $_SESSION['id_usuario'];
     <table class="table table-striped b-t b-light" id="tableListar" style="margin: 10px 0 0 0;">
         <thead>
             <tr class="success">
+                <th>Codigo</th>
                 <th>Nombre</th>
-                <th>Descripcion</th>
                 <th>Precio De Venta</th>
                 <th>Precio Costo</th>
                 <th>Proveedor</th>
@@ -25,30 +25,30 @@ $idUsuario = $_SESSION['id_usuario'];
         <tbody>
 
             <?php
-            $sql = "SELECT * FROM tbl_productos order by id_productos ASC";
+            $sql = "SELECT * FROM bd_tw.products where tipo=0 order by id_producto;";
             $query = mysqli_query($mysqli, $sql);
             $count_query   = mysqli_query($mysqli, "SELECT count(*) AS numrows FROM tbl_usuario");
             $row1 = mysqli_fetch_array($count_query);
             $numrows = $row1['numrows'];
             if ($numrows > 0) {
                 while ($row = mysqli_fetch_array($query)) {
-                    $product_id = $row['id_productos'];
-                    $nombre = $row['nombre'];
-                    $descripcion = $row['descripcion'];
-                    $precioVenta = $row['precio_venta'];
+                    $product_id = $row['id_producto'];
+                    $codigo = $row['codigo_producto'];
+                    $nombre = $row['nombre_producto'];
+                    $precio = $row['precio_producto'];
                     $precioCosto = $row['precio_costo'];
                     $proveedor = $row['proveedor'];
-                    $categoria = $row['categoria'];
-                    $fechaRegistro = $row['fecha_registro'];
+                    $categoria = $row['categorias'];
+                    $fechaRegistro = $row['date_added'];
             ?>
                     <tr>
-                        <td><?php echo $nombre ?></td>
-                        <td><?php echo $descripcion; ?></td>
-                        <td><?php echo $proveedor; ?></td>
-                        <td><?php echo $precioVenta; ?></td>
+                        <td><?php echo $codigo ?></td>
+                        <td><?php echo $nombre; ?></td>
+                        <td><?php echo $precio; ?></td>
                         <td><?php echo $precioCosto; ?></td>
+                        <td><?php echo $proveedor; ?></td>
                         <td><?php echo $categoria; ?></td>
-                        <td><?php echo $fechaRegistro; ?></td>                    
+                        <td><?php echo $fechaRegistro; ?></td>
                         <td>
                             <a href="add_product.php?idProduct=<?php echo $product_id ?> " class='btn btn-default' ui-toggle-class=""><i class="fa fa-pencil text-success text-dark"></i></a>
                             <a href="#" class='btn btn-default' title='Eliminar Producto' data-toggle="modal" data-target="#myModal4" onclick='obtener_id("<?php echo $product_id; ?>")'><i class="glyphicon glyphicon-remove"></i></a>

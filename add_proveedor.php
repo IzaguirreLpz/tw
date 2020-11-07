@@ -222,7 +222,7 @@ if (!empty($_POST)) {
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fas fa-file-signature"></i></span>
                                             <input maxlength="70" type="text" <?php if ($edicion != 0) {
-                                    echo "value=$nombro";
+                                    echo "value='$nombro'";
                                 } ?> name="nombre" placeholder="Marca" style="text-transform: uppercase;" id="txt_nc" autocomplete="off" autofocus="on" class="form-control" onkeypress="return soloLetras(event)" onPaste="return false;" title="Marca del Vehiculo" required>
                                         </div>
                                     </div>
@@ -235,7 +235,7 @@ if (!empty($_POST)) {
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fas fa-phone"></i></span>
                                             <input maxlength="8" type="number" name="tel1" <?php if ($edicion != 0) {
-                                                     echo "value=$tel1";
+                                                     echo "value='$tel1'";
                                                 } ?> style="text-transform: uppercase;" id="txt_us" autocomplete="off" autofocus="on" onPaste="return false;" class="form-control" title="Recuerda ingresar un precio" required>
                                         </div>
                                     </div>
@@ -248,7 +248,7 @@ if (!empty($_POST)) {
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fas fa-phone"></i></span>
                                             <input maxlength="8" type="number" name="tel2" <?php if ($edicion != 0) {
-                                                     echo "value=$tel2";
+                                                     echo "value='$tel2'";
                                                 } ?> style="text-transform: uppercase;" id="txt_us" autocomplete="off" autofocus="on" onPaste="return false;" class="form-control" title="Recuerda ingresar un precio" required>
                                         </div>
                                     </div>
@@ -261,7 +261,7 @@ if (!empty($_POST)) {
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fas fa-compass"></i></span>
                                             <input type="text" name="direccion" <?php if ($edicion != 0) {
-                                                     echo "value=$direccion";
+                                                     echo "value='$direccion'";
                                                 } ?> style="text-transform: uppercase;" id="txt_us" autocomplete="off" autofocus="on" onPaste="return false;" class="form-control" required>
                                         </div>
                                     </div>
@@ -274,7 +274,7 @@ if (!empty($_POST)) {
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="far fa-file-alt"></i></span>
                                             <input maxlength="9" pattern="\d*" type="number" name="rtn" <?php if ($edicion != 0) {
-                                                     echo "value=$rtn";
+                                                     echo "value='$rtn'";
                                                 } ?> style="text-transform: uppercase;" id="txt_us" autocomplete="off" autofocus="on" onPaste="return false;" class="form-control" title="Recuerda ingresar un precio" required>
                                         </div>
                                     </div>
@@ -287,7 +287,7 @@ if (!empty($_POST)) {
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fas fa-user"></i></span>
                                             <input maxlength="20" type="text" name="representante" <?php if ($edicion != 0) {
-                                                     echo "value=$representante";
+                                                     echo "value='$representante'";
                                                 } ?> style="text-transform: uppercase;" id="txt_us" autocomplete="off" autofocus="on" onPaste="return false;" class="form-control" title="Recuerda ingresar un precio" required>
                                         </div>
                                     </div>
@@ -300,7 +300,7 @@ if (!empty($_POST)) {
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fas fa-envelope"></i></span>
                                             <input type="email" name="correo" <?php if ($edicion != 0) {
-                                                     echo "value=$email";
+                                                     echo "value='$email'";
                                                 } ?> id="txt_us" autocomplete="off" autofocus="on" onPaste="return false;" class="form-control" title="Recuerda ingresar un precio" required>
                                         </div>
                                     </div>

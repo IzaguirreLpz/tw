@@ -1,5 +1,5 @@
 <style type="text/css">
-<!--
+
 table { vertical-align: top; }
 tr    { vertical-align: top; }
 td    { vertical-align: top; }
@@ -31,15 +31,14 @@ td    { vertical-align: top; }
 .border-bottom{
 	border-bottom: solid 1px #bdc3c7;
 }
-table.page_footer {width: 100%; border: none; background-color: white; padding: 2mm;border-collapse:collapse; border: none;}
+table.page_footer {
+	width: 100%; border: none; background-color: white; padding: 2mm;border-collapse:collapse; border: none;
 }
--->
 </style>
 <page backtop="15mm" backbottom="15mm" backleft="15mm" backright="15mm" style="font-size: 12pt; font-family: arial" >
         <page_footer>
         <table class="page_footer">
             <tr>
-
                 <td style="width: 50%; text-align: left">
                     P&aacute;gina [[page_cu]]/[[page_nb]]
                 </td>
@@ -52,8 +51,6 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
     <?php include("encabezado_factura.php");?>
     <br>
     
-
-	
     <table cellspacing="0" style="width: 100%; text-align: left; font-size: 11pt;">
         <tr>
            <td style="width:50%;" class='midnight-blue'>FACTURAR A</td>
@@ -61,23 +58,19 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
 		<tr>
            <td style="width:50%;" >
 			<?php 
-				$sql_cliente=mysqli_query($con,"select * from clientes where id_cliente='$id_cliente'");
+				$sql_cliente=mysqli_query($con,"select * from tbl_clientes where id_cliente='$id_cliente'");
 				$rw_cliente=mysqli_fetch_array($sql_cliente);
-				echo $rw_cliente['nombre_cliente'];
+				echo $rw_cliente['nom_cliente'];
 				echo "<br>";
-				echo $rw_cliente['direccion_cliente'];
+				echo $rw_cliente['direccion'];
 				echo "<br> Teléfono: ";
-				echo $rw_cliente['telefono_cliente'];
+				echo $rw_cliente['celular'];
 				echo "<br> Email: ";
-				echo $rw_cliente['email_cliente'];
-			?>
-			
+				echo $rw_cliente['cor_cliente'];
+			?>	
 		   </td>
         </tr>
-        
-   
     </table>
-    
        <br>
 		<table cellspacing="0" style="width: 100%; text-align: left; font-size: 11pt;">
         <tr>
@@ -88,9 +81,9 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
 		<tr>
            <td style="width:35%;">
 			<?php 
-				$sql_user=mysqli_query($con,"select * from users where user_id='$id_vendedor'");
+				$sql_user=mysqli_query($con,"select * from tbl_usuario where id_usuario='$id_vendedor'");
 				$rw_user=mysqli_fetch_array($sql_user);
-				echo $rw_user['firstname']." ".$rw_user['lastname'];
+				echo $rw_user['nombre_usuario'];
 			?>
 		   </td>
 		  <td style="width:25%;"><?php echo date("d/m/Y");?></td>
@@ -103,9 +96,6 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
 				?>
 		   </td>
         </tr>
-		
-        
-   
     </table>
 	<br>
   
@@ -149,7 +139,6 @@ while ($row=mysqli_fetch_array($sql))
             <td class='<?php echo $clase;?>' style="width: 60%; text-align: left"><?php echo $nombre_producto;?></td>
             <td class='<?php echo $clase;?>' style="width: 15%; text-align: right"><?php echo $precio_venta_f;?></td>
             <td class='<?php echo $clase;?>' style="width: 15%; text-align: right"><?php echo $precio_total_f;?></td>
-            
         </tr>
 
 	<?php 
@@ -172,20 +161,16 @@ while ($row=mysqli_fetch_array($sql))
 		<tr>
             <td colspan="3" style="widtd: 85%; text-align: right;">IVA (<?php echo $impuesto; ?>)% <?php echo $simbolo_moneda;?> </td>
             <td style="widtd: 15%; text-align: right;"> <?php echo number_format($total_iva,2);?></td>
-        </tr><tr>
+        </tr>
+        <tr>
             <td colspan="3" style="widtd: 85%; text-align: right;">TOTAL <?php echo $simbolo_moneda;?> </td>
             <td style="widtd: 15%; text-align: right;"> <?php echo number_format($total_factura,2);?></td>
         </tr>
     </table>
 	
-	
-	
 	<br>
 	<div style="font-size:11pt;text-align:center;font-weight:bold">Gracias por su compra!</div>
 	
-	
-	  
-
 </page>
 
 <?php

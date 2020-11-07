@@ -18,7 +18,9 @@
 	exit;
 	}
 
-	require_once(dirname(__FILE__).'/../html2pdf.class.php');
+	//require_once(dirname(__FILE__).'/../html2pdf.class.php');
+	require_once '../../vendor/autoload.php';
+	use Spipu\Html2Pdf\Html2Pdf;
 		
 	//Variables por GET
 	$id_cliente=intval($_GET['id_cliente']);
@@ -37,14 +39,15 @@
 
     try
     {
+  
         // init HTML2PDF
         $html2pdf = new HTML2PDF('P', 'LETTER', 'es', true, 'UTF-8', array(0, 0, 0, 0));
         // display the full page
         $html2pdf->pdf->SetDisplayMode('fullpage');
         // convert
-        $html2pdf->writeHTML($content, isset($_GET['vuehtml']));
+        $html2pdf->writeHTML('<h1>Juank Cool</h1>');
         // send the PDF
-        $html2pdf->Output('Factura.pdf');
+        $html2pdf->Output();
     }
     catch(HTML2PDF_exception $e) {
         echo $e;
