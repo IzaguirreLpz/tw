@@ -235,7 +235,6 @@ require 'modal/eliminar_orden.php';
     	  
 $( "#editar_password" ).submit(function( event ) {
   $('#actualizar_datos3').attr("disabled", true);
-  alert("miau");
  var parametros = $(this).serialize();
 	 $.ajax({
 			type: "POST",
