@@ -273,7 +273,7 @@ if ($id_usu==1){
 				<div class="col-sm-8">
 			  	 <div class="input-group">
 			  	  <span class="input-group-addon"><i class="glyphicon glyphicon-list-alt"></i></span>
-				  <textarea input  class="form-control" id="direccion" name="direccion" placeholder="Direccion" pattern="[a-zA-Z0-9]{2,64}" title="Usuario"   onPaste="return false;"  maxlength="15" autocomplete="off"></textarea>
+				  <textarea input  class="form-control" id="direccion" name="direccion" placeholder="Direccion" pattern="[a-zA-Z0-9]{2,64}" title="Usuario"   onPaste="return false;" autocomplete="off"></textarea>
 				</div> 
 			  </div>
 			  </div>
