@@ -42,8 +42,10 @@
                         <?php
                         if ($id_usu == 1) {
                             include("menu2.php");
-                        }
-                        //echo $_SESSION['menus']; 
+                        }else{
+                        echo $_SESSION['menus'];
+                            }
+                        ?>
                         ?>
 
                     </ul>

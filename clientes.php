@@ -133,10 +133,12 @@ if (!empty($_POST['clientId'])) {
                 <div class="leftside-navigation">
                     <ul class="sidebar-menu" id="nav-accordion">
                         <?php
-                        if ($id_usu == 1) {
+                         if ($id_usu == 1) {
                             include("menu2.php");
-                        }
-                        //echo $_SESSION['menus']; 
+                        }else{
+                        echo $_SESSION['menus'];
+                            }
+                        ?>
                         ?>
 
                     </ul>

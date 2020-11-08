@@ -20,11 +20,7 @@ $insert=mysqli_query($mysqli, "INSERT INTO detalle_factura (numero_factura, id_p
 
 $cantpro=getValor($id);
 $cantpro=intval($cantpro);
-echo "cant prod:".$cantpro;
-echo "cantitidad bd".$cantidad;
 $stock=$cantpro-$cantidad;
-echo  "total de la resta $stock";
-echo  "UPDATE products SET cant='".$stock."' WHERE id_producto='".$id."'";
 
 	$update=mysqli_query($mysqli, "UPDATE products SET cant='".$stock."' WHERE id_producto='".$id."'");
 	
