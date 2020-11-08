@@ -3,18 +3,8 @@
 <link rel="stylesheet" type="text/css" href="./dist/sweetalert.css">
 
 
-<?php require("config/conexion2.php");
-session_start();
-
-
-
-
+<?php require("funcs/conexion.php");
 	$user_id = $_SESSION['id_usuario'];
-
-
-
-
-
 
 /*BOTON GUARDAR */
 if (isset($_POST['btn_guardar'])) {
@@ -79,9 +69,9 @@ if (isset($_POST['ck_insertar' ])) {
 $_permiso_insertar = '0';
 }
 
-$comparar_rol = "SELECT * FROM permisos WHERE  per_id_pantalla = '$_idobjeto'   and 	per_id_rol= $_idrol ";
+$comparar_rol = "SELECT * FROM permisos WHERE  per_id_pantalla = '$_idobjeto' and per_id_rol= $_idrol ";
       
-$result = $conn->query($comparar_rol);
+$result = $mysqli->query($comparar_rol);
 
 if ($result->num_rows > 0) {
 
@@ -98,7 +88,7 @@ else{
 $sql = "INSERT INTO permisos (	per_id_rol,per_id_pantalla,per_consulta,per_insercion,per_actualizacion,per_eliminacion, per_usu_modi)
 VALUES ('$_idrol','$_idobjeto','$_permiso_consulta','$_permiso_insertar','$_permiso_actualizar','$_permiso_eliminar', '$user_id')";
 
-if ($conn->query($sql) == TRUE) {
+if ($mysqli->query($sql) == TRUE) {
         ?>
 <script>
 swal({
@@ -134,7 +124,7 @@ $eli=$_POST['moda'];
 
                         $sql = "DELETE  FROM tbl_roles_objeto WHERE id_permiso = $eli";
     
-    $conn->query($sql);
+    $mysqli->query($sql);
 
         ?>
     
