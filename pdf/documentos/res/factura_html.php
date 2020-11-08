@@ -166,6 +166,6 @@
         </page>
 <?php
 $date=date("Y-m-d H:i:s");
-$insert=mysqli_query($con,"INSERT INTO facturas VALUES (NULL,'$numero_factura','$date','$id_cliente','$id_vendedor','$condiciones','$total_factura','1')");
+$insert=mysqli_query($con,"INSERT INTO facturas VALUES (NULL,'$numero_factura','$date',$id_cliente,$id_vendedor,$condiciones,'$total_factura','1')");
 $delete=mysqli_query($con,"DELETE FROM tmp WHERE session_id='".$session_id."'");
 ?>
