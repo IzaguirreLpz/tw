@@ -2,16 +2,9 @@
 <script src="./dist/sweetalert.min.js"></script>
 <link rel="stylesheet" type="text/css" href="./dist/sweetalert.css">
 
-<form  method="POST" action="<?php echo $_SERVER["PHP_SELF"] ?>" accept-charset="UTF-8" class="form-conteiner" name = "f1">
 
-
-  
-
-
-                            
-</form>
-<?php require("config/conexion2.php");  
-
+<?php require("config/conexion2.php");
+session_start();
 
 
 
