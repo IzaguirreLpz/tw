@@ -85,7 +85,8 @@ if(($_SESSION['id_usuario'])){
           ?>
         </tbody>
       </table>
-     
+     <script>
+     </script>
       </div>
       <script src="js/bootstrap-datepicker.js"></script>
       <script src="js/locales/bootstrap-datepicker.es.js"></script>

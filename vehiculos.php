@@ -78,11 +78,17 @@ if (!empty($_POST['clientId'])) {
     <link rel="stylesheet" href="css/monthly.css">
  
     <link rel="stylesheet" href="css/bootstrap.min.css">
-  <link rel="stylesheet" href="tableexport.min.css">
+ <!--  <link rel="stylesheet" href="tableexport.min.css"> -->
  
-  <script src="js/jquery.min.js"></script>
+  <!-- <script src="js/jquery.min.js"></script>
   <script src="js/FileSaver.min.js"></script>
-  <script src="js/tableexport.min.js"></script>
+  <script src="js/tableexport.min.js"></script> -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jqc-1.12.4/jszip-2.5.0/dt-1.10.22/b-1.6.5/b-flash-1.6.5/b-html5-1.6.5/b-print-1.6.5/datatables.min.css"/>
+ 
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/jqc-1.12.4/jszip-2.5.0/dt-1.10.22/b-1.6.5/b-flash-1.6.5/b-html5-1.6.5/b-print-1.6.5/datatables.min.js"></script>
+ 
   <!--- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>-->
 	     <link href="css/select2.min.css" rel="stylesheet" /> 
       <script src="js/select2.min.js"></script>
@@ -173,8 +179,8 @@ if (!empty($_POST['clientId'])) {
 
 
                         
-<button id="procesar" class="btn btn-primary">Procesar</button>
-             <button class="btn btn-default" title="salir de la consulta"  >   <span class="fa fa-outdent" title="salir de la consulta"  onclick="load(1)"></span></button>
+<button id="procesar" class="btn btn-primary">Generar Reporte</button>
+             <button class="btn btn-default" title="salir de la consulta"  >   <span class="fa fa-outdent" title="salir de la consulta"  onclick="load(1)"></span> Salir Reporte</button>
                         </div>
                         <div id="resultados"></div><!-- Carga los datos ajax -->
                         <div class='outer_div'></div>
@@ -269,7 +275,7 @@ if (!empty($_POST['clientId'])) {
       
 		var desde = $('#fecha_ini').val();
 		var hasta = $('#fecha_fin').val();
-		var url = 'ajax/busca_clientes_fecha.php';
+		var url = 'ajax/busca_vehiculos_fecha.php';
             
 		$.ajax({
 		type:'POST',
@@ -287,14 +293,17 @@ if (!empty($_POST['clientId'])) {
 	return false;
 	});
 	
-        
+    $(document).ready(function() {
+    $('#tableListar').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ]
+    } );
+} );
        
-            function ExportTable(){
+            /* function ExportTable(){
 			$("table").tableExport({
-                
-                
-                 
-                
 				headings: true,                    // (Boolean), display table headings (th/td elements) in the <thead>
 				footers: true,                     // (Boolean), display table footers (th/td elements) in the <tfoot>
 				formats: ["xls", "csv", "txt"],    // (String[]), filetypes for the export
@@ -305,6 +314,6 @@ if (!empty($_POST['clientId'])) {
 				ignoreCols: null,                 // (Number, Number[]), column indices to exclude from the exported file
 				ignoreCSS: ".tableexport-ignore"   // (selector, selector[]), selector(s) to exclude from the exported file
 			});
-		}
+		} */
         
 </script>
