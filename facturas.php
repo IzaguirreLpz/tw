@@ -8,6 +8,7 @@ if(!isset($_SESSION['id_usuario'])){
     header ("Location: index.php");
 }
 $id_usu = $_SESSION['id_usuario'];
+$insertar=getPer('per_insercion',$_SESSION['rol'],'19');
 /*$sql = "Select id_usuario, nombre_usuario from tbl_usuario WHERE id_usuario = '$idUsuario'";
 
 
@@ -82,9 +83,9 @@ $row = $result->fetch_assoc();
         
 		    <div class="btn-group pull-right">
                 
-              
+			<?php  if ($insertar==1 || $idUsuario==1){?>
 				<a  href="nueva_factura.php" class="btn btn-info"><span class="glyphicon glyphicon-plus" ></span> Nueva Factura</a>
-                
+            <?php  } ?>    
                 
 			
 			</div>

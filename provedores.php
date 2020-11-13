@@ -11,7 +11,7 @@ $type = 'success';
 if (!isset($_SESSION['id_usuario'])) {
     header("Location: index.php");
 }
-
+$insertar=getPer('per_insercion',$_SESSION['rol'],'16');
 if ($_SESSION['estado_usuario'] == strtolower('nuevo')) {
     header("Location: preguntas.php");
 }
@@ -151,9 +151,12 @@ if (!empty($_POST['clientId'])) {
                     <div class="panel panel-default">
                         <div class="panel-heading">
                          Provedores
+                         <?php  if ($insertar==1 || $idUsuario==1){?>
                             <div class="btn-group pull-right">
                                 <button type='button' class="btn btn-success" onClick="location.href='add_proveedor.php'"><span class="glyphicon glyphicon-plus"></span> Agregar Proveedor</button>
                             </div>
+                            <?php } ?>
+			
                         </div>
                         <div class="row w3-res-tb">
 

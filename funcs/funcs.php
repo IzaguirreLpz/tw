@@ -675,7 +675,7 @@ function getPer($campo, $valor, $panta)
 {
 	global $mysqli;
 
-	$stmt = $mysqli->prepare("SELECT $campo FROM siec_permisos WHERE per_id_rol = ?  and  per_id_pantalla= ? LIMIT 1");
+	$stmt = $mysqli->prepare("SELECT $campo FROM permisos WHERE per_id_rol = ?  and  per_id_pantalla= ? LIMIT 1");
 	$stmt->bind_param('ss', $valor, $panta);
 	$stmt->execute();
 	$stmt->store_result();
