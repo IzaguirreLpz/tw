@@ -48,7 +48,7 @@ function getCualquiera($campo, $tabla, $campoWhere, $valor)
 		}
 		else
 		{
-			return null;	
+			return null;
 		}
 	}
 

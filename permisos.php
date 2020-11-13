@@ -189,7 +189,7 @@ require("./roles_objeto_bd.php");
 
     	<?php 
 
-    $sql = "SELECT rol_id_rol, rol_nombre FROM roles";
+    $sql = "SELECT menu_id, pant_nombre FROM menu where id_padre !=0  and menu_id!=6 order by pant_nombre";
     $result = $mysqli->query($sql);
     echo "<option selected = 'selected' disabled = 'disabled'> Elija un Rol</option>";
     if ($result->num_rows > 0) {
