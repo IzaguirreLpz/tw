@@ -1,4 +1,3 @@
-
 <?php
 
 session_start();
@@ -9,8 +8,8 @@ if(($_SESSION['id_usuario'])){
  $idUsuario = $_SESSION['id_usuario'];
     $rol = $_SESSION['id_rol'];
   
-//	$eliminar=getPer('permiso_eliminacion',$rol,'3');
-	//$actualizar=getPer('permiso_actualizacion',$rol,'3');
+	$eliminar=getPer('permiso_eliminacion',$rol,'14');
+	$actualizar=getPer('permiso_actualizacion',$rol,'14');
 
 	
 	
@@ -20,23 +19,23 @@ if(($_SESSION['id_usuario'])){
 
 
 ?>
-  <div class="table-responsive" id="tableListar_length">
-  <table class="table table-striped b-t b-light" id="tableListar" style="margin: 10px 0 0 0;">
-    <thead>
-      <tr class="success">
+<div class="table-responsive" id="tableListar_length">
+    <table class="table table-striped b-t b-light" id="tableListar" style="margin: 10px 0 0 0;">
+        <thead>
+            <tr class="success">
 
 
-             
-             <th>Identidad</th>
-             <th>Nombre</th>
-             <th>Telefonos </th>
-             <th>Correo</th>
-             <th>fecha</th>
-            <th> Acciones</th>
-          </tr>
+
+                <th>Identidad</th>
+                <th>Nombre</th>
+                <th>Telefonos </th>
+                <th>Correo</th>
+                <th>fecha</th>
+                <th> Acciones</th>
+            </tr>
         </thead>
         <tbody>
-          <?php
+            <?php
 			
 			 $sql = "SELECT * FROM tbl_clientes order by id_cliente ASC";
      
@@ -67,45 +66,49 @@ if(($_SESSION['id_usuario'])){
 			          
 			           $direccion=$row['direccion'];
           ?>
-   
-             
-              <tr>
-              
+
+
+            <tr>
+
                 <td><?php echo $id ?></td>
                 <td><?php echo $nom." ". $apellido;?></td>
                 <td><?php echo $cel."||".$tel;?></td>
-                 <td><?php echo $correo;?></td>
-                  <td><?php echo $fecha;?></td>
+                <td><?php echo $correo;?></td>
+                <td><?php echo $fecha;?></td>
                 <td>
-                    
-                 
-              <a href="edi_clie.php?us=<?php echo $item?> " class='btn btn-default' ui-toggle-class=""><i class="fa fa-pencil text-success text-dark"></i></a>
 
-<a href="#" class='btn btn-default' title='Eliminar usuario'  data-toggle="modal" data-target="#myModal4" onclick='obtener_id("<?php echo $item;?>")' ><i class="glyphicon glyphicon-remove"></i></a>
+                    <?php  if ($actualizar==1 || $idUsuario==1 ){?>
+                    <a href="edi_clie.php?us=<?php echo $item?> " class='btn btn-default' ui-toggle-class=""><i
+                            class="fa fa-pencil text-success text-dark"></i></a>
+                    <?php } ?>
+                    <?php  if ($eliminar==1 || $idUsuario==1 ){?>
+                    <a href="#" class='btn btn-default' title='Eliminar usuario' data-toggle="modal"
+                        data-target="#myModal4" onclick='obtener_id("<?php echo $item;?>")'><i
+                            class="glyphicon glyphicon-remove"></i></a>
+                    <?php } ?>
 
-               
-             
-               
-               
+
+
+
                 </td>
-              </tr>
-          <?php
+            </tr>
+            <?php
             
            }
           }else{ 
           
           ?>
-          <tr>
-            <td colspan="4">No se encontraron resultados</td>
-          </tr>
-          <?php
+            <tr>
+                <td colspan="4">No se encontraron resultados</td>
+            </tr>
+            <?php
           }
           ?>
         </tbody>
-      </table>
-     
-      </div>
-      <script src="js/bootstrap-datepicker.js"></script>
+    </table>
+
+</div>
+<script src="js/bootstrap-datepicker.js"></script>
 <script src="js/locales/bootstrap-datepicker.es.js"></script>
 <script src="js/jquery.dataTables.min.js"></script>
 <script src="js/dataTables.bootstrap.js"></script>

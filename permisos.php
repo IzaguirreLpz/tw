@@ -216,7 +216,7 @@ luego verificamos la conexion,luego entramos a una codicion si numero de columna
 
 	<?php 
 
-$sql = "SELECT menu_id, pant_nombre FROM menu where id_padre !=0 order by pant_nombre";
+$sql = "SELECT menu_id, pant_nombre FROM menu where id_padre !=0  and menu_id!=6 order by pant_nombre";
 $result = $mysqli->query($sql);
 
 if ($result->num_rows > 0) {

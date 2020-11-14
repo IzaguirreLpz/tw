@@ -133,6 +133,9 @@ if (!empty($_POST['clientId'])) {
                         <?php
                         if ($id_usu == 1) {
                             include("menu2.php");
+                        }else{
+                            echo $_SESSION['menus'];
+
                         }
                         //echo $_SESSION['menus']; 
                         ?>
@@ -150,9 +153,11 @@ if (!empty($_POST['clientId'])) {
                     <div class="panel panel-default">
                         <div class="panel-heading">
                          Servicios
+                         <?php  if ($insertar==1 || $idUsuario==1){?>
                             <div class="btn-group pull-right">
                                 <button type='button' class="btn btn-success" onClick="location.href='add_servicio.php'"><span class="glyphicon glyphicon-plus"></span> Agregar </button>
                             </div>
+                            <?php  } ?>  
                         </div>
                         <div class="row w3-res-tb">
 

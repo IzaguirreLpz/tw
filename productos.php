@@ -16,7 +16,7 @@ $id_usu = $_SESSION['id_usuario'];
 $objeto = "pantalla usuario";
 $accion = "INGRESO";
 $descripcion = "ingreso a pantalla usuario";
-
+$insertar=getPer('per_insercion',$_SESSION['rol'],'17');
 $bita = grabarBitacora($id_usu, $objeto, $accion, $descripcion);
 
 
@@ -108,6 +108,8 @@ $bita = grabarBitacora($id_usu, $objeto, $accion, $descripcion);
                         <?php
                         if ($id_usu == 1) {
                             include("menu2.php");
+                        }else{
+                            echo $_SESSION['menus'];
                         }
                         //echo $_SESSION['menus'];
                         ?>
@@ -126,7 +128,9 @@ $bita = grabarBitacora($id_usu, $objeto, $accion, $descripcion);
                         <div class="panel-heading">
                             PRODUCTOS
                             <div class="btn-group pull-right">
+                            <?php  if ($insertar==1 || $idUsuario==1){?>
                                 <button type='button' class="btn btn-success" onClick="location.href='add_product.php'"><span class="glyphicon glyphicon-plus"></span> Agregar </button>
+                                <?php  } ?>    
                             </div>
                         </div>
                         <div class="row w3-res-tb">

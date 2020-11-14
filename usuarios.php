@@ -14,7 +14,7 @@ if ($_SESSION['estado_usuario'] == strtolower('nuevo')) {
 }
 $id_usu = $_SESSION['id_usuario'];
 //echo $_SESSION['menus'];
-
+$insertar=getPer('per_insercion',$_SESSION['rol'],'5');
 $objeto="pantalla usuario";
 		$accion="INGRESO";
 		$descripcion="ingreso a pantalla usuario";

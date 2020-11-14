@@ -11,7 +11,7 @@ $type = 'success';
 if (!isset($_SESSION['id_usuario'])) {
     header("Location: index.php");
 }
-
+$insertar=getPer('per_insercion',$_SESSION['rol'],'19');
 if ($_SESSION['estado_usuario'] == strtolower('nuevo')) {
     header("Location: preguntas.php");
 }
@@ -83,7 +83,7 @@ if (!empty($_POST['clientId'])) {
   <script src="js/jquery.min.js"></script>
   <script src="js/FileSaver.min.js"></script>
   <script src="js/tableexport.min.js"></script>
-  <!--- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>-->
+  <!--- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>-->
 	     <link href="css/select2.min.css" rel="stylesheet" /> 
       <script src="js/select2.min.js"></script>
 </head>
@@ -235,6 +235,7 @@ require 'modal/eliminar_orden.php';
     	  
 $( "#editar_password" ).submit(function( event ) {
   $('#actualizar_datos3').attr("disabled", true);
+  
  var parametros = $(this).serialize();
 	 $.ajax({
 			type: "POST",

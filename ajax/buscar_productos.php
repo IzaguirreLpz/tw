@@ -6,6 +6,8 @@ session_start();
 
 $rol = $_SESSION['id_rol'];
 $idUsuario = $_SESSION['id_usuario'];
+$eliminar=getPer('permiso_eliminacion',$rol,'17');
+$actualizar=getPer('permiso_actualizacion',$rol,'17');
 ?>
 
 <div class="table-responsive" id="tableListar_length">
@@ -51,8 +53,12 @@ $idUsuario = $_SESSION['id_usuario'];
                         <td><?php echo $categoria; ?></td>
                         <td><?php echo $fechaRegistro; ?></td>
                         <td>
+                        <?php  if ($actualizar==1 || $idUsuario==1 ){?>
                             <a href="add_product.php?idProduct=<?php echo $product_id ?> " class='btn btn-default' ui-toggle-class=""><i class="fa fa-pencil text-success text-dark"></i></a>
+                            <?php } ?>
+                            <?php  if ($eliminar==1 || $idUsuario==1 ){?>
                             <a href="#" class='btn btn-default' title='Eliminar Producto' data-toggle="modal" data-target="#myModal4" onclick='obtener_id("<?php echo $product_id; ?>")'><i class="glyphicon glyphicon-remove"></i></a>
+                            <?php } ?>
                             <script>
                                 function reportePDF2() {
                                     var desde = $id;
