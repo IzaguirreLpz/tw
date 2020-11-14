@@ -31,8 +31,10 @@ $idUsuario = $_SESSION['id_usuario'];
 			
 			
 		
-			 $sql = "SELECT a.status,a.id_atencion,c.identidad ,a.fecha_visita ,a.id_cliente id_cliente,c.nom_cliente, c.ape_cliente from tbl_clientes c , tbl_atenciones a where a.id_cliente= c.id_cliente AND LEFT(a.fecha_visita,10)=CURDATE() ORDER BY a.id_atencion ASC";
-			$query = mysqli_query($mysqli, $sql);
+			 $sql = "SELECT a.status,a.id_atencion,c.identidad ,a.fecha_visita ,a.id_cliente id_cliente,c.nom_cliente, c.ape_cliente from tbl_clientes c , tbl_atenciones a where a.id_cliente= c.id_cliente ORDER BY a.id_atencion DESC";
+            // para que no se actualice  en el dia
+            //AND LEFT(a.fecha_visita,10)=CURDATE() 
+             $query = mysqli_query($mysqli, $sql);
      $item=0;
 			
 			$count_query   = mysqli_query($mysqli, "SELECT count(*) AS numrows FROM tbl_atenciones  ");
