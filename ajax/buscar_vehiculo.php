@@ -64,8 +64,8 @@ $actualizar=getPer('per_actualizacion',$rol,'3');
                 <td><?php echo $color;?></td>
                 <td><?php echo $placa;?></td>
                 <td><?php echo $fecha;?></td>
-              <td>
-                <td><?php echo $fecha;?></td>  
+              
+               
                <td>  
                <?php  if ($actualizar==1 || $idUsuario==1 ){?>
               <a href="add_vehiculo.php?id=<?php echo $item?> " class='btn btn-default' ui-toggle-class=""><i class="fa fa-pencil text-success text-dark"></i></a>
