@@ -6,6 +6,8 @@ session_start();
 
 $rol = $_SESSION['id_rol'];
 $idUsuario = $_SESSION['id_usuario'];
+$eliminar=getPer('permiso_eliminacion',$rol,'14');
+$actualizar=getPer('permiso_actualizacion',$rol,'14');
 ?>
 
 <div class="table-responsive" id="tableListar_length">
@@ -43,34 +45,42 @@ $idUsuario = $_SESSION['id_usuario'];
                     $fechaRegistro = date('d/m/Y', strtotime($fechaRegistro));
 
             ?>
-                    <tr>
-                        <td><?php echo $codigo ?></td>
-                        <td><?php echo $nombre; ?></td>
-                        <td><?php echo $precio; ?></td>
-                        <td><?php echo $precioCosto; ?></td>
-                        <td><?php echo $proveedor; ?></td>
-                        <td><?php echo $categoria; ?></td>
-                        <td><?php echo $fechaRegistro; ?></td>
-                        <td>
-                            <a href="add_servicio.php?idProduct=<?php echo $product_id ?> " class='btn btn-default' ui-toggle-class=""><i class="fa fa-pencil text-success text-dark"></i></a>
-                            <a href="#" class='btn btn-default' title='Eliminar Producto' data-toggle="modal" data-target="#myModal4" onclick='obtener_id("<?php echo $product_id; ?>")'><i class="glyphicon glyphicon-remove"></i></a>
-                            <script>
-                                function reportePDF2() {
-                                    var desde = $id;
-                                    let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=0,height=0,left=-1000,top=-1000`;
-                                    open('reporte/re_prueba.php?id=' + id, 'test', params);
-                                }
-                            </script>
+            <tr>
+                <td><?php echo $codigo ?></td>
+                <td><?php echo $nombre; ?></td>
+                <td><?php echo $precio; ?></td>
+                <td><?php echo $precioCosto; ?></td>
+                <td><?php echo $proveedor; ?></td>
+                <td><?php echo $categoria; ?></td>
+                <td><?php echo $fechaRegistro; ?></td>
+                <td>
+                    <?php  if ($actualizar==1 || $idUsuario==1 ){?>
+                    <a href="add_servicio.php?idProduct=<?php echo $product_id ?> " class='btn btn-default'
+                        ui-toggle-class=""><i class="fa fa-pencil text-success text-dark"></i></a>
+                    <?php } ?>
+                    <?php  if ($eliminar==1 || $idUsuario==1 ){?>
+                    <a href="#" class='btn btn-default' title='Eliminar Producto' data-toggle="modal"
+                        data-target="#myModal4" onclick='obtener_id("<?php echo $product_id; ?>")'><i
+                            class="glyphicon glyphicon-remove"></i></a>
+                    <?php } ?>
+                    <script>
+                    function reportePDF2() {
+                        var desde = $id;
+                        let params =
+                            `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=0,height=0,left=-1000,top=-1000`;
+                        open('reporte/re_prueba.php?id=' + id, 'test', params);
+                    }
+                    </script>
 
-                        </td>
-                    </tr>
-                <?php
+                </td>
+            </tr>
+            <?php
                 }
             } else {
                 ?>
-                <tr>
-                    <td colspan="4">No se encontraron resultados</td>
-                </tr>
+            <tr>
+                <td colspan="4">No se encontraron resultados</td>
+            </tr>
             <?php
             }
             ?>
