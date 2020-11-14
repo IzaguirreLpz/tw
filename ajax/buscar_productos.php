@@ -6,8 +6,8 @@ session_start();
 
 $rol = $_SESSION['id_rol'];
 $idUsuario = $_SESSION['id_usuario'];
-$eliminar=getPer('permiso_eliminacion',$rol,'17');
-$actualizar=getPer('permiso_actualizacion',$rol,'17');
+$eliminar=getPer('per_eliminacion',$rol,'17');
+$actualizar=getPer('per_actualizacion',$rol,'17');
 ?>
 
 <div class="table-responsive" id="tableListar_length">

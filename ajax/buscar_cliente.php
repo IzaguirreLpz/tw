@@ -7,9 +7,9 @@ require '../funcs/funcs.php';
 if(($_SESSION['id_usuario'])){
  $idUsuario = $_SESSION['id_usuario'];
     $rol = $_SESSION['id_rol'];
-  
-	$eliminar=getPer('permiso_eliminacion',$rol,'14');
-	$actualizar=getPer('permiso_actualizacion',$rol,'14');
+  echo $rol;
+	$eliminar=getPer('per_eliminacion',$rol,'14');
+	$actualizar=getPer('per_actualizacion',$rol,'14');
 
 	
 	

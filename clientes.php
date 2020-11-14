@@ -7,7 +7,8 @@ require 'funcs/funcs.php';
 
 $errors = '';
 $type = 'success';
-$insertar=getPer('per_insercion',$_SESSION['rol'],'14');
+$rol= $_SESSION['id_rol'];
+$insertar=getPer('per_insercion',$rol,'14');
 if (!isset($_SESSION['id_usuario'])) {
     header("Location: index.php");
 }

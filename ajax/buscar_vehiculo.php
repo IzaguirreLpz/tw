@@ -9,14 +9,14 @@ if(($_SESSION['id_usuario'])){
 <<<<<<< HEAD
   $idUsuario = $_SESSION['id_usuario'];
   $rol = $_SESSION['id_rol'];
-//$eliminar=getPer('permiso_eliminacion',$rol,'3');
-//$actualizar=getPer('permiso_actualizacion',$rol,'3');
+//$eliminar=getPer('per_eliminacion',$rol,'3');
+//$actualizar=getPer('per_actualizacion',$rol,'3');
 =======
  $idUsuario = $_SESSION['id_usuario'];
     $rol = $_SESSION['id_rol'];
   
-$eliminar=getPer('permiso_eliminacion',$rol,'3');
-$actualizar=getPer('permiso_actualizacion',$rol,'3');
+$eliminar=getPer('per_eliminacion',$rol,'3');
+$actualizar=getPer('per_actualizacion',$rol,'3');
 >>>>>>> 06e8706785a44a90d7224ce9babedc27d34afed0
 
 }else{
