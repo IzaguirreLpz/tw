@@ -83,15 +83,23 @@ if (!empty($_POST['clientId'])) {
   <!-- <script src="js/jquery.min.js"></script>
   <script src="js/FileSaver.min.js"></script>
   <script src="js/tableexport.min.js"></script> -->
-  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jqc-1.12.4/jszip-2.5.0/dt-1.10.22/b-1.6.5/b-flash-1.6.5/b-html5-1.6.5/b-print-1.6.5/datatables.min.css"/>
- 
+
+<link rel="stylesheet" type="text/css" href="reportsLibrary\datatables.min.css">
+<script type="text/javascript" src="reportsLibrary\datatables.min.js"></script>
+<script type="text/javascript" src="reportsLibrary\pdfmake.min.js"></script>
+<script type="text/javascript" src="reportsLibrary\vfs_fonts.js"></script>
+
+  <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jqc-1.12.4/jszip-2.5.0/dt-1.10.22/b-1.6.5/b-flash-1.6.5/b-html5-1.6.5/b-print-1.6.5/datatables.min.css"/>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/v/dt/jqc-1.12.4/jszip-2.5.0/dt-1.10.22/b-1.6.5/b-flash-1.6.5/b-html5-1.6.5/b-print-1.6.5/datatables.min.js"></script>
- 
+  -->
+
+
+
   <!--- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>-->
-	     <link href="css/select2.min.css" rel="stylesheet" /> 
-      <script src="js/select2.min.js"></script>
+	<link href="css/select2.min.css" rel="stylesheet" />
+    <script src="js/select2.min.js"></script>
 </head>
 
 <body>
@@ -301,7 +309,7 @@ if (!empty($_POST['clientId'])) {
         ]
     } );
 } );
-       
+
             /* function ExportTable(){
 			$("table").tableExport({
 				headings: true,                    // (Boolean), display table headings (th/td elements) in the <thead>

@@ -175,8 +175,8 @@ if (!empty($_POST['clientId'])) {
 
 
                         
-<button id="procesar" class="btn btn-primary">Procesar</button>
-             <button class="btn btn-default" title="salir de la consulta"  >   <span class="fa fa-outdent" title="salir de la consulta"  onclick="load(1)"></span></button>
+<button id="procesar" class="btn btn-primary">Generar Reporte</button>
+             <button class="btn btn-default" title="salir de la consulta"  >   <span class="fa fa-outdent" title="salir de la consulta"  onclick="load(1)"></span> Cerrar Reporte</button>
                         </div>
                         <div id="resultados"></div><!-- Carga los datos ajax -->
                         <div class='outer_div'></div>

@@ -21,7 +21,6 @@ $id_usu = $_SESSION['id_usuario'];
 $objeto="pantalla usuario";
 		$accion="INGRESO";
 		$descripcion="ingreso a pantalla usuario";
-		
 		$bita=grabarBitacora($id_usu,$objeto,$accion,$descripcion);
 
 
@@ -77,11 +76,11 @@ if (!empty($_POST['clientId'])) {
     <link rel="stylesheet" href="css/monthly.css">
  
     <link rel="stylesheet" href="css/bootstrap.min.css">
-  <link rel="stylesheet" href="tableexport.min.css">
+  <!-- <link rel="stylesheet" href="tableexport.min.css"> -->
  
   <script src="js/jquery.min.js"></script>
   <script src="js/FileSaver.min.js"></script>
-  <script src="js/tableexport.min.js"></script>
+  <!-- <script src="js/tableexport.min.js"></script> -->
   <!--- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>-->
 	     <link href="css/select2.min.css" rel="stylesheet" /> 
       <script src="js/select2.min.js"></script>
@@ -162,18 +161,16 @@ if (!empty($_POST['clientId'])) {
 		  <span class="input-group-addon">INICIO</span>
 		   <input  type="date" id="fecha_ini"  name="fecha_ini" placeholder="FECHA INICIO"></div>
 		</div>
-    
-   
+
 		<div class="input-group">
 		  <span class="input-group-addon">FIN</span>
 		<input  type="date"   id="fecha_fin" name="fecha_fin"  >
 
-	
 
 
-                        
-<button id="procesar" class="btn btn-primary">Procesar</button>
-             <button class="btn btn-default" title="salir de la consulta"  >   <span class="fa fa-outdent" title="salir de la consulta"  onclick="load(1)"></span></button>
+
+<button id="procesar" class="btn btn-primary">Generar Reporte</button>
+             <button class="btn btn-default" title="salir de la consulta"  >   <span class="fa fa-outdent" title="salir de la consulta"  onclick="load(1)"></span> Cerrar Reporte</button>
                         </div>
                         <div id="resultados"></div><!-- Carga los datos ajax -->
                         <div class='outer_div'></div>
@@ -263,37 +260,34 @@ if (!empty($_POST['clientId'])) {
             }
         })
     }
-   
     $('#procesar').on('click', function(){
-      
 		var desde = $('#fecha_ini').val();
 		var hasta = $('#fecha_fin').val();
 		var url = 'ajax/busca_clientes_fecha.php';
-            
 		$.ajax({
 		type:'POST',
 		url:url,
 		data:'desde='+desde+'&hasta='+hasta,
 		success: function(data){
-   
 			$(".outer_div").html(data).fadeIn('slow');
             ExportTable();
             $('#loader').html('');
-            
-           
 		}
 	});
 	return false;
-	});
-	
-        
-       
-            function ExportTable(){
+    });
+    
+    $(document).ready(function() {
+    $('table').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ]
+    } );
+} );
+
+            /* function ExportTable(){
 			$("table").tableExport({
-                
-                
-                 
-                
 				headings: true,                    // (Boolean), display table headings (th/td elements) in the <thead>
 				footers: true,                     // (Boolean), display table footers (th/td elements) in the <tfoot>
 				formats: ["xls", "csv", "txt"],    // (String[]), filetypes for the export
@@ -304,6 +298,5 @@ if (!empty($_POST['clientId'])) {
 				ignoreCols: null,                 // (Number, Number[]), column indices to exclude from the exported file
 				ignoreCSS: ".tableexport-ignore"   // (selector, selector[]), selector(s) to exclude from the exported file
 			});
-		}
-        
+		} */
 </script>
