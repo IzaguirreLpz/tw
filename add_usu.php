@@ -8,7 +8,7 @@ require 'funcs/funcs.php';
 if (!isset($_SESSION['id_usuario'])) {
     header("Location: index.php");
 }
-$id_usu = $_SESSION['id_usuario'];
+$idUsuario = $_SESSION['id_usuario'];
 
 $us = 0;
 //para que cuando sea agregar el rol sea nuevo predeterminado
@@ -132,7 +132,7 @@ if (isset($_GET["us"])) {
                 <div class="leftside-navigation">
                     <ul class="sidebar-menu" id="nav-accordion">
                         <?php
-                        if ($id_usu == 1) {
+                        if ($idUsuario == 1) {
                             include("menu2.php");
                         }
                         //echo $_SESSION['menus']; 

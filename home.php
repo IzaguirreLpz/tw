@@ -15,8 +15,8 @@ if ($_SESSION['estado_usuario'] == strtolower('nuevo')) {
 }
 $estado = $_SESSION['estado_usuario'];
 
-$id_usu = $_SESSION['id_usuario'];
-//echo $id_usu;
+$idUsuario = $_SESSION['id_usuario'];
+//echo $idUsuario;
 //echo $_SESSION['menus'];
 ?>
 
@@ -90,7 +90,7 @@ $id_usu = $_SESSION['id_usuario'];
                     <ul class="sidebar-menu" id="nav-accordion">
                         <?php
 
-                        if ($id_usu == 1) {
+                        if ($idUsuario == 1) {
                             include("menu2.php");
                         }else{
                         echo $_SESSION['menus'];

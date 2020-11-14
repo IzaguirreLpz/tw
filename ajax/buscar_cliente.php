@@ -7,7 +7,7 @@ require '../funcs/funcs.php';
 if(($_SESSION['id_usuario'])){
  $idUsuario = $_SESSION['id_usuario'];
     $rol = $_SESSION['id_rol'];
-  echo $rol;
+
 	$eliminar=getPer('per_eliminacion',$rol,'14');
 	$actualizar=getPer('per_actualizacion',$rol,'14');
 
