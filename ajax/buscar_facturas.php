@@ -3,7 +3,7 @@
 	
 	
 	require_once ("../funcs/conexion.php");//Contiene funcion que conecta a la base de datos
-	
+	$eliminar=getPer('permiso_eliminacion',$_SESSION['id_rol'],'19');
 	$action = (isset($_REQUEST['action'])&& $_REQUEST['action'] !=NULL)?$_REQUEST['action']:'';
 	if (isset($_GET['id'])){
 		$numero_factura=intval($_GET['id']);
@@ -96,7 +96,11 @@
 					<td class="text-right">
 					<!---	<a href="editar_factura.php?id_factura=<?php echo $id_factura;?>" class='btn btn-default' title='Editar factura' ><i class="glyphicon glyphicon-edit"></i></a> -->
 						<a href="#" class='btn btn-default' title='Descargar factura' onclick="imprimir_factura('<?php echo $id_factura;?>');"><i class="glyphicon glyphicon-download"></i></a> 
+					
+					
+						<?php  if ($eliminar==1 || $idUsuario==1 ){?>
 						<a href="#" class='btn btn-default' title='Borrar factura' onclick="eliminar('<?php echo $numero_factura; ?>')"><i class="glyphicon glyphicon-trash"></i> </a>
+						<?php } ?>
 					</td>
 						
 					</tr>

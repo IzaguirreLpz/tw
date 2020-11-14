@@ -9,8 +9,8 @@ if(($_SESSION['id_usuario'])){
  $idUsuario = $_SESSION['id_usuario'];
     $rol = $_SESSION['id_rol'];
   
-//	$eliminar=getPer('permiso_eliminacion',$rol,'3');
-	//$actualizar=getPer('permiso_actualizacion',$rol,'3');
+	$eliminar=getPer('permiso_eliminacion',$rol,'16');
+	$actualizar=getPer('permiso_actualizacion',$rol,'16');
 
 	
 	
@@ -92,11 +92,12 @@ if(($_SESSION['id_usuario'])){
                 <td><?php echo $fecha;?></td>
                 <td>
                     
-                 
+                <?php  if ($actualizar==1 || $idUsuario==1 ){?>
               <a href="add_proveedor.php?id=<?php echo $hola?> " class='btn btn-default' ui-toggle-class=""><i class="fa fa-pencil text-success text-dark"></i></a>
-
+              <?php } ?>
+              <?php  if ($eliminar==1 || $idUsuario==1 ){?>
 <a href="#" class='btn btn-default' title='Eliminar usuario'  data-toggle="modal" data-target="#myModal4" onclick='obtener_id("<?php echo $hola;?>")' ><i class="glyphicon glyphicon-remove"></i></a>
-
+<?php } ?>
                
              
                
