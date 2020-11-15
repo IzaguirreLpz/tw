@@ -21,7 +21,25 @@ $objeto="pantalla usuario";
 		
 		$bita=grabarBitacora($idUsuario,$objeto,$accion,$descripcion);
 
+//en esta etapa se obtiene el submit del modal para eliminar el Cliente
+if (!empty($_POST['clientId'])) {
+    $idCliente = $_POST['clientId'];
+    global $mysqli;
+    $query = "DELETE FROM permisos
+    WHERE per_id_permiso = $idCliente;";
+    //$query = "DELETE FROM tbl_clientes WHERE id_cliente = $idCliente;";
+    $objeto = "tbl permisos";
+    $accion = "DELETE";
+    $descripcion = "ingreso a pantalla productos";
 
+    if (mysqli_query($mysqli, $query)) {
+        $errors = "Cliente eliminado con éxito.";
+        grabarBitacora($idCliente, $objeto, $accion, $query);
+    }else{
+        $errors = "Lo sentimos , el intento de eliminado falló. Por favor, regrese y vuelva a intentarlo.";
+        $type="warning";
+    }
+}
 
 ?>
 
@@ -104,7 +122,6 @@ function deseleccionar_todo(){
          <?php 
 require("./roles_objeto_bd.php"); 
          include("modal/editar_permisos.php");
-        include("modal/eliminar_permisos_modal.php");
 
  ?>
     <section id="container">
@@ -246,7 +263,9 @@ if ($result->num_rows > 0) {
 
                         </div>
                             
-                            
+                        <h4 style="text-align: center;">
+  Recuerda que si no seleccionas ningun check solo permitira hacer consulta
+</h4>
                             
                         <div id="resultados"></div><!-- Carga los datos ajax -->
                         <div class='outer_div'></div>
@@ -272,12 +291,12 @@ if ($result->num_rows > 0) {
 
 
 <!-- Modal -->
-<<div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel" style="text-align: center;">¿Seguro que deséa eliminar este Vehiculo?</h4>
+                <h4 class="modal-title" id="myModalLabel" style="text-align: center;">¿Seguro que deséa eliminar este Rol?</h4>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" method="post" id="editar_password" name="editar_password">
@@ -285,20 +304,22 @@ if ($result->num_rows > 0) {
                     <div class="form-group">
                         <div class="col-sm-8">
                             <input type="hidden" id="clientId" name="clientId">
-                            <div class="container">
+                            <!-- <div class="container">
                                 <img width="50%" src="./images/delete.svg">
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                     <div class="modal-footer center">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btn-danger" id="eliminarProducto">Eliminar Vehiculo</button>
+                        <button type="submit" class="btn btn-danger" id="eliminarProducto">Eliminar Rol</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-</div>
+
+
+
 </body>
 
 </html>
@@ -337,7 +358,7 @@ if ($result->num_rows > 0) {
 	});
   event.preventDefault();
 })
-$("#editar_password").submit(function(event) {
+/*$("#editar_password").submit(function(event) {
         $('#actualizar_datos3').attr("disabled", true);
 
         var parametros = $(this).serialize();
@@ -359,7 +380,7 @@ $("#editar_password").submit(function(event) {
             }
         });
         event.preventDefault();
-    })
+    })*/
 
     function load(page) {
 

@@ -180,7 +180,7 @@ inner join roles on rol_id_rol= per_id_rol";
               <a href="#" class='btn btn-default' title='Editar Permiso'  data-toggle="modal" data-target="#myModal2" onclick='capturar("<?php echo $row['per_id_permiso'];?>","<?php echo $row['per_consulta'];?>","<?php echo $row['per_insercion'];?>","<?php echo $row['per_actualizacion'];?>","<?php echo $row['per_eliminacion'];?>","<?php echo $rol; $id_pantalla; ?>" )' ><i class="fa fa-pencil"></i></a>
                                  
               
-              <a href="#" class='btn btn-danger' title='Editar producto' onclick="obtener_datos('<?php echo $id;?>');" data-toggle="modal" data-target="#myModal3"><i class="fa fa-times"></i></a> 
+              <a href="#" class='btn btn-danger' title='Editar producto' onclick="obtener_id('<?php echo $id;?>');" data-toggle="modal" data-target="#myModal4"><i class="fa fa-times"></i></a> 
     
 						
                
