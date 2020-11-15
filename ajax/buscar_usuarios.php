@@ -42,7 +42,7 @@ $actualizar=getPer('per_actualizacion',$rol,'5');
 
 
 
-      $sql = "SELECT * FROM tbl_usuario inner join tbl_roles on tbl_usuario.id_rol = tbl_roles.id_rol order by id_usuario ASC";
+      $sql = "SELECT * FROM tbl_usuario inner join roles on tbl_usuario.id_rol = roles.rol_id_rol order by id_usuario ASC";
       $query = mysqli_query($mysqli, $sql);
 
 
@@ -60,7 +60,7 @@ $actualizar=getPer('per_actualizacion',$rol,'5');
           $nombre = $row['nombre_usuario'];
           $usuario = $row['usuario'];
           $id_rol = $row['id_rol'];
-          $rol = $row['rol'];
+          $rol = $row['rol_nombre'];
           $correo = $row['correo_electronico'];
           $estado = $row['estado_usuario'];
           $correo = $row['correo_electronico'];

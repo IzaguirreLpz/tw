@@ -7,11 +7,12 @@ require 'funcs/funcs.php';
 
 $errors = '';
 $type = 'success';
-
+$rol= $_SESSION['id_rol'];
+$insertar=getPer('per_insercion',$rol,'14');
 if (!isset($_SESSION['id_usuario'])) {
     header("Location: index.php");
 }
-$insertar=getPer('per_insercion',$_SESSION['id_rol'],'16');
+
 if ($_SESSION['estado_usuario'] == strtolower('nuevo')) {
     header("Location: preguntas.php");
 }
@@ -20,22 +21,23 @@ $idUsuario = $_SESSION['id_usuario'];
 
 $objeto="pantalla usuario";
 		$accion="INGRESO";
-		$descripcion="ingreso a pantalla usuario";
+		$descripcion="ingreso a pantalla roles";
 		
 		$bita=grabarBitacora($idUsuario,$objeto,$accion,$descripcion);
 
 
 //en esta etapa se obtiene el submit del modal para eliminar el Cliente
 if (!empty($_POST['clientId'])) {
-    $idProveedor = $_POST['clientId'];
+    $idCliente = $_POST['clientId'];
     global $mysqli;
-    $query = "DELETE FROM tbl_proveedores WHERE id_proveedor = $idProveedor;";
-    $objeto = "tbl_proveedores";
+    $query = "DELETE FROM tbl_clientes WHERE id_cliente = $idCliente;";
+    $objeto = "tbl_clientes";
     $accion = "DELETE";
-    $descripcion = "Se elimino un proveedor";
+    $descripcion = "ingreso a pantalla productos";
+
     if (mysqli_query($mysqli, $query)) {
-        $errors = "Proveedor eliminado con éxito.";
-        grabarBitacora($idProveedor, $objeto, $accion, $query);
+        $errors = "Cliente eliminado con éxito.";
+        grabarBitacora($idCliente, $objeto, $accion, $query);
     }else{
         $errors = "Lo sentimos , el intento de eliminado falló. Por favor, regrese y vuelva a intentarlo.";
         $type="warning";
@@ -48,7 +50,7 @@ if (!empty($_POST['clientId'])) {
 <html>
 
 <head>
-    <title>Provedores</title>
+    <title>CLIENTE</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
@@ -132,10 +134,12 @@ if (!empty($_POST['clientId'])) {
                 <div class="leftside-navigation">
                     <ul class="sidebar-menu" id="nav-accordion">
                         <?php
-                        if ($idUsuario == 1) {
+                         if ($idUsuario == 1) {
                             include("menu2.php");
-                        }
-                        //echo $_SESSION['menus']; 
+                        }else{
+                        echo $_SESSION['menus'];
+                            }
+                        ?>
                         ?>
 
                     </ul>
@@ -150,13 +154,12 @@ if (!empty($_POST['clientId'])) {
                 <div class="table-agile-info">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                         Provedores
+                         CLIENTES
                          <?php  if ($insertar==1 || $idUsuario==1){?>
                             <div class="btn-group pull-right">
-                                <button type='button' class="btn btn-success" onClick="location.href='add_proveedor.php'"><span class="glyphicon glyphicon-plus"></span> Agregar Proveedor</button>
+                                <button type='button' class="btn btn-success" onClick="location.href='add_clie.php'"><span class="glyphicon glyphicon-plus"></span> Agregar </button>
                             </div>
                             <?php } ?>
-			
                         </div>
                         <div class="row w3-res-tb">
 
@@ -175,8 +178,8 @@ if (!empty($_POST['clientId'])) {
 
 
                         
-<button id="procesar" class="btn btn-primary">Procesar</button>
-             <button class="btn btn-default" title="salir de la consulta"  >   <span class="fa fa-outdent" title="salir de la consulta"  onclick="load(1)"></span></button>
+<button id="procesar" class="btn btn-primary">Generar Reporte</button>
+             <button class="btn btn-default" title="salir de la consulta"  >   <span class="fa fa-outdent" title="salir de la consulta"  onclick="load(1)"></span> Cerrar Reporte</button>
                         </div>
                         <div id="resultados"></div><!-- Carga los datos ajax -->
                         <div class='outer_div'></div>
@@ -211,7 +214,7 @@ if (!empty($_POST['clientId'])) {
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel" style="text-align: center;">¿Seguro que deséa eliminar este Proveedor?</h4>
+                <h4 class="modal-title" id="myModalLabel" style="text-align: center;">¿Seguro que deséa eliminar este Cliente?</h4>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" method="post" id="editar_password" name="editar_password">
@@ -226,7 +229,7 @@ if (!empty($_POST['clientId'])) {
                     </div>
                     <div class="modal-footer center">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btn-danger" id="eliminarProducto">Eliminar Proveedor</button>
+                        <button type="submit" class="btn btn-danger" id="eliminarProducto">Eliminar Cliente</button>
                     </div>
                 </form>
             </div>
@@ -247,16 +250,37 @@ if (!empty($_POST['clientId'])) {
     obtener_id(item) {
         let val = item;
         let id = document.getElementById('clientId');
-        console.log(item)
         id.value = val;
         $("#user_id_mod").val(item);
     }
+
+
+    /*$("#editar_password").submit(function(event) {
+        $('#actualizar_datos3').attr("disabled", true);
+        var tabla = "tbl_clientes";
+		var campo = "id_cliente";
+        var  user_id_mod =  $("#user_id_mod").val(item);
+        $.ajax({
+            type: "POST",
+            url: "ajax/eliminar_cliente.php",
+            data: 'tabla='+tabla+'&campo='+campo+'&user_id_mod='+user_id_mod,
+            beforeSend: function(objeto) {
+                $("#resultados_ajax3").html("Mensaje: Cargando...");
+            },
+            success: function(datos) {
+                $("#resultados_ajax3").html(datos);
+                $('#actualizar_datos3').attr("disabled", false);
+               // load(1);
+            }
+        });
+        event.preventDefault();
+    })*/
 
     function load(page) {
 
         $("#loader").fadeIn('slow');
         $.ajax({
-            url: 'ajax/buscar_proveedores.php',
+            url: 'ajax/buscar_cliente.php',
             beforeSend: function(objeto) {
                 $('#loader').html('<img src="./img/ajax-loader.gif"> Cargando...');
             },
@@ -267,7 +291,15 @@ if (!empty($_POST['clientId'])) {
             }
         })
     }
-   
+
+
+
+
+
+
+
+
+         
     $('#procesar').on('click', function(){
       
 		var desde = $('#fecha_ini').val();
@@ -295,6 +327,9 @@ if (!empty($_POST['clientId'])) {
             function ExportTable(){
 			$("table").tableExport({
                 
+                
+                 
+                
 				headings: true,                    // (Boolean), display table headings (th/td elements) in the <thead>
 				footers: true,                     // (Boolean), display table footers (th/td elements) in the <tfoot>
 				formats: ["xls", "csv", "txt"],    // (String[]), filetypes for the export
@@ -307,4 +342,14 @@ if (!empty($_POST['clientId'])) {
 			});
 		}
         
+        
+        
+
+
+
+
+
+
+
+
 </script>

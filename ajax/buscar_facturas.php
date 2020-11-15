@@ -1,9 +1,11 @@
 <?php
 
 	
-	
+	session_start();
 	require_once ("../funcs/conexion.php");//Contiene funcion que conecta a la base de datos
+	require_once ("../funcs/funcs.php");
 	$eliminar=getPer('per_eliminacion',$_SESSION['id_rol'],'19');
+	$idUsuario= $_SESSION['id_usuario'];
 	$action = (isset($_REQUEST['action'])&& $_REQUEST['action'] !=NULL)?$_REQUEST['action']:'';
 	if (isset($_GET['id'])){
 		$numero_factura=intval($_GET['id']);

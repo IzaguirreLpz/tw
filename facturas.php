@@ -8,7 +8,7 @@ if(!isset($_SESSION['id_usuario'])){
     header ("Location: index.php");
 }
 $idUsuario = $_SESSION['id_usuario'];
-$insertar=getPer('per_insercion',$_SESSION['rol'],'19');
+$insertar=getPer('per_insercion',$_SESSION['id_rol'],'19');
 /*$sql = "Select id_usuario, nombre_usuario from tbl_usuario WHERE id_usuario = '$idUsuario'";
 
 

@@ -14,7 +14,7 @@ if ($_SESSION['estado_usuario'] == strtolower('nuevo')) {
 }
 $idUsuario = $_SESSION['id_usuario'];
 //echo $_SESSION['menus'];
-$insertar=getPer('per_insercion',$_SESSION['rol'],'5');
+$insertar=getPer('per_insercion',$_SESSION['id_rol'],'5');
 $objeto="pantalla usuario";
 		$accion="INGRESO";
 		$descripcion="ingreso a pantalla usuario";
@@ -28,7 +28,7 @@ $objeto="pantalla usuario";
 <html>
 
 <head>
-    <title>HOME</title>
+    <title>Usuarios</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 

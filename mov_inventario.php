@@ -11,7 +11,7 @@ $type = 'success';
 if (!isset($_SESSION['id_usuario'])) {
     header("Location: index.php");
 }
-$insertar=getPer('per_insercion',$_SESSION['rol'],'19');
+$insertar=getPer('per_insercion',$_SESSION['id_rol'],'20');
 if ($_SESSION['estado_usuario'] == strtolower('nuevo')) {
     header("Location: preguntas.php");
 }
@@ -20,7 +20,7 @@ $idUsuario = $_SESSION['id_usuario'];
 
 $objeto="pantalla usuario";
 		$accion="INGRESO";
-		$descripcion="ingreso a pantalla usuario";
+		$descripcion="ingreso a pantalla Mov Inventario.";
 		
 		$bita=grabarBitacora($idUsuario,$objeto,$accion,$descripcion);
 
@@ -49,7 +49,7 @@ if (!empty($_POST['clientId'])) {
 <html>
 
 <head>
-    <title>HOME</title>
+    <title>MOV INVENTARIO</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
