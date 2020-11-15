@@ -36,5 +36,6 @@
       <li><a href='pantallas.php'><i class=''></i>Pantallas</a> </li>
       <li><a href='bitacora.php'><i class=''></i>Bitacora</a> </li>
       <li><a href='parametro.php'><i class=''></i>Configuracion</a> </li>
+      <li><a href='Backup.php'><i class=''></i>Backup</a> </li>
    </ul>
 </li>
