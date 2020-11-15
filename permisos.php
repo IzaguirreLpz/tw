@@ -104,7 +104,7 @@ function deseleccionar_todo(){
          <?php 
 require("./roles_objeto_bd.php"); 
          include("modal/editar_permisos.php");
-        include("modal/eliminar_permiso.php");
+        include("modal/eliminar_permisos_modal.php");
 
  ?>
     <section id="container">
@@ -272,12 +272,12 @@ if ($result->num_rows > 0) {
 
 
 <!-- Modal -->
-<div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<<div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel" style="text-align: center;">¿Seguro que deséa eliminar este Cliente?</h4>
+                <h4 class="modal-title" id="myModalLabel" style="text-align: center;">¿Seguro que deséa eliminar este Vehiculo?</h4>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" method="post" id="editar_password" name="editar_password">
@@ -292,15 +292,13 @@ if ($result->num_rows > 0) {
                     </div>
                     <div class="modal-footer center">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btn-danger" id="eliminarProducto">Eliminar Cliente</button>
+                        <button type="submit" class="btn btn-danger" id="eliminarProducto">Eliminar Vehiculo</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-
-
-
+</div>
 </body>
 
 </html>
@@ -318,26 +316,50 @@ if ($result->num_rows > 0) {
     }
 
 
-    /*$("#editar_password").submit(function(event) {
+
+     
+    $( "#editar_usuario" ).submit(function( event ) {
+  $('#actualizar_datos').attr("disabled", true);
+  
+ var parametros = $(this).serialize();
+	 $.ajax({
+			type: "POST",
+			url: "ajax/editar_permiso.php",
+			data: parametros,
+			 beforeSend: function(objeto){
+				$("#resultados_ajax2").html("Mensaje: Cargando...");
+			  },
+			success: function(datos){
+			$("#resultados_ajax2").html(datos);
+			$('#actualizar_datos').attr("disabled", false);
+			load(1);
+		  }
+	});
+  event.preventDefault();
+})
+$("#editar_password").submit(function(event) {
         $('#actualizar_datos3').attr("disabled", true);
-        var tabla = "tbl_clientes";
-		var campo = "id_cliente";
-        var  user_id_mod =  $("#user_id_mod").val(item);
+
+        var parametros = $(this).serialize();
         $.ajax({
             type: "POST",
-            url: "ajax/eliminar_cliente.php",
-            data: 'tabla='+tabla+'&campo='+campo+'&user_id_mod='+user_id_mod,
+            url: "ajax/eliminar_servicios.php",
+            data: parametros,
             beforeSend: function(objeto) {
-                $("#resultados_ajax3").html("Mensaje: Cargando...");
+                $("#mensajeAjax").html("Mensaje: Cargando...");
             },
             success: function(datos) {
-                $("#resultados_ajax3").html(datos);
+                $("#mensajeAjax").html(datos);
                 $('#actualizar_datos3').attr("disabled", false);
-               // load(1);
+                load(1);
+                setTimeout(function() {
+                    limpiarMensaje('mensajeAjax');
+                    $('#myModal4').modal('hide');
+                }, 3000);
             }
         });
         event.preventDefault();
-    })*/
+    })
 
     function load(page) {
 

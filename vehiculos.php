@@ -151,9 +151,6 @@ if (!empty($_POST['clientId'])) {
                             include("menu2.php");
                         }else{
                         echo $_SESSION['menus']; 
-                        }else{
-
-                            echo $_SESSION['menus'];
                         }
                         //echo $_SESSION['menus']; 
                         ?>
@@ -251,6 +248,7 @@ if (!empty($_POST['clientId'])) {
             </div>
         </div>
     </div>
+</div>
 
 
 
