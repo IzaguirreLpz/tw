@@ -12,14 +12,14 @@ if (!isset($_SESSION['id_usuario'])) {
 if ($_SESSION['estado_usuario'] == strtolower('nuevo')) {
     header("Location: preguntas.php");
 }
-$id_usu = $_SESSION['id_usuario'];
+$idUsuario = $_SESSION['id_usuario'];
 
 
 $objeto="pantalla bitacora";
 		$accion="INGRESO";
 		$descripcion="ingreso a pantalla bitacora";
 		
-		$bita=grabarBitacora($id_usu,$objeto,$accion,$descripcion);
+		$bita=grabarBitacora($idUsuario,$objeto,$accion,$descripcion);
 //echo $_SESSION['menus'];
 ?>
 
@@ -112,7 +112,7 @@ $objeto="pantalla bitacora";
                 <div class="leftside-navigation">
                     <ul class="sidebar-menu" id="nav-accordion">
                         <?php
-                        if ($id_usu == 1) {
+                        if ($idUsuario == 1) {
                             include("menu2.php");
                         }
                         //echo $_SESSION['menus']; 

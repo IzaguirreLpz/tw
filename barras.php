@@ -40,7 +40,7 @@
                 <div class="leftside-navigation">
                     <ul class="sidebar-menu" id="nav-accordion">
                         <?php
-                        if ($id_usu == 1) {
+                        if ($idUsuario == 1) {
                             include("menu2.php");
                         }else{
                         echo $_SESSION['menus'];

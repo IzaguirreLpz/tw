@@ -12,16 +12,16 @@ if (!isset($_SESSION['id_usuario'])) {
 if ($_SESSION['estado_usuario'] == strtolower('nuevo')) {
     header("Location: preguntas.php");
 }
-$id_usu = $_SESSION['id_usuario'];
+$idUsuario = $_SESSION['id_usuario'];
 //echo $_SESSION['menus'];
 
 $objeto="pantalla usuario";
 		$accion="INGRESO";
-		$descripcion="ingreso a pantalla usuario";
+		$descripcion="ingreso a pantalla lista pendiente";
 		
-		$bita=grabarBitacora($id_usu,$objeto,$accion,$descripcion);
+		$bita=grabarBitacora($idUsuario,$objeto,$accion,$descripcion);
 
-
+        $insertar=getPer('per_insercion',$_SESSION['id_rol'],'14');
 ?>
 
 <!DOCTYPE html>
@@ -102,10 +102,11 @@ $objeto="pantalla usuario";
                 <div class="leftside-navigation">	
                     <ul class="sidebar-menu" id="nav-accordion">	
                         <?php	
-                        if ($id_usu == 1) {	
+                        if ($idUsuario == 1) {	
                             include("menu2.php");	
-                        }	
-                        //echo $_SESSION['menus']; 	
+                        }else {	
+                        echo $_SESSION['menus']; 	
+                    }
                         ?>	
 
                     </ul>	
@@ -142,7 +143,7 @@ $objeto="pantalla usuario";
                            
 				
                     
-                      <?php // style="text-transform: uppercase;width:300px; height:90px" if ($insertar==1 || $idUsuario==1){?>
+                      <?php if ($insertar==1 || $idUsuario==1){?>
                     
 	<label for="q" class="col-md-2 control-label">Cliente </label>		
 
@@ -164,7 +165,13 @@ $objeto="pantalla usuario";
                     
 								<button type="button" class="btn btn-default" onclick="agregar()">
 									<span class="glyphicon glyphicon-plus" ></span> Agregar  </button>
-								<span id="loader"></span>                   
+								<span id="loader"></span>   
+
+
+                                <?php	
+				}	
+
+				?>	                
     </div>
                         
 				

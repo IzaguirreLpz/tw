@@ -6,18 +6,15 @@ require '../funcs/conexion.php';
 require '../funcs/funcs.php';
 
 if(($_SESSION['id_usuario'])){
-<<<<<<< HEAD
   $idUsuario = $_SESSION['id_usuario'];
   $rol = $_SESSION['id_rol'];
-//$eliminar=getPer('permiso_eliminacion',$rol,'3');
-//$actualizar=getPer('permiso_actualizacion',$rol,'3');
-=======
+//$eliminar=getPer('per_eliminacion',$rol,'3');
+//$actualizar=getPer('per_actualizacion',$rol,'3');
  $idUsuario = $_SESSION['id_usuario'];
     $rol = $_SESSION['id_rol'];
   
-$eliminar=getPer('permiso_eliminacion',$rol,'3');
-$actualizar=getPer('permiso_actualizacion',$rol,'3');
->>>>>>> 06e8706785a44a90d7224ce9babedc27d34afed0
+$eliminar=getPer('per_eliminacion',$rol,'3');
+$actualizar=getPer('per_actualizacion',$rol,'3');
 
 }else{
 	header ("Location: index.php");
@@ -66,14 +63,11 @@ $actualizar=getPer('permiso_actualizacion',$rol,'3');
                 <td><?php echo $clienteId;?></td>
                 <td><?php echo $color;?></td>
                 <td><?php echo $placa;?></td>
-<<<<<<< HEAD
                 <td><?php echo $fecha;?></td>
-              <td>
-=======
-                <td><?php echo $fecha;?></td>  
+              
+               
                <td>  
                <?php  if ($actualizar==1 || $idUsuario==1 ){?>
->>>>>>> 06e8706785a44a90d7224ce9babedc27d34afed0
               <a href="add_vehiculo.php?id=<?php echo $item?> " class='btn btn-default' ui-toggle-class=""><i class="fa fa-pencil text-success text-dark"></i></a>
               <?php } ?>
                     <?php  if ($eliminar==1 || $idUsuario==1 ){?>

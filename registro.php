@@ -2,7 +2,7 @@
 
 
 require 'funcs/conexion.php';
-$consulta = "select id_rol, rol from tbl_roles";
+$consulta = "select rol_id_rol, rol_nombre from roles";
 $result = mysqli_query($mysqli, $consulta) or die(mysqli_error($mysqli));
 
 $consulta2 = "select descripcion from tbl_parametros where nombre = 'vencimiento'";
@@ -243,7 +243,7 @@ $nuevafecha = date('Y-m-j', $nuevafecha);
 											<span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
 											<select title="Rol del Usuario" class='form-control' name='rol' id='rol' onchange="load(1);" readonly>
 												<?php
-												$query_cod_veh = mysqli_query($mysqli, "SELECT id_rol,rol from tbl_roles WHERE id_rol=5");
+												$query_cod_veh = mysqli_query($mysqli, "SELECT rol_id_rol,rol_nombre from roles WHERE rolid_rol=5");
 												while ($rw = mysqli_fetch_array($query_cod_veh)) {
 												?>
 													<option value="<?php echo $rw['id_rol']; ?>"><?php echo $rw['rol']; ?></option>

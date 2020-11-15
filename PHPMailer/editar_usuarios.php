@@ -1,6 +1,6 @@
 	<?php
 require_once ("funcs/conexion.php");
-$consulta="select id_rol, rol from tbl_roles";
+$consulta="select 	rol_id_rol, 	rol_nombre from roles";
 		$result=mysqli_query($mysqli, $consulta) or die (mysqli_error($mysqli));
             
             

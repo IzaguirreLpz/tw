@@ -8,7 +8,7 @@ require 'funcs/funcs.php';
 if (!isset($_SESSION['id_usuario'])) {
     header("Location: index.php");
 }
-$id_usu = $_SESSION['id_usuario'];
+$idUsuario = $_SESSION['id_usuario'];
 
 $us = 0;
 //para que cuando sea agregar el rol sea nuevo predeterminado
@@ -132,7 +132,7 @@ if (isset($_GET["us"])) {
                 <div class="leftside-navigation">
                     <ul class="sidebar-menu" id="nav-accordion">
                         <?php
-                        if ($id_usu == 1) {
+                        if ($idUsuario == 1) {
                             include("menu2.php");
                         }
                         //echo $_SESSION['menus']; 
@@ -359,7 +359,7 @@ if (isset($_GET["us"])) {
                                                         $w = " ";
                                                         if ($rol == 5) {
 
-                                                            $w = "where id_rol=5";
+                                                            $w = "where rol_id_rol=5";
                                                         } else {
                                                             //  $w = " ";
                                                         ?>
@@ -369,12 +369,12 @@ if (isset($_GET["us"])) {
                                                         }
 
 
-                                                        $query_cod_veh = mysqli_query($mysqli, "select * from tbl_roles $w order by id_rol");
+                                                        $query_cod_veh = mysqli_query($mysqli, "select * from roles $w order by rol_id_rol");
                                                         while ($rw = mysqli_fetch_array($query_cod_veh)) {
                                                         ?>
-                                                            <option value="<?php echo $rw['id_rol']; ?>" <?php if ($rw['id_rol'] == $rol) {
+                                                            <option value="<?php echo $rw['rol_id_rol']; ?>" <?php if ($rw['rol_id_rol'] == $rol) {
                                                                                                             echo "selected='selected'";
-                                                                                                        } ?>><?php echo $rw['rol']; ?></option>
+                                                                                                        } ?>><?php echo $rw['rol_nombre']; ?></option>
                                                         <?php
                                                         }
 

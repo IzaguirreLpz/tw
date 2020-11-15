@@ -190,7 +190,7 @@ if (!$_POST["pass1"] or !$_POST["txt_nc"] or !$_POST["correo"] or !$_POST["txt_u
 				
 				$estado= $_POST["combo_estado"];
 				$estado="NUEVO";
-				$rol= $_POST["rol"];
+				$rol= $_POST["rol_id_rol"];
 				//echo $rol;
 				//$f1= $_POST["fecha1"];
 		

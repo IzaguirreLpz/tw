@@ -7,7 +7,7 @@ require 'funcs/funcs.php';
 if(!isset($_SESSION['id_usuario'])){
     header ("Location: index.php");
 }
-$id_usu = $_SESSION['id_usuario'];
+$idUsuario = $_SESSION['id_usuario'];
 /*$sql = "Select id_usuario, nombre_usuario from tbl_usuario WHERE id_usuario = '$idUsuario'";
 
 
