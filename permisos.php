@@ -153,6 +153,8 @@ require("./roles_objeto_bd.php");
                         <?php
                         if ($idUsuario == 1) {
                             include("menu2.php");
+                        }else{
+                        echo $_SESSION['menus']; 
                         }
                         //echo $_SESSION['menus']; 
                         ?>
@@ -189,7 +191,7 @@ require("./roles_objeto_bd.php");
 
     	<?php 
 
-    $sql = "SELECT menu_id, pant_nombre FROM menu where id_padre !=0  and menu_id!=6 order by pant_nombre";
+    $sql = "SELECT * FROM roles";
     $result = $mysqli->query($sql);
     echo "<option selected = 'selected' disabled = 'disabled'> Elija un Rol</option>";
     if ($result->num_rows > 0) {

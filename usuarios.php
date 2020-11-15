@@ -109,6 +109,8 @@ $objeto="pantalla usuario";
                         <?php
                         if ($idUsuario == 1) {
                             include("menu2.php");
+                        }else{
+                        echo $_SESSION['menus']; 
                         }
                         //echo $_SESSION['menus']; 
                         ?>
