@@ -86,6 +86,12 @@ if (!empty($_POST['clientId'])) {
   <!--- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>-->
 	     <link href="css/select2.min.css" rel="stylesheet" /> 
       <script src="js/select2.min.js"></script>
+      <!-- Librerias para generar reportes -->
+<link rel="stylesheet" type="text/css" href="reportsLibrary\datatables.min.css">
+<script type="text/javascript" src="reportsLibrary\datatables.min.js"></script>
+<script type="text/javascript" src="reportsLibrary\pdfmake.min.js"></script>
+<script type="text/javascript" src="reportsLibrary\vfs_fonts.js"></script>
+<!-- Librerias para generar reportes -->
 </head>
 
 <body>
@@ -335,7 +341,14 @@ $( "#editar_password" ).submit(function( event ) {
 
 
 
-
+ $(document).ready(function() {
+    $('table').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ]
+    } );
+} );
 
 
          
@@ -363,32 +376,22 @@ $( "#editar_password" ).submit(function( event ) {
 	
         
        
-            function ExportTable(){
-			$("table").tableExport({
+  //           function ExportTable(){
+		// 	$("table").tableExport({
                 
                 
                  
                 
-				headings: true,                    // (Boolean), display table headings (th/td elements) in the <thead>
-				footers: true,                     // (Boolean), display table footers (th/td elements) in the <tfoot>
-				formats: ["xls", "csv", "txt"],    // (String[]), filetypes for the export
-				fileName: "id",                    // (id, String), filename for the downloaded file
-				bootstrap: true,                   // (Boolean), style buttons using bootstrap
-				position: "well" ,                // (top, bottom), position of the caption element relative to table
-				ignoreRows: null,                  // (Number, Number[]), row indices to exclude from the exported file
-				ignoreCols: null,                 // (Number, Number[]), column indices to exclude from the exported file
-				ignoreCSS: ".tableexport-ignore"   // (selector, selector[]), selector(s) to exclude from the exported file
-			});
-		}
+		// 		headings: true,                    // (Boolean), display table headings (th/td elements) in the <thead>
+		// 		footers: true,                     // (Boolean), display table footers (th/td elements) in the <tfoot>
+		// 		formats: ["xls", "csv", "txt"],    // (String[]), filetypes for the export
+		// 		fileName: "id",                    // (id, String), filename for the downloaded file
+		// 		bootstrap: true,                   // (Boolean), style buttons using bootstrap
+		// 		position: "well" ,                // (top, bottom), position of the caption element relative to table
+		// 		ignoreRows: null,                  // (Number, Number[]), row indices to exclude from the exported file
+		// 		ignoreCols: null,                 // (Number, Number[]), column indices to exclude from the exported file
+		// 		ignoreCSS: ".tableexport-ignore"   // (selector, selector[]), selector(s) to exclude from the exported file
+		// 	});
+		// }
         
-        
-        
-
-
-
-
-
-
-
-
 </script>

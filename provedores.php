@@ -85,6 +85,12 @@ if (!empty($_POST['clientId'])) {
   <!--- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>-->
 	     <link href="css/select2.min.css" rel="stylesheet" /> 
       <script src="js/select2.min.js"></script>
+      <!-- Librerias para generar reportes -->
+<link rel="stylesheet" type="text/css" href="reportsLibrary\datatables.min.css">
+<script type="text/javascript" src="reportsLibrary\datatables.min.js"></script>
+<script type="text/javascript" src="reportsLibrary\pdfmake.min.js"></script>
+<script type="text/javascript" src="reportsLibrary\vfs_fonts.js"></script>
+<!-- Librerias para generar reportes -->
 </head>
 
 <body>
@@ -172,13 +178,11 @@ if (!empty($_POST['clientId'])) {
 		<div class="input-group">
 		  <span class="input-group-addon">FIN</span>
 		<input  type="date"   id="fecha_fin" name="fecha_fin"  >
-
-	
-
-
                         
-<button id="procesar" class="btn btn-primary">Procesar</button>
-             <button class="btn btn-default" title="salir de la consulta"  >   <span class="fa fa-outdent" title="salir de la consulta"  onclick="load(1)"></span></button>
+            <button id="procesar" class="btn btn-primary">Generar Reporte</button>
+            <a href="provedores.php">
+             <button class="btn btn-default" title="salir de la consulta"  >   <span class="fa fa-outdent" title="Salir de la consulta"  onclick="load(1)"></span>Salir Del Reporte</button>
+             </a>
                         </div>
                         <div id="resultados"></div><!-- Carga los datos ajax -->
                         <div class='outer_div'></div>
@@ -242,6 +246,14 @@ if (!empty($_POST['clientId'])) {
 </html>
 <script>
     $(document).ready(function() {
+    $('table').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ]
+    } );
+} );
+    $(document).ready(function() {
         load(1);
     });
 
@@ -274,7 +286,7 @@ if (!empty($_POST['clientId'])) {
       
 		var desde = $('#fecha_ini').val();
 		var hasta = $('#fecha_fin').val();
-		var url = 'ajax/busca_clientes_fecha.php';
+		var url = 'ajax/buscar_provedores_fecha.php';
             
 		$.ajax({
 		type:'POST',
@@ -285,28 +297,9 @@ if (!empty($_POST['clientId'])) {
 			$(".outer_div").html(data).fadeIn('slow');
             ExportTable();
             $('#loader').html('');
-            
-           
-		}
+        }
 	});
 	return false;
 	});
-	
-        
-       
-            function ExportTable(){
-			$("table").tableExport({
-                
-				headings: true,                    // (Boolean), display table headings (th/td elements) in the <thead>
-				footers: true,                     // (Boolean), display table footers (th/td elements) in the <tfoot>
-				formats: ["xls", "csv", "txt"],    // (String[]), filetypes for the export
-				fileName: "id",                    // (id, String), filename for the downloaded file
-				bootstrap: true,                   // (Boolean), style buttons using bootstrap
-				position: "well" ,                // (top, bottom), position of the caption element relative to table
-				ignoreRows: null,                  // (Number, Number[]), row indices to exclude from the exported file
-				ignoreCols: null,                 // (Number, Number[]), column indices to exclude from the exported file
-				ignoreCSS: ".tableexport-ignore"   // (selector, selector[]), selector(s) to exclude from the exported file
-			});
-		}
         
 </script>

@@ -59,32 +59,18 @@ if(($_SESSION['id_usuario'])){
 			
         while ($row=mysqli_fetch_array($query)){
 			
-			   $hola=$row['id_proveedor'];
+			             $hola=$row['id_proveedor'];
 			            $nom_empresa=$row['nom_empresa'];
 			            $representante=$row['representante'];
-						$num_tel1=$row['num_tel1'];
-						$num_tel2=$row['num_tel2'];
-						$RTN=$row['RTN'];
-			           
-                        $cor_empresa=$row['cor_empresa'];
-			
-			             
-            
-            
-            
-            
-            
+      						$num_tel1=$row['num_tel1'];
+      						$num_tel2=$row['num_tel2'];
+      						$RTN=$row['RTN'];
+                  $cor_empresa=$row['cor_empresa'];
                   $fecha=$row['fecha_registro'];
-                 $fecha= date('d/m/Y', strtotime($fecha));
-			          
-			          
+                  $fecha= date('d/m/Y', strtotime($fecha));		          
           ?>
-   
-             
               <tr>
-              
                 <td><?php echo $RTN?></td>
-             
                 <td><?php echo $nom_empresa?></td>
                 <td><?php echo $representante;?></td>
                 <td><?php echo $num_tel1." | | ".$num_tel2;?></td> 

@@ -27,7 +27,7 @@ if(($_SESSION['id_usuario'])){
                 <th >Codigo de Transación</th>
                 <th>Fecha</th>
                 <th>Codigo</th>
-                <th>Medicamento</th>
+                <th>Producto</th>
 				<th >Tipo</th>
                 <th >Cant.</th>
                 <th>Unidad</th>

@@ -30,7 +30,9 @@ $objeto="pantalla usuario";
 if (!empty($_POST['clientId'])) {
     $idCliente = $_POST['clientId'];
     global $mysqli;
-    $query = "DELETE FROM tbl_clientes WHERE id_cliente = $idCliente;";
+    $query = "DELETE FROM bd_tw.roles
+    WHERE rol_id_rol = $idCliente";
+    //$query = "DELETE FROM tbl_clientes WHERE id_cliente = $idCliente;";
     $objeto = "tbl_clientes";
     $accion = "DELETE";
     $descripcion = "ingreso a pantalla productos";
@@ -154,10 +156,10 @@ if (!empty($_POST['clientId'])) {
                 <div class="table-agile-info">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                         CLIENTES
+                         Roles
                          <?php  if ($insertar==1 || $idUsuario==1){?>
                             <div class="btn-group pull-right">
-                                <button type='button' class="btn btn-success" onClick="location.href='add_clie.php'"><span class="glyphicon glyphicon-plus"></span> Agregar </button>
+                                <button type='button' class="btn btn-success" onClick="location.href='add_rol.php'"><span class="glyphicon glyphicon-plus"></span> Agregar </button>
                             </div>
                             <?php } ?>
                         </div>
@@ -214,7 +216,7 @@ if (!empty($_POST['clientId'])) {
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel" style="text-align: center;">¿Seguro que deséa eliminar este Cliente?</h4>
+                <h4 class="modal-title" id="myModalLabel" style="text-align: center;">¿Seguro que deséa eliminar este Rol?</h4>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" method="post" id="editar_password" name="editar_password">
@@ -229,7 +231,7 @@ if (!empty($_POST['clientId'])) {
                     </div>
                     <div class="modal-footer center">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btn-danger" id="eliminarProducto">Eliminar Cliente</button>
+                        <button type="submit" class="btn btn-danger" id="eliminarProducto">Eliminar Rol</button>
                     </div>
                 </form>
             </div>
@@ -280,7 +282,7 @@ if (!empty($_POST['clientId'])) {
 
         $("#loader").fadeIn('slow');
         $.ajax({
-            url: 'ajax/buscar_cliente.php',
+            url: 'ajax/buscar_roles.php',
             beforeSend: function(objeto) {
                 $('#loader').html('<img src="./img/ajax-loader.gif"> Cargando...');
             },
@@ -292,14 +294,7 @@ if (!empty($_POST['clientId'])) {
         })
     }
 
-
-
-
-
-
-
-
-         
+   
     $('#procesar').on('click', function(){
       
 		var desde = $('#fecha_ini').val();
@@ -342,14 +337,4 @@ if (!empty($_POST['clientId'])) {
 			});
 		}
         
-        
-        
-
-
-
-
-
-
-
-
 </script>
