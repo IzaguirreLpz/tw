@@ -15,9 +15,9 @@ if ($_SESSION['estado_usuario'] == strtolower('nuevo')) {
 $idUsuario = $_SESSION['id_usuario'];
 
 
-$objeto="pantalla bitacora";
+$objeto="pantallas";
 		$accion="INGRESO";
-		$descripcion="ingreso a pantalla bitacora";
+		$descripcion="ingreso a pantalla de pantallas";
 		
 		$bita=grabarBitacora($idUsuario,$objeto,$accion,$descripcion);
 //echo $_SESSION['menus'];
@@ -125,7 +125,7 @@ $objeto="pantalla bitacora";
                 <div class="table-agile-info">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Bitacora
+                           Pantallas
 
                             <div class="btn-group pull-right">
                                
@@ -210,7 +210,7 @@ require 'modal/eliminar_usuario.php';
 
         $("#loader").fadeIn('slow');
         $.ajax({
-            url: 'ajax/buscar_bitacora.php',
+            url: 'ajax/buscar_pantalla.php',
             beforeSend: function(objeto) {
                 $('#loader').html('<img src="./img/ajax-loader.gif"> Cargando...');
             },
