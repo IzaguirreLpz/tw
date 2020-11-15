@@ -55,6 +55,12 @@ $objeto="pantalla bitacora";
     <!-- calendar -->
     <link rel="stylesheet" href="css/monthly.css">
     <!-- //calendar -->
+    <!-- Librerias para generar reportes -->
+<link rel="stylesheet" type="text/css" href="reportsLibrary\datatables.min.css">
+<script type="text/javascript" src="reportsLibrary\datatables.min.js"></script>
+<script type="text/javascript" src="reportsLibrary\pdfmake.min.js"></script>
+<script type="text/javascript" src="reportsLibrary\vfs_fonts.js"></script>
+<!-- Librerias para generar reportes -->
     <!-- //font-awesome icons -->
     <script src="js/jquery2.0.3.min.js"></script>
     <script src="js/raphael-min.js"></script>
@@ -131,15 +137,39 @@ $objeto="pantalla bitacora";
                         </div>
                         <div class="row w3-res-tb">
 
+                        <div class="col-lg-3">
+        <div class="input-group">
+          <span class="input-group-addon">INICIO</span>
+           <input  type="date" id="fecha_ini"  name="fecha_ini" placeholder="FECHA INICIO"></div>
+        </div>
+    
+   
+        <div class="input-group">
+          <span class="input-group-addon">FIN</span>
+        <input  type="date"   id="fecha_fin" name="fecha_fin"  >
+
+    
+
+
+                        
+            <button id="procesar" class="btn btn-primary">Generar Reporte</button>
+             <button class="btn btn-default" title="salir de la consulta"  > 
+                <a href="atencion_meca.php">
+                <span class="fa fa-outdent" title="salir de la consulta"></span> Salir Reporte</button>
+                </a>
+                        </div>
+                        <div id="resultados"></div><!-- Carga los datos ajax -->
+                        <div class='outer_div'></div>
+
+                    </div>
+                        <div class="row w3-res-tb">
+
                             <div class="col-sm-4">
                             </div>
                             <div class="col-sm-3">
 
                             </div>
                         </div>
-                        <div id="resultados"></div><!-- Carga los datos ajax -->
-                        <div class='outer_div'></div>
-
                     </div>
                 </div>
             </section>
@@ -219,4 +249,35 @@ require 'modal/eliminar_usuario.php';
             }
         })
     }
+ $(document).ready(function() {
+    $('table').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ]
+    } );
+} );
+
+ $('#procesar').on('click', function(){
+      
+        var desde = $('#fecha_ini').val();
+        var hasta = $('#fecha_fin').val();
+        var url = 'ajax/buscar_meca_fecha.php';
+            
+        $.ajax({
+        type:'POST',
+        url:url,
+        data:'desde='+desde+'&hasta='+hasta,
+        success: function(data){
+   
+            $(".outer_div").html(data).fadeIn('slow');
+            ExportTable();
+            $('#loader').html('');
+            
+           
+        }
+    });
+    return false;
+    });
+
 </script>

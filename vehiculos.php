@@ -84,10 +84,13 @@ if (!empty($_POST['clientId'])) {
   <script src="js/FileSaver.min.js"></script>
   <script src="js/tableexport.min.js"></script> -->
 
+<!-- Librerias para generar reportes -->
 <link rel="stylesheet" type="text/css" href="reportsLibrary\datatables.min.css">
 <script type="text/javascript" src="reportsLibrary\datatables.min.js"></script>
 <script type="text/javascript" src="reportsLibrary\pdfmake.min.js"></script>
 <script type="text/javascript" src="reportsLibrary\vfs_fonts.js"></script>
+<!-- Librerias para generar reportes -->
+
 
   <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jqc-1.12.4/jszip-2.5.0/dt-1.10.22/b-1.6.5/b-flash-1.6.5/b-html5-1.6.5/b-print-1.6.5/datatables.min.css"/>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
@@ -315,18 +318,5 @@ if (!empty($_POST['clientId'])) {
     } );
 } );
 
-            /* function ExportTable(){
-			$("table").tableExport({
-				headings: true,                    // (Boolean), display table headings (th/td elements) in the <thead>
-				footers: true,                     // (Boolean), display table footers (th/td elements) in the <tfoot>
-				formats: ["xls", "csv", "txt"],    // (String[]), filetypes for the export
-				fileName: "id",                    // (id, String), filename for the downloaded file
-				bootstrap: true,                   // (Boolean), style buttons using bootstrap
-				position: "well" ,                // (top, bottom), position of the caption element relative to table
-				ignoreRows: null,                  // (Number, Number[]), row indices to exclude from the exported file
-				ignoreCols: null,                 // (Number, Number[]), column indices to exclude from the exported file
-				ignoreCSS: ".tableexport-ignore"   // (selector, selector[]), selector(s) to exclude from the exported file
-			});
-		} */
         
 </script>

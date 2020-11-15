@@ -72,6 +72,7 @@ if (isset ($_GET["ate"] )){
     <!--   <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css'>
 	<link rel='stylesheet prefetch' href='http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.0/css/bootstrapValidator.min.css'> -->
     <link href="css/select2.min.css" rel="stylesheet" />
+    
     <script src="js/select2.min.js"></script>
 
 </head>
@@ -87,13 +88,6 @@ if (isset ($_GET["ate"] )){
             <div class="row">
                 <div class="col-lg-12">
                     <section class="panel">
-                        <header class="panel-heading">
-                            ATENCIÓN A   <?php echo $nom_com; ?>
-                            <span class="tools pull-right">
-                            <a class="fa fa-chevron-down" href="javascript:;"></a>
-                            <a class="fa fa-share" href="atencion_meca.php" ></a>
-                            </span>
-                        </header>
                         <div class="panel-body">
                             <div class="form">
                                 <form class="cmxform form-horizontal " name="consultas" method="post" id="loginform"
@@ -110,19 +104,17 @@ if (isset ($_GET["ate"] )){
                                                     <span class="input-group-addon"><i
                                                             class="glyphicon glyphicon-list-alt"></i></span>
                                                     <select class="myselect"
-                                                        style="text-transform: uppercase;width:700px; height:90px"
+                                                        style="text-transform: uppercase;width:700px; height:30px"
                                                         id="masco" name="masco">
                                                         <?php 
 														   $query_cod_veh=mysqli_query($mysqli,"SELECT id_vehiculo,placa, marca, modelo, color  from tbl_vehiculos where cliente_id = ".$id_cliente."");
 			                                             	while($rw=mysqli_fetch_array($query_cod_veh))	{
 				                                         	?>
-
                                                         <option value="<?php echo $rw['id_vehiculo'];?>"   <?php if ($rw['id_vehiculo'] == $auto) { echo "selected='selected'"; } ?>>
                                                             <?php echo $rw['placa']." | ". $rw['marca']." ". $rw['modelo']. " ".  $rw['color'];?>
                                                         </option>
                                                         <?php
 				                                        }
-
 			                                        ?>
                                                     </select>
                                                 </div>
@@ -138,7 +130,7 @@ if (isset ($_GET["ate"] )){
                                                     <span class="input-group-addon"><i
                                                             class="glyphicon glyphicon-list-alt"></i></span>
                                                     <textarea input class="form-control" id="detalle" name="detalle"
-                                                        placeholder="detalle" pattern="[a-zA-Z0-9]{2,64}"
+                                                         pattern="[a-zA-Z0-9]{2,64}"
                                                         title="Detalle de atención" onPaste="return false;" rows=5
                                                         cols="200" autocomplete="off"> <?php   echo $obs;  ?></textarea>
                                                 </div>
@@ -174,7 +166,7 @@ if (isset ($_GET["ate"] )){
                                     <br>
 
                                 <center>
-                                <label>PD.Los servicios varián segun carro y servicio detallarlos en el detalle de atención para ajustarlos en la factura.</label>
+                                    <input type="button" class="btn btn-info" value="Imprimir Para el Mecanico" onclick="window.print()">
                                 </center>
                                 </form>
                             </div>
@@ -197,83 +189,11 @@ if (isset ($_GET["ate"] )){
     <script src="js/scripts.js"></script>
     <script src="js/jquery.slimscroll.js"></script>
     <script src="js/jquery.nicescroll.js"></script>
-    <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="js/flot-chart/excanvas.min.js"></script><![endif]-->
     <script src="js/jquery.scrollTo.js"></script>
     <!-- morris JavaScript -->
     <script src="js/toastr.min.js"></script>
     <!-- calendar -->
     <script type="text/javascript" src="js/monthly.js"></script>
-    <script>
-    $(".myselect").select2();
-
-    $(document).on('submit', '#loginform', function(event) {
-        event.preventDefault();
-        $.ajax({
-            url: 'funcs/consulta.php',
-            type: 'POST',
-            dataType: 'JSON',
-            data: $(this).serialize(),
-            success: function(data) {
-                toastr.options.timeOut = 2000;
-                // toastr.options.showMethod = 'fadeIn';
-                // toastr.options.hideMethod = 'fadeOut';
-                // toastr.options.positionClass = 'toast-top-center';
-
-                if (data == "ok") {
-                    toastr.info("Atención registrada con exito");
-                    setTimeout(function() {
-                        location.href = "factura_pendiente.php";
-                    }, 2000);
-                } else {
-                    toastr.error(data);
-                }
-            }
-        })
-    });
-
-    $(".myselect").select2();
-    function obtener_id() {
-        var hasta = $('#mod_id').val();
-        var desde = $('#masco').val();
-        $("#nom").val(hasta);
-        $("#mas").val(desde);
-    }
-
-    function capturar(id) {
-
-        $("#consul_id").val(id);
-    }
-
-    $(document).ready(function() {
-        load(1);
-    });
-
-    function load(page) {
-        var hasta = $('#mod_id').val();
-
-        $("#loader").fadeIn('slow');
-        $.ajax({
-            type: 'POST',
-            url: 'ajax/atencion_ajax.php',
-            data: 'hasta=' + hasta,
-            beforeSend: function(objeto) {
-                $('#loader').html('<img src="./img/ajax-loader.gif"> Cargando...');
-            },
-            success: function(data) {
-                $(".outer_div").html(data).fadeIn('slow');
-                $('#loader').html('');
-
-            }
-        })
-    }
-    </script>
-
-
-
-    <?php
-			include("modal/registro_usado.php");
-			?>
-
     <!-- //calendar -->
 </body>
 
