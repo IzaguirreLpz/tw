@@ -224,9 +224,7 @@ if ($idUsuario==1){
                         <header class="panel-heading">
                             BACKUP
                             <span class="tools pull-right">
-                                <a class="fa fa-chevron-down" href="javascript:;"></a>
-                                <a class="fa fa-cog" href="javascript:;"></a>
-                                <a class="fa fa-times" href="javascript:;"></a>
+                               
                              </span>
                         </header>
                         <div class="panel-body">

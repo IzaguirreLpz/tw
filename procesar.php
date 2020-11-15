@@ -27,7 +27,7 @@ $con=mysqli_connect(SERVER, USER, PASS, BD);
 $con->query("SET FOREIGN_KEY_CHECKS=1");
 for($i = 0; $i < (count($sql)-1); $i++){
     if($con->query($sql[$i].";")){ 
- echo $sql[$i];
+// echo $sql[$i];
 
 	}else{
 		$totalErrors++; }
@@ -44,10 +44,10 @@ if($totalErrors<=0){
     
 }else{
 	$mensaje= "Restauración completada con éxito";
-	echo $totalErrors;
+//	echo $totalErrors;
 	
-						//print "<script>alert('$mensaje')</script>";
-				 		//print ("<script>window.location.replace('logout.php');</script>");
+						print "<script>alert('$mensaje')</script>";
+				 		print ("<script>window.location.replace('logout.php');</script>");
     
 }
         

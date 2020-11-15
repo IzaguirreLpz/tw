@@ -158,10 +158,11 @@ if (!empty($_POST)) {
                 <div class="leftside-navigation">
                     <ul class="sidebar-menu" id="nav-accordion">
                         <?php
-                        if ($idUsuario == 1) {
-                            include("menu2.php");
-                        }
-                        //echo $_SESSION['menus'];
+                       if ($idUsuario == 1) {
+                        include("menu2.php");
+                    }else{
+                  echo $_SESSION['menus']; 
+                }
                         ?>
                     </ul>
                 </div>
