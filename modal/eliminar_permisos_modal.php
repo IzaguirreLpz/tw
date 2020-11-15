@@ -14,7 +14,7 @@
 			  <div class="form-group">
 				
 				<div class="col-sm-8">
-					<input type="hidden" id="moda" name="moda">
+					<input type="" id="moda" name="moda">
 				</div>
 			  </div>
 	
