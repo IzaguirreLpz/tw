@@ -13,8 +13,8 @@ if(($_SESSION['id_usuario'])){
  $idUsuario = $_SESSION['id_usuario'];
     $rol = $_SESSION['id_rol'];
   
-$eliminar=getPer('per_eliminacion',$rol,'3');
-$actualizar=getPer('per_actualizacion',$rol,'3');
+$eliminar=getPer('per_eliminacion',$rol,'15');
+$actualizar=getPer('per_actualizacion',$rol,'15');
 
 }else{
 	header ("Location: index.php");

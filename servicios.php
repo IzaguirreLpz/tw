@@ -22,7 +22,7 @@ $objeto="pantalla usuario";
 		$accion="INGRESO";
 		$descripcion="ingreso a pantalla usuario";
 		$bita=grabarBitacora($idUsuario,$objeto,$accion,$descripcion);
-
+        $insertar=getPer('per_insercion', $_SESSION['id_rol'],'13');
 
 //en esta etapa se obtiene el submit del modal para eliminar el Cliente
 if (!empty($_POST['clientId'])) {

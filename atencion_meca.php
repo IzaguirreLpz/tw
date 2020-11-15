@@ -114,8 +114,9 @@ $objeto="pantalla bitacora";
                         <?php
                         if ($idUsuario == 1) {
                             include("menu2.php");
+                        }else{
+                        echo $_SESSION['menus']; 
                         }
-                        //echo $_SESSION['menus']; 
                         ?>
 
                     </ul>

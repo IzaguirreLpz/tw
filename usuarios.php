@@ -109,6 +109,8 @@ $objeto="pantalla usuario";
                         <?php
                         if ($idUsuario == 1) {
                             include("menu2.php");
+                        }else{
+                        echo $_SESSION['menus']; 
                         }
                         //echo $_SESSION['menus']; 
                         ?>
@@ -126,10 +128,11 @@ $objeto="pantalla usuario";
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             USUARIOS
-
+                            <?php  if ($insertar==1 || $idUsuario==1){?>
                             <div class="btn-group pull-right">
                                 <button type='button' class="btn btn-success" onClick="location.href='add_usu.php'"><span class="glyphicon glyphicon-plus"></span> Agregar </button>
                             </div>
+                            <?php } ?>
                         </div>
                         <div class="row w3-res-tb">
 
