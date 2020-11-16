@@ -99,7 +99,10 @@ if (isset ($_GET["ate"] )){
         <div class="form-w3layouts">
             <!-- page start-->
 
-
+<article id="DivIdToPrint"> 
+    <link rel="stylesheet  prefetch" href="css/bootstrap.min.css">
+    <link rel="stylesheet  prefetch" href="css/bootstrap-theme32.min.css">
+    <link rel="stylesheet  prefetch" href="css/bootstrapValidator32.min.css">   
             <div class="row">
                 <div class="col-lg-12">
                     <section class="panel">
@@ -118,11 +121,6 @@ if (isset ($_GET["ate"] )){
                                     <div class="agileinfo-row">
                                         <input type="hidden" id="mod_id" name="mod_id" value="<?php echo $ate;?>">
                                         <input type="hidden" id="id_clie" name="id_clie" value="<?php echo $id_cliente;?>">
-                                <div style="display:flex;justify-content: flex-end;margin: 10px 0">
-                                    <a class="btn btn-info" href="consulta_detalle.php?ate=<?php echo $ate;?>&id=<?php echo $id_cliente;?>" target="__blank">
-                                        Generar Formulario Para Mecanico
-                                    </a>
-                                </div>
                                         <div class='form-group'>
                                             <label class='col-sm-3 control-label'
                                                 for='id_accomodation'>Auto</label>
@@ -152,17 +150,6 @@ if (isset ($_GET["ate"] )){
                                             </div>
 
                                         </div>
-
-
-
-
-
-
-
-
-
-
-
 
 
                                     </div>
@@ -233,9 +220,10 @@ if (isset ($_GET["ate"] )){
                     </section>
                 </div>
             </div>
+        </article>
             <!-- page end-->
+            <input type="button" class="btn btn-info" value="Imprimir Para el Mecanico" onclick="printDiv()">
         </div>
-
 
 
 
@@ -266,6 +254,25 @@ if (isset ($_GET["ate"] )){
     <!-- calendar -->
     <script type="text/javascript" src="js/monthly.js"></script>
     <script>
+
+
+function printDiv() 
+{
+
+  var divToPrint=document.getElementById('DivIdToPrint');
+
+  var newWin=window.open('','Print-Window');
+
+  newWin.document.open();
+
+  newWin.document.write('<html><body onload="window.print()">'+divToPrint.innerHTML+'</body></html>');
+
+  newWin.document.close();
+
+  setTimeout(function(){newWin.close();},10);
+
+}
+
     $(".myselect").select2();
 
     $(document).on('submit', '#loginform', function(event) {
