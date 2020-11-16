@@ -46,11 +46,11 @@
 
 
 
-body {
+/*body {
 	font-family: 'Roboto', sans-serif;
 	text-align: center;
 	
-}
+}*/
 
 body a, body a:hover, input[type="button"], input[type="submit"], input[type="submit"]:hover {
 	transition: 0.5s all;

@@ -152,6 +152,11 @@ mysqli_free_result($result);
 </script>
 </head>
 <body>
+    <style type="text/css">
+        body{
+           text-align: left;
+        }
+    </style>
 <section id="container">
 <!--header start-->
 <header class="header fixed-top clearfix">
