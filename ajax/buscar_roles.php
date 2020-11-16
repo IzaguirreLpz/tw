@@ -8,8 +8,8 @@ if(($_SESSION['id_usuario'])){
  $idUsuario = $_SESSION['id_usuario'];
     $rol = $_SESSION['id_rol'];
 
-	$eliminar=getPer('per_eliminacion',$rol,'14');
-	$actualizar=getPer('per_actualizacion',$rol,'14');
+	$eliminar=getPer('per_eliminacion',$rol,'7');
+	$actualizar=getPer('per_actualizacion',$rol,'7');
 
 	
 	

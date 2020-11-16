@@ -16,7 +16,7 @@ $idUsuario = $_SESSION['id_usuario'];
 $objeto = "pantalla usuario";
 $accion = "INGRESO";
 $descripcion = "ingreso a pantalla usuario";
-$insertar=getPer('per_insercion',$_SESSION['rol'],'17');
+$insertar=getPer('per_insercion',$_SESSION['id_rol'],'17');
 $bita = grabarBitacora($idUsuario, $objeto, $accion, $descripcion);
 
 
