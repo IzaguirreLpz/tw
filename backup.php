@@ -125,7 +125,7 @@ mysqli_free_result($result);
 <script src="js/morris.js"></script>
 
 <!--// css -->
-<!--   <link rel="stylesheet" href="css/style3.css" 	type="text/css" media="all">-->
+     <link rel="stylesheet" href="css/style3.css" 	type="text/css" media="all">
 <!-- <link rel="stylesheet  prefetch" href="css/bootstrap2.min" > -->
 <!--<link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>-->
 	
@@ -243,14 +243,17 @@ mysqli_free_result($result);
             			<form action="#" action="<?php $_SERVER['PHP_SELF']; ?>" method="post">
                         <br>
                         <br>
-                            <h3>Copia Seguridad</h3>
+               <h2>Copia Seguridad</h2>
 							<div class="icon1">
-                                  <img class="" src="images/database.png" width="5%" alt="Custom Signup Form">
+                                  <img class="" src="images/database.png" width="20%" alt="Custom Signup Form">
 				 
 							</div>
                             
-
-
+						
+<div class="icon1">
+                            <br>
+							</div>
+<div class="icon1">
                            
     
     
@@ -273,7 +276,24 @@ mysqli_free_result($result);
 
 							</div>
                             
-
+<div class="icon1">
+                            <br>
+							</div>
+                            
+<div class="icon1">
+                            <br>
+							</div>
+                            
+<div class="icon1">
+                            <br>
+							</div>
+                            
+<div class="icon1">
+                            <br>
+							</div>
+<div class="icon1">
+                            <br>
+							</div>
 					</form>
            
 		
@@ -286,10 +306,10 @@ mysqli_free_result($result);
 
 		<div class="aitsloginwthree w3layouts agileits">
         <form name="frmcargararchivo" method="post" enctype="multipart/form-data">
-     <h3>Subir Archivo</h3>
+     <h2>Subir Archivo</h2>
 
      <div class="icon1">
-                                  <img class="" src="images/database.png" width="5%" alt="Custom Signup Form">
+                                  <img class="" src="images/database.png" width="20%" alt="Custom Signup Form">
 				 
 							</div>
 	
