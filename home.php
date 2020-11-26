@@ -5,7 +5,8 @@ session_start();
 //echo $_SESSION['menus'];
 require 'funcs/conexion.php';
 require 'funcs/funcs.php';
-
+$rol= $_SESSION['id_rol'];
+$insertar=getPer('per_insercion',$rol,'14');
 if (!isset($_SESSION['id_usuario'])) {
     header("Location: index.php");
 }
@@ -42,9 +43,20 @@ $idUsuario = $_SESSION['id_usuario'];
     <link rel="stylesheet" href="css/monthly.css">
     <!-- //calendar -->
     <!-- //font-awesome icons -->
+    <!-- CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+
+<!-- jQuery and JS bundle w/ Popper.js -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 </head>
 
 <body>
+    <style type="text/css">
+        .col-lg-6{
+            margin: 15px 0;
+        }
+    </style>
     <section id="container">
         <!--header start-->
         <header class="header fixed-top clearfix">
@@ -106,6 +118,59 @@ $idUsuario = $_SESSION['id_usuario'];
         <!--main content start-->
         <section id="main-content">
             <section class="wrapper">
+                <div class="container">                    
+                    <div class="row">
+                        <?php  if ($insertar==1 || $idUsuario==1){?>
+                        <div class="col-lg-6">
+                            <div class="card" style="width: 18rem;box-shadow: 5px 5px 10px 0px #6f6d6d99;">
+                            <a href="add_clie.php">                                
+                              <img src="./images/addCliente.svg" class="card-img-top" alt="...">
+                              <div class="card-body">
+                                <h3>Agregar Cliente</h3>
+                              </div>
+                            </a>
+                            </div>
+                        </div>
+                        <?php } ?>
+                        <?php  if ($insertar==1 || $idUsuario==1){?>
+                        <div class="col-lg-6">
+                            <div class="card" style="width: 18rem;box-shadow: 5px 5px 10px 0px #6f6d6d99;">
+                              <a href="add_vehiculo.php">
+                              <img src="./images/carro.svg" class="card-img-top" alt="...">
+                              <div class="card-body">
+                                <h3>Agregar Vehiculo</h3>
+                              </div>
+                              </a>
+                            </div>
+                        </div>
+                        <?php } ?>
+                          <?php  if ($insertar==1 || $idUsuario==1){?>
+                        <div class="col-lg-6">
+                                <div class="card" style="width: 18rem; box-shadow: 5px 5px 10px 0px #6f6d6d99;">
+                                    <a href="clientes_pend.php">
+                                      <img src="./images/espera.svg" class="card-img-top" alt="...">
+                                      <div class="card-body">
+                                         <h3>Ver Lista De Espera</h3>
+                                      </div>
+                                    </a>
+                                </div>
+                        </div>
+                        <?php } ?>
+                        <?php  if ($insertar==1 || $idUsuario==1){?>
+                        <div class="col-lg-6">
+                                <div class="card" style="width: 18rem;box-shadow: 5px 5px 10px 0px #6f6d6d99;">
+                                    <a href="atencion_meca.php">
+                                      <img src="./images/atencion.svg" class="card-img-top" alt="...">
+                                      <div class="card-body">
+                                        <h3>Ver Atenciones</h3>
+                                      </div>
+                                     </a>
+                                </div>
+                            </div>
+                        <?php } ?>
+                    </div>
+                    </div>
+                </div>
 
             </section>
 
