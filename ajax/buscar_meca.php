@@ -138,7 +138,7 @@ switch ($status) {
  <?php 
             if ($status==2 ||$status==1) {     ?>
                     <a href="consulta.php?ate=<?php echo $id;?>&id=<?php echo $clie;?>" data-toggle="tooltip" title="ATENDER CONSULTA"
-                        class='btn btn-default'><span class="fa fa-cog"></span></a>
+                        class='btn btn-default'> <span class="fa fa-cog"></span> Atender</a>
 
 
                     <?php

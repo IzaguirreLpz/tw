@@ -124,7 +124,7 @@ $objeto="pantalla usuario";
                 <div class="table-agile-info">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Lista de espera
+                            TICKETS
                             
                             <div class="btn-group pull-right">
                 
