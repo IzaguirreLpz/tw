@@ -11,7 +11,8 @@ $idUsuario = $_SESSION['id_usuario'];
 
 
 ?>
-
+<link rel="stylesheet" type="text/css" href="reportsLibrary\datatables.min.css">
+<script type="text/javascript" src="reportsLibrary\datatables.min.js"></script>
 <div class="dataTables_length" id="tableListar_length">
 <table class="table table-striped b-t b-light" id="tableListar" style="margin: 10px 0 0 0;">
  
@@ -164,7 +165,14 @@ switch ($status) {
     </table>
 
 </div>
-<script src="js/bootstrap-datepicker.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('table').DataTable();
+} );
+</script>
+
+
+      <script src="js/bootstrap-datepicker.js"></script>
       <script src="js/locales/bootstrap-datepicker.es.js"></script>
       <script src="js/jquery.dataTables.min.js"></script>
       <script src="js/dataTables.bootstrap.js"></script>
