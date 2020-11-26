@@ -6,7 +6,7 @@ require '../funcs/funcs.php';
 session_start();
 $rol = $_SESSION['id_rol'];
 $idUsuario = $_SESSION['id_usuario'];
-
+$rango = $_POST['rango'];
 //$clinica= $_SESSION['clinica'];
 
 
@@ -23,17 +23,35 @@ $idUsuario = $_SESSION['id_usuario'];
                 <th>Id</th>
                 <th>Nombre </th>
                 <th>Estado</th>
+                <th>Mécanico</th>
                 <th>Fecha atencion</th>
                 <th>Opciones</th>
             </tr>
         </thead>
         <tbody>
             <?php
-			
-			
+			 $ran_w = "AND LEFT(a.fecha_visita,10)=CURDATE() ";
+            switch ($rango) {
+                case 1:
+                    $ran_w="AND LEFT(a.fecha_visita,10)=CURDATE() ";
+          break;
+      case 2:
+        $ran_w="AND WEEKOFYEAR(a.fecha_visita)=WEEKOFYEAR(NOW()) ";
+          break;
+          case 3:
+            $ran_w="AND  YEAR(a.fecha_visita) = YEAR(NOW()) AND MONTH(a.fecha_visita)=MONTH(NOW())"; 
+  break;
+  
+
+}
+
+
+
+
 		
-			 $sql = "SELECT a.status,a.id_atencion,c.identidad ,a.fecha_visita ,a.id_cliente id_cliente,c.nom_cliente, c.ape_cliente from tbl_clientes c , tbl_atenciones a where a.id_cliente= c.id_cliente ORDER BY a.id_atencion DESC";
-            // para que no se actualice  en el dia
+			 $sql = "SELECT a.status,a.id_atencion,c.identidad ,a.fecha_visita ,a.id_cliente id_cliente,c.nom_cliente, c.ape_cliente, u.nombre_usuario  from tbl_clientes c , tbl_atenciones a, tbl_usuario u where a.id_cliente= c.id_cliente and a.id_meca = u.id_usuario  $ran_w ORDER BY a.id_atencion DESC";
+          // echo $sql;
+             // para que no se actualice  en el dia
             //AND LEFT(a.fecha_visita,10)=CURDATE() 
              $query = mysqli_query($mysqli, $sql);
      $item=0;
@@ -53,7 +71,7 @@ $id=$row['id_atencion'];
 			               $clave=$row['identidad'];
 						$nombre=$row['nom_cliente'];
 						$id_emp=$row['ape_cliente'];
-
+$meca = $row['nombre_usuario'];
 				        $fecha=$row['fecha_visita'];
 			            
                  $fecha= date('d/m/Y', strtotime($fecha));
@@ -109,7 +127,7 @@ switch ($status) {
 
 
 
-
+                 <td><?php echo $meca;?></td>
                 <td><?php echo $fecha;?></td>
 
 

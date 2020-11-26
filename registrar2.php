@@ -23,11 +23,16 @@ if (  !$_POST["correo"]  or !$_POST["txt_us"] or !$_POST["estado_usuarios"] or !
 		 $rol = intval($_POST['rol']);
 		 $email=  $_POST["correo"]   ;
 		 $est=  $_POST["estado_usuarios"]  ;
+	
 
 			 // $est="NUEVO";
 			  $comparar="ACTIVO";
                   $intentos = " ";
 			  
+
+	
+	
+
 			 if  ( $est=="NUEVO"){
 				 $act="1";
 					 
@@ -190,7 +195,7 @@ if (!$_POST["pass1"] or !$_POST["txt_nc"] or !$_POST["correo"] or !$_POST["txt_u
 				
 				$estado= $_POST["combo_estado"];
 				$estado="NUEVO";
-				$rol= $_POST["rol_id_rol"];
+				$rol= $_POST["rol"];
 				//echo $rol;
 				//$f1= $_POST["fecha1"];
 		

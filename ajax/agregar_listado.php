@@ -11,9 +11,9 @@ session_start();
 //$action = (isset($_REQUEST['action'])&& $_REQUEST['action'] !=NULL)?$_REQUEST['action']:'';
 	if (isset($_GET['id'])){
 		$empleado=intval($_GET['id']);
-		$query=mysqli_query($mysqli, "select * from tbl_clientes where id_cliente='".$empleado."'");
+		$query=mysqli_query($mysqli, "select count(*) contar from tbl_vehiculos where cliente_id='".$empleado."'");
 		$rw_user=mysqli_fetch_array($query);
-		$count=$rw_user['id_cliente'];
+		$count=$rw_user['contar'];
 		if ($count!= 0){
             
             
@@ -36,7 +36,7 @@ session_start();
 			?>
 			<div class="alert alert-danger alert-dismissible" role="alert">
 			  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			  <strong>Error!</strong> Lo siento algo ha salido mal intenta nuevamente.
+			  <strong>Error!</strong> No tiene vehiculos asignado el cliente.
 			</div>
 			<?php
 			

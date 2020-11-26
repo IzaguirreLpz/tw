@@ -285,8 +285,7 @@ if (isset($_GET["us"])) {
                                                 </div>
                                             </div>
 
-
-
+                                         
 
 
 
@@ -361,7 +360,7 @@ if (isset($_GET["us"])) {
                                                         $w = " ";
                                                         if ($rol == 5) {
 
-                                                            $w = "where rol_id_rol=5";
+                                                           // $w = "where rol_id_rol=5";
                                                         } else {
                                                             //  $w = " ";
                                                         ?>

@@ -219,8 +219,8 @@ $idUsuario= $_SESSION['id_usuario'];
 		  		  <div class="input-group">
 		  		  
 		  		  
-		  		   <input type="radio" name="gender" id="gender" value="M" checked> Male
-  <input type="radio" name="gender" id="gender" value="F"> Female<br>
+		  		   <input type="radio" name="gender" id="gender" value="M" checked> Masculino
+  <input type="radio" name="gender" id="gender" value="F"> Femenino<br>
  
 				</div>
 			  </div>

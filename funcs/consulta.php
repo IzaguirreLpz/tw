@@ -10,8 +10,8 @@ if (empty($_POST['masco'])){
         
 		} elseif (empty($_POST['detalle'])){
 		 	echo json_encode( "Destalle de atencion esta vacio.");
-        } elseif (empty($_POST['id_clie'])) {
-            echo json_encode( "cliente vacio");	
+        } elseif (empty($_POST['meca'])) {
+            echo json_encode( "Eliga un mécanico.");	
         
 
   
@@ -31,6 +31,7 @@ elseif (
     $obs=$_POST['detalle'];
     $ate=$_POST['mod_id'];
     $fin=$_POST['fin'];
+    $meca=$_POST['meca'];
     $bol=getCualquiera('numero_factura','facturas','id_atencion',$ate);
     $num_fact=getNum();
         //echo $num_fact;
@@ -60,7 +61,7 @@ elseif (
     }
 
 
-    	$sql="UPDATE tbl_atenciones SET id_auto='".$auto."',observacion='".$obs."', status= '".$fin."'  WHERE id_atencion=".$ate."";
+    	$sql="UPDATE tbl_atenciones SET id_auto='".$auto."',observacion='".$obs."', status= '".$fin."', id_meca= '".$meca."'  WHERE id_atencion=".$ate."";
 
 		$query_update = mysqli_query($mysqli,$sql);
 

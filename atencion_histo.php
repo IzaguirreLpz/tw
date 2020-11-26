@@ -76,7 +76,6 @@ $objeto="pantalla bitacora";
                 <a href="home.php" class="logo">
                     MENU
                 </a>
-                
                 <div class="sidebar-toggle-box">
                     <div class="fa fa-bars"></div>
                 </div>
@@ -140,17 +139,6 @@ $objeto="pantalla bitacora";
                         <div class="row w3-res-tb">
 
                         <div class="col-lg-3">
-
-                        <input type="radio" id="gender" onchange="load(1,1)" name="gender" value="1" checked >
-<label for="male">Día</label><br>
-<input type="radio" id="gender" name="gender" onchange="load(1,2)" value="2">
-<label for="female">Semana</label><br>
-<input type="radio" id="gender" name="gender" onchange="load(1,3)" value="3">
-<label for="other">Mes</label>
-<label for="male">Día</label><br>
-                                                          
-                                                        </div>
-                                                        <div class="col-sm-3">
         <div class="input-group">
           <span class="input-group-addon">INICIO</span>
            <input  type="date" id="fecha_ini"  name="fecha_ini" placeholder="FECHA INICIO"></div>
@@ -170,11 +158,7 @@ $objeto="pantalla bitacora";
                 <a href="atencion_meca.php">
                 <span class="fa fa-outdent" title="salir de la consulta"></span> Salir Reporte</button>
                 </a>
-      </div>
-
-                
-               
-                       
+                        </div>
                         <div id="resultados"></div><!-- Carga los datos ajax -->
                         <div class='outer_div'></div>
 
@@ -251,14 +235,11 @@ require 'modal/eliminar_usuario.php';
         event.preventDefault();
     })
 
-    function load(page,rang) {
-        var rango = rang;
-        
+    function load(page) {
+
         $("#loader").fadeIn('slow');
         $.ajax({
-            type: 'POST',
             url: 'ajax/buscar_meca.php',
-            data: 'rango='+ rang,
             beforeSend: function(objeto) {
                 $('#loader').html('<img src="./img/ajax-loader.gif"> Cargando...');
             },

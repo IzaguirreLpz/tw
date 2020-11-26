@@ -108,7 +108,9 @@ if (!empty($_POST)) {
     <link rel="stylesheet  prefetch" href="css/bootstrap.min.css">
     <link rel="stylesheet  prefetch" href="css/bootstrap-theme32.min.css">
     <link rel="stylesheet  prefetch" href="css/bootstrapValidator32.min.css">
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+    <link href="css/select2.min.css" rel="stylesheet" /> 
+      <script src="js/select2.min.js"></script>
 </head>
 
 <body>
@@ -244,7 +246,7 @@ if (!empty($_POST)) {
                                                     $result = mysqli_query($mysqli,$query) or die(mysql_error()."[".$query."]");
                                                 ?>
                                                 <span class="input-group-addon"><i class="fas fa-user"></i></span>
-                                                <select class="form-control" id="exampleFormControlSelect1" name="cliente" title="Seleccione un cliente">
+                                                <select class="myselect" style="text-transform: uppercase;width:600px; height:90px" id="exampleFormControlSelect1" name="cliente" title="Seleccione un cliente">
                                                     <?php
                                                     if ($edicion != 0) {
                                                         $client = getArray("tbl_clientes", "id_cliente", $cliente);
@@ -303,6 +305,8 @@ if (!empty($_POST)) {
     </section>
 
     <script type="application/x-javascript">
+$(".myselect").select2();
+
         addEventListener("load", function() {
             setTimeout(hideURLbar, 0);
         }, false);

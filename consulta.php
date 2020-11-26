@@ -23,7 +23,9 @@ if (isset ($_GET["ate"] )){
 	
 	$arreglo = getArray("tbl_atenciones","id_atencion",$ate);
 	$auto = $arreglo['id_auto'];
-	$obs = $arreglo['observacion'];
+    $obs = $arreglo['observacion'];
+    
+    $id_meca =$arreglo['id_meca'];
     if ($obs==null){$obs=' ';}
 
 	}
@@ -110,7 +112,7 @@ if (isset ($_GET["ate"] )){
                             ATENCIÓN A   <?php echo $nom_com; ?>
                             <span class="tools pull-right">
 
-                                <a class="fa fa-chevron-down" href="javascript:;"></a>
+                            <input type="button" class="btn btn-info" value="Imprimir Para el Mecanico" onclick="printDiv()">
                               <a class="fa fa-share" href="atencion_meca.php" ></a>
                             </span>
                         </header>
@@ -148,7 +150,7 @@ if (isset ($_GET["ate"] )){
                                                     </select>
                                                 </div>
                                             </div>
-
+                                              
                                         </div>
 
 
@@ -157,7 +159,35 @@ if (isset ($_GET["ate"] )){
                                     <div class="agileinfo-row w3ls-row2">
 
 
+                                    <div class='form-group'>
+                                            <label class='col-sm-3 control-label'
+                                                for='id_accomodation'>Mécanico</label>
 
+                                            <div class='col-md-8'>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i
+                                                            class="glyphicon glyphicon-list-alt"></i></span>
+                                                    <select class="myselect"
+                                                        style="text-transform: uppercase;width:700px; height:90px"
+                                                        id="meca" name="meca">
+                                                        <?php 
+														   $query_cod_veh=mysqli_query($mysqli,"SELECT id_usuario,	usuario, nombre_usuario  from tbl_usuario where id_rol = 3");
+			                                             	while($rw=mysqli_fetch_array($query_cod_veh))	{
+				                                         	?>
+
+                                                        <option value="<?php echo $rw['id_usuario'];?>"   <?php if ($rw['id_usuario'] == $id_meca) { echo "selected='selected'"; } ?>>
+                                                            <?php echo $rw['usuario']." | ". " ".  $rw['nombre_usuario'];?>
+                                                        </option>
+                                                        <?php
+				                                                    }
+
+			                                           	?>
+
+                                                    </select>
+                                                </div>
+                                            </div>
+                                              
+                                        </div>
 
 
                                         <div class="form-group">
@@ -292,7 +322,7 @@ function printDiv()
                 if (data == "ok") {
                     toastr.info("Atención registrada con exito");
                     setTimeout(function() {
-                        location.href = "factura_pendiente.php";
+                        location.href = "atencion_meca.php";
                     }, 2000);
                 } else {
                     toastr.error(data);
