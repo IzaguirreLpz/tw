@@ -11,7 +11,7 @@ $type = 'success';
 if (!isset($_SESSION['id_usuario'])) {
     header("Location: index.php");
 }
-$insertar=getPer('per_insercion',$_SESSION['id_rol'],'15');
+$insertar=getPer('per_insercion',$_SESSION['id_rol'],'12');
 if ($_SESSION['estado_usuario'] == strtolower('nuevo')) {
     header("Location: preguntas.php");
 }

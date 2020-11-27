@@ -21,7 +21,7 @@ $objeto="pantalla usuario";
 		
 		$bita=grabarBitacora($idUsuario,$objeto,$accion,$descripcion);
 
-        $insertar=getPer('per_insercion',$_SESSION['id_rol'],'14');
+        $insertar=getPer('per_insercion',$_SESSION['id_rol'],'13');
 ?>
 
 <!DOCTYPE html>

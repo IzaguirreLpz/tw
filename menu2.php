@@ -3,8 +3,9 @@
 <li class='sub-menu'>
    <a href='javascript:;'><i class="fas fa-car"></i><span>Atención</span></a>
    <ul class='sub'>
-      
-      <li><a href='clientes_pend.php'><i class=''></i>Lista  de Espera</a> </li>
+   <li><a href='clientes.php'><i class=''></i>Clientes</a> </li>
+      <li><a href='vehiculos.php'><i class=''></i>Vehiculos</a> </li>
+      <li><a href='clientes_pend.php'><i class=''></i>Tickets</a> </li>
       <li><a href='atencion_meca.php'><i class=''></i>Atenciones</a> </li>
        <li><a href='servicios.php'><i class=''></i>Lista servicios</a> </li>
    </ul>
@@ -12,8 +13,7 @@
 <li class='sub-menu'>
    <a href='javascript:;'><i class="fas fa-users-cog"></i><span>Administracion</span></a>
    <ul class='sub'>
-      <li><a href='clientes.php'><i class=''></i>Clientes</a> </li>
-      <li><a href='vehiculos.php'><i class=''></i>Vehiculos</a> </li>
+    
      <li><a href='provedores.php'><i class=''></i>Provedores</a> </li>
             <li><a href='productos.php'><i class=''></i>Productos</a> </li>
 
