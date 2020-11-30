@@ -199,6 +199,11 @@ if (!empty($_POST['clientId'])) {
 <button id="procesar" class="btn btn-primary">Generar Reporte</button>
              <button class="btn btn-default" title="salir de la consulta"  >   <span class="fa fa-outdent" title="salir de la consulta"  onclick="load(1)"></span> Salir Reporte</button>
                         </div>
+                         <?php
+                if ($errors != '') {
+                    echo showMessage($errors, $type);
+                }
+                ?>
                         <div id="resultados"></div><!-- Carga los datos ajax -->
                         <div class='outer_div'></div>
 
@@ -206,11 +211,7 @@ if (!empty($_POST['clientId'])) {
                 </div>
             </section>
 
-            <?php
-                if ($errors != '') {
-                    echo showMessage($errors, $type);
-                }
-                ?>
+           
             <script src="js/bootstrap.js"></script>
             <script src="js/jquery.dcjqaccordion.2.7.js"></script>
             <script src="js/scripts.js"></script>
@@ -261,6 +262,13 @@ if (!empty($_POST['clientId'])) {
 
 </html>
 <script>
+    //eliminar alerta despues de 5 segundos
+        let alerta = document.getElementsByClassName('alert');
+        setTimeout(function() {
+            while (alerta.length > 0) {
+                alerta[0].parentNode.removeChild(alerta[0]);
+            }
+        }, 5000);
     $(document).ready(function() {
         load(1);
     });
