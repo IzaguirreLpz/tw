@@ -59,9 +59,7 @@ $actualizar=getPer('per_actualizacion',$rol,'13');
                         ui-toggle-class=""><i class="fa fa-pencil text-success text-dark"></i></a>
                     <?php } ?>
                     <?php  if ($eliminar==1 || $idUsuario==1 ){?>
-                    <a href="#" class='btn btn-default' title='Eliminar Producto' data-toggle="modal"
-                        data-target="#myModal4" onclick='obtener_id("<?php echo $product_id; ?>")'><i
-                            class="glyphicon glyphicon-remove"></i></a>
+                        <a href="#" class='btn btn-default' title='Eliminar Producto' data-toggle="modal" data-target="#myModal4" onclick='obtener_id("<?php echo $product_id; ?>")'><i class="glyphicon glyphicon-remove"></i></a>
                     <?php } ?>
                     <script>
                     function reportePDF2() {

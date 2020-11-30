@@ -44,18 +44,18 @@ if (empty($_POST['prodictId'])) {
 
     $sql = "DELETE  FROM products WHERE id_producto='" . $productId . "'";
     $query = mysqli_query($mysqli, $sql);
-    $objeto = "tbl_productos";
+    $objeto = "products";
     $accion = "DELETE";
-    $descripcion = "ingreso a pantalla productos";
+    $descripcion = "eliminar  producto o servicio";
 
     if ($query) {
-        $messages[] = "Producto eliminado con éxito.";
+        $messages[] = "Registro eliminado con éxito.";
         $bita = grabarBitacora($idUsuario, $objeto, $accion, $sql);
     } else {
         $errors[] = "Lo sentimos , el intento de eliminado falló. Por favor, regrese y vuelva a intentarlo.";
     }
 } else {
-    $errors[] = "Este producto ya fue utilizado en una factura, no  puedes.";
+    $errors[] = " ya fue utilizado en una factura, no  puedes eliminarlo.";
 }
 
 

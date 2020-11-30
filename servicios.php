@@ -18,7 +18,7 @@ if ($_SESSION['estado_usuario'] == strtolower('nuevo')) {
 $idUsuario = $_SESSION['id_usuario'];
 //echo $_SESSION['menus'];
 
-$objeto="pantalla usuario";
+$objeto="pantalla servicios";
 		$accion="INGRESO";
 		$descripcion="ingreso a pantalla usuario";
 		$bita=grabarBitacora($idUsuario,$objeto,$accion,$descripcion);
@@ -29,9 +29,9 @@ if (!empty($_POST['clientId'])) {
     $idCliente = $_POST['clientId'];
     global $mysqli;
     $query = "DELETE FROM products WHERE id_producto = $idCliente;";
-    $objeto = "tbl_clientes";
+    $objeto = "products";
     $accion = "DELETE";
-    $descripcion = "ingreso de nuevos servicios";
+    $descripcion = "eliminado servicios";
     if (mysqli_query($mysqli, $query)) {
         $errors = "Servicio eliminado con éxito.";
         grabarBitacora($idCliente, $objeto, $accion, $query);
@@ -213,32 +213,11 @@ if (!empty($_POST['clientId'])) {
 
 
 <!-- Modal -->
-<div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel" style="text-align: center;">¿Seguro que deséa eliminar este Servicio?</h4>
-            </div>
-            <div class="modal-body">
-                <form class="form-horizontal" method="post" id="editar_password" name="editar_password">
-                    <div id="mensajeAjax"></div>
-                    <div class="form-group">
-                        <div class="col-sm-8">
-                            <input type="hidden" id="clientId" name="clientId">
-                            <div class="container">
-                                <img width="50%" src="./images/delete.svg">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer center">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btn-danger" id="eliminarProducto">Eliminar Servicio</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+<?php
+
+require 'modal/eliminar_producto.php';
+
+?>
 
 
 
@@ -250,13 +229,36 @@ if (!empty($_POST['clientId'])) {
         load(1);
     });
 
-    function
-    obtener_id(item) {
-        let val = item;
-        let id = document.getElementById('clientId');
-        id.value = val;
-        $("#user_id_mod").val(item);
+    function obtener_id(id, titulo, descripcion) {
+        $("#product_id").val(id);
     }
+
+
+    
+    $("#editar_password").submit(function(event) {
+        $('#actualizar_datos3').attr("disabled", true);
+
+        var parametros = $(this).serialize();
+        $.ajax({
+            type: "POST",
+            url: "ajax/eliminar_producto.php",
+            data: parametros,
+            beforeSend: function(objeto) {
+                $("#mensajeAjax").html("Mensaje: Cargando...");
+            },
+            success: function(datos) {
+                $("#mensajeAjax").html(datos);
+                $('#actualizar_datos3').attr("disabled", false);
+                load(1);
+                setTimeout(function() {
+                    limpiarMensaje('mensajeAjax');
+                    $('#myModal4').modal('hide');
+                }, 3000);
+            }
+        });
+        event.preventDefault();
+    })
+
 
     function load(page) {
 
