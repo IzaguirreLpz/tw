@@ -59,6 +59,7 @@ if (!empty($_POST)) {
     if (mysqli_query($conexion, $consulta)) {
         $errors = 'Se ha ingresado el rol correctamente';
         $type = 'success';
+        header('Location: roles.php');
     } else {
         $mensaje = mysqli_error($conexion);
         $errors = 'Hemos tenido el siguiente problema: ' . $mensaje . '</br> Contacta tu Administrador</br>'.$consulta.'';

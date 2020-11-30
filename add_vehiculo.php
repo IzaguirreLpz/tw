@@ -67,6 +67,8 @@ if (!empty($_POST)) {
     if (mysqli_query($conexion, $consulta)) {
         $errors = 'Se ha ingresado el vehiculo correctamente';
         $type = 'success';
+        header('Location: vehiculos.php');
+
     } else {
         $mensaje = mysqli_error($conexion);
         $errors = 'Hemos tenido el siguiente problema: ' . $mensaje . '</br> Contacta tu Administrador</br>'.$consulta.'';
