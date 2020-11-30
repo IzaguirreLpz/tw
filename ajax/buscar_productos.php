@@ -19,7 +19,7 @@ $actualizar=getPer('per_actualizacion',$rol,'17');
                 <th>Precio De Venta</th>
                 <th>Precio Costo</th>
                 <th>Proveedor</th>
-                <th>Categoria</th>
+                <th>Cantidad</th>
                 <th>Fecha Registro</th>
                 <th>Acciones</th>
             </tr>
@@ -40,7 +40,7 @@ $actualizar=getPer('per_actualizacion',$rol,'17');
                     $precio = $row['precio_producto'];
                     $precioCosto = $row['precio_costo'];
                     $proveedor = $row['proveedor'];
-                    $categoria = $row['categorias'];
+                    $categoria = $row['cant'];
                     $fechaRegistro = $row['date_added'];
                     $fechaRegistro = date('d/m/Y', strtotime($fechaRegistro));
             ?>

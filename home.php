@@ -150,7 +150,7 @@ $idUsuario = $_SESSION['id_usuario'];
                                     <a href="clientes_pend.php">
                                       <img src="./images/espera.svg" class="card-img-top" alt="...">
                                       <div class="card-body">
-                                         <h3>Ver Lista De Espera</h3>
+                                         <h3>Tickets</h3>
                                       </div>
                                     </a>
                                 </div>

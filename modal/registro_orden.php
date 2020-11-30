@@ -143,7 +143,7 @@
               </div>
      <span id='stok'>
               <div class="form-group">
-                <label class="col-sm-3 control-label">Stock</label>
+                <label class="col-sm-3 control-label">Existencia</label>
                 <div class="col-sm-6">
                   <input type="text" class="form-control" id="stok" name="stock" readonly required>
                 </div>
@@ -169,7 +169,7 @@
               </div>
 
               <div class="form-group">
-                <label class="col-sm-3 control-label">Total Stock</label>
+                <label class="col-sm-3 control-label">Total Existencia </label>
                 <div class="col-sm-6">
                   <input type="text" class="form-control" id="total_stok" name="total_stock" readonly required>
                 </div>

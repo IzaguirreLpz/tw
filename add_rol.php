@@ -39,7 +39,7 @@ if (!empty($_POST)) {
         global $mysqli;
         $conexion = $mysqli;
         if (mysqli_query($conexion, $sql)) {
-            $errors = 'Se han actualizado los datos de el producto correctamente';
+            $errors = 'Se han actualizado los datos de el Rol correctamente';
             $type = 'success';
         } else {
             $mensaje = mysqli_error($conexion);
@@ -55,9 +55,9 @@ if (!empty($_POST)) {
     $consulta = "INSERT INTO roles
 		(rol_nombre,rol_descripcion)
 		VALUES
-		('$nombre','$descripcion');";
+		('$nombreRol','$descripcionRol');";
     if (mysqli_query($conexion, $consulta)) {
-        $errors = 'Se ha ingresado el vehiculo correctamente';
+        $errors = 'Se ha ingresado el rol correctamente';
         $type = 'success';
     } else {
         $mensaje = mysqli_error($conexion);

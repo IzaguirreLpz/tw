@@ -19,7 +19,7 @@ if(isset($_POST['dataidobat'])) {
 
 	if($stock != '') {
 		echo "<div class='form-group'>
-                <label class='col-sm-3 control-label'>Stock</label>
+                <label class='col-sm-3 control-label'>Existencia</label>
                 <div class='col-sm-6'>
                   <div class='input-group'>
                     <input type='text' class='form-control' id='stok' name='stock' value='$stock' readonly>
@@ -29,7 +29,7 @@ if(isset($_POST['dataidobat'])) {
               </div>";
 	} else {
 		echo "<div class='form-group'>
-                <label class='col-sm-3 control-label'>Stock</label>
+                <label class='col-sm-3 control-label'>Existencia</label>
                 <div class='col-sm-6'>
                   <div class='input-group'>
                     <input type='text' class='form-control' id='stok' name='stock' value='0' readonly>

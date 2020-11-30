@@ -5,12 +5,12 @@ error_reporting(E_PARSE);
  const USER = "root";
 
 //Servidor de mysql
- const SERVER = "testingdb.c2lgpurhnyvd.us-east-1.rds.amazonaws.com"; 
+ const SERVER = "localhost"; 
 //Nombre de la base de datos
 const BD = "bd_tw";
 
 //Contraseña de myqsl
-const PASS = "NiOlUT2X3M1D2maxbCWI";
+const PASS = "";
 
 //Carpeta donde se almacenaran las copias de seguridad
 const BACKUP_PATH =  "./backup/";
