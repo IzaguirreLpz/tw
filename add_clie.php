@@ -141,7 +141,7 @@ $idUsuario= $_SESSION['id_usuario'];
 				<div class="col-sm-8">
 			  	 <div class="input-group">
 			  	  <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
-				  <input  type="tel" class="form-control" id="identidad" name="identidad" placeholder="22345678" pattern="^[9
+				  <input  type="number" class="form-control" id="identidad" name="identidad" placeholder="22345678" pattern="^[9
 				  |0|1|2]\d{12}$"  title="min 13 numeros solo"onPaste="return false;"  maxlength="15" autocomplete="off" >
 				</div> 
 			  </div>

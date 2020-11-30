@@ -28,7 +28,7 @@ $actualizar=getPer('per_actualizacion',$rol,'12');
       <tr class="success">
             <th>Marca</th>
             <th>Modelo</th>
-            <th>Cliente Id</th>
+            <th>Cliente</th>
             <th>Color</th>
             <th>Placa</th>
             <th>Fecha Ingreso</th>
@@ -38,7 +38,9 @@ $actualizar=getPer('per_actualizacion',$rol,'12');
         <tbody>
           <?php
 
-			 $sql = "SELECT * FROM tbl_vehiculos order by id_vehiculo ASC";
+			 $sql = "SELECT v.id_vehiculo,v.marca,v.modelo,c.nom_cliente, c.ape_cliente , v.color, v.placa, v.fecha_registro
+                FROM bd_tw.tbl_vehiculos v, tbl_clientes c where v.cliente_id=c.id_cliente and v.fecha_registro
+                order by id_vehiculo ASC";
 
 			$query = mysqli_query($mysqli, $sql);
 
@@ -51,7 +53,8 @@ $actualizar=getPer('per_actualizacion',$rol,'12');
             $item=$row['id_vehiculo'];
             $marca=$row['marca'];
             $modelo=$row['modelo'];
-            $clienteId=$row['cliente_id'];
+            $clienteNom=$row['nom_cliente'];
+            $clienteApe=$row['ape_cliente'];
             $color=$row['color'];
             $placa=$row['placa'];
             $fecha=$row['fecha_registro'];
@@ -60,7 +63,7 @@ $actualizar=getPer('per_actualizacion',$rol,'12');
               <tr>
                 <td><?php echo $marca ?></td>
                 <td><?php echo $modelo;?></td>
-                <td><?php echo $clienteId;?></td>
+                <td><?php echo $clienteNom." ".$clienteApe;?></td>
                 <td><?php echo $color;?></td>
                 <td><?php echo $placa;?></td>
                 <td><?php echo $fecha;?></td>

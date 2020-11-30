@@ -91,7 +91,7 @@ if (
 
 <div class="row">
     <div class="col">
-        <h3 class="display-4" style="text-align: center;color:#676767">Reporte de Vehiculos <?php echo $tit_fecha; ?></h3>
+        <h3 class="display-4" style="text-align: center;color:#676767">Reporte de Productos <?php echo $tit_fecha; ?></h3>
     </div>
 </div>
 <div class="dataTables_length" id="tableListar_length">
@@ -101,49 +101,53 @@ if (
         <thead>
    
       <tr class="success">
-             <th>Marca</th>
-             <th>Modelo</th>
-             <th>Cliente </th>
-             <th>Color</th>
-             <th>Placa</th>
-             <th>Fecha Ingreso</th>
+               <th>Codigo</th>
+                <th>Nombre</th>
+                <th>Precio De Venta</th>
+                <th>Precio Costo</th>
+                <th>Proveedor</th>
+                <th>Cantidad</th>
+                <th>Fecha Registro</th>
           </tr>
         </thead>
         <tbody>
             <?php
             if (!empty($hasta) && !empty($desde)){
-                $sql = "SELECT v.id_vehiculo,v.marca,v.modelo,c.nom_cliente, c.ape_cliente , v.color, v.placa, v.fecha_registro
-                FROM bd_tw.tbl_vehiculos v, tbl_clientes c where v.cliente_id=c.id_cliente and v.fecha_registro
+                $sql = "SELECT *
+                FROM bd_tw.products where fecha_registro
                 between '$desde' and '$hasta';";
              }else{
-                $sql = "SELECT v.id_vehiculo,v.marca,v.modelo,c.nom_cliente, c.ape_cliente , v.color, v.placa, v.fecha_registro
-                FROM bd_tw.tbl_vehiculos v, tbl_clientes c where v.cliente_id=c.id_cliente;";
+                $sql = "SELECT *
+                FROM bd_tw.products;";
                 }
         //echo $cli;
         //echo $sql;
 	    $query = mysqli_query($mysqli, $sql);
         $item=0;
-if(!empty($query) AND mysqli_num_rows($query) > 0){
+//if(mysqli_num_rows($query)>0)
+if(!empty($query) AND mysqli_num_rows($query) > 0)
+{
 	while($row = mysqli_fetch_array($query)){
 		/* $item = $item+1; */
-        $item=$row['id_vehiculo'];
-        $marca=$row['marca'];
-        $modelo=$row['modelo'];
-        $clienteNom=$row['nom_cliente'];
-        $clienteApe=$row['ape_cliente'];
-        $color=$row['color'];
-        $placa=$row['placa'];
-        $fecha=$row['fecha_registro'];
-        $fecha= date('d/m/Y', strtotime($fecha));
+         $product_id = $row['id_producto'];
+                    $codigo = $row['codigo_producto'];
+                    $nombre = $row['nombre_producto'];
+                    $precio = $row['precio_producto'];
+                    $precioCosto = $row['precio_costo'];
+                    $proveedor = $row['proveedor'];
+                    $categoria = $row['cant'];
+                    $fechaRegistro = $row['date_added'];
+                    $fechaRegistro = date('d/m/Y', strtotime($fechaRegistro));
 
 ?>
 		    <tr>
-                <td><?php echo $marca ?></td>
-                <td><?php echo $modelo;?></td>
-                <td><?php echo $clienteNom." ".$clienteApe;?></td>
-                <td><?php echo $color;?></td>
-                <td><?php echo $placa;?></td>
-                <td><?php echo $fecha;?></td>
+               <td><?php echo $codigo ?></td>
+                        <td><?php echo $nombre; ?></td>
+                        <td><?php echo $precio; ?></td>
+                        <td><?php echo $precioCosto; ?></td>
+                        <td><?php echo $proveedor; ?></td>
+                        <td><?php echo $categoria; ?></td>
+                        <td><?php echo $fechaRegistro; ?></td>
               </tr>
           <?php
             
