@@ -28,14 +28,16 @@ $objeto="pantalla usuario";
 //en esta etapa se obtiene el submit del modal para eliminar el Cliente
 if (!empty($_POST['clientId'])) {
     $idCliente = $_POST['clientId'];
+    echo $idCliente;
+
     global $mysqli;
     $query = "DELETE FROM tbl_vehiculos WHERE id_vehiculo = $idCliente;";
-    $objeto = "tbl_clientes";
+    $objeto = "tbl_vehiculos";
     $accion = "DELETE";
-    $descripcion = "ingreso a pantalla productos";
+    $descripcion = "eliminando de la tabla vehiculos";
 
     if (mysqli_query($mysqli, $query)) {
-        $errors = "Cliente eliminado con éxito.";
+        $errors = " eliminado con éxito.";
         grabarBitacora($idCliente, $objeto, $accion, $query);
     }else{
         $errors = "Lo sentimos , el intento de eliminado falló. Por favor, regrese y vuelva a intentarlo.";
