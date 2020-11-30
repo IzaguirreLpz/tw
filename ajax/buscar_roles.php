@@ -65,9 +65,11 @@ if(($_SESSION['id_usuario'])){
                             class="fa fa-pencil text-success text-dark"></i></a>
                     <?php } ?>
                     <?php  if ($eliminar==1 || $idUsuario==1 ){?>
-                    <a href="#" class='btn btn-default' title='Eliminar usuario' data-toggle="modal"
+
+                        <a href="#" class='btn btn-default' title='Eliminar usuario'  data-toggle="modal" data-target="#myModal4" onclick='obtener_id2("<?php echo $idRol;?>")' ><i class="glyphicon glyphicon-remove"></i></a>
+                   <!--- <a href="#" class='btn btn-default' title='Eliminar usuario' data-toggle="modal"
                         data-target="#myModal4" onclick='obtener_id("<?php echo $idRol;?>")'><i
-                            class="glyphicon glyphicon-remove"></i></a>
+                            class="glyphicon glyphicon-remove"></i></a>-->
                     <?php } ?>
                 </td>
             </tr>

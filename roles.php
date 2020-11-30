@@ -30,7 +30,13 @@ $objeto="pantalla usuario";
 if (!empty($_POST['clientId'])) {
     $idCliente = $_POST['clientId'];
     global $mysqli;
-    $query = "DELETE FROM bd_tw.roles
+
+    
+    $cont=getContar('tbl_usuario','id_rol',$idCliente);
+
+   echo $cont;
+    if ($cont==null) {
+    $query = "DELETE FROM roles
     WHERE rol_id_rol = $idCliente";
     //$query = "DELETE FROM tbl_clientes WHERE id_cliente = $idCliente;";
     $objeto = "tbl_clientes";
@@ -44,6 +50,11 @@ if (!empty($_POST['clientId'])) {
         $errors = "Lo sentimos , el intento de eliminado falló. Por favor, regrese y vuelva a intentarlo.";
         $type="warning";
     }
+} else {
+    $errors = "Este rol ya fue asignado a los usuarios, no  puedes eliminarlo.";
+    $type="warning";
+}
+
 }
 
 ?>
@@ -190,11 +201,7 @@ if (!empty($_POST['clientId'])) {
                 </div>
             </section>
 
-            <?php
-                if ($errors != '') {
-                    echo showMessage($errors, $type);
-                }
-                ?>
+           
             <script src="js/bootstrap.js"></script>
             <script src="js/jquery.dcjqaccordion.2.7.js"></script>
             <script src="js/scripts.js"></script>
@@ -211,34 +218,17 @@ if (!empty($_POST['clientId'])) {
 
 
 <!-- Modal -->
-<div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel" style="text-align: center;">¿Seguro que deséa eliminar este Rol?</h4>
-            </div>
-            <div class="modal-body">
-                <form class="form-horizontal" method="post" id="editar_password" name="editar_password">
-                    <div id="mensajeAjax"></div>
-                    <div class="form-group">
-                        <div class="col-sm-8">
-                            <input type="hidden" id="clientId" name="clientId">
-                            <div class="container">
-                                <img width="50%" src="./images/delete.svg">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer center">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btn-danger" id="eliminarProducto">Eliminar Rol</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+
+<?php
 
 
+//    include("modal/eliminar_usuario.php");
+//   include("modal/editar_usuarios.php");
+require 'modal/eliminar_roles.php';
+
+
+
+?>
 
 </body>
 
@@ -254,6 +244,15 @@ if (!empty($_POST['clientId'])) {
         let id = document.getElementById('clientId');
         id.value = val;
         $("#user_id_mod").val(item);
+    }
+
+    function
+    obtener_id2(item) {
+
+
+        $("#user_id_mod").val(item);
+
+
     }
 
 
@@ -316,7 +315,25 @@ if (!empty($_POST['clientId'])) {
 	});
 	return false;
 	});
-	
+	$("#editar_password").submit(function(event) {
+        $('#actualizar_datos3').attr("disabled", true);
+
+        var parametros = $(this).serialize();
+        $.ajax({
+            type: "POST",
+            url: "ajax/eliminar_rol.php",
+            data: parametros,
+            beforeSend: function(objeto) {
+                $("#resultados_ajax3").html("Mensaje: Cargando...");
+            },
+            success: function(datos) {
+                $("#resultados_ajax3").html(datos);
+                $('#actualizar_datos3').attr("disabled", false);
+                load(1);
+            }
+        });
+        event.preventDefault();
+    })
         
        
             function ExportTable(){
