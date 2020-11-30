@@ -10,6 +10,33 @@ require 'conexion.php';
 	return $value;
 }*/
 
+
+
+
+
+
+//saber si existe relacion
+
+function getContar($table, $campo , $valor)
+{
+	global $mysqli;
+
+	$stmt = $mysqli->prepare("select count(*) from $table where $campo = $valor ");
+
+	$stmt->execute();
+	$stmt->store_result();
+	$num = $stmt->num_rows;
+
+	if ($num > 0) {
+		$stmt->bind_result($_campo);
+		$stmt->fetch();
+		return $_campo;
+	} else {
+		return null;
+	}
+}
+
+
 function minMaxPass($valor)
 {
 

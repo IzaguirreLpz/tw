@@ -25,7 +25,21 @@ if (empty($_POST['prodictId'])) {
     !empty($_POST['prodictId'])
 ) {
 
+
+
     $productId = $_POST['prodictId'];
+
+    $cont=getContar('detalle_factura','id_producto',$productId);
+
+
+    if ($cont==null) {
+
+
+
+
+
+
+   
     $a = 3;
 
     $sql = "DELETE  FROM products WHERE id_producto='" . $productId . "'";
@@ -40,6 +54,11 @@ if (empty($_POST['prodictId'])) {
     } else {
         $errors[] = "Lo sentimos , el intento de eliminado falló. Por favor, regrese y vuelva a intentarlo.";
     }
+} else {
+    $errors[] = "Este producto ya fue utilizado en una factura, no  puedes.";
+}
+
+
 } else {
     $errors[] = "Un error desconocido ocurrió.";
 }
