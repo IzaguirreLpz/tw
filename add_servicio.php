@@ -70,7 +70,7 @@ if (!empty($_POST)) {
     if (mysqli_query($conexion, $consulta)) {
         $errors = 'Se ha ingresado el producto correctamente';
         $type = 'success';
-        header('Location: servicios.php');
+       
 
     } else {
         $mensaje = mysqli_error($conexion);
@@ -330,8 +330,9 @@ if (!empty($_POST)) {
         setTimeout(function() {
             while (alerta.length > 0) {
                 alerta[0].parentNode.removeChild(alerta[0]);
+                location.href="servicios.php"
             }
-        }, 5000);
+        }, 3500);
     </script>
 
     <script src="js/bootstrap.js"></script>

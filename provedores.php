@@ -20,7 +20,7 @@ $idUsuario = $_SESSION['id_usuario'];
 
 $objeto="pantalla usuario";
 		$accion="INGRESO";
-		$descripcion="ingreso a pantalla usuario";
+		$descripcion="ingreso a pantalla proveedores";
 		
 		$bita=grabarBitacora($idUsuario,$objeto,$accion,$descripcion);
 
@@ -30,7 +30,7 @@ if (!empty($_POST['clientId'])) {
     $idProveedor = $_POST['clientId'];
     //codigo de validacion
 
-    $cont=getContar('tbl_proveedores','id_proveedor',$idProveedor);
+    $cont=getContar('products','proveedor',$idProveedor);
 
     if ($cont==null) {
    
@@ -275,7 +275,7 @@ if (!empty($_POST['clientId'])) {
             while (alerta.length > 0) {
                 alerta[0].parentNode.removeChild(alerta[0]);
             }
-        }, 5000);
+        }, 3500);
     $(document).ready(function() {
     $('table').DataTable( {
         dom: 'Bfrtip',

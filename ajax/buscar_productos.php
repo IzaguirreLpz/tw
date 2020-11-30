@@ -27,7 +27,8 @@ $actualizar=getPer('per_actualizacion',$rol,'17');
         <tbody>
 
             <?php
-            $sql = "SELECT * FROM bd_tw.products where tipo=0 order by id_producto;";
+            $sql = "SELECT * FROM products p, tbl_proveedores e where p.proveedor =  e.id_proveedor and p.tipo=0 order by id_producto;";
+         
             $query = mysqli_query($mysqli, $sql);
             $count_query   = mysqli_query($mysqli, "SELECT count(*) AS numrows FROM tbl_usuario");
             $row1 = mysqli_fetch_array($count_query);
@@ -39,7 +40,7 @@ $actualizar=getPer('per_actualizacion',$rol,'17');
                     $nombre = $row['nombre_producto'];
                     $precio = $row['precio_producto'];
                     $precioCosto = $row['precio_costo'];
-                    $proveedor = $row['proveedor'];
+                    $proveedor = $row['nom_empresa'];
                     $categoria = $row['cant'];
                     $fechaRegistro = $row['date_added'];
                     $fechaRegistro = date('d/m/Y', strtotime($fechaRegistro));

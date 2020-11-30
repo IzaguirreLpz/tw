@@ -20,7 +20,7 @@ session_start();
             
             $idUsuario = $_SESSION['id_usuario'];
            
-			$agregar=mysqli_query($mysqli,"INSERT INTO tbl_atenciones (id_cliente,id_usuario,status,id_meca ) values ('$empleado','$idUsuario',1,2)");
+			$agregar=mysqli_query($mysqli,"INSERT INTO tbl_atenciones (id_cliente,id_usuario,status,id_meca ) values ('$empleado','$idUsuario',1,1)");
              //$sentencia="INSERT INTO siec_empleados (ate_clave_empleado,ate_id_clinica,ate_id_usuario ) values ( '$empleado',1,1)"
              	//	$sql="INSERT INTO clientes (nombre_cliente, telefono_cliente, email_cliente, direccion_cliente, status_cliente, date_added) VALUES ('$nombre','$telefono','$email','$direccion','$estado','$date_added')";
         

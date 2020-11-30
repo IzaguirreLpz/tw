@@ -258,7 +258,7 @@ if (!empty($_POST)) {
             while (alerta.length > 0) {
                 alerta[0].parentNode.removeChild(alerta[0]);
             }
-        }, 5000);
+        }, 3500);
     </script>
 
     <script src="js/bootstrap.js"></script>

@@ -34,13 +34,13 @@ if (!empty($_POST)) {
     echo $post; */
     if (!empty($_POST['editMode'])){
         $idProduct = $_POST['editMode'];
-        $nombre = $_POST['product_nombre'];
+        $nombre = strtoupper($_POST['product_nombre']);
         $precio = $_POST['product_venta'];
         $precioCompra = $_POST['product_compra'];
         $proveedor = $_POST['product_supliers'];
         $unidades = $_POST['cantidad'];
         $unidadGuardado = $_POST['unidad_guardado'];
-        $categoria = $_POST['categoria'];
+        $categoria = strtoupper($_POST['categoria']);
         $sql = "UPDATE products
         SET nombre_producto = '$nombre',
         precio_producto = $precio,precio_costo = $precioCompra,cant = $unidades, 
@@ -58,13 +58,13 @@ if (!empty($_POST)) {
         }
        // mysqli_close($conexion);
     }else{
-    $nombre = $_POST['product_nombre'];
+    $nombre =  strtoupper ($_POST['product_nombre']);
     $precio = $_POST['product_venta'];
     $precioCompra = $_POST['product_compra'];
     $proveedor = $_POST['product_supliers'];
     $unidades = $_POST['cantidad'];
     $unidadGuardado = $_POST['unidad_guardado'];
-    $categoria = $_POST['categoria'];
+    $categoria =strtoupper( $_POST['categoria']);
     global $mysqli;
     $query_id = mysqli_query($mysqli, "SELECT RIGHT(codigo_producto,6) as codigo FROM products ORDER BY codigo DESC LIMIT 1") or die('error '.mysqli_error($mysqli));
     $data_id = mysqli_fetch_assoc($query_id);
@@ -72,14 +72,14 @@ if (!empty($_POST)) {
     $buat_id   = str_pad($codigo, 6, "0", STR_PAD_LEFT);
     $codigo = "P$buat_id";
     $conexion = $mysqli;
-    $consulta = "INSERT INTO bd_tw.products
+    $consulta = "INSERT INTO products
     (codigo_producto,nombre_producto,status_producto,precio_producto,
     precio_costo,cant,tipo,unidad,categorias,proveedor)
     VALUES('$codigo','$nombre',1,$precio,$precioCompra,$unidades,0,'$unidadGuardado','$categoria','$proveedor');";
     if (mysqli_query($conexion, $consulta)) {
         $errors = 'Se ha ingresado el producto correctamente';
         $type = 'success';
-        header('Location: productos.php');
+     
     } else {
         $mensaje = mysqli_error($conexion);
         $errors = 'Hemos tenido el siguiente problema: ' . $mensaje . '</br> Contacta tu Administrador';
@@ -291,12 +291,12 @@ if (!empty($_POST)) {
                                                     if($edicion != 0){
                                                         echo "<option value='$proveedor'>$proveedor</option>";
                                                         foreach ($result as $key => $value) {
-                                                            if($value['nom_empresa'] != $proveedor)
-                                                            echo "<option value='{$value['nom_empresa']}'>{$value['nom_empresa']}</option>";
+                                                            if($value['id_proveedor'] != $proveedor)
+                                                            echo "<option value='{$value['id_proveedor']}'>{$value['nom_empresa']}</option>";
                                                        }
                                                     }else{
                                                         foreach ($result as $key => $value) {
-                                                            echo "<option value='{$value['nom_empresa']}'>{$value['nom_empresa']}</option>";
+                                                            echo "<option value='{$value['id_proveedor']}'>{$value['nom_empresa']}</option>";
                                                        } 
                                                     }
                                                     ?>
@@ -398,8 +398,9 @@ if (!empty($_POST)) {
         setTimeout(function() {
             while (alerta.length > 0) {
                 alerta[0].parentNode.removeChild(alerta[0]);
+                location.href="productos.php"
             }
-        }, 5000);
+        }, 3500);
     </script>
 
     <script src="js/bootstrap.js"></script>

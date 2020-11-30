@@ -13,7 +13,7 @@
                         <div class="col-sm-8">
                             <input type="hidden" id="product_id" name="prodictId">
                             <div class="container">
-                                <img width="50%" src="./images/delete.svg">
+                                
                             </div>
                         </div>
                     </div>

@@ -110,6 +110,8 @@ if (
                   where a.id_cliente= c.id_cliente AND LEFT(a.fecha_visita,10)=CURDATE() ORDER BY a.id_atencion ASC ";
                 }
 
+                
+
       $query = mysqli_query($mysqli, $sql);
      $item=0;
       

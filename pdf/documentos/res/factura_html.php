@@ -137,7 +137,9 @@
         
             <?php 
             //Insert en la tabla detalle_cotizacion
-            $insert_detail=mysqli_query($con, "INSERT INTO detalle_factura VALUES ($numero_factura,$id_producto,$cantidad,$precio_venta_r)");
+
+            
+            //"INSERT INTO detalle_factura (id_detalle, numero_factura, id_producto, cantidad, precio_venta) VALUES ($numero_factura,$id_producto,$cantidad,$precio_venta_r)");
             
             $nums++;
             }
@@ -166,6 +168,8 @@
         </page>
 <?php
 $date=date("Y-m-d H:i:s");
-$insert=mysqli_query($con,"INSERT INTO facturas VALUES (NULL,'$numero_factura','$date',$id_cliente,$id_vendedor,$condiciones,'$total_factura','1')");
+$insert=mysqli_query($con,"INSERT INTO facturas(numero_factura, fecha_factura, id_cliente, id_vendedor, condiciones, total_venta, estado_factura,id_atencion)  VALUES ('$numero_factura','$date',$id_cliente,$id_vendedor,$condiciones,'$total_factura','1','0')");
+
+$insert_detail=mysqli_query($con, "INSERT INTO detalle_factura(numero_factura, id_producto, cantidad, precio_venta) select $numero_factura , id_producto, cantidad_tmp,precio_tmp from tmp where session_id='$session_id'");
 $delete=mysqli_query($con,"DELETE FROM tmp WHERE session_id='".$session_id."'");
 ?>

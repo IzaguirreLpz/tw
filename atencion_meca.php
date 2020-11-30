@@ -147,7 +147,7 @@ $objeto="pantalla bitacora";
 <label for="female">Semana</label><br>
 <input type="radio" id="gender" name="gender" onchange="load(1,3)" value="3">
 <label for="other">Mes</label>
-<label for="male">Día</label><br>
+<br>
                                                           
                                                         </div>
                                                         <div class="col-sm-3">

@@ -57,7 +57,7 @@
 		$reload = './facturas.php';
 		//main query to fetch the data
 		$sql="SELECT * FROM  $sTable $sWhere LIMIT $offset,$per_page";
-     
+       
 		$query = mysqli_query($mysqli, $sql);
 		//loop through fetched data
 		if ($numrows>0){

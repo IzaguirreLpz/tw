@@ -22,13 +22,13 @@ return;
 
                $id_clie = $_POST["id"];
 				$id=$_POST["identidad"];
-				$nombre=$_POST["nombre"];				
-                $ape = $_POST["apellido"];				
+				$nombre= strtoupper($_POST["nombre"]);				
+                $ape =  strtoupper($_POST["apellido"]);				
 				$correo=$_POST["correo_electronico"];
     			$cel= $_POST["celular"];
     			$tel= $_POST["telefono"];
                 $gender= $_POST["gender"];
-               $dir=$_POST["direccion"];
+               $dir= strtoupper($_POST["direccion"]);
             
 
             

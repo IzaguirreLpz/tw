@@ -50,7 +50,7 @@ $rango = $_POST['rango'];
 
 		
 			 $sql = "SELECT a.status,a.id_atencion,c.identidad ,a.fecha_visita ,a.id_cliente id_cliente,c.nom_cliente, c.ape_cliente, u.nombre_usuario  from tbl_clientes c , tbl_atenciones a, tbl_usuario u where a.id_cliente= c.id_cliente and a.id_meca = u.id_usuario  $ran_w ORDER BY a.id_atencion DESC";
-          // echo $sql;
+  
              // para que no se actualice  en el dia
             //AND LEFT(a.fecha_visita,10)=CURDATE() 
              $query = mysqli_query($mysqli, $sql);

@@ -28,7 +28,10 @@ $objeto="pantalla usuario";
 //en esta etapa se obtiene el submit del modal para eliminar el Cliente
 if (!empty($_POST['clientId'])) {
     $idCliente = $_POST['clientId'];
-    echo $idCliente;
+    $cont=getContar('tbl_atenciones','id_auto',$idCliente);
+
+    if ($cont==null) {
+	
 
     global $mysqli;
     $query = "DELETE FROM tbl_vehiculos WHERE id_vehiculo = $idCliente;";
@@ -36,13 +39,20 @@ if (!empty($_POST['clientId'])) {
     $accion = "DELETE";
     $descripcion = "eliminando de la tabla vehiculos";
 
-    if (mysqli_query($mysqli, $query)) {
+      if (mysqli_query($mysqli, $query)) {
         $errors = " eliminado con éxito.";
         grabarBitacora($idCliente, $objeto, $accion, $query);
-    }else{
+      }else{
         $errors = "Lo sentimos , el intento de eliminado falló. Por favor, regrese y vuelva a intentarlo.";
         $type="warning";
-    }
+      }
+
+
+   }else {
+    $errors = "Lo sentimos , el vehiculo esta vinculado a atenciones.";
+       $type="warning";
+   
+   }
 }
 
 ?>
@@ -268,7 +278,7 @@ if (!empty($_POST['clientId'])) {
             while (alerta.length > 0) {
                 alerta[0].parentNode.removeChild(alerta[0]);
             }
-        }, 5000);
+        }, 3500);
     $(document).ready(function() {
         load(1);
     });

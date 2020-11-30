@@ -30,7 +30,7 @@ if (empty($_POST['prodictId'])) {
     $productId = $_POST['prodictId'];
 
     $cont=getContar('detalle_factura','id_producto',$productId);
-
+   
 
     if ($cont==null) {
 

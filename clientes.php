@@ -19,9 +19,9 @@ if ($_SESSION['estado_usuario'] == strtolower('nuevo')) {
 $idUsuario = $_SESSION['id_usuario'];
 //echo $_SESSION['menus'];
 
-$objeto="pantalla usuario";
+$objeto="pantalla clientes";
 		$accion="INGRESO";
-		$descripcion="ingreso a pantalla usuario";
+		$descripcion="ingreso a pantalla clientes";
 		
 		$bita=grabarBitacora($idUsuario,$objeto,$accion,$descripcion);
 
@@ -29,11 +29,15 @@ $objeto="pantalla usuario";
 //en esta etapa se obtiene el submit del modal para eliminar el Cliente
 if (!empty($_POST['clientId'])) {
     $idCliente = $_POST['clientId'];
+
+    $cont=getContar('tbl_vehiculos','cliente_id',$idCliente);
+    $cont_fac=getContar('facturas','id_cliente',$idCliente);
+    if ($cont==null &&  $cont_fac==null ) { 
     global $mysqli;
     $query = "DELETE FROM tbl_clientes WHERE id_cliente = $idCliente;";
     $objeto = "tbl_clientes";
     $accion = "DELETE";
-    $descripcion = "ingreso a pantalla productos";
+    $descripcion = "eliminar cliente";
 
     if (mysqli_query($mysqli, $query)) {
         $errors = "Cliente eliminado con éxito.";
@@ -42,6 +46,11 @@ if (!empty($_POST['clientId'])) {
         $errors = "Lo sentimos , el intento de eliminado falló. Por favor, regrese y vuelva a intentarlo.";
         $type="warning";
     }
+
+} else {
+    $errors = " Este cliente tiene asignado vehiculos/ facturas, no  puedes eliminarlo.";
+    $type="warning";
+}
 }
 
 ?>
@@ -181,6 +190,12 @@ if (!empty($_POST['clientId'])) {
 <button id="procesar" class="btn btn-primary">Generar Reporte</button>
              <button class="btn btn-default" title="salir de la consulta"  >   <span class="fa fa-outdent" title="salir de la consulta"  onclick="load(1)"></span> Cerrar Reporte</button>
                         </div>
+
+                        <?php
+                if ($errors != '') {
+                    echo showMessage($errors, $type);
+                }
+                ?>
                         <div id="resultados"></div><!-- Carga los datos ajax -->
                         <div class='outer_div'></div>
 
@@ -188,11 +203,7 @@ if (!empty($_POST['clientId'])) {
                 </div>
             </section>
 
-            <?php
-                if ($errors != '') {
-                    echo showMessage($errors, $type);
-                }
-                ?>
+          
             <script src="js/bootstrap.js"></script>
             <script src="js/jquery.dcjqaccordion.2.7.js"></script>
             <script src="js/scripts.js"></script>
@@ -242,6 +253,17 @@ if (!empty($_POST['clientId'])) {
 
 </html>
 <script>
+
+
+
+ //eliminar alerta despues de 5 segundos
+ let alerta = document.getElementsByClassName('alert');
+        setTimeout(function() {
+            while (alerta.length > 0) {
+                alerta[0].parentNode.removeChild(alerta[0]);
+            }
+        }, 3500);
+
     $(document).ready(function() {
         load(1);
     });

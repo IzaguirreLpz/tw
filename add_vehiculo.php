@@ -31,12 +31,12 @@ if (!empty($_POST)) {
     echo $post; */
     if (!empty($_POST['editMode'])){
         $editId = $_POST['editMode'];
-        $marca = $_POST['marca'];
-        $modelo = $_POST['modelo'];
+        $marca =  strtoupper ($_POST['marca']);
+        $modelo =  strtoupper ( $_POST['modelo']);
         $cliente = $_POST['cliente'];
         $color = $_POST['color'];
         $placa = $_POST['placa'];
-        $placa = strtoupper($placa);
+        $placa = strtoupper ($placa);
         $sql = "UPDATE tbl_vehiculos SET marca = '$marca',
         modelo = '$modelo',
         cliente_id = $cliente,
@@ -55,10 +55,10 @@ if (!empty($_POST)) {
         }
        // mysqli_close($conexion);
     }else{
-    $marca = $_POST['marca'];
-    $modelo = $_POST['modelo'];
+    $marca = strtoupper ($_POST['marca']);
+    $modelo = strtoupper ($_POST['modelo']);
     $cliente = $_POST['cliente'];
-    $color = $_POST['color'];
+    $color = strtoupper ( $_POST['color']);
     $placa = $_POST['placa'];
     $placa = strtoupper($placa);
     global $mysqli;
@@ -67,7 +67,7 @@ if (!empty($_POST)) {
     if (mysqli_query($conexion, $consulta)) {
         $errors = 'Se ha ingresado el vehiculo correctamente';
         $type = 'success';
-        header('Location: vehiculos.php');
+        
 
     } else {
         $mensaje = mysqli_error($conexion);
@@ -217,7 +217,7 @@ if (!empty($_POST)) {
                                     <div class="col-lg-6">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fas fa-file-signature"></i></span>
-                                            <input maxlength="70" type="text" <?php if ($edicion != 0) {
+                                            <input maxlength="50" type="text" <?php if ($edicion != 0) {
                                     echo "value='$marca'";
                                 } ?> name="marca" placeholder="Marca" style="text-transform: uppercase;" id="txt_nc" autocomplete="off" autofocus="on" class="form-control" onkeypress="return soloLetras(event)" onPaste="return false;" title="Marca del Vehiculo" required>
                                         </div>
@@ -230,7 +230,7 @@ if (!empty($_POST)) {
                                         <div class="col-lg-6">
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i class="fas fa-file-alt"></i></span>
-                                                    <input maxlength="70" type="text" <?php if ($edicion != 0) {
+                                                    <input maxlength="50" type="text" <?php if ($edicion != 0) {
                                     echo "value='$modelo'";
                                 } ?> name="modelo" placeholder="Modelo" style="text-transform: uppercase;" id="txt_nc" autocomplete="off" autofocus="on" class="form-control" onkeypress="return soloLetras(event)" onPaste="return false;" title="Marca del Vehiculo" required>
                                             </div>
@@ -244,7 +244,7 @@ if (!empty($_POST)) {
                                             <div class="input-group">
                                                 <?php
                                                     global $mysqli;
-                                                    $query = "select * from tbl_clientes";
+                                                    $query = "select id_cliente , concat(identidad, ' || ',nom_cliente) as nom_cliente from tbl_clientes";
                                                     $result = mysqli_query($mysqli,$query) or die(mysql_error()."[".$query."]");
                                                 ?>
                                                 <span class="input-group-addon"><i class="fas fa-user"></i></span>
@@ -322,8 +322,9 @@ $(".myselect").select2();
         setTimeout(function() {
             while (alerta.length > 0) {
                 alerta[0].parentNode.removeChild(alerta[0]);
+                location.href="vehiculos.php"
             }
-        }, 5000);
+        }, 3500);
     </script>
 
     <script src="js/bootstrap.js"></script>

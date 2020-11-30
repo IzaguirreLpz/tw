@@ -33,12 +33,12 @@ if (!empty($_POST)) {
     echo $post; */
     if (!empty($_POST['editMode'])){
         $editId = $_POST['editMode'];
-        $nombre = $_POST['nombre'];
+        $nombre = strtoupper ( $_POST['nombre']);
         $tel1 = $_POST['tel1'];
         $tel2 = $_POST['tel2'];
-        $direccion = $_POST['direccion'];
+        $direccion =strtoupper (  $_POST['direccion']);
         $rtn = $_POST['rtn'];
-        $representate = $_POST['representante'];
+        $representate = strtoupper ( $_POST['representante']);
         $correo = $_POST['correo'];
         $sql = "UPDATE  bd_tw . tbl_proveedores  SET
          nom_empresa  = '$nombre',
@@ -61,22 +61,22 @@ if (!empty($_POST)) {
         }
        // mysqli_close($conexion);
     }else{
-    $nombre = $_POST['nombre'];
-    $tel1 = $_POST['tel1'];
-    $tel2 = $_POST['tel2'];
-    $direccion = $_POST['direccion'];
+    $nombre = strtoupper (  $_POST['nombre']);
+    $tel1 = strtoupper ( $_POST['tel1']);
+    $tel2 = strtoupper ( $_POST['tel2']);
+    $direccion = strtoupper ( $_POST['direccion']);
     $rtn = $_POST['rtn'];
-    $representate = $_POST['representante'];
+    $representate = strtoupper ( $_POST['representante']);
     $correo = $_POST['correo'];
     global $mysqli;
     $conexion = $mysqli;
-    $consulta = "INSERT INTO  bd_tw . tbl_proveedores 
+    $consulta = "INSERT INTO  tbl_proveedores 
     (nom_empresa , num_tel1 , num_tel2 , direccion , RTN , representante , cor_empresa)
     VALUES('$nombre',$tel1,$tel2,'$direccion','$rtn','$representate','$correo');";
     if (mysqli_query($conexion, $consulta)) {
         $errors = 'Se ha ingresado el vehiculo correctamente';
         $type = 'success';
-        header('Location: provedores.php');
+        
     } else {
         $mensaje = mysqli_error($conexion);
         $errors = 'Hemos tenido el siguiente problema: ' . $mensaje . '</br> Contacta tu Administrador</br>'.$consulta.'';
@@ -339,8 +339,9 @@ if (!empty($_POST)) {
         setTimeout(function() {
             while (alerta.length > 0) {
                 alerta[0].parentNode.removeChild(alerta[0]);
+                location.href="proveedores.php"
             }
-        }, 5000);
+        }, 3500);
     </script>
 
     <script src="js/bootstrap.js"></script>

@@ -232,7 +232,7 @@ if (isset ($_GET["ate"] )){
                                     <div id="resultados">
                                         <b></b>                               
                                         <button type="submit" class="btn btn-success">
-                                                Registrar Atención
+                                               Guardar / Finalizar 
                                             </button>
                                         
                                        
@@ -252,7 +252,7 @@ if (isset ($_GET["ate"] )){
             </div>
         </article>
             <!-- page end-->
-            <input type="button" class="btn btn-info" value="Imprimir Para el Mecanico" onclick="printDiv()">
+         
         </div>
 
 
