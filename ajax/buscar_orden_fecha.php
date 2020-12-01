@@ -36,6 +36,13 @@ if (
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/v/dt/jqc-1.12.4/jszip-2.5.0/dt-1.10.22/b-1.6.5/b-flash-1.6.5/b-html5-1.6.5/b-print-1.6.5/datatables.min.js"></script>
+
+     <!-- Librerias para generar reportes -->
+<link rel="stylesheet" type="text/css" href="reportsLibrary\datatables.min.css">
+<script type="text/javascript" src="reportsLibrary\datatables.min.js"></script>
+<script type="text/javascript" src="reportsLibrary\pdfmake.min.js"></script>
+<script type="text/javascript" src="reportsLibrary\vfs_fonts.js"></script>
+<!-- Librerias para generar reportes -->
  
   <!-- <script src="../js/jquery.min.js"></script>
   <script src="../js/FileSaver.min.js"></script>
@@ -142,7 +149,8 @@ if(mysqli_num_rows($query)>0){
         </tbody>
       </table>
          <script>
-         $(document).ready(function() {
+         
+ $(document).ready(function() {
     $('table').DataTable( {
         dom: 'Bfrtip',
         buttons: [
@@ -150,5 +158,6 @@ if(mysqli_num_rows($query)>0){
         ]
     } );
 } );
+
             </script>
       </div>
