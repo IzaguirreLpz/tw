@@ -136,10 +136,21 @@ $objeto="pantalla usuario";
                         </div>
                         <div class="row w3-res-tb">
 
-                            <div class="col-sm-4">
-                            </div>
-                            <div class="col-sm-3">
+                           <div class="col-lg-3">
+        <div class="input-group">
+          <span class="input-group-addon">INICIO</span>
+           <input type="date" id="bd-desde"   placeholder="FECHA INICIO"></div>
+        </div>
+    
+   
+        <div class="input-group">
+          <span class="input-group-addon">FIN</span>
+        <input  type="date" id="bd-hasta" >
 
+
+             <a  href="javascript:reportePDF();" style="margin: 0 10px" class="btn btn-danger">Consulta a PDF</a>      
+                        
+                        </div>
                             </div>
                         </div>
                         <div id="resultados"></div><!-- Carga los datos ajax -->
@@ -224,4 +235,12 @@ require 'modal/eliminar_usuario.php';
             }
         })
     }
+
+     function reportePDF(){
+    var desde = $('#bd-desde').val();
+    
+    var hasta = $('#bd-hasta').val();
+    window.open('rpt_usuarios.php?desde='+desde+'&hasta='+hasta);
+}   
+
 </script>

@@ -152,6 +152,7 @@ $bita = grabarBitacora($idUsuario, $objeto, $accion, $descripcion);
                         
 <button id="procesar" class="btn btn-primary">Generar Reporte</button>
              <button class="btn btn-default" title="salir de la consulta"  >   <span class="fa fa-outdent" title="salir de la consulta"  onclick="load(1)"></span> Salir Reporte</button>
+             <a  href="javascript:reportePDF();" class="btn btn-danger">Consulta a PDF</a>
                         </div>
 
                     </div>
@@ -258,4 +259,11 @@ $('#procesar').on('click', function(){
             }
         })
     }
+
+    function reportePDF(){
+    var desde = $('#fecha_ini').val();
+    //alert(desde);
+    var hasta = $('#fecha_fin').val();
+    window.open('rpt_productos.php?desde='+desde+'&hasta='+hasta);
+}   
 </script>
