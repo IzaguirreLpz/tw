@@ -321,13 +321,34 @@ if (!empty($_POST['clientId'])) {
 
 
 
+    $('#bd-hasta').on('change', function(){
+		var desde = $('#bd-desde').val();
+        var hasta = $('#bd-hasta').val();
+        
+        if (desde > hasta){
+alert("la fecha inicial debe ser  menos que la fecha hasta.");
+return false;
 
+        }
+		var url = 'ajax/busca_clientes_fecha.php';
+		$.ajax({
+		type:'POST',
+		url:url,
+		data:'desde='+desde+'&hasta='+hasta,
+		success: function(data){
+			$(".outer_div").html(data).fadeIn('slow');
+					$('#loader').html('');
+		}
+	});
+	return false;
+	});
+	
 
          
     $('#procesar').on('click', function(){
       
-		var desde = $('#fecha_ini').val();
-		var hasta = $('#fecha_fin').val();
+		var desde = $('#bd_desde').val();
+		var hasta = $('#bd_hasta').val();
 		var url = 'ajax/busca_clientes_fecha.php';
             
 		$.ajax({
@@ -351,7 +372,7 @@ if (!empty($_POST['clientId'])) {
 		
     function reportePDF(){
     var desde = $('#bd-desde').val();
-    alert(desde);
+    
 	var hasta = $('#bd-hasta').val();
 	window.open('rpt_clie.php?desde='+desde+'&hasta='+hasta);
 }   

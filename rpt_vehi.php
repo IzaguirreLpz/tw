@@ -13,6 +13,7 @@ if(strlen($_GET['desde'])>0 and strlen($_GET['hasta'])>0){
 
 	$verDesde = '__/__/____';
 	$verHasta = '__/__/____';
+
 }
 require('fpdf.php');
 require 'funcs/funcs.php';
@@ -27,38 +28,40 @@ $pdf->Cell(50, 10, 'hoy: '.date('d-m-Y').'', 0);
 $pdf->Ln(15);
 $pdf->SetFont('Arial', 'B', 11);
 $pdf->Cell(70, 8, '', 0);
-$pdf->Cell(100, 8, 'Listado de clientes Registrados', 0);
+$pdf->Cell(100, 8, 'Listado de Vehiculo Registrados', 0);
 $pdf->Ln(10);
 $pdf->Cell(60, 8, '', 0);
+$pdf->Cell(60, 8, 'Desde: '.$verDesde.' hasta: '.$verHasta, 8);
 $pdf->Ln(23);
 $pdf->SetFont('Arial', 'B', 8);
-$pdf->Cell(10, 8, 'item', 0);
-$pdf->Cell(30, 8, 'Identidad ', 0);
-$pdf->Cell(55, 8, 'Nombre ', 0);
-$pdf->Cell(25, 8, 'celular', 0);
-$pdf->Cell(40, 8, 'Correo', 0);
-$pdf->Cell(40, 8, 'Registrado ', 0);
+$pdf->Cell(20, 8, 'Placa', 0);
+$pdf->Cell(65, 8, 'Nombre Cliente ', 0);
+$pdf->Cell(30, 8, 'Marca ', 0);
+$pdf->Cell(30, 8, 'Modelo', 0);
+$pdf->Cell(25, 8, 'Color', 0);
+
+$pdf->Cell(15, 8, 'Registrado ', 0);
 
 
 
 $pdf->Ln(8);
 $pdf->SetFont('Arial', '', 8);
 //CONSULTA
-$productos = mysqli_query($mysqli,"SELECT id_vehiculo, marca, modelo, cliente_id, color, placa, fecha_registro FROM tbl_vehiculos  ");
+$productos = mysqli_query($mysqli,"SELECT v.id_vehiculo,v.marca,v.modelo,c.nom_cliente, c.ape_cliente , v.color, v.placa, v.fecha_registro FROM bd_tw.tbl_vehiculos v, tbl_clientes c where v.cliente_id=c.id_cliente and v.fecha_registro  BETWEEN '$desde' AND '$hasta'order by id_vehiculo ASC");
 $item = 0;
 $totaluni = 0;
 $totaldis = 0;
 while($productos2 = mysqli_fetch_array($productos)){
 	$item = $item+1;
 
-	$pdf->Cell(10, 8, $item, 0);
-	$pdf->Cell(30, 8, $productos2['id_vehiculo'], 0);
-	$pdf->Cell(55, 8, $productos2['nom_cliente']." ". $productos2['ape_cliente'], 0);
-	$pdf->Cell(25, 8, $productos2['marca'], 0);
-	$pdf->Cell(40, 8, $productos2['modelo'], 0);
 	
+	$pdf->Cell(20, 8, $productos2['placa'], 0);
+	$pdf->Cell(65, 8, $productos2['nom_cliente']." ". $productos2['ape_cliente'], 0);
+	$pdf->Cell(30, 8, $productos2['marca'], 0);
+	$pdf->Cell(30, 8, $productos2['modelo'], 0);
+	$pdf->Cell(25, 8, $productos2['color'], 0);
 	
-	$pdf->Cell(25, 8, date('d/m/Y', strtotime($productos2['fecha_registro'])), 0);
+	$pdf->Cell(15, 8, date('d/m/Y', strtotime($productos2['fecha_registro'])), 0);
 	$pdf->Ln(8);
 }
 $pdf->SetFont('Arial', 'B', 8);

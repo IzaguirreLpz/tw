@@ -194,13 +194,13 @@ if (!empty($_POST['clientId'])) {
                         <div class="col-lg-3">
 		<div class="input-group">
 		  <span class="input-group-addon">INICIO</span>
-		   <input  type="date" id="fecha_ini"  name="fecha_ini" placeholder="FECHA INICIO"></div>
+		   <input  type="date" id="bd-desde"  name="bd-desde" placeholder="FECHA INICIO"></div>
 		</div>
     
    
 		<div class="input-group">
 		  <span class="input-group-addon">FIN</span>
-		<input  type="date"   id="fecha_fin" name="fecha_fin"  >
+		<input  type="date"   id="bd-hasta" name="bd-hasta"  >
 
 	
 
@@ -208,6 +208,8 @@ if (!empty($_POST['clientId'])) {
                         
 <button id="procesar" class="btn btn-primary">Generar Reporte</button>
              <button class="btn btn-default" title="salir de la consulta"  >   <span class="fa fa-outdent" title="salir de la consulta"  onclick="load(1)"></span> Salir Reporte</button>
+             <a  href="javascript:reportePDF();" class="btn btn-danger">Consulta a PDF</a>      
+                       
                         </div>
                          <?php
                 if ($errors != '') {
@@ -309,8 +311,8 @@ if (!empty($_POST['clientId'])) {
    
     $('#procesar').on('click', function(){
       
-		var desde = $('#fecha_ini').val();
-		var hasta = $('#fecha_fin').val();
+		var desde = $('#bd-desde').val();
+		var hasta = $('#bd-hasta').val();
 		var url = 'ajax/busca_vehiculos_fecha.php';
             
 		$.ajax({
@@ -338,5 +340,29 @@ if (!empty($_POST['clientId'])) {
     } );
 } );
 
+
+function reportePDF(){
+    var desde = $('#bd-desde').val();
+    
+	var hasta = $('#bd-hasta').val();
+	window.open('rpt_vehi.php?desde='+desde+'&hasta='+hasta);
+}   
         
+$('#bd-hasta').on('change', function(){
+		var desde = $('#bd-desde').val();
+		var hasta = $('#bd-hasta').val();
+		var url = 'ajax/busca_clientes_fecha.php';
+		$.ajax({
+		type:'POST',
+		url:url,
+		data:'desde='+desde+'&hasta='+hasta,
+		success: function(data){
+			$(".outer_div").html(data).fadeIn('slow');
+					$('#loader').html('');
+		}
+	});
+	return false;
+	});
+	
+      
 </script>
