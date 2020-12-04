@@ -353,7 +353,7 @@ if (!empty($_POST['clientId'])) {
     var desde = $('#bd-desde').val();
     alert(desde);
 	var hasta = $('#bd-hasta').val();
-	window.open('reporte/clientes.php?desde='+desde+'&hasta='+hasta);
+	window.open('rpt_clie.php?desde='+desde+'&hasta='+hasta);
 }   
         
         

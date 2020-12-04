@@ -65,5 +65,5 @@ while($productos2 = mysqli_fetch_array($productos)){
 $pdf->SetFont('Arial', 'B', 8);
 $pdf->Cell(104,8,'',0);
 //'reporte.pdf','D'
-$pdf->Output('reporte_clientes.pdf','D');
+$pdf->Output();
 ?>
