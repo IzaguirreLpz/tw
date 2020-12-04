@@ -195,17 +195,21 @@ if (!empty($_POST['clientId'])) {
                         <div class="col-lg-3">
 		<div class="input-group">
 		  <span class="input-group-addon">INICIO</span>
-		   <input  type="date" id="fecha_ini"  name="fecha_ini" placeholder="FECHA INICIO"></div>
+		  <input type="date" id="bd-desde" ></div>
 		</div>
     
    
 		<div class="input-group">
 		  <span class="input-group-addon">FIN</span>
-		<input  type="date"   id="fecha_fin" name="fecha_fin"  >
+          <input  type="date" id="bd-hasta" >
                         
             <button id="procesar" class="btn btn-primary">Generar Reporte</button>
             <a href="provedores.php">
              <button class="btn btn-default" title="salir de la consulta"  >   <span class="fa fa-outdent" title="Salir de la consulta"  onclick="load(1)"></span>Salir Del Reporte</button>
+             <a  href="javascript:reportePDF();" class="btn btn-danger">Consulta a PDF</a>      
+         
+             
+             
              </a>
                         </div>
                          <?php
@@ -315,8 +319,8 @@ if (!empty($_POST['clientId'])) {
    
     $('#procesar').on('click', function(){
       
-		var desde = $('#fecha_ini').val();
-		var hasta = $('#fecha_fin').val();
+		var desde = $('#bd-desde').val();
+		var hasta = $('#bd-hasta').val();
 		var url = 'ajax/buscar_provedores_fecha.php';
             
 		$.ajax({
@@ -333,4 +337,46 @@ if (!empty($_POST['clientId'])) {
 	return false;
 	});
         
+
+
+
+    $('#bd-hasta').on('change', function(){
+		var desde = $('#bd-desde').val();
+        var hasta = $('#bd-hasta').val();
+        
+        if (desde > hasta){
+         alert("la fecha inicial debe ser  menos que la fecha hasta.");
+           return false;
+
+        }
+		var url = 'ajax/busca_provedores_fecha.php';
+		$.ajax({
+		type:'POST',
+		url:url,
+		data:'desde='+desde+'&hasta='+hasta,
+		success: function(data){
+			$(".outer_div").html(data).fadeIn('slow');
+					$('#loader').html('');
+		}
+	});
+	return false;
+	});
+
+
+
+    function reportePDF(){
+          
+        if (desde > hasta){
+alert("la fecha inicial debe ser  menos que la fecha hasta.");
+return false;
+
+        }
+    var desde = $('#bd-desde').val();
+    
+    var hasta = $('#bd-hasta').val();
+   
+	window.open('rpt_prove.php?desde='+desde+'&hasta='+hasta);
+}   
+        
+
 </script>

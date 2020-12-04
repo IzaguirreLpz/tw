@@ -187,8 +187,8 @@ if (!empty($_POST['clientId'])) {
 
 
                         
-<button id="procesar" class="btn btn-primary"  href="javascript:reportePDF()" >Generar Reporte</button>
-             <button class="btn btn-default" title="salir de la consulta"  >   <span class="fa fa-outdent" title="salir de la consulta"  onclick="load(1)"></span> Cerrar Reporte</button>
+        <a href="clientes.php">
+             <button class="btn btn-default" title="salir de la consulta"  >   <span class="fa fa-outdent" title="salir de la consulta"  onclick="load(1)"></span> Cerrar Reporte</button></a> 
              <a  href="javascript:reportePDF();" class="btn btn-danger">Consulta a PDF</a>      
                         
                         </div>
