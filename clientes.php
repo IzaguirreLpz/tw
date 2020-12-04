@@ -175,20 +175,22 @@ if (!empty($_POST['clientId'])) {
                         <div class="col-lg-3">
 		<div class="input-group">
 		  <span class="input-group-addon">INICIO</span>
-		   <input  type="date" id="fecha_ini"  name="fecha_ini" placeholder="FECHA INICIO"></div>
+		   <input type="date" id="bd-desde"   placeholder="FECHA INICIO"></div>
 		</div>
     
    
 		<div class="input-group">
 		  <span class="input-group-addon">FIN</span>
-		<input  type="date"   id="fecha_fin" name="fecha_fin"  >
+		<input  type="date" id="bd-hasta" >
 
 	
 
 
                         
-<button id="procesar" class="btn btn-primary">Generar Reporte</button>
+<button id="procesar" class="btn btn-primary"  href="javascript:reportePDF()" >Generar Reporte</button>
              <button class="btn btn-default" title="salir de la consulta"  >   <span class="fa fa-outdent" title="salir de la consulta"  onclick="load(1)"></span> Cerrar Reporte</button>
+             <a  href="javascript:reportePDF();" class="btn btn-danger">Consulta a PDF</a>      
+                        
                         </div>
 
                         <?php
@@ -346,24 +348,13 @@ if (!empty($_POST['clientId'])) {
 	
         
        
-            function ExportTable(){
-			$("table").tableExport({
-                
-                
-                 
-                
-				headings: true,                    // (Boolean), display table headings (th/td elements) in the <thead>
-				footers: true,                     // (Boolean), display table footers (th/td elements) in the <tfoot>
-				formats: ["xls", "csv", "txt"],    // (String[]), filetypes for the export
-				fileName: "id",                    // (id, String), filename for the downloaded file
-				bootstrap: true,                   // (Boolean), style buttons using bootstrap
-				position: "well" ,                // (top, bottom), position of the caption element relative to table
-				ignoreRows: null,                  // (Number, Number[]), row indices to exclude from the exported file
-				ignoreCols: null,                 // (Number, Number[]), column indices to exclude from the exported file
-				ignoreCSS: ".tableexport-ignore"   // (selector, selector[]), selector(s) to exclude from the exported file
-			});
-		}
-        
+		
+    function reportePDF(){
+    var desde = $('#bd-desde').val();
+    alert(desde);
+	var hasta = $('#bd-hasta').val();
+	window.open('reporte/clientes.php?desde='+desde+'&hasta='+hasta);
+}   
         
         
 
