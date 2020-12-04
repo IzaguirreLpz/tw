@@ -45,7 +45,7 @@ $pdf->Cell(40, 8, 'Registrado ', 0);
 $pdf->Ln(8);
 $pdf->SetFont('Arial', '', 8);
 //CONSULTA
-$productos = mysqli_query($mysqli,"SELECT * FROM tbl_clientes  ");
+$productos = mysqli_query($mysqli,"SELECT * FROM tbl_clientes WHERE fecha_registro BETWEEN '$desde' AND '$hasta'  ");
 $item = 0;
 $totaluni = 0;
 $totaldis = 0;
