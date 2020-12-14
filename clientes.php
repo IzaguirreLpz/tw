@@ -175,11 +175,29 @@ if (!empty($_POST['clientId'])) {
                         </div>
                         <div class="row w3-res-tb">
 
+
                             <div class="col-lg-3">
                                 <div class="input-group">
                                     <span class="input-group-addon">INICIO</span>
                                     <input type="date" id="bd-desde" placeholder="FECHA INICIO">
                                 </div>
+                            </div>
+
+
+                            <div class="input-group">
+                                <span class="input-group-addon">FIN</span>
+                                <input type="date" id="bd-hasta">
+
+
+
+
+
+                                <a href="clientes.php">
+                                    <button class="btn btn-default" title="salir de la consulta"> <span
+                                            class="fa fa-outdent" title="salir de la consulta" onclick="load(1)"></span>
+                                        Cerrar Reporte</button></a>
+                                <a href="javascript:reportePDF();" class="btn btn-danger">Consulta a PDF</a>
+
                             </div>
 
 
@@ -372,11 +390,11 @@ function reportePDF() {
     var hasta = $('#bd-hasta').val();
     var inputs = document.getElementsByTagName('input');
 
-for(var i = 0; i < inputs.length; i++) {
-    if(inputs[i].type.toLowerCase() == 'search') {
-        var busca = inputs[i].value;
+    for (var i = 0; i < inputs.length; i++) {
+        if (inputs[i].type.toLowerCase() == 'search') {
+            var busca = inputs[i].value;
+        }
     }
-}
     window.open('rpt_clie.php?desde=' + desde + '&hasta=' + hasta + '&buscar=' + busca);
 }
 </script>
