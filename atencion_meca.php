@@ -160,7 +160,7 @@ $objeto="pantalla bitacora";
         <div class="input-group">
           <span class="input-group-addon">FIN</span>
         <input  type="date"   id="fecha_fin" name="fecha_fin"  >
-            <a href="javascript:reportePDF();" style="margin: 0 15px" class="btn btn-danger">Generar PDF</a>
+           <!--  <a href="javascript:reportePDF();" style="margin: 0 15px" class="btn btn-danger">Generar PDF</a> -->
                                     </a>
       </div>
 

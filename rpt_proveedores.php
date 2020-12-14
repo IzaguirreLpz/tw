@@ -16,6 +16,7 @@ if(strlen($_GET['desde'])>0 and strlen($_GET['hasta'])>0){
 }
 require('fpdf.php');
 require 'funcs/funcs.php';
+date_default_timezone_set('America/El_Salvador');
 $buscar = $_GET['buscar'];
 $pdf = new FPDF();
 $pdf->AddPage();
