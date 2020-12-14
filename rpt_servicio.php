@@ -40,7 +40,7 @@ $pdf->Cell(30, 8, 'Fecha De Ingreso', 0);
 $pdf->Cell(25, 8, 'Precio Venta', 0);
 $pdf->Cell(25, 8, 'Precio Compra', 0);
 $pdf->Cell(20, 8, 'Cantidad', 0);
-$pdf->Cell(25, 8, 'Proveedor', 0);
+//$pdf->Cell(25, 8, 'Proveedor', 0);
 
 
 $pdf->Ln(8);
