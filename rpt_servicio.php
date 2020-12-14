@@ -46,9 +46,9 @@ $pdf->Cell(25, 8, 'Proveedor', 0);
 $pdf->Ln(8);
 $pdf->SetFont('Arial', '', 8);
 //CONSULTA
-$sql = "SELECT p.codigo_producto, p.nombre_producto, p.precio_producto, p.precio_costo, p.cant, pr.nom_empresa, p.tipo, p.date_added FROM bd_tw.products p
+$sql = "SELECT p.codigo_producto, p.nombre_producto, p.precio_producto, p.precio_costo, p.cant, p.tipo, p.date_added FROM bd_tw.products p
 WHERE codigo_producto like '%".$buscar."%' or nombre_producto like '%".$buscar."%' 
-or precio_producto like '%".$buscar."%' or precio_costo like '%".$buscar."%' or date_added like '%".$buscar."%' or nom_empresa like '%".$buscar."%';";
+or precio_producto like '%".$buscar."%' or precio_costo like '%".$buscar."%' or date_added like '%".$buscar."%';";
 //echo "$sql";
 $productos = mysqli_query($mysqli,$sql);
 $item = 0;
