@@ -139,7 +139,7 @@ $objeto="pantalla bitacora";
                         </div>
                         <div class="row w3-res-tb">
 
-                        <div class="col-lg-3">
+                        <!-- <div class="col-lg-3">
 
                         <input type="radio" id="gender" onchange="load(1,1)" name="gender" value="1" checked >
 <label for="male">Día</label><br>
@@ -149,7 +149,7 @@ $objeto="pantalla bitacora";
 <label for="other">Mes</label>
 <br>
                                                           
-                                                        </div>
+                                                        </div> -->
                                                         <div class="col-sm-3">
         <div class="input-group">
           <span class="input-group-addon">INICIO</span>
@@ -160,16 +160,8 @@ $objeto="pantalla bitacora";
         <div class="input-group">
           <span class="input-group-addon">FIN</span>
         <input  type="date"   id="fecha_fin" name="fecha_fin"  >
-
-    
-
-
-                        
-            <button id="procesar" class="btn btn-primary">Generar Reporte</button>
-             <button class="btn btn-default" title="salir de la consulta"  > 
-                <a href="atencion_meca.php">
-                <span class="fa fa-outdent" title="salir de la consulta"></span> Salir Reporte</button>
-                </a>
+            <a href="javascript:reportePDF();" style="margin: 0 15px" class="btn btn-danger">Generar PDF</a>
+                                    </a>
       </div>
 
                 
@@ -269,16 +261,16 @@ require 'modal/eliminar_usuario.php';
             }
         })
     }
- $(document).ready(function() {
+ /*$(document).ready(function() {
     $('table').DataTable( {
         dom: 'Bfrtip',
         buttons: [
             'copy', 'csv', 'excel', 'pdf', 'print'
         ]
     } );
-} );
+} );*/
 
- $('#procesar').on('click', function(){
+ /*$('#procesar').on('click', function(){
       
         var desde = $('#fecha_ini').val();
         var hasta = $('#fecha_fin').val();
@@ -298,6 +290,20 @@ require 'modal/eliminar_usuario.php';
         }
     });
     return false;
-    });
+    });*/
+
+ function reportePDF() {
+    var desde = $('#fecha_ini').val();
+    var hasta = $('#fecha_fin').val();
+    var inputs = document.getElementsByTagName('input');
+
+    for (var i = 0; i < inputs.length; i++) {
+        if (inputs[i].type.toLowerCase() == 'search') {
+            var busca = inputs[i].value;
+            console.log(busca, desde, hasta)
+        }
+    }
+    window.open('rpt_proveedores.php?desde=' + desde + '&hasta=' + hasta + '&buscar=' + busca);
+}
 
 </script>

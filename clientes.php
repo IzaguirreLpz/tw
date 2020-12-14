@@ -187,27 +187,10 @@ if (!empty($_POST['clientId'])) {
                             <div class="input-group">
                                 <span class="input-group-addon">FIN</span>
                                 <input type="date" id="bd-hasta">
-
-
-
-
-
-                                <a href="clientes.php">
-                                    <button class="btn btn-default" title="salir de la consulta"> <span
-                                            class="fa fa-outdent" title="salir de la consulta" onclick="load(1)"></span>
-                                        Cerrar Reporte</button></a>
-                                <a href="javascript:reportePDF();" class="btn btn-danger">Consulta a PDF</a>
+                                <a href="javascript:reportePDF();" style="margin: 0px 15px" class="btn btn-danger">Generar a PDF</a>
 
                             </div>
 
-
-                            <div class="input-group">
-                                <span class="input-group-addon">FIN</span>
-                                <input type="date" id="bd-hasta">
-                                <a href="javascript:reportePDF();" style="margin: 0 15px" class="btn btn-danger">Generar
-                                    PDF</a>
-
-                            </div>
 
                             <?php
                 if ($errors != '') {

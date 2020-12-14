@@ -207,14 +207,7 @@ if (!empty($_POST['clientId'])) {
                             <div class="input-group">
                                 <span class="input-group-addon">FIN</span>
                                 <input type="date" id="bd-hasta">
-
-                                < <button id="procesar" class="btn btn-primary">Generar Reporte</button>
-                                    <a href="provedores.php">
-                                        <button class="btn btn-default" title="salir de la consulta"> <span
-                                                class="fa fa-outdent" title="Salir de la consulta"
-                                                onclick="load(1)"></span>Salir Del Reporte</button>
-                                        <a href="javascript:reportePDF();" class="btn btn-danger">Consulta a PDF</a>
-
+                                        <a href="javascript:reportePDF();" style="margin: 0 15px" class="btn btn-danger">Generar PDF</a>
                                     </a>
                             </div>
                             <?php
@@ -346,8 +339,8 @@ function load(page) {
 	});*/
 
 function reportePDF() {
-    var desde = $('#fecha_ini').val();
-    var hasta = $('#fecha_fin').val();
+    var desde = $('#bd-desde').val();
+    var hasta = $('#bd-hasta').val();
     var inputs = document.getElementsByTagName('input');
 
     for (var i = 0; i < inputs.length; i++) {

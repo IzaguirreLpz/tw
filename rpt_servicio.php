@@ -19,7 +19,7 @@ require 'funcs/funcs.php';
 $buscar = $_GET['buscar'];
 $pdf = new FPDF();
 $pdf->AddPage();
-$pdf->SetFont('Arial', '', 15);
+$pdf->SetFont('Arial', '', 10);
 $pdf->Image('images/tecniwahs_logo.png' , 70 ,15, 90, 15,'PNG');
 $pdf->Cell(1, 10, ' ', 0);
 $pdf->Cell(70, 8, 'Fecha Y Hora: '.date('d-m-Y H:i:s').'', 0);
