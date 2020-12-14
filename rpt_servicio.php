@@ -46,7 +46,7 @@ $pdf->Cell(25, 8, 'Proveedor', 0);
 $pdf->Ln(8);
 $pdf->SetFont('Arial', '', 8);
 //CONSULTA
-$sql = "SELECT p.codigo_producto, p.nombre_producto, p.precio_producto, p.precio_costo, p.cant, pr.nom_empresa, p.tipo, p.date_added FROM bd_tw.products p inner join tbl_proveedores pr on p.proveedor=pr.id_proveedor
+$sql = "SELECT p.codigo_producto, p.nombre_producto, p.precio_producto, p.precio_costo, p.cant, pr.nom_empresa, p.tipo, p.date_added FROM bd_tw.products p
 WHERE codigo_producto like '%".$buscar."%' or nombre_producto like '%".$buscar."%' 
 or precio_producto like '%".$buscar."%' or precio_costo like '%".$buscar."%' or date_added like '%".$buscar."%' or nom_empresa like '%".$buscar."%';";
 //echo "$sql";
@@ -63,7 +63,6 @@ while($productos2 = mysqli_fetch_array($productos)){
 			$pdf->Cell(25, 8, $productos2['precio_producto'], 0);
 			$pdf->Cell(25, 8, $productos2['precio_costo'], 0);
 			$pdf->Cell(20, 8, $productos2['cant'], 0);
-			$pdf->Cell(25, 8, $productos2['nom_empresa'], 0);
 			$pdf->Ln(8);	
 		}
 	}	
