@@ -146,13 +146,8 @@ $bita = grabarBitacora($idUsuario, $objeto, $accion, $descripcion);
           <span class="input-group-addon">FIN</span>
         <input  type="date"   id="fecha_fin" name="fecha_fin"  >
 
-    
 
-
-                        
-<button id="procesar" class="btn btn-primary">Generar Reporte</button>
-             <button class="btn btn-default" title="salir de la consulta"  >   <span class="fa fa-outdent" title="salir de la consulta"  onclick="load(1)"></span> Salir Reporte</button>
-             <a  href="javascript:reportePDF();" class="btn btn-danger">Consulta a PDF</a>
+             <a  href="javascript:reportePDF();" style="margin: 0 15px" class="btn btn-danger">Generar PDF</a>
                         </div>
 
                     </div>
@@ -182,7 +177,10 @@ require 'modal/eliminar_producto.php';
 ?>
 
 </html>
+
 <script>
+
+    
 
 $('#procesar').on('click', function(){
       
@@ -260,10 +258,20 @@ $('#procesar').on('click', function(){
         })
     }
 
-    function reportePDF(){
+
+function reportePDF() {
     var desde = $('#fecha_ini').val();
-    //alert(desde);
     var hasta = $('#fecha_fin').val();
-    window.open('rpt_productos.php?desde='+desde+'&hasta='+hasta);
-}   
+    var inputs = document.getElementsByTagName('input');
+
+for(var i = 0; i < inputs.length; i++) {
+    if(inputs[i].type.toLowerCase() == 'search') {
+        var busca = inputs[i].value;
+        console.log(busca, desde, hasta)
+    }
+}
+    window.open('rpt_productos.php?desde=' + desde + '&hasta=' + hasta + '&buscar=' + busca);
+}
+
+
 </script>

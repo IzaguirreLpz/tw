@@ -31,10 +31,7 @@ if (
   <script src="../js/jquery.min.js"></script>
   <script src="../js/FileSaver.min.js"></script>
  <!--  <script src="../js/tableexport.min.js"></script> -->
- <link rel="stylesheet" type="text/css" href="reportsLibrary\datatables.min.css">
-<script type="text/javascript" src="reportsLibrary\datatables.min.js"></script>
-<script type="text/javascript" src="reportsLibrary\pdfmake.min.js"></script>
-<script type="text/javascript" src="reportsLibrary\vfs_fonts.js"></script>
+ 
 
   <style>
 	table ,tr td{
@@ -64,7 +61,7 @@ if (
 
         <thead>
             <tr>
-            <th><b> Reporte de Clientes <?php echo $tit_fecha; ?> </b>
+            
           </th>
             </tr>
       <tr class="success">

@@ -111,11 +111,20 @@ if (isset ($_GET["ate"] )){
                         <header class="panel-heading">
                             ATENCIÓN A   <?php echo $nom_com; ?>
                             <span class="tools pull-right">
-
-                            <input type="button" class="btn btn-info" value="Imprimir Para el Mecanico" onclick="printDiv()">
                               <a class="fa fa-share" href="atencion_meca.php" ></a>
                             </span>
                         </header>
+                        <div style="display: grid;grid-template-columns: 1fr 1fr;justify-items: center;margin: 30px ">
+                            <div>
+                                <a href="add_vehiculo.php">
+                                  <input type="button" class="btn btn-success" value="Agregar Nuevo Vehiculo">                            
+                                </a>
+                            </div>
+                            <div>
+                            <input type="button" class="btn btn-info" value="Imprimir Para el Mecanico" onclick="printDiv()">
+                                
+                            </div>
+                        </div>
                         <div class="panel-body">
                             <div class="form">
                                 <form class="cmxform form-horizontal " name="consultas" method="post" id="loginform"

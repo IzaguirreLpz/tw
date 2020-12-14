@@ -203,9 +203,8 @@ if (!empty($_POST['clientId'])) {
 		  <span class="input-group-addon">FIN</span>
 		<input  type="date"   id="fecha_fin" name="fecha_fin"  >
                         
-            <button id="procesar" class="btn btn-primary">Generar Reporte</button>
-            <a href="provedores.php">
-             <button class="btn btn-default" title="salir de la consulta"  >   <span class="fa fa-outdent" title="Salir de la consulta"  onclick="load(1)"></span>Salir Del Reporte</button>
+             <a  href="javascript:reportePDF();" style="margin: 0 15px" class="btn btn-danger">Generar PDF</a>
+           
              </a>
                         </div>
                          <?php
@@ -313,7 +312,7 @@ if (!empty($_POST['clientId'])) {
         })
     }
    
-    $('#procesar').on('click', function(){
+    /*$('#procesar').on('click', function(){
       
 		var desde = $('#fecha_ini').val();
 		var hasta = $('#fecha_fin').val();
@@ -331,6 +330,20 @@ if (!empty($_POST['clientId'])) {
         }
 	});
 	return false;
-	});
+	});*/
         
+    function reportePDF() {
+    var desde = $('#fecha_ini').val();
+    var hasta = $('#fecha_fin').val();
+    var inputs = document.getElementsByTagName('input');
+
+for(var i = 0; i < inputs.length; i++) {
+    if(inputs[i].type.toLowerCase() == 'search') {
+        var busca = inputs[i].value;
+        console.log(busca, desde, hasta)
+    }
+}
+    window.open('rpt_proveedores.php?desde=' + desde + '&hasta=' + hasta + '&buscar=' + busca);
+}
+
 </script>

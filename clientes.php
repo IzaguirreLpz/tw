@@ -22,7 +22,6 @@ $idUsuario = $_SESSION['id_usuario'];
 $objeto="pantalla clientes";
 		$accion="INGRESO";
 		$descripcion="ingreso a pantalla clientes";
-		
 		$bita=grabarBitacora($idUsuario,$objeto,$accion,$descripcion);
 
 
@@ -64,13 +63,13 @@ if (!empty($_POST['clientId'])) {
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
     <script type="application/x-javascript">
-        addEventListener("load", function() {
-            setTimeout(hideURLbar, 0);
-        }, false);
+    addEventListener("load", function() {
+        setTimeout(hideURLbar, 0);
+    }, false);
 
-        function hideURLbar() {
-            window.scrollTo(0, 1);
-        }
+    function hideURLbar() {
+        window.scrollTo(0, 1);
+    }
     </script>
     <!-- bootstrap-css -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -79,23 +78,25 @@ if (!empty($_POST['clientId'])) {
     <link href="css/style.css" rel='stylesheet' type='text/css' />
     <link href="css/style-responsive.css" rel="stylesheet" />
     <!-- font CSS -->
-    <link href='//fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+    <link
+        href='//fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic'
+        rel='stylesheet' type='text/css'>
     <!-- font-awesome icons -->
     <link rel="stylesheet" href="css/font.css" type="text/css" />
     <link href="css/font-awesome.css" rel="stylesheet">
     <link rel="stylesheet" href="css/morris.css" type="text/css" />
     <!-- calendar -->
     <link rel="stylesheet" href="css/monthly.css">
- 
+
     <link rel="stylesheet" href="css/bootstrap.min.css">
-  <link rel="stylesheet" href="tableexport.min.css">
- 
-  <script src="js/jquery.min.js"></script>
-  <script src="js/FileSaver.min.js"></script>
-  <script src="js/tableexport.min.js"></script>
-  <!--- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>-->
-	     <link href="css/select2.min.css" rel="stylesheet" /> 
-      <script src="js/select2.min.js"></script>
+    <link rel="stylesheet" href="tableexport.min.css">
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/FileSaver.min.js"></script>
+    <script src="js/tableexport.min.js"></script>
+    <!--- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>-->
+    <link href="css/select2.min.css" rel="stylesheet" />
+    <script src="js/select2.min.js"></script>
 </head>
 
 <body>
@@ -149,7 +150,7 @@ if (!empty($_POST['clientId'])) {
                         echo $_SESSION['menus']; 
                         }
                         ?>
-                      
+
 
                     </ul>
                 </div>
@@ -163,49 +164,46 @@ if (!empty($_POST['clientId'])) {
                 <div class="table-agile-info">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                         CLIENTES
-                         <?php  if ($insertar==1 || $idUsuario==1){?>
+                            CLIENTES
+                            <?php  if ($insertar==1 || $idUsuario==1){?>
                             <div class="btn-group pull-right">
-                                <button type='button' class="btn btn-success" onClick="location.href='add_clie.php'"><span class="glyphicon glyphicon-plus"></span> Agregar </button>
+                                <button type='button' class="btn btn-success"
+                                    onClick="location.href='add_clie.php'"><span
+                                        class="glyphicon glyphicon-plus"></span> Agregar </button>
                             </div>
                             <?php } ?>
                         </div>
                         <div class="row w3-res-tb">
 
-                        <div class="col-lg-3">
-		<div class="input-group">
-		  <span class="input-group-addon">INICIO</span>
-		   <input type="date" id="bd-desde"   placeholder="FECHA INICIO"></div>
-		</div>
-    
-   
-		<div class="input-group">
-		  <span class="input-group-addon">FIN</span>
-		<input  type="date" id="bd-hasta" >
-
-	
+                            <div class="col-lg-3">
+                                <div class="input-group">
+                                    <span class="input-group-addon">INICIO</span>
+                                    <input type="date" id="bd-desde" placeholder="FECHA INICIO">
+                                </div>
+                            </div>
 
 
-                        
-<button id="procesar" class="btn btn-primary"  href="javascript:reportePDF()" >Generar Reporte</button>
-             <button class="btn btn-default" title="salir de la consulta"  >   <span class="fa fa-outdent" title="salir de la consulta"  onclick="load(1)"></span> Cerrar Reporte</button>
-             <a  href="javascript:reportePDF();" class="btn btn-danger">Consulta a PDF</a>      
-                        
-                        </div>
+                            <div class="input-group">
+                                <span class="input-group-addon">FIN</span>
+                                <input type="date" id="bd-hasta">
+                                <a href="javascript:reportePDF();" style="margin: 0 15px" class="btn btn-danger">Generar
+                                    PDF</a>
 
-                        <?php
+                            </div>
+
+                            <?php
                 if ($errors != '') {
                     echo showMessage($errors, $type);
                 }
                 ?>
-                        <div id="resultados"></div><!-- Carga los datos ajax -->
-                        <div class='outer_div'></div>
+                            <div id="resultados"></div><!-- Carga los datos ajax -->
+                            <div class='outer_div'></div>
 
+                        </div>
                     </div>
-                </div>
             </section>
 
-          
+
             <script src="js/bootstrap.js"></script>
             <script src="js/jquery.dcjqaccordion.2.7.js"></script>
             <script src="js/scripts.js"></script>
@@ -221,33 +219,36 @@ if (!empty($_POST['clientId'])) {
             <!-- //calendar -->
 
 
-<!-- Modal -->
-<div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel" style="text-align: center;">¿Seguro que deséa eliminar este Cliente?</h4>
-            </div>
-            <div class="modal-body">
-                <form class="form-horizontal" method="post" id="editar_password" name="editar_password">
-                    <div id="mensajeAjax"></div>
-                    <div class="form-group">
-                        <div class="col-sm-8">
-                            <input type="hidden" id="clientId" name="clientId">
-                            <div class="container">
-                                <img width="50%" src="./images/delete.svg">
-                            </div>
+            <!-- Modal -->
+            <div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel" style="text-align: center;">¿Seguro que deséa
+                                eliminar este Cliente?</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form class="form-horizontal" method="post" id="editar_password" name="editar_password">
+                                <div id="mensajeAjax"></div>
+                                <div class="form-group">
+                                    <div class="col-sm-8">
+                                        <input type="hidden" id="clientId" name="clientId">
+                                        <div class="container">
+                                            <img width="50%" src="./images/delete.svg">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer center">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                    <button type="submit" class="btn btn-danger" id="eliminarProducto">Eliminar
+                                        Cliente</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
-                    <div class="modal-footer center">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btn-danger" id="eliminarProducto">Eliminar Cliente</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+                </div>
 
 
 
@@ -255,31 +256,28 @@ if (!empty($_POST['clientId'])) {
 
 </html>
 <script>
-
-
-
- //eliminar alerta despues de 5 segundos
- let alerta = document.getElementsByClassName('alert');
-        setTimeout(function() {
-            while (alerta.length > 0) {
-                alerta[0].parentNode.removeChild(alerta[0]);
-            }
-        }, 3500);
-
-    $(document).ready(function() {
-        load(1);
-    });
-
-    function
-    obtener_id(item) {
-        let val = item;
-        let id = document.getElementById('clientId');
-        id.value = val;
-        $("#user_id_mod").val(item);
+//eliminar alerta despues de 5 segundos
+let alerta = document.getElementsByClassName('alert');
+setTimeout(function() {
+    while (alerta.length > 0) {
+        alerta[0].parentNode.removeChild(alerta[0]);
     }
+}, 3500);
+
+$(document).ready(function() {
+    load(1);
+});
+
+function
+obtener_id(item) {
+    let val = item;
+    let id = document.getElementById('clientId');
+    id.value = val;
+    $("#user_id_mod").val(item);
+}
 
 
-    /*$("#editar_password").submit(function(event) {
+/*$("#editar_password").submit(function(event) {
         $('#actualizar_datos3').attr("disabled", true);
         var tabla = "tbl_clientes";
 		var campo = "id_cliente";
@@ -300,90 +298,85 @@ if (!empty($_POST['clientId'])) {
         event.preventDefault();
     })*/
 
-    function load(page) {
+function load(page) {
 
-        $("#loader").fadeIn('slow');
-        $.ajax({
-            url: 'ajax/buscar_cliente.php',
-            beforeSend: function(objeto) {
-                $('#loader').html('<img src="./img/ajax-loader.gif"> Cargando...');
-            },
-            success: function(data) {
-                $(".outer_div").html(data).fadeIn('slow');
-                $('#loader').html('');
-
-            }
-        })
-    }
-
-
-
-
-
-
-    $('#bd-hasta').on('change', function(){
-		var desde = $('#bd-desde').val();
-        var hasta = $('#bd-hasta').val();
-        
-        if (desde > hasta){
-alert("la fecha inicial debe ser  menos que la fecha hasta.");
-return false;
+    $("#loader").fadeIn('slow');
+    $.ajax({
+        url: 'ajax/buscar_cliente.php',
+        beforeSend: function(objeto) {
+            $('#loader').html('<img src="./img/ajax-loader.gif"> Cargando...');
+        },
+        success: function(data) {
+            $(".outer_div").html(data).fadeIn('slow');
+            $('#loader').html('');
 
         }
-		var url = 'ajax/busca_clientes_fecha.php';
-		$.ajax({
-		type:'POST',
-		url:url,
-		data:'desde='+desde+'&hasta='+hasta,
-		success: function(data){
-			$(".outer_div").html(data).fadeIn('slow');
-					$('#loader').html('');
-		}
-	});
-	return false;
-	});
-	
+    })
+}
 
-         
-    $('#procesar').on('click', function(){
-      
-		var desde = $('#bd_desde').val();
-		var hasta = $('#bd_hasta').val();
-		var url = 'ajax/busca_clientes_fecha.php';
-            
-		$.ajax({
-		type:'POST',
-		url:url,
-		data:'desde='+desde+'&hasta='+hasta,
-		success: function(data){
-   
-			$(".outer_div").html(data).fadeIn('slow');
+
+
+
+
+
+/*$('#bd-hasta').on('change', function() {
+    var desde = $('#bd-desde').val();
+    var hasta = $('#bd-hasta').val();
+
+    if (desde > hasta) {
+        alert("la fecha inicial debe ser  menos que la fecha hasta.");
+        return false;
+
+    }
+    var url = 'ajax/busca_clientes_fecha.php';
+    $.ajax({
+        type: 'POST',
+        url: url,
+        data: 'desde=' + desde + '&hasta=' + hasta,
+        success: function(data) {
+            $(".outer_div").html(data).fadeIn('slow');
+            $('#loader').html('');
+        }
+    });
+    return false;
+});*/
+
+
+
+/*$('#procesar').on('click', function() {
+
+    var desde = $('#bd_desde').val();
+    var hasta = $('#bd_hasta').val();
+    var url = 'ajax/busca_clientes_fecha.php';
+
+    $.ajax({
+        type: 'POST',
+        url: url,
+        data: 'desde=' + desde + '&hasta=' + hasta,
+        success: function(data) {
+
+            $(".outer_div").html(data).fadeIn('slow');
             ExportTable();
             $('#loader').html('');
-            
-           
-		}
-	});
-	return false;
-	});
-	
-        
-       
-		
-    function reportePDF(){
+
+
+        }
+    });
+    return false;
+});*/
+
+
+
+function reportePDF() {
     var desde = $('#bd-desde').val();
-    
-	var hasta = $('#bd-hasta').val();
-	window.open('rpt_clie.php?desde='+desde+'&hasta='+hasta);
-}   
-        
-        
+    var hasta = $('#bd-hasta').val();
+    var inputs = document.getElementsByTagName('input');
 
-
-
-
-
-
-
-
+for(var i = 0; i < inputs.length; i++) {
+    if(inputs[i].type.toLowerCase() == 'search') {
+        var busca = inputs[i].value;
+    }
+}
+    window.open('rpt_clie.php?desde=' + desde + '&hasta=' + hasta + '&buscar=' + busca);
+}
 </script>

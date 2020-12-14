@@ -38,15 +38,15 @@ $delete=mysqli_query($mysqli, "DELETE FROM tmp WHERE id_tmp='".$id_tmp."'");
 $simbolo_moneda="L";
 ?>
 <table class="table">
-<tr>
-	<th class='text-center'>CODIGO</th>
-	<th class='text-center'>CANT.</th>
-	<th>DESCRIPCION</th>
-	<th class='text-right'>PRECIO UNIT.</th>
-	<th class='text-right'>PRECIO TOTAL</th>
-	<th></th>
-</tr>
-<?php
+    <tr>
+        <th class='text-center'>CODIGO</th>
+        <th class='text-center'>CANT.</th>
+        <th>DESCRIPCION</th>
+        <th class='text-right'>PRECIO UNIT.</th>
+        <th class='text-right'>PRECIO TOTAL</th>
+        <th></th>
+    </tr>
+    <?php
 	$sumador_total=0;
 	//"select * from products, tmp where products.id_producto=tmp.id_producto and tmp.session_id='".$session_id."'");
 	$sql=mysqli_query($mysqli, "select * from products, tmp where products.id_producto=tmp.id_producto and tmp.session_id='".$session_id."'");
@@ -67,15 +67,15 @@ $simbolo_moneda="L";
 	$sumador_total+=$precio_total_r;//Sumador
 	
 		?>
-		<tr>
-			<td class='text-center'><?php echo $codigo_producto;?></td>
-			<td class='text-center'><?php echo $cantidad;?></td>
-			<td><?php echo $nombre_producto;?></td>
-			<td class='text-right'><?php echo $precio_venta_f;?></td>
-			<td class='text-right'><?php echo $precio_total_f;?></td>
-			<td class='text-center'><a href="#" onclick="eliminar('<?php echo $id_tmp ?>')"><i class="glyphicon glyphicon-trash"></i></a></td>
-		</tr>		
-		<?php
+    <tr>
+        <td class='text-center'><?php echo $codigo_producto;?></td>
+        <td class='text-center'><?php echo $cantidad;?></td>
+        <td><?php echo $nombre_producto;?></td>
+        <td class='text-right'><?php echo $precio_venta_f;?></td>
+        <td class='text-right'><?php echo $precio_total_f;?></td>
+        <td class='text-center'><a href="#" onclick="eliminar('<?php echo $id_tmp ?>')">Anular</a></td>
+    </tr>
+    <?php
 	}
 	$impuesto=15;
 	$subtotal=number_format($sumador_total,2,'.','');
@@ -84,20 +84,20 @@ $simbolo_moneda="L";
 	$total_factura=$subtotal+$total_iva;
 
 ?>
-<tr>
-	<td class='text-right' colspan=4>SUBTOTAL <?php echo $simbolo_moneda;?></td>
-	<td class='text-right'><?php echo number_format($subtotal,2);?></td>
-	<td></td>
-</tr>
-<tr>
-	<td class='text-right' colspan=4>IVA (<?php echo $impuesto;?>)% <?php echo $simbolo_moneda;?></td>
-	<td class='text-right'><?php echo number_format($total_iva,2);?></td>
-	<td></td>
-</tr>
-<tr>
-	<td class='text-right' colspan=4>TOTAL <?php echo $simbolo_moneda;?></td>
-	<td class='text-right'><?php echo number_format($total_factura,2);?></td>
-	<td></td>
-</tr>
+    <tr>
+        <td class='text-right' colspan=4>SUBTOTAL <?php echo $simbolo_moneda;?></td>
+        <td class='text-right'><?php echo number_format($subtotal,2);?></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class='text-right' colspan=4>IVA (<?php echo $impuesto;?>)% <?php echo $simbolo_moneda;?></td>
+        <td class='text-right'><?php echo number_format($total_iva,2);?></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class='text-right' colspan=4>TOTAL <?php echo $simbolo_moneda;?></td>
+        <td class='text-right'><?php echo number_format($total_factura,2);?></td>
+        <td></td>
+    </tr>
 
 </table>

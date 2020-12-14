@@ -203,12 +203,7 @@ if (!empty($_POST['clientId'])) {
 		<input  type="date"   id="bd-hasta" name="bd-hasta"  >
 
 	
-
-
-                        
-<button id="procesar" class="btn btn-primary">Generar Reporte</button>
-             <button class="btn btn-default" title="salir de la consulta"  >   <span class="fa fa-outdent" title="salir de la consulta"  onclick="load(1)"></span> Salir Reporte</button>
-             <a  href="javascript:reportePDF();" class="btn btn-danger">Consulta a PDF</a>      
+             <a  href="javascript:reportePDF();" style="margin: 0 15px" class="btn btn-danger">Generar PDF</a>      
                        
                         </div>
                          <?php
@@ -309,7 +304,7 @@ if (!empty($_POST['clientId'])) {
         })
     }
    
-    $('#procesar').on('click', function(){
+    /*$('#procesar').on('click', function(){
       
 		var desde = $('#bd-desde').val();
 		var hasta = $('#bd-hasta').val();
@@ -329,26 +324,40 @@ if (!empty($_POST['clientId'])) {
 		}
 	});
 	return false;
-	});
+	});*/
 	
-    $(document).ready(function() {
+   /* $(document).ready(function() {
     $('#tableListar').DataTable( {
         dom: 'Bfrtip',
         buttons: [
             'copy', 'csv', 'excel', 'pdf', 'print'
         ]
     } );
-} );
+} );*/
 
 
-function reportePDF(){
+/*function reportePDF(){
     var desde = $('#bd-desde').val();
     
 	var hasta = $('#bd-hasta').val();
 	window.open('rpt_vehi.php?desde='+desde+'&hasta='+hasta);
+} */
+
+function reportePDF() {
+    var desde = $('#bd-desde').val();
+    var hasta = $('#bd-hasta').val();
+    var inputs = document.getElementsByTagName('input');
+
+for(var i = 0; i < inputs.length; i++) {
+    if(inputs[i].type.toLowerCase() == 'search') {
+        var busca = inputs[i].value;
+        console.log(busca, desde, hasta)
+    }
+}
+    window.open('rpt_vehi.php?desde=' + desde + '&hasta=' + hasta + '&buscar=' + busca);
 }   
         
-$('#bd-hasta').on('change', function(){
+/*$('#bd-hasta').on('change', function(){
 		var desde = $('#bd-desde').val();
 		var hasta = $('#bd-hasta').val();
 		var url = 'ajax/busca_clientes_fecha.php';
@@ -362,7 +371,7 @@ $('#bd-hasta').on('change', function(){
 		}
 	});
 	return false;
-	});
+	});*/
 	
       
 </script>

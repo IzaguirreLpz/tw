@@ -121,16 +121,16 @@ $delete=mysqli_query($mysqli, "DELETE FROM tmp WHERE id_tmp='".$id_tmp."'");
 
 ?>
 <table class="table">
-<tr class="warning">
-	<th class='text-center'>CODIGO</th>
-    	<th>NOMBRE</th>
-    <th>FECHA</th>
-	<th class='text-center'>CANT.</th>
+    <tr class="warning">
+        <th class='text-center'>CODIGO</th>
+        <th>NOMBRE</th>
+        <th>FECHA</th>
+        <th class='text-center'>CANT.</th>
 
 
-	<th></th>
-</tr>
-<?php
+        <th></th>
+    </tr>
+    <?php
     
     
     
@@ -156,17 +156,18 @@ $delete=mysqli_query($mysqli, "DELETE FROM tmp WHERE id_tmp='".$id_tmp."'");
 
 	
 		?>
-		<tr>
-			<td class='text-center'><?php echo $codigo_producto;?></td>
-            	<td><?php echo $nombre_producto;?></td>
-            <td><?php echo $fecha_vence;?></td>
-			<td class='text-center'><?php echo $cantidad;?></td>
-		
-			
-		
-			<td class='text-center'><a href="#" onclick="eliminar('<?php echo $id_tmp ?>')"><i class="glyphicon glyphicon-trash"></i></a></td>
-		</tr>		
-		<?php
+    <tr>
+        <td class='text-center'><?php echo $codigo_producto;?></td>
+        <td><?php echo $nombre_producto;?></td>
+        <td><?php echo $fecha_vence;?></td>
+        <td class='text-center'><?php echo $cantidad;?></td>
+
+
+
+        <td class='text-center'><a href="#" onclick="eliminar('<?php echo $id_tmp ?>')"><i
+                    class="glyphicon glyphicon-trash"></i></a></td>
+    </tr>
+    <?php
 	}
 
 ?>

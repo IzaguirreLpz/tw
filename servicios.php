@@ -178,11 +178,8 @@ if (!empty($_POST['clientId'])) {
 		<input  type="date"   id="fecha_fin" name="fecha_fin"  >
 
 
+             <a  href="javascript:reportePDF();" style="margin: 0 15px" class="btn btn-danger">Generar PDF</a>
 
-
-<button id="procesar" class="btn btn-primary">Generar Reporte</button>
-             <a href="servicios.php">
-             <button class="btn btn-default" title="salir de la consulta"  >   <span class="fa fa-outdent" title="salir de la consulta"  onclick="load(1)"></span> Cerrar Reporte</button>
              </a>
                         </div>
                         <div id="resultados"></div><!-- Carga los datos ajax -->
@@ -275,7 +272,7 @@ require 'modal/eliminar_producto.php';
             }
         })
     }
-    $('#procesar').on('click', function(){
+    /*$('#procesar').on('click', function(){
 		var desde = $('#fecha_ini').val();
 		var hasta = $('#fecha_fin').val();
 		var url = 'ajax/buscar_servicios_fecha.php';
@@ -290,15 +287,20 @@ require 'modal/eliminar_producto.php';
 		}
 	});
 	return false;
-    });
+    });*/
     
-    $(document).ready(function() {
-    $('table').DataTable( {
-        dom: 'Bfrtip',
-        buttons: [
-            'copy', 'csv', 'excel', 'pdf', 'print'
-        ]
-    } );
-} );
+   function reportePDF() {
+    var desde = $('#fecha_ini').val();
+    var hasta = $('#fecha_fin').val();
+    var inputs = document.getElementsByTagName('input');
+
+for(var i = 0; i < inputs.length; i++) {
+    if(inputs[i].type.toLowerCase() == 'search') {
+        var busca = inputs[i].value;
+        console.log(busca, desde, hasta)
+    }
+}
+    window.open('rpt_servicio.php?desde=' + desde + '&hasta=' + hasta + '&buscar=' + busca);
+}
 
 </script>

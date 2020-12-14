@@ -86,7 +86,7 @@ $simbolo_moneda=get_row('tbl_parametros','descripcion', 'id_parametro', 10);
 			<td><?php echo $nombre_producto;?></td>
 			<td class='text-right'><?php echo $precio_venta_f;?></td>
 			<td class='text-right'><?php echo $precio_total_f;?></td>
-			<td class='text-center'><a href="#" onclick="eliminar('<?php echo $id_detalle ?>')"><i class="glyphicon glyphicon-trash"></i></a></td>
+			<td class='text-center'><a href="#" onclick="eliminar('<?php echo $id_detalle ?>')">Anular</a></td>
 		</tr>		
 		<?php
 	}

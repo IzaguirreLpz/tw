@@ -113,12 +113,10 @@ if (
         <tbody>
             <?php
             if (!empty($hasta) && !empty($desde)){
-                $sql = "SELECT *
-                FROM bd_tw.products where fecha_registro
+                $sql = "SELECT * FROM products p, tbl_proveedores e where p.proveedor =  e.id_proveedor and p.tipo=0 order by id_producto and fecha_registro
                 between '$desde' and '$hasta';";
              }else{
-                $sql = "SELECT *
-                FROM bd_tw.products;";
+                $sql = "SELECT * FROM products p, tbl_proveedores e where p.proveedor =  e.id_proveedor and p.tipo=0 order by id_producto;";
                 }
         //echo $cli;
         //echo $sql;

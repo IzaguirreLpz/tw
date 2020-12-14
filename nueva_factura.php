@@ -105,7 +105,10 @@ if(!isset($_SESSION['id_usuario'])){
 						</div>
 				
 				
-				<div class="col-md-12">
+				
+			
+		<div id="resultados" class='col-md-12' style="margin-top:10px"></div><!-- Carga los datos ajax -->		
+		<div class="col-md-12">
 					<div class="pull-right">
 						
 					
@@ -115,11 +118,9 @@ if(!isset($_SESSION['id_usuario'])){
 						<button id="Guardado" type="submit" class="btn btn-success">
 						  <span class="glyphicon glyphicon-print"></span> Guardar e Imprimir
 						</button>
-					</div>	
-				</div>
 			</form>	
-			
-		<div id="resultados" class='col-md-12' style="margin-top:10px"></div><!-- Carga los datos ajax -->			
+					</div>	
+				</div>	
 		</div>
 	</div>		
 		  <div class="row-fluid">

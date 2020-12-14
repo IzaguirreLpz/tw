@@ -133,7 +133,7 @@ $idUsuario= $_SESSION['id_usuario'];
                         </header>
                         <div class="panel-body">
                             <div class="form">
-                            <form class="cmxform form-horizontal " method="post" id="loginform"  action="" novalidate="novalidate">
+                            <form class="cmxform form-horizontal " method="post" id="loginform"  action="" data-toggle="validator">
                             <div class="agileinfo-row">
 		  
 		       <div class="form-group">
@@ -142,7 +142,7 @@ $idUsuario= $_SESSION['id_usuario'];
 			  	 <div class="input-group">
 			  	  <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
 				  <input  type="number" class="form-control" id="identidad" name="identidad" placeholder="22345678" pattern="^[9
-				  |0|1|2]\d{12}$"  title="min 13 numeros solo"onPaste="return false;"  maxlength="15" autocomplete="off" >
+				  |0|1|2]\d{12}$"  title="min 13 numeros solo"onPaste="return false;"  maxlength="15" autocomplete="off" required="">
 				</div> 
 			  </div>
 			  </div>
@@ -188,7 +188,7 @@ $idUsuario= $_SESSION['id_usuario'];
 				<div class="col-sm-8">
 			  	 <div class="input-group">
 			  	  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-				  <input  type="text" class="form-control" id="apellido" name="apellido" placeholder="Apellidos" pattern="[a-zA-Z0-9]{2,64}" title="Usuario" style="text-transform: uppercase;" onkeypress="return soloLetras(event)"  onPaste="return false;"  maxlength="15" autocomplete="off">
+				  <input  type="text" class="form-control" id="apellido" name="apellido" placeholder="Apellidos" pattern="[a-zA-Z0-9]{2,64}" title="Usuario" style="text-transform: uppercase;" onkeypress="return soloLetras(event)"  onPaste="return false;"  maxlength="15" autocomplete="off" required>
 				</div> 
 			  </div>
 			  </div>
@@ -231,7 +231,7 @@ $idUsuario= $_SESSION['id_usuario'];
 				<div class="col-sm-8">
 			  	 <div class="input-group">
 			  	  <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
-				  <input  type="tel" class="form-control" id="celular" name="celular" placeholder="99003423" pattern="^[9|8|3]\d{7}$"  title="min 8 numeros solo" style="text-transform: uppercase;"  onPaste="return false;"  maxlength="15" autocomplete="off" required>
+				  <input  type="number" class="form-control" id="celular" name="celular" placeholder="99003423" pattern="^[9|8|3]\d{7}$"  title="min 8 numeros solo" style="text-transform: uppercase;"  onPaste="return false;"  maxlength="15" autocomplete="off" required>
 
 				</div> 
 			  </div>
@@ -253,7 +253,7 @@ $idUsuario= $_SESSION['id_usuario'];
 				<div class="col-sm-8">
 			  	 <div class="input-group">
 			  	  <span class="input-group-addon"><i class="glyphicon glyphicon-phone-alt"></i></span>
-				  <input  type="tel" class="form-control" id="telefono" name="telefono" placeholder="22345678" pattern="^[9
+				  <input  type="number" class="form-control" id="telefono" name="telefono" placeholder="22345678" pattern="^[9
 				  |8|3|2]\d{7}$"  title="min 8 numeros solo" style="text-transform: uppercase;"  onPaste="return false;"  maxlength="15" autocomplete="off" required>
 				</div> 
 			  </div>

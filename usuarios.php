@@ -236,11 +236,25 @@ require 'modal/eliminar_usuario.php';
         })
     }
 
-     function reportePDF(){
+   /*  function reportePDF(){
     var desde = $('#bd-desde').val();
     
     var hasta = $('#bd-hasta').val();
     window.open('rpt_usuarios.php?desde='+desde+'&hasta='+hasta);
-}   
+}  */
+
+function reportePDF() {
+    var desde = $('#bd-desde').val();
+    var hasta = $('#bd-hasta').val();
+    var inputs = document.getElementsByTagName('input');
+
+for(var i = 0; i < inputs.length; i++) {
+    if(inputs[i].type.toLowerCase() == 'search') {
+        var busca = inputs[i].value;
+        console.log(busca, desde, hasta)
+    }
+}
+    window.open('rpt_usuarios.php?desde=' + desde + '&hasta=' + hasta + '&buscar=' + busca);
+} 
 
 </script>

@@ -166,7 +166,12 @@
                 
                 
                 <?php } ?>
-				<div class="col-md-12">
+				
+			<div class="clearfix"></div>
+				<div class="factura" class='col-md-12' style="margin-top:10px"></div><!-- Carga los datos ajax -->	
+			<div class="editar_factura" class='col-md-12' style="margin-top:10px"></div>
+		<div id="resultados" class='col-md-12' style="margin-top:10px"></div><!-- Carga los datos ajax -->			
+			<div class="col-md-12">
 					<div class="pull-right">
 						<button type="submit" class="btn btn-info">
 						  <span class="glyphicon glyphicon-refresh"></span> Guardar datos
@@ -181,11 +186,6 @@
 					</div>	
 				</div>
 			</form>	
-			<div class="clearfix"></div>
-				<div class="factura" class='col-md-12' style="margin-top:10px"></div><!-- Carga los datos ajax -->	
-			<div class="editar_factura" class='col-md-12' style="margin-top:10px"></div>
-		<div id="resultados" class='col-md-12' style="margin-top:10px"></div><!-- Carga los datos ajax -->			
-			
 		</div>
 	</div>		
 		 

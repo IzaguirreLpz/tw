@@ -311,7 +311,7 @@ mysqli_free_result($result);
 
 		<div class="aitsloginwthree w3layouts agileits">
         <form name="frmcargararchivo" method="post" enctype="multipart/form-data">
-     <h2>Subir Archivo</h2>
+     <h2>Subir Archivo Recovery</h2>
 
      <div class="icon1">
                                   <img class="" src="images/database.png" width="20%" alt="Custom Signup Form">

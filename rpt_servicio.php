@@ -55,7 +55,7 @@ $item = 0;
 $totaluni = 0;
 $totaldis = 0;
 while($productos2 = mysqli_fetch_array($productos)){
-	if ($productos2['tipo'] == 0) {
+	if ($productos2['tipo'] == '1') {
 		if ($productos2['date_added'] > $desde && $productos2['date_added'] < $hasta) {
 			$pdf->Cell(20, 8, $productos2['codigo_producto'], 0);
 			$pdf->Cell(40, 8, $productos2['nombre_producto'], 0);
